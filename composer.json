@@ -1,0 +1,26 @@
+{
+    "name": "simple-bus/doctrine-orm-bridge",
+    "type": "library",
+    "description": "Doctrine ORM bridge for using command and event buses",
+    "keywords": ["Doctrine", "event bus", "command bus"],
+    "homepage": "http://github.com/SimpleBus/DoctrineORMBridge",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Noback",
+            "email": "matthiasnoback@gmail.com",
+            "homepage": "http://php-and-symfony.matthiasnoback.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "beberlei/assert": "~2.0",
+        "simple-bus/command-bus": "~1.0",
+        "simple-bus/event-bus": "~1.0",
+        "simple-bus/command-event-bridge": "~1.0",
+        "doctrine/orm": "~2.0"
+    },
+    "autoload": {
+        "psr-4" : { "SimpleBus\\DoctrineORMBridge\\" : "src" }
+    }
+}
