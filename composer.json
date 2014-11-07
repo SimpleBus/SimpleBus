@@ -20,6 +20,9 @@
         "simple-bus/command-event-bridge": "~1.0",
         "doctrine/orm": "~2.0"
     },
+    "suggest": {
+        "simple-bus/symfony-bridge": "Bridge for using command buses and event buses with Symfony"
+    },
     "autoload": {
         "psr-4" : { "SimpleBus\\DoctrineORMBridge\\" : "src" }
     }
