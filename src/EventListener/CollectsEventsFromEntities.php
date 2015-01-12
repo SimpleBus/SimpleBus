@@ -7,7 +7,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use SimpleBus\Event\Provider\ProvidesEvents;
 
-class CollectsEventFromEntities implements EventSubscriber, ProvidesEvents
+class CollectsEventsFromEntities implements EventSubscriber, ProvidesEvents
 {
     private $collectedEvents = array();
 

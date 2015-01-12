@@ -3,14 +3,11 @@
 namespace SimpleBus\DoctrineORMBridge\CommandBus;
 
 use Doctrine\ORM\EntityManager;
-use SimpleBus\Command\Bus\CommandBus;
+use SimpleBus\Command\Bus\Middleware\CommandBusMiddleware;
 use SimpleBus\Command\Command;
-use SimpleBus\Command\Bus\RemembersNext;
 
-class WrapsNextCommandInTransaction implements CommandBus
+class WrapsCommandHandlingInTransaction implements CommandBusMiddleware
 {
-    use RemembersNext;
-
     private $entityManager;
 
     public function __construct(EntityManager $entityManager)
@@ -18,13 +15,11 @@ class WrapsNextCommandInTransaction implements CommandBus
         $this->entityManager = $entityManager;
     }
 
-    public function handle(Command $command)
+    public function handle(Command $command, callable $next)
     {
-        $commandBus = $this;
-
         $this->entityManager->transactional(
-            function () use ($commandBus, $command) {
-                $commandBus->next($command);
+            function () use ($command, $next) {
+                $next($command);
             }
         );
     }
