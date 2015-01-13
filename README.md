@@ -13,9 +13,9 @@ Using Composer:
 1. Set up a [command bus](https://github.com/SimpleBus/CommandBus):
 
     ```php
-    use SimpleBus\Command\Bus\Middleware\CommandBusSupportingMiddleware;
+    use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
 
-    $commandBus = new CommandBusSupportingMiddleware();
+    $commandBus = new MessageBusSupportingMiddleware();
     ```
 
 2. Set up a Doctrine ORM entity manager:
@@ -28,33 +28,35 @@ Using Composer:
 3. Create the event provider and register it as a Doctrine event subscriber:
 
     ```php
+    use SimpleBus\DoctrineORMBridge\EventListener\CollectsEventsFromEntities;
+
     $eventProvider = new CollectsEventsFromEntities();
 
-    $entityManager->getConnection()->getEventManager()->addEventSubscriber($eventSubscriber);
+    $entityManager->getConnection()->getEventManager()->addEventSubscriber($eventProvider);
     ```
 
 3. If you want your commands to be handled inside a database transaction, wrap the existing command bus:
 
     ```php
-    use SimpleBus\DoctrineORMBridge\CommandBus\WrapsCommandHandlingInTransaction;
+    use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
 
-    $transactionalMiddleware = new WrapsCommandHandlingInTransaction($entityManager);
+    $transactionalMiddleware = new WrapsMessageHandlingInTransaction($entityManager);
 
     $commandBus->addMiddleware($transactionalMiddleware);
     ```
 
 4. If you want to dispatch events collected from the entities that played a part in the last flush operation, register
-the event-dispatching middleware. It requires an [`EventBus`](https://github.com/SimpleBus/EventBus) instance.
+the event-dispatching middleware. It requires a [`MessageBus`](https://github.com/SimpleBus/MessageBus).
 
     ```php
-    use SimpleBus\CommandEventBridge\CommandBus\DispatchesEvents;
-    use SimpleBus\Event\Bus\EventBus;
+    use SimpleBus\Event\MessageBus\DispatchesEventsMiddleware;
+    use SimpleBus\Message\Bus\MessageBus;
 
-    // set up an instance of EventBus
+    // set up an instance of MessageBus
     $eventBus = ...;
 
     $eventDispatchingMiddleware = new DispatchesEvents($eventProvider, $eventBus);
 
-    // N.B. add this middleware *before* the WrapsCommandHandlingInTransaction middleware
+    // N.B. add this middleware *before* the WrapsMessageHandlingInTransaction middleware
     $commandBus->addMiddleware($eventDispatchingMiddleware);
     ```

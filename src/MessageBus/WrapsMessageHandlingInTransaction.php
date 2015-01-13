@@ -1,12 +1,12 @@
 <?php
 
-namespace SimpleBus\DoctrineORMBridge\CommandBus;
+namespace SimpleBus\DoctrineORMBridge\MessageBus;
 
 use Doctrine\ORM\EntityManager;
-use SimpleBus\Command\Bus\Middleware\CommandBusMiddleware;
-use SimpleBus\Command\Command;
+use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
+use SimpleBus\Message\Message;
 
-class WrapsCommandHandlingInTransaction implements CommandBusMiddleware
+class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
     private $entityManager;
 
@@ -15,7 +15,7 @@ class WrapsCommandHandlingInTransaction implements CommandBusMiddleware
         $this->entityManager = $entityManager;
     }
 
-    public function handle(Command $command, callable $next)
+    public function handle(Message $command, callable $next)
     {
         $this->entityManager->transactional(
             function () use ($command, $next) {
