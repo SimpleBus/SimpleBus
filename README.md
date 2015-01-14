@@ -49,13 +49,13 @@ Using Composer:
 the event-dispatching middleware. It requires a [`MessageBus`](https://github.com/SimpleBus/MessageBus).
 
     ```php
-    use SimpleBus\Event\MessageBus\DispatchesEventsMiddleware;
+    use SimpleBus\Message\Recorder\HandlesRecordedMessagesMiddleware;
     use SimpleBus\Message\Bus\MessageBus;
 
     // set up an instance of MessageBus
     $eventBus = ...;
 
-    $eventDispatchingMiddleware = new DispatchesEvents($eventProvider, $eventBus);
+    $eventDispatchingMiddleware = new HandlesRecordedMessagesMiddleware($eventProvider, $eventBus);
 
     // N.B. add this middleware *before* the WrapsMessageHandlingInTransaction middleware
     $commandBus->addMiddleware($eventDispatchingMiddleware);
