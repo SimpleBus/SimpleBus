@@ -15,11 +15,11 @@ class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
         $this->entityManager = $entityManager;
     }
 
-    public function handle(Message $command, callable $next)
+    public function handle(Message $message, callable $next)
     {
         $this->entityManager->transactional(
-            function () use ($command, $next) {
-                $next($command);
+            function () use ($message, $next) {
+                $next($message);
             }
         );
     }
