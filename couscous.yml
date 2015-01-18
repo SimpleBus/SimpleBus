@@ -19,3 +19,6 @@ menu:
             itemId: domain_events
             text: Domain events
             relativeUrl: doc/domain_events.html
+        symfony_integration:
+            text: Symfony integration
+            absoluteUrl: http://simplebus.github.io/SymfonyBridge/
