@@ -5,9 +5,10 @@ namespace SimpleBus\DoctrineORMBridge\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
+use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 use SimpleBus\Message\Recorder\RecordsMessages;
 
-class CollectsEventsFromEntities implements EventSubscriber, RecordsMessages
+class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMessages
 {
     private $collectedEvents = array();
 
