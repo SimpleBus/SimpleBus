@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>SimpleBus/SymfonyBridge</title>
+
+        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://simplebus.github.io/SymfonyBridge/">
+                SimpleBus/SymfonyBridge
+                <small class="hidden-xs hidden-sm">
+                    Use SimpleBus/MessageBus in a Symfony application
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/getting_started.html">
+                                        Getting started
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/command_bus_bundle.html">
+                                        Command bus bundle
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/event_bus_bundle.html">
+                                        Event bus bundle
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/doctrine_orm_bridge_bundle.html">
+                                        Doctrine ORM bridge bundle
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Upgrading from 1.0 to 2.0</h1>
+<h2>Command and event names</h2>
+<p>In 1.0 commands and events had a <code>name()</code> method which returned their names. This name was also used in the service
+tags for command and event handlers. The new default is that commands and events don't have a <code>name()</code> method anymore
+and their name is just their fully-qualified class name (FQCN):</p>
+<h3>Commands and command handlers, events and event handlers</h3>
+<p>Given this command:</p>
+<pre><code class="language-php">use SimpleBus\Command\Command;
+
+class SomeCommand implements Command
+{
+    // no name() method anymore
+    ...
+}</code></pre>
+<p>You would have a command handler which looks like this:</p>
+<pre><code class="language-php">use SimpleBus\Message\Handler\MessageHandler;
+use SimpleBus\Message\Message;
+
+class SomeCommandHandler implements MessageHandler
+{
+    public function handle(Message $message)
+    {
+        ...
+    }
+}</code></pre>
+<p>Please note that you shouldn't implement <code>CommandHandler</code> anymore. Instead implement <code>MessageHandler</code>. The only
+parameter of the <code>handle()</code> method is not a <code>Command</code> anymore, but a <code>Message</code>.</p>
+<p>You can register this handler like this:</p>
+<pre><code class="language-yaml">services:
+    some_command_handler:
+        class: Fully\Qualified\Class\Name\Of\SomeCommandHandler
+        tags:
+            - { name: command_handler, handles: Fully\Qualified\Class\Name\Of\SomeCommand }</code></pre>
+<p>The same for event subscribers (previously known as event handlers):</p>
+<pre><code class="language-php">use SimpleBus\Event\Event;
+
+class SomeEvent implements Event
+{
+    ...
+}</code></pre>
+<p>A subscriber for this event might look like this:</p>
+<pre><code class="language-php">use SimpleBus\Message\Subscriber\MessageSubscriber;
+use SimpleBus\Message\Message;
+
+class SomeEventSubscriber implements MessageSubscriber
+{
+    public function notify(Message $message)
+    {
+        ...
+    }
+}</code></pre>
+<p>Please note that you shouldn't implement <code>EventHandler</code> anymore, but instead implement <code>MessageSubscriber</code>. Also, the
+<code>handle()</code> method has been renamed to <code>notify()</code> and the only parameter is not an <code>Event</code>, but a <code>Message</code>.</p>
+<p>You can register this subscriber like this:</p>
+<pre><code class="language-yaml">services:
+    some_event_subscriber:
+        class: Fully\Qualified\Class\Name\Of\SomeEventSubscriber
+        tags:
+            - { name: event_subscriber, handles: Fully\Qualified\Class\Name\Of\SomeEvent }</code></pre>
+<h3>Named messages</h3>
+<p>If instead of the FQCN you want to keep using the command/event name as returned by its <code>messageName()</code> method, you should
+configure this in <code>config.yml</code>:</p>
+<pre><code class="language-yaml">command_bus:
+    # the name of a command is considered to be its FQCN
+    command_name_resolver_strategy: class_based
+
+event_bus:
+    # the name of an event should be returned by its messageName() method
+    event_name_resolver_strategy: named_message</code></pre>
+<p>When you choose for the <code>named_message</code> strategy, you have to make your commands/events implement the <code>NamedMessage</code>
+interface:</p>
+<pre><code class="language-php">use SimpleBus\Message\Name\NamedMessage;
+
+class SomeEvent implements Event, NamedMessage
+{
+    public static function messageName()
+    {
+        return 'name_of_the_event';
+    }
+}</code></pre>
+<h2>Command and event buses have become message bus middlewares</h2>
+<p>Previously you could define your own command bus and event bus behaviors by implementing <code>CommandBus</code> or <code>EventBus</code>.
+As of version 2.0 you should implement <code>MessageBusMiddleware</code> instead:</p>
+<pre><code class="language-php">use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
+
+class SpecializedCommandBusMiddleware implements MessageBusMiddleware
+{
+    public function handle(Message $message, callable $next)
+    {
+        // do whatever you want
+
+        $next($message);
+
+        // maybe do some more things
+    }
+}</code></pre>
+<p>Please note that the trait <code>RemembersNext</code> doesn't exist anymore. Instead of calling <code>$this-&gt;next()</code> you should now
+call <code>$next($message)</code>.</p>
+<p>You should register command bus middleware like this:</p>
+<pre><code class="language-yaml">services:
+    specialized_command_bus_middleware:
+        class: Fully\Qualified\Class\Name\Of\SpecializedCommandBusMiddleware
+        tags:
+            - { name: command_bus_middleware, priority: 0 }</code></pre>
+<p>The same for event bus middleware, but then you should use the tag <code>event_bus_middleware</code>. The priority value for
+middlewares works just like it did before.</p>
+<h2>Event providers have become message recorders</h2>
+<p>If you have entities that collect domain events, you should implement <code>ContainsRecordedMessages</code> instead of
+<code>ProvidesEvents</code> and use the trait <code>PrivateMessageRecorderCapabilities</code> instead of <code>EventProviderCapabilities</code>. The
+<code>raise()</code> method has been renamed to <code>record()</code>.</p>
+<pre><code class="language-php">use SimpleBus\Message\Recorder\ContainsRecordedMessages;
+use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
+
+class Entity implements ContainsRecordedMessages
+{
+    use PrivateMessageRecorderCapabilities;
+
+    public function someFunction()
+    {
+        // $event is an instance of Message
+        $event = ...;
+
+        $this-&gt;record($event);
+    }
+}</code></pre>
+<p>If you had registered event providers using the service tag <code>event_provider</code>, you should change that to
+<code>message_recorder</code>.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

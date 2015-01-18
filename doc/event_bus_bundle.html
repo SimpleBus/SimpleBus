@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>SimpleBus/SymfonyBridge</title>
+
+        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://simplebus.github.io/SymfonyBridge/">
+                SimpleBus/SymfonyBridge
+                <small class="hidden-xs hidden-sm">
+                    Use SimpleBus/MessageBus in a Symfony application
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/getting_started.html">
+                                        Getting started
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/command_bus_bundle.html">
+                                        Command bus bundle
+                                    </a>
+                                </li>
+                                                            <li class="active">
+                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/event_bus_bundle.html">
+                                        Event bus bundle
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/doctrine_orm_bridge_bundle.html">
+                                        Doctrine ORM bridge bundle
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Event bus bundle</h1>
+<p>Using the building blocks supplied by the <a href="https://github.com/SimpleBus/MessageBus">SimpleBus/MessageBus library</a> you
+can create an event bus, which is basically a message bus, with some middlewares and a collection of message
+subscribers. This is described in the <a href="http://simplebus.github.io/MessageBus/doc/event_bus.html">documentation of
+MessageBus</a>.</p>
+<p>If you use Symfony, you don't have to manually configure an event bus in each project. The <a href="https://github.com/SimpleBus/SymfonyBridge">SimpleBus/SymfonyBridge
+library</a> package comes with the <code>SimpleBusEventBusBundle</code> which handles it
+for you.</p>
+<p>First enable the bundle in your application's kernel:</p>
+<pre><code class="language-php">class AppKernel extends Kernel
+{
+    public function registerBundles()
+    {
+        $bundles = array(
+            ...
+            new SimpleBus\SymfonyBridge\SimpleBusEventBusBundle()
+        )
+        ...
+    }
+    ...
+}</code></pre>
+<h2>Using the event bus</h2>
+<p>This bundle provides the <code>event_bus</code> service which is an instance of <code>MessageBus</code>. Wherever you like, you can let it
+handle events, e.g. by fetching it inside a container-aware controller:</p>
+<pre><code class="language-php">// $event is an instance of SimpleBus\Message\Type\Event
+$event = ...;
+
+$this-&gt;get('event_bus')-&gt;handle($event);</code></pre>
+<p>However, you are encouraged to properly inject the <code>event_bus</code> service as a dependency whenever you need it:</p>
+<pre><code class="language-yaml">services:
+    some_service:
+        arguments:
+            - @event_bus</code></pre>
+<h2>Registering event subscribers</h2>
+<p>As described in the <a href="http://simplebus.github.io/MessageBus/doc/event_bus.html">MessageBus documentation</a> you can
+notify event subscribers about the occurrence of a particular event. This bundle allows you to register your own
+event subscribers by adding the <code>event_subscriber</code> tag to the event subscriber's service definition:</p>
+<pre><code class="language-yaml">services:
+    user_registered_event_subscriber:
+        class: Fully\Qualified\Class\Name\Of\UserRegisteredEventSubscriber
+        tags:
+            - { name: event_subscriber, handles: Fully\Qualified\Class\Name\Of\UserRegistered }</code></pre>
+<blockquote>
+<h4>Event subscribers are lazy-loaded</h4>
+<p>Since only some of the event subscribers are going to handle any particular event, event subscribers are lazy-loaded.
+This means that their services should be defined as public services (i.e. you can't use <code>public: false</code> for them).</p>
+</blockquote>
+<h2>Adding event bus middlewares</h2>
+<p>As described in the <a href="http://simplebus.github.io/MessageBus/doc/event_bus.html">MessageBus documentation</a> you can
+extend the behavior of the event bus by adding middlewares to it. This bundle allows you to register your own
+middlewares by adding the <code>event_bus_middleware</code> tag to middleware service definitions:</p>
+<pre><code class="language-yaml">services:
+    specialized_event_bus_middleware:
+        class: YourSpecializedEventBusMiddleware
+        public: false
+        tags:
+            - { name: event_bus_middleware, priority: 100 }</code></pre>
+<p>By providing a value for the <code>priority</code> tag attribute you can influence the order in which middlewares are added to the
+event bus.</p>
+<blockquote>
+<h4>Middlewares are not lazy-loaded</h4>
+<p>Whenever you use the event bus, you also use all of its middlewares, so event bus middlewares are not lazy-loaded.
+This means that their services should be defined as private services (i.e. you should use <code>public: false</code>). See also:
+<a href="http://symfony.com/doc/current/components/dependency_injection/advanced.html#marking-services-as-public-private">Marking Services as public /
+private</a></p>
+</blockquote>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
