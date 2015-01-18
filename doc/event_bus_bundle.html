@@ -99,12 +99,28 @@ event subscribers by adding the <code>event_subscriber</code> tag to the event s
     user_registered_event_subscriber:
         class: Fully\Qualified\Class\Name\Of\UserRegisteredEventSubscriber
         tags:
-            - { name: event_subscriber, handles: Fully\Qualified\Class\Name\Of\UserRegistered }</code></pre>
+            - { name: event_subscriber, subscribes_to: Fully\Qualified\Class\Name\Of\UserRegistered }</code></pre>
 <blockquote>
 <h4>Event subscribers are lazy-loaded</h4>
 <p>Since only some of the event subscribers are going to handle any particular event, event subscribers are lazy-loaded.
 This means that their services should be defined as public services (i.e. you can't use <code>public: false</code> for them).</p>
 </blockquote>
+<h2>Setting the event name resolving strategy</h2>
+<p>To find the correct event subscribers for a given event, the name of the event is used. This can be either 1) its fully-
+qualified class name (FQCN) or, 2) if the event implements the <code>SimpleBus\Message\Name\NamedMessage</code> interface, the
+value returned by its static <code>messageName()</code> method. By default, the first strategy is used, but you can configure it
+in your application configuration:</p>
+<pre><code class="language-yaml">event_bus:
+    # default value for this key is "class_based"
+    event_name_resolver_strategy: named_message</code></pre>
+<p>When you change the strategy, you also have to change the value of the <code>subscribes_to</code> attribute of your event
+subscriber service definitions:</p>
+<pre><code class="language-yaml">services:
+    user_registered_event_subscriber:
+        class: Fully\Qualified\Class\Name\Of\UserRegisteredEventSubscriber
+        tags:
+            - { name: event_subscriber, subscribes_to: user_registered }</code></pre>
+<p>Make sure that the value of <code>subscribes_to</code> matches the return value of <code>UserRegistered::messageName()</code>.</p>
 <h2>Adding event bus middlewares</h2>
 <p>As described in the <a href="http://simplebus.github.io/MessageBus/doc/event_bus.html">MessageBus documentation</a> you can
 extend the behavior of the event bus by adding middlewares to it. This bundle allows you to register your own
@@ -124,6 +140,68 @@ This means that their services should be defined as private services (i.e. you s
 <a href="http://symfony.com/doc/current/components/dependency_injection/advanced.html#marking-services-as-public-private">Marking Services as public /
 private</a></p>
 </blockquote>
+<h2>Event recorders</h2>
+<h3>Recording events</h3>
+<p>As explained <a href="http://simplebus.github.io/MessageBus/doc/message_recorder.html">in the documentation of MessageBus</a> you
+can collect events while a command is being handled. If you want to record new events you can inject the
+<code>event_recorder</code> service as a constructor argument of a command handler:</p>
+<pre><code class="language-php">use SimpleBus\Message\Handler\MessageHandler;
+use SimpleBus\Message\Message;
+use SimpleBus\Message\Recorder\RecordsMessages;
+
+class SomeInterestingCommandHandler implements MessageHandler
+{
+    private $eventRecorder;
+
+    public function __construct(RecordsMessages $eventRecorder)
+    {
+        $this-&gt;eventRecorder = $eventRecorder;
+    }
+
+    public function handle(Message $message)
+    {
+        ...
+
+        // create an event (which is itself an instance of Message)
+        $event = new SomethingInterestingHappened();
+
+        // record the event
+        $this-&gt;eventRecorder-&gt;record($event);
+    }
+}</code></pre>
+<p>The corresponding service definition looks like this:</p>
+<pre><code class="language-yaml">services:
+    some_interesting_command_handler:
+    arguments:
+        - @event_recorder
+    tags:
+        - { name: command_handler, handles: Fully\Qualified\Name\Of\SomeInterestingCommand</code></pre>
+<p>Recorded events will be handled after the command has been completely handled.</p>
+<h3>Registering your own message recorders</h3>
+<p>In case you have another source for recorded message (for instance a class that collects domain events like the
+<a href="https://github.com/SimpleBus/DoctrineORMBridge">DoctrineORMBridge</a> does), you can register it as a message recorder:</p>
+<pre><code class="language-php">use SimpleBus\Message\Recorder\ContainsRecordedMessages;
+use SimpleBus\Message\Message;
+
+class PropelDomainEvents implements ContainsRecordedMessages
+{
+    public function recordedMessages()
+    {
+        // return an array of Message instances
+    }
+
+    public function eraseRecordedMessages()
+    {
+        // clear the internal array containing the recorded messages
+    }
+}</code></pre>
+<p>The corresponding service definition looks like this:</p>
+<pre><code class="language-yaml">services:
+    propel_domain_events:
+        class: Fully\Qualified\Class\Name\Of\PropelDomainEvents
+        public: false
+        tags:
+            - { name: event_recorder }</code></pre>
                 </section>
 
             </div>

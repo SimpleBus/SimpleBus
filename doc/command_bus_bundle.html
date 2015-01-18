@@ -104,6 +104,22 @@ command handlers by adding the <code>command_handler</code> tag to the command h
 <p>Since only one of the command handlers is going to handle any particular command, command handlers are lazy-loaded.
 This means that their services should be defined as public services (i.e. you can't use <code>public: false</code> for them).</p>
 </blockquote>
+<h2>Setting the command name resolving strategy</h2>
+<p>To find the correct command handler for a given command, the name of the command is used. This can be either 1) its
+fully-qualified class name (FQCN) or, 2) if the command implements the <code>SimpleBus\Message\Name\NamedMessage</code> interface,
+the value returned by its static <code>messageName()</code> method. By default, the first strategy is used, but you can configure
+it in your application configuration:</p>
+<pre><code class="language-yaml">command_bus:
+    # default value for this key is "class_based"
+    command_name_resolver_strategy: named_message</code></pre>
+<p>When you change the strategy, you also have to change the value of the <code>subscribes_to</code> attribute of your command handler
+service definitions:</p>
+<pre><code class="language-yaml">services:
+    register_user_command_handler:
+        class: Fully\Qualified\Class\Name\Of\RegisterUserCommandHandler
+        tags:
+            - { name: command_handler, handles: register_user }</code></pre>
+<p>Make sure that the value of <code>subscribes_to</code> matches the return value of <code>RegisterUser::messageName()</code>.</p>
 <h2>Adding command bus middleware</h2>
 <p>As described in the <a href="http://simplebus.github.io/MessageBus/doc/command_bus.html">MessageBus documentation</a> you can
 extend the behavior of the command bus by adding middleware to it. This bundle allows you to register your own
