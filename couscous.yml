@@ -3,6 +3,10 @@ subTitle: Integrate SimpleBus/MessageBus with Doctrine ORM
 baseUrl: http://simplebus.github.io/DoctrineORMBridge
 menu:
     items:
+        home:
+            itemId: home
+            text: Home
+            relativeUrl: /
         getting_started:
             itemId: getting_started
             text: Getting started
