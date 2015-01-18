@@ -33,6 +33,11 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
+                                    <a href="http://simplebus.github.io/SymfonyBridge/">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="">
                                     <a href="http://simplebus.github.io/SymfonyBridge/doc/getting_started.html">
                                         Getting started
                                     </a>
@@ -52,74 +57,152 @@
                                         Doctrine ORM bridge bundle
                                     </a>
                                 </li>
+                                                            <li class="active">
+                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/upgrade_guide.html">
+                                        Upgrade guide
+                                    </a>
+                                </li>
                                                     </ul>
 
                     </nav>
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Upgrading from 1.0 to 2.0</h1>
-<h2>Command and event names</h2>
-<p>In 1.0 commands and events had a <code>name()</code> method which returned their names. This name was also used in the service
-tags for command and event handlers. The new default is that commands and events don't have a <code>name()</code> method anymore
-and their name is just their fully-qualified class name (FQCN):</p>
-<h3>Commands and command handlers, events and event handlers</h3>
-<p>Given this command:</p>
+                    <h1>Upgrade guide</h1>
+<h2>From 1.0 to 2.0</h2>
+<h3>Commands</h3>
+<p>Before:</p>
 <pre><code class="language-php">use SimpleBus\Command\Command;
 
-class SomeCommand implements Command
+class FooCommand implements Command
+{
+    public function name()
+    {
+        return 'foo';
+    }
+}</code></pre>
+<p>After:</p>
+<pre><code class="language-php">use SimpleBus\Message\Type\Command;
+
+class FooCommand implements Command
 {
     // no name() method anymore
-    ...
 }</code></pre>
-<p>You would have a command handler which looks like this:</p>
-<pre><code class="language-php">use SimpleBus\Message\Handler\MessageHandler;
-use SimpleBus\Message\Message;
+<p>Or:</p>
+<pre><code class="language-php">use SimpleBus\Message\Type\Command;
+use SimpleBus\Message\Name\NamedMessage;
 
-class SomeCommandHandler implements MessageHandler
+class FooCommand implements Command, NamedMessage
 {
-    public function handle(Message $message)
+    public static function messageName()
+    {
+        return 'foo';
+    }
+}</code></pre>
+<p>See below for more information about this change.</p>
+<h3>Events</h3>
+<p>Before:</p>
+<pre><code class="language-php">use SimpleBus\Event\Event;
+
+class BarEvent implements Event
+{
+    public function name()
+    {
+        return 'bar';
+    }
+}</code></pre>
+<p>After:</p>
+<pre><code class="language-php">use SimpleBus\Message\Type\Event;
+
+class BarEvent implements Event
+{
+    // no name() method anymore
+}</code></pre>
+<p>Or:</p>
+<pre><code class="language-php">use SimpleBus\Message\Type\Event;
+use SimpleBus\Message\Name\NamedMessage;
+
+class BarEvent implements Event, NamedMessage
+{
+    public static function messageName()
+    {
+        return 'bar';
+    }
+}</code></pre>
+<p>See below for more information about this change.</p>
+<h3>Command handlers</h3>
+<p>Before:</p>
+<pre><code class="language-php">use SimpleBus\Command\Handler\CommandHandler;
+use SimpleBus\Command\Command;
+
+class FooCommandHandler implements CommandHandler
+{
+    public function handle(Command $command)
     {
         ...
     }
 }</code></pre>
-<p>Please note that you shouldn't implement <code>CommandHandler</code> anymore. Instead implement <code>MessageHandler</code>. The only
-parameter of the <code>handle()</code> method is not a <code>Command</code> anymore, but a <code>Message</code>.</p>
+<p>After:</p>
+<pre><code class="language-php">use SimpleBus\Message\Handler\MessageHandler;
+use SimpleBus\Message\Message;
+
+class FooCommandHandler implements MessageHandler
+{
+    public function handle(Message $command)
+    {
+        ...
+    }
+}</code></pre>
 <p>You can register this handler like this:</p>
 <pre><code class="language-yaml">services:
-    some_command_handler:
-        class: Fully\Qualified\Class\Name\Of\SomeCommandHandler
+    foo_command_handler:
+        class: Fully\Qualified\Class\Name\Of\FooCommandHandler
         tags:
-            - { name: command_handler, handles: Fully\Qualified\Class\Name\Of\SomeCommand }</code></pre>
-<p>The same for event subscribers (previously known as event handlers):</p>
-<pre><code class="language-php">use SimpleBus\Event\Event;
+            - { name: command_handler, handles: Fully\Qualified\Class\Name\Of\FooCommand }</code></pre>
+<p>Or, if you let commands implement <code>NamedMessage</code>:</p>
+<pre><code class="language-yaml">services:
+    foo_command_handler:
+        class: Fully\Qualified\Class\Name\Of\FooCommandHandler
+        tags:
+            - { name: command_handler, handles: foo }</code></pre>
+<h3>Event subscribers</h3>
+<p>Before:</p>
+<pre><code class="language-php">use SimpleBus\Event\Handler\EventHandler;
+use SimpleBus\Event\Event;
 
-class SomeEvent implements Event
+class BarEventHandler implements EventHandler
 {
-    ...
+    public function handle(Event $event)
+    {
+        ...
+    }
 }</code></pre>
-<p>A subscriber for this event might look like this:</p>
+<p>After:</p>
 <pre><code class="language-php">use SimpleBus\Message\Subscriber\MessageSubscriber;
 use SimpleBus\Message\Message;
 
-class SomeEventSubscriber implements MessageSubscriber
+class BarEventSubscriber implements MessageSubscriber
 {
     public function notify(Message $message)
     {
         ...
     }
 }</code></pre>
-<p>Please note that you shouldn't implement <code>EventHandler</code> anymore, but instead implement <code>MessageSubscriber</code>. Also, the
-<code>handle()</code> method has been renamed to <code>notify()</code> and the only parameter is not an <code>Event</code>, but a <code>Message</code>.</p>
 <p>You can register this subscriber like this:</p>
 <pre><code class="language-yaml">services:
-    some_event_subscriber:
-        class: Fully\Qualified\Class\Name\Of\SomeEventSubscriber
+    bar_event_subscriber:
+        class: Fully\Qualified\Class\Name\Of\BarEventSubscriber
         tags:
-            - { name: event_subscriber, handles: Fully\Qualified\Class\Name\Of\SomeEvent }</code></pre>
+            - { name: event_subscriber, handles: Fully\Qualified\Class\Name\Of\BarEvent }</code></pre>
+<p>Or, if you let events implement <code>NamedMessage</code>:</p>
+<pre><code class="language-yaml">services:
+    bar_event_subscriber:
+        class: Fully\Qualified\Class\Name\Of\BarEventSubscriber
+        tags:
+            - { name: event_subscriber, handles: bar }</code></pre>
 <h3>Named messages</h3>
-<p>If instead of the FQCN you want to keep using the command/event name as returned by its <code>messageName()</code> method, you should
-configure this in <code>config.yml</code>:</p>
+<p>If instead of the FQCN you want to keep using the command/event name as returned by its <code>messageName()</code> method, you
+should configure this in <code>config.yml</code>:</p>
 <pre><code class="language-yaml">command_bus:
     # the name of a command is considered to be its FQCN
     command_name_resolver_strategy: class_based
@@ -127,20 +210,10 @@ configure this in <code>config.yml</code>:</p>
 event_bus:
     # the name of an event should be returned by its messageName() method
     event_name_resolver_strategy: named_message</code></pre>
-<p>When you choose for the <code>named_message</code> strategy, you have to make your commands/events implement the <code>NamedMessage</code>
-interface:</p>
-<pre><code class="language-php">use SimpleBus\Message\Name\NamedMessage;
-
-class SomeEvent implements Event, NamedMessage
-{
-    public static function messageName()
-    {
-        return 'name_of_the_event';
-    }
-}</code></pre>
-<h2>Command and event buses have become message bus middlewares</h2>
+<p>This strategy then applies to all your commands or events.</p>
+<h3>Command and event bus middlewares</h3>
 <p>Previously you could define your own command bus and event bus behaviors by implementing <code>CommandBus</code> or <code>EventBus</code>.
-As of version 2.0 you should implement <code>MessageBusMiddleware</code> instead:</p>
+As of version 2.0 in both cases you should implement <code>MessageBusMiddleware</code> instead:</p>
 <pre><code class="language-php">use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
 class SpecializedCommandBusMiddleware implements MessageBusMiddleware
@@ -163,8 +236,9 @@ call <code>$next($message)</code>.</p>
         tags:
             - { name: command_bus_middleware, priority: 0 }</code></pre>
 <p>The same for event bus middleware, but then you should use the tag <code>event_bus_middleware</code>. The priority value for
-middlewares works just like it did before.</p>
-<h2>Event providers have become message recorders</h2>
+middlewares works just like it did before. Read more in the <a href="command_bus_bundle.html">CommandBusBundle</a> and
+<a href="event_bus_bundle.html">EventBusBundle</a> documentation.</p>
+<h2>Event providers have become event recorders</h2>
 <p>If you have entities that collect domain events, you should implement <code>ContainsRecordedMessages</code> instead of
 <code>ProvidesEvents</code> and use the trait <code>PrivateMessageRecorderCapabilities</code> instead of <code>EventProviderCapabilities</code>. The
 <code>raise()</code> method has been renamed to <code>record()</code>.</p>
@@ -185,6 +259,7 @@ class Entity implements ContainsRecordedMessages
 }</code></pre>
 <p>If you had registered event providers using the service tag <code>event_provider</code>, you should change that to
 <code>event_recorder</code>.</p>
+<p>Read more about event recorders in the <a href="event_bus_bundle.html">EventBusBundle</a> documentation.</p>
                 </section>
 
             </div>
