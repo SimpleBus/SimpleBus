@@ -6,7 +6,7 @@ menu:
         home:
             itemId: home
             text: Home
-            relativeUrl: /
+            relativeUrl: ""
         getting_started:
             itemId: getting_started
             text: Getting started
