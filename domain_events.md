@@ -41,7 +41,7 @@ The event recorder will loop over all the entities that were involved in the las
 internally recorded events.
 
 After a database transaction was completed successfully these events should be handled by the event bus. This is done by
-a specialized middleware, which should be added to the command bus *before* the middleware that is responsible for
+a specialized middleware, which should be appended to the command bus *before* the middleware that is responsible for
 handling the transaction.
 
 ```php
@@ -50,9 +50,14 @@ use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
 use SimpleBus\Message\Bus\MessageBus;
 
 $eventDispatchingMiddleware = new HandlesRecordedMessagesMiddleware($eventProvider, $eventBus);
-// N.B. add this middleware *before* the WrapsMessageHandlingInTransaction middleware
-$commandBus->addMiddleware($eventDispatchingMiddleware);
+// N.B. append this middleware *before* the WrapsMessageHandlingInTransaction middleware
+$commandBus->appendMiddleware($eventDispatchingMiddleware);
 
 $transactionalMiddleware = new WrapsMessageHandlingInTransaction($entityManager);
-$commandBus->addMiddleware($transactionalMiddleware);
+$commandBus->appendMiddleware($transactionalMiddleware);
 ```
+
+> #### Prepend middleware
+>
+> The `MessageBusSupportingMiddleware` class also has a `prependMiddleware()` method, which you can use to prepend
+> middleware instead of appending it.
