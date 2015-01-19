@@ -193,13 +193,13 @@ class BarEventSubscriber implements MessageSubscriber
     bar_event_subscriber:
         class: Fully\Qualified\Class\Name\Of\BarEventSubscriber
         tags:
-            - { name: event_subscriber, handles: Fully\Qualified\Class\Name\Of\BarEvent }</code></pre>
+            - { name: event_subscriber, subscribes_to: Fully\Qualified\Class\Name\Of\BarEvent }</code></pre>
 <p>Or, if you let events implement <code>NamedMessage</code>:</p>
 <pre><code class="language-yaml">services:
     bar_event_subscriber:
         class: Fully\Qualified\Class\Name\Of\BarEventSubscriber
         tags:
-            - { name: event_subscriber, handles: bar }</code></pre>
+            - { name: event_subscriber, subscribes_to: bar }</code></pre>
 <h3>Named messages</h3>
 <p>If instead of the FQCN you want to keep using the command/event name as returned by its <code>messageName()</code> method, you
 should configure this in <code>config.yml</code>:</p>
