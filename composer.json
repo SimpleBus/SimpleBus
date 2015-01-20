@@ -16,7 +16,7 @@
         "php": ">=5.4",
         "beberlei/assert": "~2.0",
         "simple-bus/message-bus": "~1.0",
-        "doctrine/orm": "~2.0"
+        "doctrine/orm": "~2.5@dev"
     },
     "suggest": {
         "simple-bus/symfony-bridge": "Bridge for using command buses and event buses with Symfony"
@@ -29,5 +29,7 @@
     },
     "require-dev": {
         "matthiasnoback/doctrine-orm-test-service-provider": "~2.0"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
