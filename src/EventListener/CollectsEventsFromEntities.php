@@ -6,7 +6,6 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
-use SimpleBus\Message\Recorder\RecordsMessages;
 
 class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMessages
 {
@@ -50,10 +49,12 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
     {
         $entity = $event->getEntity();
 
-        if ($entity instanceof RecordsMessages) {
+        if ($entity instanceof ContainsRecordedMessages) {
             foreach ($entity->recordedMessages() as $event) {
                 $this->collectedEvents[] = $event;
             }
+
+            $entity->eraseMessages();
         }
     }
 }

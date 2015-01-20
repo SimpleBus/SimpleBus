@@ -23,5 +23,11 @@
     },
     "autoload": {
         "psr-4" : { "SimpleBus\\DoctrineORMBridge\\" : "src" }
+    },
+    "autoload-dev": {
+        "psr-4" : { "SimpleBus\\DoctrineORMBridge\\Tests\\" : "tests" }
+    },
+    "require-dev": {
+        "matthiasnoback/doctrine-orm-test-service-provider": "~2.0"
     }
 }
