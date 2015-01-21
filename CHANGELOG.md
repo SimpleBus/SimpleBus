@@ -19,6 +19,6 @@
 
 - Instead of SimpleBus/CommandBus and SimpleBus/EventBus 1.0 this library now uses SimpleBus/MessageBus 1.0.
 
-[unreleased]: https://github.com/simple-bus/doctrine-orm-bridge/compare/v2.0.1...HEAD
-[2.0.1]: https://github.com/simple-bus/doctrine-orm-bridge/compare/v2.0.0...v2.0.1
-[2.0.0]: https://github.com/simple-bus/doctrine-orm-bridge/compare/v1.0.0...v2.0.0
+[unreleased]: https://github.com/SimpleBus/DoctrineORMBridge/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/SimpleBus/DoctrineORMBridge/compare/v2.0.0...v2.0.1
+[2.0.0]: https://github.com/SimpleBus/DoctrineORMBridge/compare/v1.0.0...v2.0.0
