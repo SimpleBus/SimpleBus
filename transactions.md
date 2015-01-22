@@ -5,13 +5,20 @@ currentMenu: transactions
 # Transactions
 
 It is generally a good idea to wrap command handling in a database transaction. If you want to do this, add the
-`WrapsMessageHandlingInTransaction` middleware to the command bus. Provide the `EntityManager` instance that you want
-to use:
+`WrapsMessageHandlingInTransaction` middleware to the command bus. Provide an instance of the Doctrine `ManagerRegistry`
+interface and the name of the entity manager that you want to use.
 
 ```php
 use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
 
-$transactionalMiddleware = new WrapsMessageHandlingInTransaction($entityManager);
+/*
+ * $managerRegistry is an instance of Doctrine\Common\Persistence\ManagerRegistry
+ *
+ * For example: if you use Symfony, use the "doctrine" service
+ */
+$managerRegistry = ...;
+
+$transactionalMiddleware = new WrapsMessageHandlingInTransaction($managerRegistry, 'default');
 
 $commandBus->addMiddleware($transactionalMiddleware);
 ```
