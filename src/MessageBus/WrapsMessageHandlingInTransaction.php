@@ -2,25 +2,49 @@
 
 namespace SimpleBus\DoctrineORMBridge\MessageBus;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
+use Exception;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use SimpleBus\Message\Message;
 
 class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
-    private $entityManager;
+    /**
+     * @var ManagerRegistry
+     */
+    private $managerRegistry;
 
-    public function __construct(EntityManager $entityManager)
+    /**
+     * @var string
+     */
+    private $entityManagerName;
+
+    /**
+     * @param ManagerRegistry $managerRegistry
+     * @param string $entityManagerName
+     */
+    public function __construct(ManagerRegistry $managerRegistry, $entityManagerName)
     {
-        $this->entityManager = $entityManager;
+        $this->managerRegistry = $managerRegistry;
+        $this->entityManagerName = $entityManagerName;
     }
 
     public function handle(Message $message, callable $next)
     {
-        $this->entityManager->transactional(
-            function () use ($message, $next) {
-                $next($message);
-            }
-        );
+        $entityManager = $this->managerRegistry->getManager($this->entityManagerName);
+        /** @var $entityManager EntityManager */
+
+        try {
+            $entityManager->transactional(
+                function () use ($message, $next) {
+                    $next($message);
+                }
+            );
+        } catch (Exception $exception) {
+            $this->managerRegistry->resetManager($this->entityManagerName);
+
+            throw $exception;
+        }
     }
 }

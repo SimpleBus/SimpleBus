@@ -28,7 +28,8 @@
         "psr-4" : { "SimpleBus\\DoctrineORMBridge\\Tests\\" : "tests" }
     },
     "require-dev": {
-        "matthiasnoback/doctrine-orm-test-service-provider": "~2.0"
+        "matthiasnoback/doctrine-orm-test-service-provider": "~2.0",
+        "phpunit/phpunit": "~4.6@dev"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
