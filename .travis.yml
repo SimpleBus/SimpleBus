@@ -4,7 +4,6 @@ php:
   - 5.4
 
 env:
-  - DOCTRINE_VERSION: 2.1.*
   - DOCTRINE_VERSION: 2.2.*
   - DOCTRINE_VERSION: 2.3.*
   - DOCTRINE_VERSION: 2.4.*
