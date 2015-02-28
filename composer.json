@@ -1,0 +1,29 @@
+{
+    "name": "simple-bus/asynchronous",
+    "type": "library",
+    "description": "Generic classes and interfaces for asynchronous messaging using SimpleBus",
+    "keywords": ["asynchronous", "messaging", "command bus", "event bus"],
+    "homepage": "http://github.com/SimpleBus/Asynchronous",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Noback",
+            "email": "matthiasnoback@gmail.com",
+            "homepage": "http://php-and-symfony.matthiasnoback.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "simple-bus/message-bus": "~1.0",
+        "beberlei/assert": "~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4" : { "SimpleBus\\Asynchronous\\" : "src" }
+    },
+    "autoload-dev": {
+        "psr-4" : { "SimpleBus\\Asynchronous\\Tests\\" : "tests" }
+    }
+}
