@@ -1,0 +1,31 @@
+{
+    "name": "simple-bus/jms-serializer-bridge",
+    "type": "bundle",
+    "description": "Bridge for using JMSSerializer as message serializer for SimpleBus/Asynchronous",
+    "keywords": ["asynchronous", "message", "serialization"],
+    "homepage": "http://github.com/SimpleBus/JMSSerializerBridge",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Noback",
+            "email": "matthiasnoback@gmail.com",
+            "homepage": "http://php-and-symfony.matthiasnoback.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "beberlei/assert": "~2.0",
+        "simple-bus/message-bus": "~1.0",
+        "simple-bus/asynchronous": "dev-master",
+        "jms/serializer": "~0.12"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4" : { "SimpleBus\\JMSSerializerBridge\\" : "src" }
+    },
+    "autoload-dev": {
+        "psr-4" : { "SimpleBus\\JMSSerializerBridge\\Tests\\" : "tests" }
+    }
+}

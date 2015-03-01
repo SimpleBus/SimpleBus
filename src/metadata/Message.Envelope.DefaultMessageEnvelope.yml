@@ -1,0 +1,6 @@
+SimpleBus\Asynchronous\Message\Envelope\DefaultMessageEnvelope:
+    properties:
+        type:
+            type: string
+        serializedMessage:
+            type: string
