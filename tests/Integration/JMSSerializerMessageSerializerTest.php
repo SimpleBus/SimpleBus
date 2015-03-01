@@ -17,7 +17,7 @@ class JMSSerializerMessageSerializerTest extends \PHPUnit_Framework_TestCase
         $messageEnvelopeFactory = new DefaultMessageEnvelopeFactory();
         $format = 'json';
         $jmsSerializer = SerializerBuilder::create()
-            ->addMetadataDir(SerializerMetadata::dir(), 'SimpleBus\Asynchronous')
+            ->addMetadataDir(SerializerMetadata::directory(), SerializerMetadata::namespacePrefix())
             ->build();
         $originalMessage = new SampleMessage('test', 123);
 
