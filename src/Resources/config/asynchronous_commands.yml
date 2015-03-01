@@ -1,0 +1,50 @@
+services:
+    asynchronous_command_bus:
+        alias: simple_bus.asynchronous.command_bus
+
+    simple_bus.asynchronous.command_bus:
+        class: SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware
+        public: false
+
+    simple_bus.asynchronous.command_bus.delegates_to_message_handler_middleware:
+        class: SimpleBus\Message\Handler\DelegatesToMessageHandlerMiddleware
+        public: false
+        arguments:
+            - @simple_bus.asynchronous.command_bus.command_handler_resolver
+        tags:
+            - { name: asynchronous_command_bus_middleware, priority: -1000 }
+
+    simple_bus.asynchronous.command_bus.command_handler_map:
+        class: SimpleBus\Message\Handler\Map\LazyLoadingMessageHandlerMap
+        public: false
+        arguments:
+            # collection of command handler service ids, will be provided by the RegisterHandlers compiler pass
+            - []
+            - @simple_bus.asynchronous.command_bus.invokable_service_locator
+
+    simple_bus.asynchronous.command_bus.command_handler_resolver:
+        class: SimpleBus\Message\Handler\Resolver\NameBasedMessageHandlerResolver
+        public: false
+        arguments:
+            - @simple_bus.asynchronous.command_bus.command_name_resolver
+            - @simple_bus.asynchronous.command_bus.command_handler_map
+
+    simple_bus.asynchronous.command_bus.invokable_service_locator:
+        class: SimpleBus\SymfonyBridge\DependencyInjection\InvokableServiceLocator
+        public: false
+        arguments:
+            - @service_container
+
+    simple_bus.asynchronous.command_bus.finishes_command_before_handling_next_middleware:
+        class: SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext
+        public: false
+        tags:
+            - { name: asynchronous_command_bus_middleware, priority: 1000 }
+
+    simple_bus.asynchronous.command_bus.publishes_unhandled_commands_middleware:
+        class: SimpleBus\Asynchronous\Message\Bus\PublishesUnhandledMessages
+        arguments:
+            - @simple_bus.asynchronous.command_publisher
+            - @logger
+        tags:
+            - { name: command_bus_middleware, priority: -999 }

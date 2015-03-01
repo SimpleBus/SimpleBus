@@ -1,0 +1,34 @@
+services:
+    native_message_serializer:
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\NativeMessageSerializer
+
+    command_publisher_spy:
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\PublisherSpy
+
+    event_publisher_spy:
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\PublisherSpy
+
+    synchronous_event_subscriber_spy:
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\EventSubscriberSpy
+        tags:
+            - { name: event_subscriber, subscribes_to: SimpleBus\AsynchronousBundle\Tests\Functional\DummyEvent }
+
+    asynchronous_event_subscriber_spy:
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\EventSubscriberSpy
+        tags:
+            - { name: asynchronous_event_subscriber, subscribes_to: SimpleBus\AsynchronousBundle\Tests\Functional\DummyEvent }
+
+    asynchronous_command_handler_spy:
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\CommandHandlerSpy
+        tags:
+            - { name: asynchronous_command_handler, handles: SimpleBus\AsynchronousBundle\Tests\Functional\DummyCommand }
+
+    logger:
+        class: Psr\Log\NullLogger
+
+simple_bus_asynchronous:
+    message_serializer_service_id: native_message_serializer
+    commands:
+        publisher_service_id: command_publisher_spy
+    events:
+        publisher_service_id: event_publisher_spy

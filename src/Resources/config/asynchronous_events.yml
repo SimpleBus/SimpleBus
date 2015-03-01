@@ -1,0 +1,51 @@
+services:
+    asynchronous_event_bus:
+        alias: simple_bus.asynchronous.event_bus
+
+    simple_bus.asynchronous.event_bus:
+        class: SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware
+        public: false
+
+    simple_bus.asynchronous.event_dispatcher:
+        class: SimpleBus\Asynchronous\Message\Dispatcher\AsynchronousEventDispatcher
+        public: false
+        arguments:
+            - @simple_bus.asynchronous.event_publisher
+        tags:
+            # insert before the middleware that actually notifies a message subscriber of the message
+            - { name: event_bus_middleware, priority: 0 }
+
+    simple_bus.asynchronous.event_bus.finishes_message_before_handling_next_middleware:
+        class: SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext
+        public: false
+        tags:
+            - { name: asynchronous_event_bus_middleware, priority: 1000 }
+
+    simple_bus.asynchronous.event_bus.notifies_message_subscribers_middleware:
+        class: SimpleBus\Message\Subscriber\NotifiesMessageSubscribersMiddleware
+        public: false
+        arguments:
+            - @simple_bus.asynchronous.event_bus.event_subscribers_resolver
+        tags:
+            - { name: asynchronous_event_bus_middleware, priority: -1000 }
+
+    simple_bus.asynchronous.event_bus.event_subscribers_collection:
+        class: SimpleBus\Message\Subscriber\Collection\LazyLoadingMessageSubscriberCollection
+        public: false
+        arguments:
+            # collection of event subscriber services ids, will be provided by the RegisterSubscribers compiler pas
+            - []
+            - @simple_bus.asynchronous.event_bus.invokable_service_locator
+
+    simple_bus.asynchronous.event_bus.event_subscribers_resolver:
+        class: SimpleBus\Message\Subscriber\Resolver\NameBasedMessageSubscriberResolver
+        public: false
+        arguments:
+            - @simple_bus.asynchronous.event_bus.event_name_resolver
+            - @simple_bus.asynchronous.event_bus.event_subscribers_collection
+
+    simple_bus.asynchronous.event_bus.invokable_service_locator:
+        class: SimpleBus\SymfonyBridge\DependencyInjection\InvokableServiceLocator
+        public: false
+        arguments:
+            - @service_container
