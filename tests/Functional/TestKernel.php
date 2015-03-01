@@ -12,7 +12,7 @@ class TestKernel extends Kernel
 {
     private $tempDir;
 
-    public function __construct($tempDir)
+    public function __construct()
     {
         $this->tempDir = __DIR__ . '/temp';
     }

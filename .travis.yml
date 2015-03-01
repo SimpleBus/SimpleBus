@@ -8,5 +8,8 @@ before_script:
   - composer selfupdate
   - composer install --prefer-dist
 
+script:
+  - vendor/bin/phpunit
+
 notifications:
   email: matthiasnoback@gmail.com
