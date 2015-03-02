@@ -14,7 +14,6 @@
     ],
     "require": {
         "php": ">=5.4",
-        "beberlei/assert": "~2.0",
         "simple-bus/message-bus": "~1.0",
         "simple-bus/asynchronous": "dev-master",
         "jms/serializer": "~0.12"

@@ -1,6 +1,8 @@
-SimpleBus\Asynchronous\Message\Envelope\DefaultMessageEnvelope:
+SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope:
     properties:
         type:
             type: string
         serializedMessage:
             type: string
+        message:
+            exclude: true
