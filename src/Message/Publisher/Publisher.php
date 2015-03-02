@@ -12,5 +12,5 @@ interface Publisher
      * @param Message $message
      * @return void
      */
-    public function publish(Message $message);
+    public function publish($serializedMessage);
 }

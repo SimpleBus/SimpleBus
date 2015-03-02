@@ -2,16 +2,17 @@
 
 namespace SimpleBus\Asynchronous\Message\Envelope;
 
+use SimpleBus\Message\Message;
+
 interface EnvelopeFactory
 {
     /**
-     * Create an Envelope or a Message of the given type and serialized message
+     * Create an Envelope for a message
      *
-     * @param string $type
-     * @param string $serializedMessage
+     * @param Message $message
      * @return Envelope
      */
-    public function createEnvelopeForSerializedMessage($type, $serializedMessage);
+    public function wrapMessageInEnvelope(Message $message);
 
     /**
      * The FQCN of the Envelope instances created by this factory

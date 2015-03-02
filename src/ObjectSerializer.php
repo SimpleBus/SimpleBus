@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\Asynchronous\Message\Serializer;
+namespace SimpleBus\Asynchronous;
 
 interface ObjectSerializer
 {

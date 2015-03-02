@@ -1,10 +1,12 @@
 <?php
 
-namespace Message\Serializer;
+namespace SimpleBus\Asynchronous\Tests\Message\Envelope\Serializer;
 
+use SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope;
 use SimpleBus\Asynchronous\Message\Envelope\Envelope;
-use SimpleBus\Asynchronous\Message\Serializer\MessageInEnvelopeSerializer;
-use SimpleBus\Asynchronous\Tests\Message\Serializer\Fixtures\DummyMessage;
+use SimpleBus\Asynchronous\Message\Envelope\Serializer\DefaultEnvelopeSerializer;
+use SimpleBus\Asynchronous\Tests\Message\Envelope\Serializer\Fixtures\DummyMessage;
+use SimpleBus\Message\Message;
 
 class MessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,23 +16,22 @@ class MessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
     public function it_serializes_a_message_and_wraps_it_in_a_serialized_envelope()
     {
         $message = new DummyMessage();
-        $messageType = get_class($message);
         $serializedMessage = 'the serialized message';
 
-        $envelope = $this->dummyEnvelope();
+        $envelope = DefaultEnvelope::forMessage($message);
         $serializedEnvelope = 'the serialized envelope';
 
-        $envelopeFactory = $this->envelopeFactoryCreatesEnvelope($messageType, $serializedMessage, $envelope);
+        $envelopeFactory = $this->envelopeFactoryCreatesEnvelope($message, $envelope);
 
         $objectSerializer = $this->objectSerializerSerializes([
             [$message, $serializedMessage],
-            [$envelope, $serializedEnvelope]
+            [$envelope->withSerializedMessage($serializedMessage), $serializedEnvelope]
         ]);
 
-        $messageSerializer = new MessageInEnvelopeSerializer($envelopeFactory, $objectSerializer);
-        $actualSerializedEnvelope = $messageSerializer->serialize($message);
+        $messageSerializer = new DefaultEnvelopeSerializer($envelopeFactory, $objectSerializer);
+        $actualSerializedEnvelope = $messageSerializer->wrapAndSerialize($message);
 
-        $this->assertSame($serializedEnvelope, $actualSerializedEnvelope);
+        $this->assertEquals($serializedEnvelope, $actualSerializedEnvelope);
     }
 
     /**
@@ -40,12 +41,12 @@ class MessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
     {
         $message = new DummyMessage();
 
-        $messageClass = 'The\Message\Class';
+        $messageClass = get_class($message);
         $serializedMessage = 'the serialized message';
 
         $envelopeClass = 'The\Envelope\Class';
         $serializedEnvelope = 'the serialized envelope';
-        $envelope = $this->envelopeStub($messageClass, $serializedMessage);
+        $envelope = DefaultEnvelope::forSerializedMessage($messageClass, $serializedMessage);
         $envelopeFactory = $this->envelopeFactoryForEnvelopeClass($envelopeClass);
 
         $objectSerializer = $this->mockObjectSerializerDeserializes([
@@ -53,47 +54,33 @@ class MessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
             [$serializedMessage, $messageClass, $message]
         ]);
 
-        $messageSerializer = new MessageInEnvelopeSerializer($envelopeFactory, $objectSerializer);
-        $actualMessage = $messageSerializer->deserialize($serializedEnvelope);
+        $messageSerializer = new DefaultEnvelopeSerializer($envelopeFactory, $objectSerializer);
+        $actualEnvelop = $messageSerializer->unwrapAndDeserialize($serializedEnvelope);
 
-        $this->assertSame($message, $actualMessage);
+        $expectedEnvelop = $envelope->withMessage($message);
+        $this->assertEquals($expectedEnvelop, $actualEnvelop);
     }
 
-    private function envelopeFactoryCreatesEnvelope($type, $message, Envelope $expectedEnvelope)
+    private function envelopeFactoryCreatesEnvelope(Message $message, Envelope $expectedEnvelope)
     {
         $envelopeFactory = $this->getMock('SimpleBus\Asynchronous\Message\Envelope\EnvelopeFactory');
         $envelopeFactory
             ->expects($this->once())
-            ->method('createEnvelopeForSerializedMessage')
-            ->with($type, $message)
+            ->method('wrapMessageInEnvelope')
+            ->with($this->equalTo($message))
             ->will($this->returnValue($expectedEnvelope));
 
         return $envelopeFactory;
     }
 
-    private function dummyEnvelope()
-    {
-        return $this->getMock('SimpleBus\Asynchronous\Message\Envelope\Envelope');
-    }
-
     private function mockObjectSerializer()
     {
-        return $this->getMock('SimpleBus\Asynchronous\Message\Serializer\ObjectSerializer');
+        return $this->getMock('SimpleBus\Asynchronous\ObjectSerializer');
     }
 
     private function envelopeStub($type, $message)
     {
-        $envelope = $this->getMock('SimpleBus\Asynchronous\Message\Envelope\Envelope');
-        $envelope
-            ->expects($this->any())
-            ->method('type')
-            ->will($this->returnValue($type));
-        $envelope
-            ->expects($this->any())
-            ->method('message')
-            ->will($this->returnValue($message));
-
-        return $envelope;
+        return DefaultEnvelope::forSerializedMessage($type, $message);
     }
 
     private function objectSerializerSerializes(array $serializes)
@@ -105,7 +92,7 @@ class MessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
             $objectSerializer
                 ->expects($this->at($at))
                 ->method('serialize')
-                ->with($this->identicalTo($object))
+                ->with($this->equalTo($object))
                 ->will($this->returnValue($serializedObject));
         }
 
@@ -116,7 +103,7 @@ class MessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
     {
         $envelopeFactory = $this->getMock('SimpleBus\Asynchronous\Message\Envelope\EnvelopeFactory');
         $envelopeFactory
-            ->expects($this->once())
+            ->expects($this->any())
             ->method('envelopeClass')
             ->will($this->returnValue($envelopeClass));
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\Asynchronous\Tests\Message\Serializer\Fixtures;
+namespace SimpleBus\Asynchronous\Tests\Message\Envelope\Serializer\Fixtures;
 
 use SimpleBus\Message\Message;
 

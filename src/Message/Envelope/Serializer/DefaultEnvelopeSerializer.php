@@ -1,13 +1,14 @@
 <?php
 
-namespace SimpleBus\Asynchronous\Message\Serializer;
+namespace SimpleBus\Asynchronous\Message\Envelope\Serializer;
 
 use Assert\Assertion;
 use SimpleBus\Asynchronous\Message\Envelope\Envelope;
 use SimpleBus\Asynchronous\Message\Envelope\EnvelopeFactory;
+use SimpleBus\Asynchronous\ObjectSerializer;
 use SimpleBus\Message\Message;
 
-class MessageInEnvelopeSerializer implements MessageSerializer
+class DefaultEnvelopeSerializer implements EnvelopeSerializer
 {
     /**
      * @var EnvelopeFactory
@@ -15,7 +16,7 @@ class MessageInEnvelopeSerializer implements MessageSerializer
     private $envelopeFactory;
 
     /**
-     * @var ObjectSerializer
+     * @var \SimpleBus\Asynchronous\ObjectSerializer
      */
     private $objectSerializer;
 
@@ -28,17 +29,17 @@ class MessageInEnvelopeSerializer implements MessageSerializer
     }
 
     /**
-     * Serialize a Message by wrapping it in an Envelope
+     * Serialize a Message by wrapping it in an Envelope and serializing the envelope
      *
      * @{inheritdoc}
      */
-    public function serialize(Message $message)
+    public function wrapAndSerialize(Message $message)
     {
-        $type = get_class($message);
-        $messageBody = $this->objectSerializer->serialize($message);
-        $envelope = $this->envelopeFactory->createEnvelopeForSerializedMessage($type, $messageBody);
+        $envelope = $this->envelopeFactory->wrapMessageInEnvelope($message);
 
-        return $this->objectSerializer->serialize($envelope);
+        $serializedMessage = $this->objectSerializer->serialize($message);
+
+        return $this->objectSerializer->serialize($envelope->withSerializedMessage($serializedMessage));
     }
 
     /**
@@ -46,17 +47,15 @@ class MessageInEnvelopeSerializer implements MessageSerializer
      *
      * @{inheritdoc}
      */
-    public function deserialize($serializedMessage)
+    public function unwrapAndDeserialize($serializedEnvelope)
     {
         $envelope = $this->objectSerializer->deserialize(
-            $serializedMessage,
+            $serializedEnvelope,
             $this->envelopeFactory->envelopeClass()
         );
         /** @var $envelope Envelope */
+        $message = $this->objectSerializer->deserialize($envelope->serializedMessage(), $envelope->type());
 
-        $message = $this->objectSerializer->deserialize($envelope->message(), $envelope->type());
-        Assertion::isInstanceOf($message, 'SimpleBus\Message\Message');
-
-        return $message;
+        return $envelope->withMessage($message);
     }
 }

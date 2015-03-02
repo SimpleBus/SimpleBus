@@ -3,6 +3,7 @@
 namespace SimpleBus\Asynchronous\Tests\Message\Envelope;
 
 use SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelopeFactory;
+use SimpleBus\Asynchronous\Tests\Message\Envelope\Serializer\Fixtures\DummyMessage;
 
 class DefaultEnvelopeFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,13 +13,12 @@ class DefaultEnvelopeFactoryTest extends \PHPUnit_Framework_TestCase
     public function it_creates_a_default_message_envelope()
     {
         $factory = new DefaultEnvelopeFactory();
-        $type = $this->dummyClassName();
-        $serializedMessage = $this->dummySerializedMessage();
 
-        $envelope = $factory->createEnvelopeForSerializedMessage($type, $serializedMessage);
+        $message = new DummyMessage();
+        $envelope = $factory->wrapMessageInEnvelope($message);
         $this->assertInstanceOf('SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope', $envelope);
-        $this->assertSame($type, $envelope->type());
-        $this->assertSame($serializedMessage, $envelope->message());
+        $this->assertSame(get_class($message), $envelope->type());
+        $this->assertSame($message, $envelope->message());
     }
 
     /**
@@ -28,23 +28,7 @@ class DefaultEnvelopeFactoryTest extends \PHPUnit_Framework_TestCase
     {
         $factory = new DefaultEnvelopeFactory();
 
-        $envelope = $factory->createEnvelopeForSerializedMessage(
-            $this->dummyClassName(),
-            $this->dummySerializedMessage()
-        );
-
         $defaultEnvelopeClass = 'SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope';
-        $this->assertInstanceOf($defaultEnvelopeClass, $envelope);
         $this->assertSame($defaultEnvelopeClass, $factory->envelopeClass());
-    }
-
-    private function dummyClassName()
-    {
-        return 'SimpleBus\Asynchronous\Tests\Message\Envelope\Fixtures\DummyMessageClass';
-    }
-
-    private function dummySerializedMessage()
-    {
-        return '{"key":"value"}';
     }
 }
