@@ -4,7 +4,7 @@ namespace SimpleBus\Asynchronous\Message\Envelope;
 
 use Assert\Assertion;
 
-class DefaultMessageEnvelope implements MessageEnvelope
+class DefaultEnvelope implements Envelope
 {
     /**
      * @var string
@@ -27,7 +27,7 @@ class DefaultMessageEnvelope implements MessageEnvelope
         return $this->type;
     }
 
-    public function serializedMessage()
+    public function message()
     {
         return $this->serializedMessage;
     }

@@ -2,9 +2,9 @@
 
 namespace Message\Envelope;
 
-use SimpleBus\Asynchronous\Message\Envelope\DefaultMessageEnvelope;
+use SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope;
 
-class DefaultMessageEnvelopeTest extends \PHPUnit_Framework_TestCase
+class DefaultEnvelopeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -13,7 +13,7 @@ class DefaultMessageEnvelopeTest extends \PHPUnit_Framework_TestCase
     {
         $notAString = 1000000;
         $this->setExpectedException('\InvalidArgumentException');
-        new DefaultMessageEnvelope($notAString, 'any string');
+        new DefaultEnvelope($notAString, 'any string');
     }
 
     /**
@@ -23,6 +23,6 @@ class DefaultMessageEnvelopeTest extends \PHPUnit_Framework_TestCase
     {
         $notAString = 1000000;
         $this->setExpectedException('\InvalidArgumentException');
-        new DefaultMessageEnvelope('any string', $notAString);
+        new DefaultEnvelope('any string', $notAString);
     }
 }

@@ -7,7 +7,7 @@ use SimpleBus\Message\Message;
 interface MessageSerializer
 {
     /**
-     * Serialize a Message to a string representation of a MessageEnvelope object for that Message
+     * Serialize a Message to a string representation of that Message
      *
      * @param Message $message
      * @return string
@@ -15,10 +15,10 @@ interface MessageSerializer
     public function serialize(Message $message);
 
     /**
-     * Extract a Message from a serialized string representation of its MessageEnvelope object
+     * Extract a Message from a serialized string representation
      *
-     * @param string $serializedMessageEnvelope
+     * @param string $serializedMessage
      * @return Message
      */
-    public function deserialize($serializedMessageEnvelope);
+    public function deserialize($serializedMessage);
 }

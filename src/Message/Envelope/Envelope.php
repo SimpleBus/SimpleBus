@@ -2,7 +2,7 @@
 
 namespace SimpleBus\Asynchronous\Message\Envelope;
 
-interface MessageEnvelope
+interface Envelope
 {
     /**
      * The type (FQCN) of the serialized message
@@ -16,5 +16,5 @@ interface MessageEnvelope
      *
      * @return string
      */
-    public function serializedMessage();
+    public function message();
 }
