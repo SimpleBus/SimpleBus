@@ -4,7 +4,9 @@ namespace SimpleBus\Asynchronous\Tests\Message\Envelope\Serializer;
 
 use SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope;
 use SimpleBus\Asynchronous\Message\Envelope\Envelope;
+use SimpleBus\Asynchronous\Message\Envelope\EnvelopeFactory;
 use SimpleBus\Asynchronous\Message\Envelope\Serializer\StandardMessageInEnvelopeSerializer;
+use SimpleBus\Asynchronous\ObjectSerializer;
 use SimpleBus\Asynchronous\Tests\Message\Envelope\Serializer\Fixtures\DummyMessage;
 use SimpleBus\Message\Message;
 
@@ -61,6 +63,11 @@ class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCas
         $this->assertEquals($expectedEnvelop, $actualEnvelop);
     }
 
+    /**
+     * @param Message $message
+     * @param Envelope $expectedEnvelope
+     * @return \PHPUnit_Framework_MockObject_MockObject|EnvelopeFactory
+     */
     private function envelopeFactoryCreatesEnvelope(Message $message, Envelope $expectedEnvelope)
     {
         $envelopeFactory = $this->getMock('SimpleBus\Asynchronous\Message\Envelope\EnvelopeFactory');
@@ -73,14 +80,12 @@ class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCas
         return $envelopeFactory;
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|ObjectSerializer
+     */
     private function mockObjectSerializer()
     {
         return $this->getMock('SimpleBus\Asynchronous\ObjectSerializer');
-    }
-
-    private function envelopeStub($type, $message)
-    {
-        return DefaultEnvelope::forSerializedMessage($type, $message);
     }
 
     private function objectSerializerSerializes(array $serializes)
@@ -99,6 +104,10 @@ class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCas
         return $objectSerializer;
     }
 
+    /**
+     * @param $envelopeClass
+     * @return \PHPUnit_Framework_MockObject_MockObject|EnvelopeFactory
+     */
     private function envelopeFactoryForEnvelopeClass($envelopeClass)
     {
         $envelopeFactory = $this->getMock('SimpleBus\Asynchronous\Message\Envelope\EnvelopeFactory');

@@ -3,6 +3,7 @@
 namespace Message\Dispatcher;
 
 use SimpleBus\Asynchronous\Message\Dispatcher\AsynchronousEventDispatcher;
+use SimpleBus\Asynchronous\Message\Publisher\Publisher;
 use SimpleBus\Message\Message;
 
 class AsynchronousEventDispatcherTest extends \PHPUnit_Framework_TestCase
@@ -31,11 +32,17 @@ class AsynchronousEventDispatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($nextCallableCalled);
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|Publisher
+     */
     private function mockPublisher()
     {
         return $this->getMock('SimpleBus\Asynchronous\Message\Publisher\Publisher');
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|Message
+     */
     private function dummyMessage()
     {
         return $this->getMock('SimpleBus\Message\Message');

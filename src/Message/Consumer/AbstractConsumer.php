@@ -11,18 +11,18 @@ use SimpleBus\Message\Bus\MessageBus;
 abstract class AbstractConsumer
 {
     /**
-     * @var EnvelopeSerializer
+     * @var MessageInEnvelopSerializer
      */
-    private $envelopeSerializer;
+    private $messageInEnvelopeSerializer;
 
     /**
      * @var MessageBus
      */
     private $messageBus;
 
-    public function __construct(MessageInEnvelopSerializer $envelopeSerializer, MessageBus $messageBus)
+    public function __construct(MessageInEnvelopSerializer $messageInEnvelopeSerializer, MessageBus $messageBus)
     {
-        $this->envelopeSerializer = $envelopeSerializer;
+        $this->messageInEnvelopeSerializer = $messageInEnvelopeSerializer;
         $this->messageBus = $messageBus;
     }
 
@@ -31,9 +31,9 @@ abstract class AbstractConsumer
      *
      * @param string $serializedEnvelope
      */
-    protected function consume($serializedEnvelope)
+    protected function consumeSerializedEnvelope($serializedEnvelope)
     {
-        $envelope = $this->envelopeSerializer->unwrapAndDeserialize($serializedEnvelope);
+        $envelope = $this->messageInEnvelopeSerializer->unwrapAndDeserialize($serializedEnvelope);
 
         $this->messageBus->handle($envelope->message());
     }

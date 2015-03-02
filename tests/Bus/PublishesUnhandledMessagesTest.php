@@ -2,7 +2,9 @@
 
 namespace Bus;
 
+use Psr\Log\LoggerInterface;
 use SimpleBus\Asynchronous\Message\Bus\PublishesUnhandledMessages;
+use SimpleBus\Asynchronous\Message\Publisher\Publisher;
 use SimpleBus\Message\Handler\Map\Exception\NoHandlerForMessageName;
 use SimpleBus\Message\Message;
 
@@ -11,7 +13,7 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_calls_the_next_middleware_and_when_the_message_is_handled_it_doesnt_publish_it()
+    public function it_calls_the_next_middleware_and_when_the_message_is_handled_it_does_not_publish_it()
     {
         $message = $this->dummyMessage();
 
@@ -67,21 +69,33 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($nextCallableCalled);
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|Publisher
+     */
     private function mockPublisher()
     {
         return $this->getMock('SimpleBus\Asynchronous\Message\Publisher\Publisher');
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|Message
+     */
     private function dummyMessage()
     {
         return $this->getMock('SimpleBus\Message\Message');
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|LoggerInterface
+     */
     private function dummyLogger()
     {
         return $this->getMock('Psr\Log\LoggerInterface');
     }
 
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|LoggerInterface
+     */
     private function mockLogger()
     {
         return $this->getMock('Psr\Log\LoggerInterface');

@@ -8,6 +8,6 @@ class DummyConsumer extends AbstractConsumer
 {
     public function publicConsume($serializedEnvelope)
     {
-        $this->consume($serializedEnvelope);
+        $this->consumeSerializedEnvelope($serializedEnvelope);
     }
 }
