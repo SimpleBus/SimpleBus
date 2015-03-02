@@ -2,7 +2,7 @@
 
 namespace SimpleBus\Asynchronous\Message\Consumer;
 
-use SimpleBus\Asynchronous\Message\Envelope\Serializer\EnvelopeSerializer;
+use SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageSerializer;
 use SimpleBus\Message\Bus\MessageBus;
 
 /**
@@ -20,7 +20,7 @@ abstract class AbstractConsumer
      */
     private $messageBus;
 
-    public function __construct(EnvelopeSerializer $envelopeSerializer, MessageBus $messageBus)
+    public function __construct(MessageSerializer $envelopeSerializer, MessageBus $messageBus)
     {
         $this->envelopeSerializer = $envelopeSerializer;
         $this->messageBus = $messageBus;
