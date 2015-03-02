@@ -24,8 +24,8 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('message_serializer_service_id')
-                    ->info('Service id of an instance of MessageSerializer')
+                ->scalarNode('object_serializer_service_id')
+                    ->info('Service id of an instance of ObjectSerializer')
                     ->isRequired()
                 ->end()
                 ->arrayNode('commands')

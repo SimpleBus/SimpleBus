@@ -1,7 +1,17 @@
 services:
     simple_bus.asynchronous.message_envelope_factory:
-        alias: simple_bus.asynchronous.default_message_envelope_factory
+        alias: simple_bus.asynchronous.default_envelope_factory
 
-    simple_bus.asynchronous.default_message_envelope_factory:
-        class: SimpleBus\Asynchronous\Message\Envelope\DefaultMessageEnvelopeFactory
+    simple_bus.asynchronous.default_envelope_factory:
+        class: SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelopeFactory
         public: false
+
+    simple_bus.asynchronous.message_serializer:
+        alias: simple_bus.asynchronous.message_in_envelop_serializer
+
+    simple_bus.asynchronous.message_in_envelop_serializer:
+        class: SimpleBus\Asynchronous\Message\Serializer\MessageInEnvelopeSerializer
+        arguments:
+            - @simple_bus.asynchronous.message_envelope_factory
+            # configured inside the bundle configuration
+            - @simple_bus.asynchronous.object_serializer

@@ -1,6 +1,6 @@
 services:
-    native_message_serializer:
-        class: SimpleBus\AsynchronousBundle\Tests\Functional\NativeMessageSerializer
+    native_object_serializer:
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\NativeObjectSerializer
 
     command_publisher_spy:
         class: SimpleBus\AsynchronousBundle\Tests\Functional\PublisherSpy
@@ -27,7 +27,7 @@ services:
         class: Psr\Log\NullLogger
 
 simple_bus_asynchronous:
-    message_serializer_service_id: native_message_serializer
+    object_serializer_service_id: native_object_serializer
     commands:
         publisher_service_id: command_publisher_spy
     events:

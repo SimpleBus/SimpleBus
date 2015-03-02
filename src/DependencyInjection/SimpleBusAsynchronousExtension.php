@@ -35,8 +35,8 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
 
         $loader->load('serialization.yml');
         $container->setAlias(
-            'simple_bus.asynchronous.message_serializer',
-            $mergedConfig['message_serializer_service_id']
+            'simple_bus.asynchronous.object_serializer',
+            $mergedConfig['object_serializer_service_id']
         );
 
         if ($mergedConfig['commands']['enabled']) {
