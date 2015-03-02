@@ -2,7 +2,7 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
-use SimpleBus\Asynchronous\Message\Serializer\ObjectSerializer;
+use SimpleBus\Asynchronous\ObjectSerializer;
 
 class NativeObjectSerializer implements ObjectSerializer
 {

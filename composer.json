@@ -17,7 +17,7 @@
         "beberlei/assert": "~2.0",
         "simple-bus/message-bus": "~1.0",
         "simple-bus/asynchronous": "dev-master",
-        "simple-bus/symfony-bridge": "~3.0",
+        "simple-bus/symfony-bridge": "^3.0.1",
         "symfony/framework-bundle": "~2.0"
     },
     "require-dev": {

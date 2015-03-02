@@ -49,3 +49,10 @@ services:
         public: false
         arguments:
             - @service_container
+
+    simple_bus.asynchronous.abstract_event_consumer:
+        class: SimpleBus\Asynchronous\Message\Consumer\AbstractConsumer
+        abstract: true
+        arguments:
+            - @simple_bus.asynchronous.message_serializer
+            - @simple_bus.asynchronous.event_bus

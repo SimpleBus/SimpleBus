@@ -23,6 +23,14 @@ services:
         tags:
             - { name: asynchronous_command_handler, handles: SimpleBus\AsynchronousBundle\Tests\Functional\DummyCommand }
 
+    asynchronous_command_consumer:
+        parent: simple_bus.asynchronous.abstract_command_consumer
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\CommandConsumer
+
+    asynchronous_event_consumer:
+        parent: simple_bus.asynchronous.abstract_event_consumer
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\CommandConsumer
+
     logger:
         class: Psr\Log\NullLogger
 

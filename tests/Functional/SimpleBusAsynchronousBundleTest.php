@@ -2,6 +2,7 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
+use SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -94,5 +95,43 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $asynchronousCommandHandlerSpy = $kernel->getContainer()->get('asynchronous_command_handler_spy');
         /** @var CommandHandlerSpy $asynchronousCommandHandlerSpy->handledCommands */
         $this->assertSame([$command], $asynchronousCommandHandlerSpy->handledCommands());
+    }
+
+    /**
+     * @test
+     */
+    public function it_consumes_asynchronous_commands()
+    {
+        $kernel = static::createKernel();
+        $kernel->boot();
+
+        $command = new DummyCommand();
+        $envelope = DefaultEnvelope::forSerializedMessage(get_class($command), serialize($command));
+
+        $commandConsumer = $kernel->getContainer()->get('asynchronous_command_consumer');
+        $commandConsumer->consume(serialize($envelope));
+
+        $asynchronousCommandHandlerSpy = $kernel->getContainer()->get('asynchronous_command_handler_spy');
+        /** @var CommandHandlerSpy $asynchronousCommandHandlerSpy->handledCommands */
+        $this->assertEquals([new DummyCommand()], $asynchronousCommandHandlerSpy->handledCommands());
+    }
+
+    /**
+     * @test
+     */
+    public function it_consumes_asynchronous_events()
+    {
+        $kernel = static::createKernel();
+        $kernel->boot();
+
+        $event = new DummyEvent();
+        $envelope = DefaultEnvelope::forSerializedMessage(get_class($event), serialize($event));
+
+        $commandConsumer = $kernel->getContainer()->get('asynchronous_event_consumer');
+        $commandConsumer->consume(serialize($envelope));
+
+        $asynchronousEventSubscriber = $kernel->getContainer()->get('asynchronous_event_subscriber_spy');
+        /** @var EventSubscriberSpy $asynchronousEventSubscriber */
+        $this->assertEquals([$event], $asynchronousEventSubscriber->notifiedEvents());
     }
 }

@@ -48,3 +48,10 @@ services:
             - @logger
         tags:
             - { name: command_bus_middleware, priority: -999 }
+
+    simple_bus.asynchronous.abstract_command_consumer:
+        class: SimpleBus\Asynchronous\Message\Consumer\AbstractConsumer
+        abstract: true
+        arguments:
+            - @simple_bus.asynchronous.message_serializer
+            - @simple_bus.asynchronous.command_bus
