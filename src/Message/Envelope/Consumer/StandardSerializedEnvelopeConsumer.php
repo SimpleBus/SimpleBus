@@ -1,14 +1,14 @@
 <?php
 
-namespace SimpleBus\Asynchronous\Message\Consumer;
+namespace SimpleBus\Asynchronous\Message\Envelope\Consumer;
 
 use SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer;
 use SimpleBus\Message\Bus\MessageBus;
 
 /**
- * Extend from this consumer to easily implement an asynchronous message consumer
+ * Use this consumer to easily implement an asynchronous message consumer
  */
-abstract class AbstractConsumer
+class StandardSerializedEnvelopeConsumer implements SerializedEnvelopeConsumer
 {
     /**
      * @var MessageInEnvelopSerializer
@@ -26,12 +26,7 @@ abstract class AbstractConsumer
         $this->messageBus = $messageBus;
     }
 
-    /**
-     * Consume a serialized Envelope, which includes a serialized Message
-     *
-     * @param string $serializedEnvelope
-     */
-    protected function consumeSerializedEnvelope($serializedEnvelope)
+    public function consume($serializedEnvelope)
     {
         $envelope = $this->messageInEnvelopeSerializer->unwrapAndDeserialize($serializedEnvelope);
 

@@ -2,13 +2,13 @@
 
 namespace SimpleBus\Asynchronous\Tests\Message\Consumer;
 
+use SimpleBus\Asynchronous\Message\Envelope\Consumer\StandardSerializedEnvelopeConsumer;
 use SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope;
 use SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer;
-use SimpleBus\Asynchronous\Tests\Message\Consumer\Fixtures\DummyConsumer;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Message\Message;
 
-class AbstractConsumerTest extends \PHPUnit_Framework_TestCase
+class StandardSerializedEnvelopeConsumerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -33,8 +33,8 @@ class AbstractConsumerTest extends \PHPUnit_Framework_TestCase
             ->method('handle')
             ->with($this->identicalTo($message));
 
-        $consumer = new DummyConsumer($envelopeSerializer, $messageBus);
-        $consumer->publicConsume($serializedEnvelope);
+        $consumer = new StandardSerializedEnvelopeConsumer($envelopeSerializer, $messageBus);
+        $consumer->consume($serializedEnvelope);
     }
 
     /**
