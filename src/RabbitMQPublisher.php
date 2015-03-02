@@ -3,14 +3,14 @@
 namespace SimpleBus\RabbitMQBundle;
 
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer;
 use SimpleBus\Asynchronous\Message\Publisher\Publisher;
-use SimpleBus\Asynchronous\Message\Serializer\MessageSerializer;
 use SimpleBus\Message\Message;
 
 class RabbitMQPublisher implements Publisher
 {
     /**
-     * @var MessageSerializer
+     * @var MessageInEnvelopSerializer
      */
     private $serializer;
 
@@ -19,9 +19,9 @@ class RabbitMQPublisher implements Publisher
      */
     private $producer;
 
-    public function __construct(MessageSerializer $serializer, Producer $producer)
+    public function __construct(MessageInEnvelopSerializer $messageSerializer, Producer $producer)
     {
-        $this->serializer = $serializer;
+        $this->serializer = $messageSerializer;
         $this->producer = $producer;
     }
 
@@ -32,7 +32,7 @@ class RabbitMQPublisher implements Publisher
      */
     public function publish(Message $message)
     {
-        $serializedMessage = $this->serializer->serialize($message);
+        $serializedMessage = $this->serializer->wrapAndSerialize($message);
 
         $this->producer->publish($serializedMessage);
     }

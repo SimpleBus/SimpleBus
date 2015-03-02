@@ -10,36 +10,18 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_deserializes_the_message_and_hands_it_over_to_the_message_bus()
+    public function it_consumes_the_message_body_as_a_serialized_envelope()
     {
-        $messageBody = 'the-serialized-message-body';
-        $deserializedMessage = $this->dummyMessage();
-        $serializer = $this->mockSerializer();
-        $serializer
+        $serializedEnvelope = 'a serialized envelope';
+        $serializedEnvelopeConsumer = $this->mockSerializedEnvelopeConsumer();
+        $serializedEnvelopeConsumer
             ->expects($this->once())
-            ->method('deserialize')
-            ->with($messageBody)
-            ->will($this->returnValue($deserializedMessage));
+            ->method('consume')
+            ->with($serializedEnvelope);
 
-        $messageBus = $this->mockMessageBus();
-        $messageBus
-            ->expects($this->once())
-            ->method('handle')
-            ->with($this->identicalTo($deserializedMessage));
+        $consumer = new RabbitMQMessageConsumer($serializedEnvelopeConsumer);
 
-        $consumer = new RabbitMQMessageConsumer($serializer, $messageBus);
-
-        $consumer->execute($this->newAMQPMessage($messageBody));
-    }
-
-    private function mockSerializer()
-    {
-        return $this->getMock('SimpleBus\Asynchronous\Message\Serializer\MessageSerializer');
-    }
-
-    private function mockMessageBus()
-    {
-        return $this->getMock('SimpleBus\Message\Bus\MessageBus');
+        $consumer->execute($this->newAMQPMessage($serializedEnvelope));
     }
 
     private function newAMQPMessage($messageBody)
@@ -47,8 +29,8 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
         return new AMQPMessage($messageBody);
     }
 
-    private function dummyMessage()
+    private function mockSerializedEnvelopeConsumer()
     {
-        return $this->getMock('SimpleBus\Message\Message');
+        return $this->getMock('SimpleBus\Asynchronous\Message\Envelope\Consumer\SerializedEnvelopeConsumer');
     }
 }

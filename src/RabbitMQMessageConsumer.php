@@ -2,27 +2,20 @@
 
 namespace SimpleBus\RabbitMQBundle;
 
-use SimpleBus\Asynchronous\Message\Serializer\MessageSerializer;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
-use SimpleBus\Message\Bus\MessageBus;
+use SimpleBus\Asynchronous\Message\Envelope\Consumer\SerializedEnvelopeConsumer;
 
 class RabbitMQMessageConsumer implements ConsumerInterface
 {
     /**
-     * @var \SimpleBus\Asynchronous\Message\Serializer\MessageSerializer
+     * @var SerializedEnvelopeConsumer
      */
-    private $serializer;
+    private $consumer;
 
-    /**
-     * @var MessageBus
-     */
-    private $messageBus;
-
-    public function __construct(MessageSerializer $serializer, MessageBus $eventBus)
+    public function __construct(SerializedEnvelopeConsumer $consumer)
     {
-        $this->serializer = $serializer;
-        $this->messageBus = $eventBus;
+        $this->consumer = $consumer;
     }
 
     /**
@@ -30,8 +23,6 @@ class RabbitMQMessageConsumer implements ConsumerInterface
      */
     public function execute(AMQPMessage $msg)
     {
-        $message = $this->serializer->deserialize($msg->body);
-
-        $this->messageBus->handle($message);
+        $this->consumer->consume($msg->body);
     }
 }

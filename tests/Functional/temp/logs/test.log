@@ -1,0 +1,3 @@
+debug No message handler found, trying to handle it asynchronously {"type":"SimpleBus\\RabbitMQBundle\\Tests\\Functional\\AsynchronousCommand"}
+debug Handling message {"type":"SimpleBus\\RabbitMQBundle\\Tests\\Functional\\AsynchronousCommand"}
+debug Notified of message {"type":"SimpleBus\\RabbitMQBundle\\Tests\\Functional\\Event"}

@@ -1,12 +1,14 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle\DependencyExtension;
+namespace SimpleBus\RabbitMQBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 class Configuration implements ConfigurationInterface
 {
+    private $alias;
+
     public function __construct($alias)
     {
         $this->alias = $alias;

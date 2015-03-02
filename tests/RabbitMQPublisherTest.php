@@ -2,7 +2,6 @@
 
 namespace SimpleBus\RabbitMQBundle\Tests;
 
-use PhpAmqpLib\Message\AMQPMessage;
 use SimpleBus\RabbitMQBundle\RabbitMQPublisher;
 
 class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
@@ -17,7 +16,7 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
         $serializer = $this->mockSerializer();
         $serializer
             ->expects($this->once())
-            ->method('serialize')
+            ->method('wrapAndSerialize')
             ->with($message)
             ->will($this->returnValue($serializedMessageEnvelope));
 
@@ -34,7 +33,7 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
 
     private function mockSerializer()
     {
-        return $this->getMock('SimpleBus\Asynchronous\Message\Serializer\MessageSerializer');
+        return $this->getMock('SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer');
     }
 
     private function mockProducer()
@@ -43,11 +42,6 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
             ->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
             ->disableOriginalConstructor()
             ->getMock();
-    }
-
-    private function newAMQPMessage($messageBody)
-    {
-        return new AMQPMessage($messageBody);
     }
 
     private function dummyMessage()
