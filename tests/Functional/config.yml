@@ -1,6 +1,6 @@
 services:
     public_message_serializer:
-        alias: simple_bus.jms_serializer.message_serializer
+        alias: simple_bus.asynchronous.message_serializer
 
     # needed to make JMSSerializerBundle work
     translator:

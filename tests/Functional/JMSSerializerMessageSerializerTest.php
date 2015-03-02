@@ -2,7 +2,7 @@
 
 namespace SimpleBus\JMSSerializerBundle\Tests\Functional;
 
-use SimpleBus\JMSSerializerBridge\JMSSerializerMessageSerializer;
+use SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class JMSSerializerMessageSerializerTest extends KernelTestCase
@@ -15,17 +15,17 @@ class JMSSerializerMessageSerializerTest extends KernelTestCase
     /**
      * @test
      */
-    public function it_serializes_and_deserializes_messages()
+    public function it_serializes_and_deserializes_messages_in_envelopes()
     {
         $kernel = $this->createKernel();
         $kernel->boot();
         $messageSerializer = $kernel->getContainer()->get('public_message_serializer');
-        /** @var JMSSerializerMessageSerializer $messageSerializer */
+        /** @var MessageInEnvelopSerializer $messageSerializer */
 
         $originalMessage = new SampleMessage('test', 123);
 
-        $serializedMessageEnvelope = $messageSerializer->serialize($originalMessage);
-        $deserializedMessage = $messageSerializer->deserialize($serializedMessageEnvelope);
-        $this->assertEquals($deserializedMessage, $originalMessage);
+        $serializedMessageEnvelope = $messageSerializer->wrapAndSerialize($originalMessage);
+        $deserializedEnvelope = $messageSerializer->unwrapAndDeserialize($serializedMessageEnvelope);
+        $this->assertEquals($deserializedEnvelope->message(), $originalMessage);
     }
 }

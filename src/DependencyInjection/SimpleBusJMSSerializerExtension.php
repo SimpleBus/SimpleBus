@@ -39,7 +39,7 @@ class SimpleBusJMSSerializerExtension extends Extension implements PrependExtens
         $container->prependExtensionConfig(
             'simple_bus_asynchronous',
             [
-                'message_serializer_service_id' => 'simple_bus.jms_serializer.message_serializer'
+                'object_serializer_service_id' => 'simple_bus.jms_serializer.object_serializer'
             ]
         );
     }
