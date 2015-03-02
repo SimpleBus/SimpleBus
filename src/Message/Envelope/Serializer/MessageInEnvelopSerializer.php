@@ -5,7 +5,7 @@ namespace SimpleBus\Asynchronous\Message\Envelope\Serializer;
 use SimpleBus\Asynchronous\Message\Envelope\Envelope;
 use SimpleBus\Message\Message;
 
-interface MessageSerializer
+interface MessageInEnvelopSerializer
 {
     /**
      * Serialize a Message to a string representation of that Message wrapped in an Envelope

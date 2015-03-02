@@ -4,11 +4,11 @@ namespace SimpleBus\Asynchronous\Tests\Message\Envelope\Serializer;
 
 use SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope;
 use SimpleBus\Asynchronous\Message\Envelope\Envelope;
-use SimpleBus\Asynchronous\Message\Envelope\Serializer\EnvelopeSerializer;
+use SimpleBus\Asynchronous\Message\Envelope\Serializer\StandardMessageInEnvelopeSerializer;
 use SimpleBus\Asynchronous\Tests\Message\Envelope\Serializer\Fixtures\DummyMessage;
 use SimpleBus\Message\Message;
 
-class EnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
+class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -28,7 +28,7 @@ class EnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
             [$envelope->withSerializedMessage($serializedMessage), $serializedEnvelope]
         ]);
 
-        $messageSerializer = new EnvelopeSerializer($envelopeFactory, $objectSerializer);
+        $messageSerializer = new StandardMessageInEnvelopeSerializer($envelopeFactory, $objectSerializer);
         $actualSerializedEnvelope = $messageSerializer->wrapAndSerialize($message);
 
         $this->assertEquals($serializedEnvelope, $actualSerializedEnvelope);
@@ -54,7 +54,7 @@ class EnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
             [$serializedMessage, $messageClass, $message]
         ]);
 
-        $messageSerializer = new EnvelopeSerializer($envelopeFactory, $objectSerializer);
+        $messageSerializer = new StandardMessageInEnvelopeSerializer($envelopeFactory, $objectSerializer);
         $actualEnvelop = $messageSerializer->unwrapAndDeserialize($serializedEnvelope);
 
         $expectedEnvelop = $envelope->withMessage($message);

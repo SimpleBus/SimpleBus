@@ -7,7 +7,7 @@ use SimpleBus\Asynchronous\Message\Envelope\EnvelopeFactory;
 use SimpleBus\Asynchronous\ObjectSerializer;
 use SimpleBus\Message\Message;
 
-class EnvelopeSerializer implements MessageSerializer
+class StandardMessageInEnvelopeSerializer implements MessageInEnvelopSerializer
 {
     /**
      * @var EnvelopeFactory

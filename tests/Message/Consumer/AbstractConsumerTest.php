@@ -17,7 +17,7 @@ class AbstractConsumerTest extends \PHPUnit_Framework_TestCase
         $message = $this->getMock('SimpleBus\Message\Message');
         $envelope = DefaultEnvelope::forMessage($message);
 
-        $envelopeSerializer = $this->getMock('SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageSerializer');
+        $envelopeSerializer = $this->getMock('SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer');
         $envelopeSerializer
             ->expects($this->once())
             ->method('unwrapAndDeserialize')
