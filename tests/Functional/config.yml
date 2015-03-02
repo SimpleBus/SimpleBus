@@ -24,12 +24,14 @@ services:
             - { name: asynchronous_command_handler, handles: SimpleBus\AsynchronousBundle\Tests\Functional\DummyCommand }
 
     asynchronous_command_consumer:
-        parent: simple_bus.asynchronous.abstract_command_consumer
-        class: SimpleBus\AsynchronousBundle\Tests\Functional\CommandConsumer
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\MessageConsumer
+        arguments:
+            - @simple_bus.asynchronous.standard_serialized_command_envelope_consumer
 
     asynchronous_event_consumer:
-        parent: simple_bus.asynchronous.abstract_event_consumer
-        class: SimpleBus\AsynchronousBundle\Tests\Functional\CommandConsumer
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\MessageConsumer
+        arguments:
+            - @simple_bus.asynchronous.standard_serialized_event_envelope_consumer
 
     logger:
         class: Psr\Log\NullLogger
