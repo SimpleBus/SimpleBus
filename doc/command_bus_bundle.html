@@ -122,7 +122,7 @@ it in your application configuration:</p>
 <pre><code class="language-yaml">command_bus:
     # default value for this key is "class_based"
     command_name_resolver_strategy: named_message</code></pre>
-<p>When you change the strategy, you also have to change the value of the <code>subscribes_to</code> attribute of your command handler
+<p>When you change the strategy, you also have to change the value of the <code>handles</code> attribute of your command handler
 service definitions:</p>
 <pre><code class="language-yaml">services:
     register_user_command_handler:
