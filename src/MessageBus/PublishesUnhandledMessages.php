@@ -1,9 +1,9 @@
 <?php
 
-namespace SimpleBus\Asynchronous\Message\Bus;
+namespace SimpleBus\Asynchronous\MessageBus;
 
 use Psr\Log\LoggerInterface;
-use SimpleBus\Asynchronous\Message\Publisher\Publisher;
+use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use SimpleBus\Message\Handler\Map\Exception\NoHandlerForMessageName;
 use SimpleBus\Message\Message;

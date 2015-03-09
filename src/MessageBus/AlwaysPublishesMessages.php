@@ -1,15 +1,15 @@
 <?php
 
-namespace SimpleBus\Asynchronous\Message\Dispatcher;
+namespace SimpleBus\Asynchronous\MessageBus;
 
-use SimpleBus\Asynchronous\Message\Publisher\Publisher;
+use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use SimpleBus\Message\Message;
 
-class AsynchronousEventDispatcher implements MessageBusMiddleware
+class AlwaysPublishesMessages implements MessageBusMiddleware
 {
     /**
-     * @var Publisher
+     * @var \SimpleBus\Asynchronous\Publisher\Publisher
      */
     private $publisher;
 

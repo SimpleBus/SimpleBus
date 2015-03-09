@@ -1,12 +1,12 @@
 <?php
 
-namespace Message\Dispatcher;
+namespace SimpleBus\Asynchronous\Tests\MessageBus;
 
-use SimpleBus\Asynchronous\Message\Dispatcher\AsynchronousEventDispatcher;
-use SimpleBus\Asynchronous\Message\Publisher\Publisher;
+use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
+use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Message;
 
-class AsynchronousEventDispatcherTest extends \PHPUnit_Framework_TestCase
+class AlwaysPublishesMessagesTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -26,7 +26,7 @@ class AsynchronousEventDispatcherTest extends \PHPUnit_Framework_TestCase
             $this->assertSame($message, $actualMessage);
         };
 
-        $middleware = new AsynchronousEventDispatcher($publisher);
+        $middleware = new AlwaysPublishesMessages($publisher);
         $middleware->handle($message, $next);
 
         $this->assertTrue($nextCallableCalled);
@@ -37,7 +37,7 @@ class AsynchronousEventDispatcherTest extends \PHPUnit_Framework_TestCase
      */
     private function mockPublisher()
     {
-        return $this->getMock('SimpleBus\Asynchronous\Message\Publisher\Publisher');
+        return $this->getMock('SimpleBus\Asynchronous\Publisher\Publisher');
     }
 
     /**

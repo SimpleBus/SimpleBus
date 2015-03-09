@@ -1,10 +1,10 @@
 <?php
 
-namespace Bus;
+namespace SimpleBus\Asynchronous\Tests\MessageBus;
 
 use Psr\Log\LoggerInterface;
-use SimpleBus\Asynchronous\Message\Bus\PublishesUnhandledMessages;
-use SimpleBus\Asynchronous\Message\Publisher\Publisher;
+use SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages;
+use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Handler\Map\Exception\NoHandlerForMessageName;
 use SimpleBus\Message\Message;
 
@@ -74,7 +74,7 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
      */
     private function mockPublisher()
     {
-        return $this->getMock('SimpleBus\Asynchronous\Message\Publisher\Publisher');
+        return $this->getMock('SimpleBus\Asynchronous\Publisher\Publisher');
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\Asynchronous\Message\Envelope\Consumer;
+namespace SimpleBus\Asynchronous\Consumer;
 
 interface SerializedEnvelopeConsumer
 {

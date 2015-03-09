@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\Asynchronous\Message\Publisher;
+namespace SimpleBus\Asynchronous\Publisher;
 
 use SimpleBus\Message\Message;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace SimpleBus\Asynchronous\Tests\Message\Consumer;
+namespace SimpleBus\Asynchronous\Tests\Consumer;
 
-use SimpleBus\Asynchronous\Message\Envelope\Consumer\StandardSerializedEnvelopeConsumer;
-use SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope;
-use SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer;
+use SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer;
+use SimpleBus\Serialization\Envelope\DefaultEnvelope;
+use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Message\Message;
 
@@ -58,6 +58,6 @@ class StandardSerializedEnvelopeConsumerTest extends \PHPUnit_Framework_TestCase
      */
     private function mockMessageInEnvelopeSerializer()
     {
-        return $this->getMock('SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer');
+        return $this->getMock('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer');
     }
 }

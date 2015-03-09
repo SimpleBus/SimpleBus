@@ -1,8 +1,8 @@
 <?php
 
-namespace SimpleBus\Asynchronous\Message\Envelope\Consumer;
+namespace SimpleBus\Asynchronous\Consumer;
 
-use SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer;
+use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
 use SimpleBus\Message\Bus\MessageBus;
 
 /**

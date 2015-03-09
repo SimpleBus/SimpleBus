@@ -1,4 +1,4 @@
-title: Asynchronous
+title: SimpleBus/Asynchronous
 subTitle: Generic classes and interfaces for asynchronous messaging using SimpleBus
 baseUrl: http://simplebus.github.io/Asynchronous
 menu:
@@ -7,3 +7,11 @@ menu:
             itemId: home
             text: Home
             relativeUrl: ""
+        publishing_messages:
+            itemId: publishing_messages
+            text: Publishing messages
+            relativeUrl: "doc/publishing_messages.html"
+        consuming_messages:
+            itemId: consuming_messages
+            text: Consuming messages
+            relativeUrl: "doc/consuming_messages.html"
