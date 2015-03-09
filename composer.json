@@ -28,5 +28,7 @@
     },
     "autoload-dev": {
         "psr-4" : { "SimpleBus\\AsynchronousBundle\\Tests\\" : "tests" }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

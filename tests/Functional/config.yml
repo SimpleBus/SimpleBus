@@ -1,6 +1,6 @@
 services:
     native_object_serializer:
-        class: SimpleBus\AsynchronousBundle\Tests\Functional\NativeObjectSerializer
+        class: SimpleBus\Serialization\NativeObjectSerializer
 
     command_publisher_spy:
         class: SimpleBus\AsynchronousBundle\Tests\Functional\PublisherSpy

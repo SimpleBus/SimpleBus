@@ -2,8 +2,8 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
-use SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope;
 use SimpleBus\Message\Bus\MessageBus;
+use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class SimpleBusAsynchronousBundleTest extends KernelTestCase

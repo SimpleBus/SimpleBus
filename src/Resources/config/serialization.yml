@@ -3,14 +3,14 @@ services:
         alias: simple_bus.asynchronous.default_envelope_factory
 
     simple_bus.asynchronous.default_envelope_factory:
-        class: SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelopeFactory
+        class: SimpleBus\Serialization\Envelope\DefaultEnvelopeFactory
         public: false
 
     simple_bus.asynchronous.message_serializer:
         alias: simple_bus.asynchronous.standard_message_in_envelop_serializer
 
     simple_bus.asynchronous.standard_message_in_envelop_serializer:
-        class: SimpleBus\Asynchronous\Message\Envelope\Serializer\StandardMessageInEnvelopeSerializer
+        class: SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSerializer
         public: false
         arguments:
             - @simple_bus.asynchronous.envelope_factory

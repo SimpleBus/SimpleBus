@@ -42,7 +42,7 @@ services:
             - { name: asynchronous_command_bus_middleware, priority: 1000 }
 
     simple_bus.asynchronous.command_bus.publishes_unhandled_commands_middleware:
-        class: SimpleBus\Asynchronous\Message\Bus\PublishesUnhandledMessages
+        class: SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages
         arguments:
             - @simple_bus.asynchronous.command_publisher
             - @logger
@@ -50,7 +50,7 @@ services:
             - { name: command_bus_middleware, priority: -999 }
 
     simple_bus.asynchronous.standard_serialized_command_envelope_consumer:
-        class: SimpleBus\Asynchronous\Message\Envelope\Consumer\StandardSerializedEnvelopeConsumer
+        class: SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer
         public: false
         arguments:
             - @simple_bus.asynchronous.message_serializer

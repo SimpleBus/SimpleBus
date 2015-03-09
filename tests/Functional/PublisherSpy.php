@@ -2,7 +2,7 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
-use SimpleBus\Asynchronous\Message\Publisher\Publisher;
+use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Message;
 
 class PublisherSpy implements Publisher

@@ -1,0 +1,13 @@
+title: SimpleBus/AsynchronousBundle
+subTitle: Symfony bundle for using SimpleBus/Asynchronous
+baseUrl: http://simplebus.github.io/AsynchronousBundle
+menu:
+    items:
+        home:
+            itemId: home
+            text: Home
+            relativeUrl: ""
+        getting_started:
+            itemId: getting_started
+            text: Getting started
+            relativeUrl: "doc/getting_started.html"

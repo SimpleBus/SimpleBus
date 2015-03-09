@@ -11,19 +11,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SimpleBusAsynchronousBundle extends Bundle
 {
-    /**
-     * @var string
-     */
-    private $configurationAlias;
-
-    public function __construct($configurationAlias = 'simple_bus_asynchronous')
-    {
-        $this->configurationAlias = $configurationAlias;
-    }
-
     public function getContainerExtension()
     {
-        return new SimpleBusAsynchronousExtension($this->configurationAlias);
+        return new SimpleBusAsynchronousExtension('simple_bus_asynchronous');
     }
 
     public function build(ContainerBuilder $container)

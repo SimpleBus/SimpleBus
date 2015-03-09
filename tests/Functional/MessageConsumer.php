@@ -2,7 +2,7 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
-use SimpleBus\Asynchronous\Message\Envelope\Consumer\StandardSerializedEnvelopeConsumer;
+use SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer;
 
 class MessageConsumer
 {
