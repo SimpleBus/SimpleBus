@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Serialization</title>
+
+        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://simplebus.github.io/Serialization/">
+                Serialization
+                <small class="hidden-xs hidden-sm">
+                    Generic classes and interfaces for serializing SimpleBus messages
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/Serialization/">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="active">
+                                    <a href="http://simplebus.github.io/Serialization/doc/message_envelope.html">
+                                        Message envelopes
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/Serialization/doc/object_serializer.html">
+                                        Object serializer
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/Serialization/doc/message_serializer.html">
+                                        Message serializer
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Message envelopes</h1>
+<p>Before an instance of <code>SimpleBus\Message\Message</code> can be serialized to JSON, XML, etc. it has to be wrapped inside an
+envelope. The envelope contains some metadata about the message, e.g. the type of the message (its fully qualified class
+name - FQCN) and the message itself. <code>SimpleBus/Serialization</code> comes with a default implementation of an envelope, which
+can be used like this:</p>
+<pre><code class="language-php">use SimpleBus\Serialization\Envelope\DefaultEnvelope;
+
+// $message is an instance of Message
+$message = ...;
+
+$envelope = DefaultEnvelope::forMessage($message);
+
+$fqcn = $envelope-&gt;messageType();
+$message = $envelope-&gt;message();</code></pre>
+<p>Because the message itself is an object and needs to be transformed to plain text in order to travel over a network, you
+should serialize the message itself using an <a href="object_serializer.html">object serializer</a> and get a new envelope instance
+with the serialized message:</p>
+<pre><code class="language-php">// $serializedMessage is a string
+$serializedMessage = ...;
+
+$envelopeWithSerializedMessage = $envelope-&gt;withSerializedMessage($serializedMessage);</code></pre>
+<p>The new <code>Envelope</code> only contains the serialized message. Using the <a href="object_serializer.html">object serializer</a> you can now
+safely serialize the entire envelope.</p>
+<p>If an <code>Envelope</code> contains a serialized message and you have deserialized that message, you can get a new envelope by
+providing the actual message:</p>
+<pre><code class="language-php">// $deserializedMessage is an instance of Message
+$deserializedMessage = ...;
+
+$envelopeWithActualMessage = $envelopeWithSerializedMessage-&gt;withMessage($deserializedMessage);</code></pre>
+<h2>Custom envelope types</h2>
+<p>You may want to use your own type of envelopes, containing extra metadata like a timestamp, or the identifier of
+the machine that produced the message. In that case you can just implement your own <code>Envelope</code> class:</p>
+<pre><code class="language-php">use SimpleBus\Serialization\Envelope\DefaultEnvelope;
+
+class MyEnvelope extends DefaultEnvelope
+{
+    ...
+}
+
+// or
+
+class MyEnvelope implements Envelope
+{
+    ...
+}</code></pre>
+<h2>Envelope factory</h2>
+<p>The <a href="message_serializer.html">message serializer</a> uses an <code>EnvelopeFactory</code> to delegate the creation of envelopes to, so
+if you want to use your own type of envelopes, you should implement an envelope factory yourself as well:</p>
+<pre><code class="language-php">use SimpleBus\Serialization\Envelope\EnvelopeFactory;
+use SimpleBus\Message\Message;
+
+class MyEnvelopeFactory implements EnvelopeFactory
+{
+    public function wrapMessageInEnvelope(Message $message)
+    {
+        return MyEnvelope::forMessage($message);
+    }
+
+    public function envelopeClass()
+    {
+        return 'Fully\Qualified\Class\Name\Of\MyEnvelope';
+    }
+}</code></pre>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Serialization</title>
+
+        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://simplebus.github.io/Serialization/">
+                Serialization
+                <small class="hidden-xs hidden-sm">
+                    Generic classes and interfaces for serializing SimpleBus messages
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/Serialization/">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/Serialization/doc/message_envelope.html">
+                                        Message envelopes
+                                    </a>
+                                </li>
+                                                            <li class="active">
+                                    <a href="http://simplebus.github.io/Serialization/doc/object_serializer.html">
+                                        Object serializer
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/Serialization/doc/message_serializer.html">
+                                        Message serializer
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Object serializer</h1>
+<p>An object serializer is supposed to be able to serialize <em>any object</em> handed to it. <code>SimpleBus/Serializer</code> contains a
+simple implementation of an object serializer, which uses the native PHP <code>serialize()</code> and <code>unserialize()</code> functions:</p>
+<pre><code class="language-php">// $envelope is an instance of Envelope, containing a serialized Message
+$envelope = ...;
+
+$serializer = NativeObjectSerializer();
+$serializedEnvelope = $serializer-&gt;serialize($envelope);
+
+$deserializedEnvelope = $serializer-&gt;deserialize($serializedEnvelope, get_class($envelope));</code></pre>
+<blockquote>
+<h2>Use another serializer</h2>
+<p>You are encouraged to use a more advanced serializer like the
+<a href="https://github.com/schmittjoh/serializer">JMSSerializer</a>.
+<a href="https://github.com/SimpleBus/JMSSerializerBridge">SimpleBus/JMSSerializerBridge</a> contains an adapter for the SimpleBus
+<code>ObjectSerializer</code> interface.</p>
+<p>Using JSON or XML as the serialized format a message is better readable and understandable for humans, but more
+importantly, it's platform-independent.</p>
+</blockquote>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
