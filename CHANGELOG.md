@@ -1,4 +1,0 @@
-# Change log
-
-## [Unreleased][unreleased]
-
