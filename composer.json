@@ -1,0 +1,29 @@
+{
+    "name": "simple-bus/serialization",
+    "type": "library",
+    "description": "Generic classes and interfaces for serializing messages",
+    "keywords": ["messages", "serialization", "SimpleBus"],
+    "homepage": "http://github.com/SimpleBus/Serialization",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Noback",
+            "email": "matthiasnoback@gmail.com",
+            "homepage": "http://php-and-symfony.matthiasnoback.nl"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "simple-bus/message-bus": "~1.0",
+        "beberlei/assert": "~2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4" : { "SimpleBus\\Serialization\\" : "src" }
+    },
+    "autoload-dev": {
+        "psr-4" : { "SimpleBus\\Serialization\\Tests\\" : "tests" }
+    }
+}
