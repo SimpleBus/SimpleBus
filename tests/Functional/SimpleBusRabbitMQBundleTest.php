@@ -70,7 +70,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
                     $message
                 );
             },
-            new Eventually(5000, 100)
+            new Eventually(10000, 100)
         );
     }
 
