@@ -148,6 +148,15 @@ command bus.</p>
 This means that their services should be defined as private services (i.e. you should use <code>public: false</code>). See also:
 <a href="http://symfony.com/doc/current/components/dependency_injection/advanced.html#marking-services-as-public-private">Marking Services as public /
 private</a></p>
+<h2>Logging</h2>
+<p>If you want to log every command that is being handled, enable logging in <code>config.yml</code>:</p>
+<pre><code class="language-yaml">command_bus:
+    logging: ~</code></pre>
+<p>Optionally mention the channel that should be used for logging:</p>
+<pre><code class="language-yaml">command_bus:
+    logging:
+        # default channel: command_bus
+        channel: my_preferred_channel</code></pre>
 </blockquote>
                 </section>
 

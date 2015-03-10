@@ -212,6 +212,17 @@ class PropelDomainEvents implements ContainsRecordedMessages
         public: false
         tags:
             - { name: event_recorder }</code></pre>
+<blockquote>
+<h2>Logging</h2>
+<p>If you want to log every event that is being handled, enable logging in <code>config.yml</code>:</p>
+<pre><code class="language-yaml">event_bus:
+    logging: ~</code></pre>
+<p>Optionally mention the channel that should be used for logging:</p>
+<pre><code class="language-yaml">event_bus:
+    logging:
+        # default channel: event_bus
+        channel: my_preferred_channel</code></pre>
+</blockquote>
                 </section>
 
             </div>
