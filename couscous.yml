@@ -1,0 +1,13 @@
+title: SimpleBus/RabbitMQBundle
+subTitle: Use RabbitMQ with SimpleBus/Asynchronous
+baseUrl: http://simplebus.github.io/RabbitMQBundle
+menu:
+    items:
+        home:
+            itemId: home
+            text: Home
+            relativeUrl: ""
+        getting_started:
+            itemId: getting_started
+            text: Getting started
+            relativeUrl: "doc/getting_started.html"

@@ -19,19 +19,34 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
 
     public function prepend(ContainerBuilder $container)
     {
-        // TODO allow enabling either commands or events
-        $container
-            ->prependExtensionConfig(
+        $this->requireBundle('SimpleBusAsynchronousBundle', $container);
+        $this->requireBundle('OldSoundRabbitMqBundle', $container);
+
+        // it's a shame we have to do this twice :)
+        $configs = $container->getExtensionConfig($this->getAlias());
+        $mergedConfig = $this->processConfiguration($this->getConfiguration($configs, $container), $configs);
+
+        if ($mergedConfig['commands']['enabled']) {
+            $container->prependExtensionConfig(
                 'simple_bus_asynchronous',
                 [
                     'commands' => [
                         'publisher_service_id' => 'simple_bus.rabbit_mq.command_publisher'
-                    ],
+                    ]
+                ]
+            );
+        }
+
+        if ($mergedConfig['events']['enabled']) {
+            $container->prependExtensionConfig(
+                'simple_bus_asynchronous',
+                [
                     'events' => [
                         'publisher_service_id' => 'simple_bus.rabbit_mq.event_publisher'
                     ]
                 ]
             );
+        }
     }
 
     public function getConfiguration(array $config, ContainerBuilder $container)
@@ -52,6 +67,19 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
             $container->setAlias(
                 'simple_bus.rabbit_mq.' . $messageType . '_producer',
                 $mergedConfig[$configurationKey]['producer_service_id']
+            );
+        }
+    }
+
+    private function requireBundle($bundleName, ContainerBuilder $container)
+    {
+        $enabledBundles = $container->getParameter('kernel.bundles');
+        if (!isset($enabledBundles[$bundleName])) {
+            throw new \LogicException(
+                sprintf(
+                    'You need to enable "%s" as well',
+                    $bundleName
+                )
             );
         }
     }
