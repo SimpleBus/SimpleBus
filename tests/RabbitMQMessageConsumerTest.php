@@ -31,6 +31,6 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
 
     private function mockSerializedEnvelopeConsumer()
     {
-        return $this->getMock('SimpleBus\Asynchronous\Message\Envelope\Consumer\SerializedEnvelopeConsumer');
+        return $this->getMock('SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer');
     }
 }

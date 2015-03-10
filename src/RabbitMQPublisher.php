@@ -3,8 +3,8 @@
 namespace SimpleBus\RabbitMQBundle;
 
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
-use SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer;
-use SimpleBus\Asynchronous\Message\Publisher\Publisher;
+use SimpleBus\Asynchronous\Publisher\Publisher;
+use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
 use SimpleBus\Message\Message;
 
 class RabbitMQPublisher implements Publisher

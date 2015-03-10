@@ -4,7 +4,7 @@ namespace SimpleBus\RabbitMQBundle;
 
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
-use SimpleBus\Asynchronous\Message\Envelope\Consumer\SerializedEnvelopeConsumer;
+use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer;
 
 class RabbitMQMessageConsumer implements ConsumerInterface
 {

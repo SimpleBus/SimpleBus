@@ -33,7 +33,7 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
 
     private function mockSerializer()
     {
-        return $this->getMock('SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer');
+        return $this->getMock('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer');
     }
 
     private function mockProducer()
