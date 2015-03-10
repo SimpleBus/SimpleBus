@@ -25,7 +25,7 @@
         "simple-bus/jms-serializer-bundle": "dev-master",
         "symfony/console": "~2.0",
         "symfony/finder": "~2.0",
-        "symfony/process": "~3.0@dev",
+        "symfony/process": "~2.0",
         "matthiasnoback/phpunit-asynchronicity": "dev-master"
     },
     "autoload": {
