@@ -5,6 +5,8 @@ services:
     simple_bus.asynchronous.command_bus:
         class: SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware
         public: false
+        tags:
+            { name: message_bus, type: command, middleware_tag: asynchronous_command_bus_middleware }
 
     simple_bus.asynchronous.command_bus.delegates_to_message_handler_middleware:
         class: SimpleBus\Message\Handler\DelegatesToMessageHandlerMiddleware

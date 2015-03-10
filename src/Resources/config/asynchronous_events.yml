@@ -5,6 +5,8 @@ services:
     simple_bus.asynchronous.event_bus:
         class: SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware
         public: false
+        tags:
+            { name: message_bus, type: event, middleware_tag: asynchronous_event_bus_middleware }
 
     simple_bus.asynchronous.always_publishes_messages_middleware:
         class: SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages
