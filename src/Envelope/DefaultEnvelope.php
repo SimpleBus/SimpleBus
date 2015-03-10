@@ -10,7 +10,7 @@ class DefaultEnvelope implements Envelope
     /**
      * @var string
      */
-    private $type;
+    private $messageType;
 
     /**
      * @var Message|null
@@ -22,9 +22,9 @@ class DefaultEnvelope implements Envelope
      */
     private $serializedMessage;
 
-    protected function __construct($type, Message $message = null, $serializedMessage = null)
+    protected function __construct($messageType, Message $message = null, $serializedMessage = null)
     {
-        $this->setType($type);
+        $this->setMessageType($messageType);
         $this->setMessage($message);
         $this->setSerializedMessage($serializedMessage);
     }
@@ -55,7 +55,7 @@ class DefaultEnvelope implements Envelope
      */
     public function messageType()
     {
-        return $this->type;
+        return $this->messageType;
     }
 
     /**
@@ -87,7 +87,7 @@ class DefaultEnvelope implements Envelope
      */
     public function withMessage(Message $message)
     {
-        return new self($this->type, $message, $this->serializedMessage);
+        return new self($this->messageType, $message, $this->serializedMessage);
     }
 
     /**
@@ -97,18 +97,18 @@ class DefaultEnvelope implements Envelope
     {
         Assertion::string($serializedMessage);
 
-        return new self($this->type, $this->message, $serializedMessage);
+        return new self($this->messageType, $this->message, $serializedMessage);
     }
 
-    private function setType($type)
+    private function setMessageType($messageType)
     {
-        Assertion::string($type);
+        Assertion::string($messageType);
         Assertion::true(
-            is_a($type, 'SimpleBus\Message\Message', true),
+            is_a($messageType, 'SimpleBus\Message\Message', true),
             'The type of the message should be "SimpleBus\Message\Message"'
         );
 
-        $this->type = $type;
+        $this->messageType = $messageType;
     }
 
     private function setMessage(Message $message = null)
