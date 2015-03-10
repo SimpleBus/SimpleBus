@@ -11,6 +11,6 @@ final class SerializerMetadata
 
     public static function namespacePrefix()
     {
-        return 'SimpleBus\Asynchronous';
+        return 'SimpleBus\Serialization';
     }
 }

@@ -3,7 +3,7 @@
 namespace SimpleBus\JMSSerializerBridge\Tests\Integration;
 
 use JMS\Serializer\SerializerBuilder;
-use SimpleBus\Asynchronous\Message\Envelope\DefaultEnvelope;
+use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\JMSSerializerBridge\JMSSerializerObjectSerializer;
 use SimpleBus\JMSSerializerBridge\SerializerMetadata;
 

@@ -5,7 +5,7 @@ namespace SimpleBus\JMSSerializerBridge;
 use JMS\Serializer\DeserializationContext;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
-use SimpleBus\Asynchronous\ObjectSerializer;
+use SimpleBus\Serialization\ObjectSerializer;
 
 class JMSSerializerObjectSerializer implements ObjectSerializer
 {
