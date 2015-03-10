@@ -2,7 +2,7 @@
 
 namespace SimpleBus\JMSSerializerBundle\Tests\Functional;
 
-use SimpleBus\Asynchronous\Message\Envelope\Serializer\MessageInEnvelopSerializer;
+use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class JMSSerializerMessageSerializerTest extends KernelTestCase
