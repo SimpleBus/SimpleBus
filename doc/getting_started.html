@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>SimpleBus/RabbitMQBundle</title>
+
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://simplebus.github.io/RabbitMQBundle/">
+                SimpleBus/RabbitMQBundle
+                <small class="hidden-xs hidden-sm">
+                    Use RabbitMQ with SimpleBus/Asynchronous
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/RabbitMQBundle/">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="active">
+                                    <a href="http://simplebus.github.io/RabbitMQBundle/doc/getting_started.html">
+                                        Getting started
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Using RabbitMQ for publishing messages</h1>
+<p>The <code>SimpleBusRabbitMQBundle</code> allows you to publish and consume SimpleBus messages using RabbitMQ.</p>
+<h2>Getting started</h2>
+<p>First, enable <a href="https://github.com/SimpleBus/AsynchronousBundle">SimpleBusAsynchronousBundle</a> in your Symfony project.
+Next enable <code>SimpleBusRabbitMQBundle</code> and <a href="https://github.com/videlalvaro/RabbitMqBundle">OldSoundRabbitMqBundle</a>.</p>
+<h3>Handling commands asynchronously</h3>
+<p>If you want commands to be handled asynchronously, you should first configure <code>OldSoundRabbitMqBundle</code>:</p>
+<pre><code class="language-yaml"># in config.yml
+old_sound_rabbit_mq:
+    # don't forget to provide the connection details
+    ...
+    producers:
+        ...
+        asynchronous_commands:
+            connection:       default
+            exchange_options: { name: 'asynchronous_commands', type: direct }
+    consumers:
+        ...
+        asynchronous_commands:
+            connection:       default
+            exchange_options: { name: 'asynchronous_commands', type: direct }
+            queue_options:    { name: 'asynchronous_commands' }
+            # use the consumer provided by SimpleBusRabbitMQBundle
+            callback:         simple_bus.rabbit_mq.commands_consumer</code></pre>
+<p>Now enable asynchronous command handling:</p>
+<pre><code class="language-yaml"># in config.yml
+
+simple_bus_rabbit_mq:
+    commands:
+        # this producer service will be defined by OldSoundRabbitMqBundle,
+        # its name is old_sound_rabbit_mq.%producer_name%_producer
+        producer_service_id: old_sound_rabbit_mq.asynchronous_commands_producer</code></pre>
+<p>Please note that commands are only handled asynchronously when there is no regular handler defined for it. Instead of
+registering the handler using the tag <code>command_handler</code>, you should now register it using the tag
+<code>asynchronous_command_handler</code>:</p>
+<pre><code class="language-yaml">services:
+    my_asynchronous_command_handler:
+        class: ...
+        tags:
+            { name: asynchronous_command_handler, handles: ... }</code></pre>
+<p>See also the documentation of <a href="https://github.com/SimpleBus/AsynchronousBundle">SimpleBus/AsynchronousBundle</a>.</p>
+<p>To actually consume command messages, you need to start (and keep running):</p>
+<pre><code>php app/console rabbitmq:consume asynchronous_commands</code></pre>
+<h3>Handling events asynchronously</h3>
+<p>If you want events to be handled asynchronously, you should first configure <code>OldSoundRabbitMqBundle</code>:</p>
+<pre><code class="language-yaml"># in config.yml
+old_sound_rabbit_mq:
+    # don't forget to provide the connection details
+    ...
+    producers:
+        ...
+        asynchronous_events:
+            connection:       default
+            exchange_options: { name: 'asynchronous_events', type: direct }
+    consumers:
+        asynchronous_events:
+            connection:       default
+            exchange_options: { name: 'asynchronous_events', type: direct }
+            queue_options:    { name: 'asynchronous_events' }
+            # use the consumer provided by SimpleBusRabbitMQBundle
+            callback:         simple_bus.rabbit_mq.asynchronous_events</code></pre>
+<p>Now enable asynchronous event handling:</p>
+<pre><code class="language-yaml"># in config.yml
+
+simple_bus_rabbit_mq:
+    events:
+        # this producer service will be defined by OldSoundRabbitMqBundle,
+        # its name is old_sound_rabbit_mq.%producer_name%_producer
+        producer_service_id: old_sound_rabbit_mq.asynchronous_events_producer</code></pre>
+<p>Events are <em>always handled synchronously as well as asynchronously</em>. If you want an event subscriber to only be notified
+of an event asynchronously, instead of registering the subscriber using the tag <code>event_subscriber</code> tag, you should now
+use the <code>asynchronous_event_subscriber</code> tag:</p>
+<pre><code class="language-yaml">services:
+    my_asynchronous_event_subscriber:
+        class: ...
+        tags:
+            { name: asynchronous_event_subscriber, subscribes_to: ... }</code></pre>
+<p>To actually consume event messages, you need to start (and keep running):</p>
+<pre><code>php app/console rabbitmq:consume asynchronous_events</code></pre>
+<blockquote>
+<h3>Tweak the configuration</h3>
+<p>You are encouraged to tweak the exchange/queue options and make them right for your project. Read more about your
+options in the <a href="http://www.rabbitmq.com/documentation.html">RabbitMQ documentation</a> and in the <a href="https://github.com/videlalvaro/RabbitMqBundle">documentation of
+OldSoundRabbitMQBundle</a>.</p>
+</blockquote>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
