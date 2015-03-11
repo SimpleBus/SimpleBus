@@ -51,3 +51,35 @@ simple_bus_asynchronous:
 >
 > As part of SimpleBus a [RabbitMQBundle](https://github.com/SimpleBus/RabbitMQBundle) has been provided which
 > automatically registers command and event publishers to publish serialized messages to a RabbitMQ exchange.
+
+## Logging
+
+To see what messages are being consumed, enable logging for commands and/or events:
+
+```yaml
+# in config.yml
+simple_bus_asynchronous:
+    commands:
+        ...
+        logging: ~
+    events:
+        ...
+        logging: ~
+```
+
+Optionally, provide a logger channel:
+
+```yaml
+# in config.yml
+simple_bus_asynchronous:
+    commands:
+        ...
+        logging:
+            # default is asynchronous_command_bus
+            channel: my_commands_channel
+    events:
+        ...
+        logging:
+            # default is asynchronous_event_bus
+            channel: my_events_channel
+```
