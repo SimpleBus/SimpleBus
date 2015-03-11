@@ -12,7 +12,8 @@ bundle configuration:
 ```yaml
 # in config.yml
 simple_bus_rabbit_mq:
-    routing_key: class_based
+    # default value is "empty"
+    routing_key_resolver: class_based
 ```
 
 When for example a `Message` of class `Acme\Command\RegisterUser` is published to the queue, its routing key will be
@@ -28,6 +29,43 @@ old_sound_rabbit_mq:
             exchange_options: { name: 'asynchronous_commands', type: topic }
             queue_options:    { name: 'asynchronous_commands', routing_keys: ['Acme.Command.#'] }
             callback:         simple_bus.rabbit_mq.events_consumer
+```
+
+## Custom routing keys
+
+If you want to define routing keys in a custom way (not based on the class of a `Message`), create a class that
+implements `RoutingKeyResolver`:
+
+```php
+use SimpleBus\RabbitMQBundle\Routing\RoutingKeyResolver;
+use SimpleBus\Message\Message;
+
+class MyCustomRoutingKeyResolver implements RoutingKeyResolver
+{
+    public function resolveRoutingKeyFor(Message $message)
+    {
+        // determine the routing key for the given Message
+        return ...;
+
+        // if you don't want to use a specific routing key, return an empty string
+    }
+}
+```
+
+Now register this class as a service:
+
+```yaml
+services:
+    my_custom_routing_key_resolver:
+        class: MyCustomRoutingKeyResolver
+```
+
+Finally, mention your routing key resolver service id in the bundle configuration:
+
+```yaml
+# in config.yml
+simple_bus_rabbit_mq:
+    routing_key_resolver: my_custom_routing_key_resolver
 ```
 
 > ## Fair dispatching
