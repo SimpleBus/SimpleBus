@@ -2,6 +2,7 @@
 
 namespace SimpleBus\RabbitMQBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -80,11 +81,18 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
             );
 
         $loader->load('routing.yml');
-        $container
-            ->setAlias(
-                'simple_bus.rabbit_mq.routing.routing_key_resolver',
-                'simple_bus.rabbit_mq.routing.' . $mergedConfig['routing_key'] . '_routing_key_resolver'
+        if (in_array($mergedConfig['routing_key_resolver'], ['empty', 'class_based'])) {
+            $routingKeyResolverId = sprintf(
+                'simple_bus.rabbit_mq.routing.%s_routing_key_resolver',
+                $mergedConfig['routing_key_resolver']
             );
+        } else {
+            $routingKeyResolverId = $mergedConfig['routing_key_resolver'];
+        }
+        $container->setAlias(
+            'simple_bus.rabbit_mq.routing.routing_key_resolver',
+             $routingKeyResolverId
+        );
     }
 
     private function requireBundle($bundleName, ContainerBuilder $container)

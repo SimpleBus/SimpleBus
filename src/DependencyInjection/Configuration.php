@@ -46,8 +46,8 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->enumNode('routing_key')
-                    ->values(['class_based', 'empty'])
+                ->scalarNode('routing_key_resolver')
+                    ->info('Can be "empty", "class_based" or a service id')
                     ->defaultValue('empty')
                 ->end()
             ->end();
