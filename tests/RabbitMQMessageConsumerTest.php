@@ -4,6 +4,9 @@ namespace SimpleBus\RabbitMQBundle\Tests;
 
 use Exception;
 use PhpAmqpLib\Message\AMQPMessage;
+use SimpleBus\RabbitMQBundle\Event\Events;
+use SimpleBus\RabbitMQBundle\Event\MessageConsumed;
+use SimpleBus\RabbitMQBundle\Event\MessageConsumptionFailed;
 use SimpleBus\RabbitMQBundle\RabbitMQMessageConsumer;
 
 class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
@@ -14,15 +17,17 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
     public function it_consumes_the_message_body_as_a_serialized_envelope()
     {
         $serializedEnvelope = 'a serialized envelope';
+        $message = $this->newAMQPMessage($serializedEnvelope);
         $serializedEnvelopeConsumer = $this->mockSerializedEnvelopeConsumer();
         $serializedEnvelopeConsumer
             ->expects($this->once())
             ->method('consume')
             ->with($serializedEnvelope);
 
-        $consumer = new RabbitMQMessageConsumer($serializedEnvelopeConsumer, $this->errorHandlerDummy());
+        $eventDispatcher = $this->eventDispatcherDispatchesMessageConsumedEvent($message);
+        $consumer = new RabbitMQMessageConsumer($serializedEnvelopeConsumer, $eventDispatcher);
 
-        $consumer->execute($this->newAMQPMessage($serializedEnvelope));
+        $consumer->execute($message);
     }
 
     /**
@@ -38,14 +43,14 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
             ->will($this->throwException($exception));
         $message = $this->newAMQPMessage();
 
-        $errorHandler = $this->errorHandlerHandles($exception, $message);
+        $eventDispatcher = $this->eventDispatcherDispatchesConsumptionFailedEvent($message, $exception);
 
-        $consumer = new RabbitMQMessageConsumer($serializedEnvelopeConsumer, $errorHandler);
+        $consumer = new RabbitMQMessageConsumer($serializedEnvelopeConsumer, $eventDispatcher);
 
         $consumer->execute($message);
     }
 
-    private function newAMQPMessage($messageBody  = '')
+    private function newAMQPMessage($messageBody = '')
     {
         return new AMQPMessage($messageBody);
     }
@@ -55,20 +60,34 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
         return $this->getMock('SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer');
     }
 
-    private function errorHandlerDummy()
+    private function eventDispatcherDispatchesConsumptionFailedEvent(AMQPMessage $message, Exception $exception)
     {
-        return $this->getMock('SimpleBus\RabbitMQBundle\ErrorHandling\ErrorHandler');
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+
+        $eventDispatcher
+            ->expects($this->once())
+            ->method('dispatch')
+            ->will($this->returnCallback(function ($name, MessageConsumptionFailed $event) use ($message, $exception) {
+                $this->assertSame(Events::MESSAGE_CONSUMPTION_FAILED, $name);
+                $this->assertSame($message, $event->message());
+                $this->assertSame($exception, $event->exception());
+            }));
+
+        return $eventDispatcher;
     }
 
-    private function errorHandlerHandles(Exception $exception, AMQPMessage $message)
+    private function eventDispatcherDispatchesMessageConsumedEvent($message)
     {
-        $errorHandler = $this->getMock('SimpleBus\RabbitMQBundle\ErrorHandling\ErrorHandler');
+        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
 
-        $errorHandler
+        $eventDispatcher
             ->expects($this->once())
-            ->method('handle')
-            ->with($this->identicalTo($message), $this->identicalTo($exception));
+            ->method('dispatch')
+            ->will($this->returnCallback(function ($name, MessageConsumed $event) use ($message) {
+                $this->assertSame(Events::MESSAGE_CONSUMED, $name);
+                $this->assertSame($message, $event->message());
+            }));
 
-        return $errorHandler;
+        return $eventDispatcher;
     }
 }

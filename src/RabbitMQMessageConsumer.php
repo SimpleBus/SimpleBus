@@ -7,6 +7,10 @@ use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer;
 use SimpleBus\RabbitMQBundle\ErrorHandling\ErrorHandler;
+use SimpleBus\RabbitMQBundle\Event\Events;
+use SimpleBus\RabbitMQBundle\Event\MessageConsumed;
+use SimpleBus\RabbitMQBundle\Event\MessageConsumptionFailed;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RabbitMQMessageConsumer implements ConsumerInterface
 {
@@ -16,22 +20,30 @@ class RabbitMQMessageConsumer implements ConsumerInterface
     private $consumer;
 
     /**
-     * @var ErrorHandler
+     * @var EventDispatcherInterface
      */
-    private $errorHandler;
+    private $eventDispatcher;
 
-    public function __construct(SerializedEnvelopeConsumer $consumer, ErrorHandler $errorHandler)
+    public function __construct(SerializedEnvelopeConsumer $consumer, EventDispatcherInterface $eventDispatcher)
     {
         $this->consumer = $consumer;
-        $this->errorHandler = $errorHandler;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function execute(AMQPMessage $msg)
     {
         try {
             $this->consumer->consume($msg->body);
+
+            $this->eventDispatcher->dispatch(
+                Events::MESSAGE_CONSUMED,
+                new MessageConsumed($msg)
+            );
         } catch (Exception $exception) {
-            $this->errorHandler->handle($msg, $exception);
+            $this->eventDispatcher->dispatch(
+                Events::MESSAGE_CONSUMPTION_FAILED,
+                new MessageConsumptionFailed($msg, $exception)
+            );
         }
     }
 }

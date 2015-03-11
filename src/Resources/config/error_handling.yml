@@ -3,17 +3,11 @@ parameters:
     simple_bus.rabbit_mq.error_handling.log_message: "Failed to handle a message"
 
 services:
-    simple_bus.rabbit_mq.delegating_error_handler:
-        class: SimpleBus\RabbitMQBundle\ErrorHandling\DelegatingErrorHandler
-        arguments:
-            # list of ErrorHandler instances, provided by the RegisterErrorHandlers compiler pass
-            - []
-
-    simple_bus.rabbit_mq.logging_error_handler:
-        class: SimpleBus\RabbitMQBundle\ErrorHandling\LoggingErrorHandler
+    simple_bus.rabbit_mq.error_logging_event_subscriber:
+        class: SimpleBus\RabbitMQBundle\EventListener\LogErrorWhenMessageConsumptionFailed
         arguments:
             - @logger
             - %simple_bus.rabbit_mq.error_handling.log_level%
             - %simple_bus.rabbit_mq.error_handling.log_message%
         tags:
-            - { name: simple_bus.rabbit_mq.error_handler }
+            - { name: kernel.event_subscriber }

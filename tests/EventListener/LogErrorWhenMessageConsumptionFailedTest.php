@@ -5,9 +5,10 @@ namespace SimpleBus\RabbitMQBundle\Tests\ErrorHandling;
 use Exception;
 use PhpAmqpLib\Message\AMQPMessage;
 use Psr\Log\LogLevel;
-use SimpleBus\RabbitMQBundle\ErrorHandling\LoggingErrorHandler;
+use SimpleBus\RabbitMQBundle\Event\MessageConsumptionFailed;
+use SimpleBus\RabbitMQBundle\EventListener\LogErrorWhenMessageConsumptionFailed;
 
-class LoggingErrorHandlerTest extends \PHPUnit_Framework_TestCase
+class LogErrorWhenMessageConsumptionFailedTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
@@ -22,9 +23,9 @@ class LoggingErrorHandlerTest extends \PHPUnit_Framework_TestCase
 
         $logger = $this->loggerShouldLog($logLevel, $logMessage, ['message' => $message, 'exception' => $exception]);
 
-        $errorHandler = new LoggingErrorHandler($logger, $logLevel, $logMessage);
+        $errorHandler = new LogErrorWhenMessageConsumptionFailed($logger, $logLevel, $logMessage);
 
-        $errorHandler->handle($message, $exception);
+        $errorHandler->messageConsumptionFailed(new MessageConsumptionFailed($message, $exception));
     }
 
     private function loggerShouldLog($logLevel, $logMessage, $context)

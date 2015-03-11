@@ -7,6 +7,9 @@ use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Process\Process;
 
+/**
+ * @group functional
+ */
 class SimpleBusRabbitMQBundleTest extends KernelTestCase
 {
     /**

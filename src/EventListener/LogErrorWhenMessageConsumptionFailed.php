@@ -1,12 +1,13 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle\ErrorHandling;
+namespace SimpleBus\RabbitMQBundle\EventListener;
 
-use Exception;
-use PhpAmqpLib\Message\AMQPMessage;
 use Psr\Log\LoggerInterface;
+use SimpleBus\RabbitMQBundle\Event\Events;
+use SimpleBus\RabbitMQBundle\Event\MessageConsumptionFailed;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class LoggingErrorHandler implements ErrorHandler
+class LogErrorWhenMessageConsumptionFailed implements EventSubscriberInterface
 {
     /**
      * @var LoggerInterface
@@ -30,21 +31,22 @@ class LoggingErrorHandler implements ErrorHandler
         $this->logMessage = $logMessage;
     }
 
+    public static function getSubscribedEvents()
+    {
+        return [Events::MESSAGE_CONSUMPTION_FAILED => 'messageConsumptionFailed'];
+    }
+
     /**
      * Log the failed message and the related exception
-     *
-     * @{inheritdoc}
-     * @param AMQPMessage $message
-     * @param Exception $exception
      */
-    public function handle(AMQPMessage $message, Exception $exception)
+    public function messageConsumptionFailed(MessageConsumptionFailed $event)
     {
         $this->logger->log(
             $this->logLevel,
             $this->logMessage,
             [
-                'exception' => $exception,
-                'message' => $message
+                'exception' => $event->exception(),
+                'message' => $event->message()
             ]
         );
     }

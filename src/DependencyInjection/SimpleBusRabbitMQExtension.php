@@ -73,7 +73,7 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
         $loader->load('error_handling.yml');
         $loggerChannel = $mergedConfig['logging']['channel'];
         $container
-            ->findDefinition('simple_bus.rabbit_mq.logging_error_handler')
+            ->findDefinition('simple_bus.rabbit_mq.error_logging_event_subscriber')
             ->addTag(
                 'monolog.logger',
                 ['channel' => $loggerChannel]
