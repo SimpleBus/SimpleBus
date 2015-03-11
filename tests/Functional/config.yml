@@ -1,3 +1,6 @@
+parameters:
+    log_file: %kernel.logs_dir%/%kernel.environment%.log
+
 services:
     native_object_serializer:
         class: SimpleBus\Serialization\NativeObjectSerializer
@@ -33,12 +36,18 @@ services:
         arguments:
             - @simple_bus.asynchronous.standard_serialized_event_envelope_consumer
 
-    logger:
-        class: Psr\Log\NullLogger
-
 simple_bus_asynchronous:
     object_serializer_service_id: native_object_serializer
     commands:
         publisher_service_id: command_publisher_spy
+        logging: ~
     events:
         publisher_service_id: event_publisher_spy
+        logging: ~
+
+monolog:
+    handlers:
+        main:
+            type:  stream
+            path:  %log_file%
+            level: debug

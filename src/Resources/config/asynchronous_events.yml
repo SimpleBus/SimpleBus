@@ -1,3 +1,6 @@
+parameters:
+    simple_bus.asynchronous.event_bus.logging.level: debug
+
 services:
     asynchronous_event_bus:
         alias: simple_bus.asynchronous.event_bus
@@ -58,3 +61,10 @@ services:
         arguments:
             - @simple_bus.asynchronous.message_serializer
             - @simple_bus.asynchronous.event_bus
+
+    simple_bus.asynchronous.event_bus.logging_middleware:
+        class: SimpleBus\Message\Logging\LoggingMiddleware
+        public: false
+        arguments:
+            - @logger
+            - %simple_bus.asynchronous.event_bus.logging.level%

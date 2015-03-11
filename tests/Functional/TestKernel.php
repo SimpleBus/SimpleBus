@@ -5,6 +5,7 @@ namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 use SimpleBus\AsynchronousBundle\SimpleBusAsynchronousBundle;
 use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
 use SimpleBus\SymfonyBridge\SimpleBusEventBusBundle;
+use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -14,6 +15,8 @@ class TestKernel extends Kernel
 
     public function __construct()
     {
+        parent::__construct('test', true);
+
         $this->tempDir = __DIR__ . '/temp';
     }
 
@@ -22,7 +25,8 @@ class TestKernel extends Kernel
         return [
             new SimpleBusCommandBusBundle(),
             new SimpleBusEventBusBundle(),
-            new SimpleBusAsynchronousBundle()
+            new SimpleBusAsynchronousBundle(),
+            new MonologBundle(),
         ];
     }
 

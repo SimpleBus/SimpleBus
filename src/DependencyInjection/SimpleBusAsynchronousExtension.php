@@ -2,6 +2,7 @@
 
 namespace SimpleBus\AsynchronousBundle\DependencyInjection;
 
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -40,33 +41,11 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
         );
 
         if ($mergedConfig['commands']['enabled']) {
-            $this->requireBundle('SimpleBusCommandBusBundle', $container);
-            $loader->load('asynchronous_commands.yml');
-
-            $container->setAlias(
-                'simple_bus.asynchronous.command_bus.command_name_resolver',
-                'simple_bus.command_bus.command_name_resolver'
-            );
-
-            $container->setAlias(
-                'simple_bus.asynchronous.command_publisher',
-                $mergedConfig['commands']['publisher_service_id']
-            );
+            $this->loadAsynchronousCommandBus($mergedConfig['commands'], $container, $loader);
         }
 
         if ($mergedConfig['events']['enabled']) {
-            $this->requireBundle('SimpleBusEventBusBundle', $container);
-            $loader->load('asynchronous_events.yml');
-
-            $container->setAlias(
-                'simple_bus.asynchronous.event_bus.event_name_resolver',
-                'simple_bus.event_bus.event_name_resolver'
-            );
-
-            $container->setAlias(
-                'simple_bus.asynchronous.event_publisher',
-                $mergedConfig['events']['publisher_service_id']
-            );
+            $this->loadAsynchronousEventBus($mergedConfig['events'], $container, $loader);
         }
     }
 
@@ -81,5 +60,55 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
                 )
             );
         }
+    }
+
+    private function loadAsynchronousCommandBus(array $config, ContainerBuilder $container, LoaderInterface $loader)
+    {
+        $this->requireBundle('SimpleBusCommandBusBundle', $container);
+        $loader->load('asynchronous_commands.yml');
+
+        $container->setAlias(
+            'simple_bus.asynchronous.command_bus.command_name_resolver',
+            'simple_bus.command_bus.command_name_resolver'
+        );
+
+        $container->setAlias(
+            'simple_bus.asynchronous.command_publisher',
+            $config['publisher_service_id']
+        );
+
+        $container->setParameter(
+            'simple_bus.asynchronous.command_bus.logging.enabled',
+            $config['logging']['enabled']
+        );
+        $container->setParameter(
+            'simple_bus.asynchronous.command_bus.logging.channel',
+            $config['logging']['channel']
+        );
+    }
+
+    private function loadAsynchronousEventBus(array $config, ContainerBuilder $container, LoaderInterface $loader)
+    {
+        $this->requireBundle('SimpleBusEventBusBundle', $container);
+        $loader->load('asynchronous_events.yml');
+
+        $container->setAlias(
+            'simple_bus.asynchronous.event_bus.event_name_resolver',
+            'simple_bus.event_bus.event_name_resolver'
+        );
+
+        $container->setAlias(
+            'simple_bus.asynchronous.event_publisher',
+            $config['publisher_service_id']
+        );
+
+        $container->setParameter(
+            'simple_bus.asynchronous.event_bus.logging.enabled',
+            $config['logging']['enabled']
+        );
+        $container->setParameter(
+            'simple_bus.asynchronous.event_bus.logging.channel',
+            $config['logging']['channel']
+        );
     }
 }
