@@ -6,7 +6,6 @@ use Exception;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer;
-use SimpleBus\RabbitMQBundle\ErrorHandling\ErrorHandler;
 use SimpleBus\RabbitMQBundle\Event\Events;
 use SimpleBus\RabbitMQBundle\Event\MessageConsumed;
 use SimpleBus\RabbitMQBundle\Event\MessageConsumptionFailed;

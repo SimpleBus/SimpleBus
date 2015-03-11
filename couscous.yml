@@ -15,3 +15,7 @@ menu:
             itemId: events
             text: Events
             relativeUrl: "doc/events.html"
+        routing:
+            itemId: routing
+            text: Routing
+            relativeUrl: "doc/routing.html"

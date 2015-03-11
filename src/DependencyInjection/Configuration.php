@@ -20,6 +20,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode = $treeBuilder->root($this->alias);
         $rootNode
+            ->addDefaultsIfNotSet()
             ->children()
                 ->arrayNode('commands')
                     ->canBeEnabled()
@@ -44,6 +45,10 @@ class Configuration implements ConfigurationInterface
                             ->defaultValue('error')
                         ->end()
                     ->end()
+                ->end()
+                ->enumNode('routing_key')
+                    ->values(['class_based', 'empty'])
+                    ->defaultValue('empty')
                 ->end()
             ->end();
 

@@ -22,6 +22,13 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
      */
     private $process;
 
+    /**
+     * Timeout for asynchronous tests
+     *
+     * @var int
+     */
+    private $timeoutMs = 10000;
+
     protected static function getKernelClass()
     {
         return 'SimpleBus\RabbitMQBundle\Tests\Functional\TestKernel';
@@ -85,7 +92,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
                     $message
                 );
             },
-            new Eventually(5000, 100)
+            new Eventually($this->timeoutMs, 100)
         );
     }
 

@@ -2,6 +2,7 @@
 
 namespace SimpleBus\RabbitMQBundle\Tests;
 
+use SimpleBus\Message\Message;
 use SimpleBus\RabbitMQBundle\RabbitMQPublisher;
 
 class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
@@ -9,9 +10,10 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_serializes_the_message_and_publishes_it()
+    public function it_serializes_the_message_and_publishes_it_using_the_resolved_router_key()
     {
         $message = $this->dummyMessage();
+        $routingKey = 'the-routing-key';
         $serializedMessageEnvelope = 'the-serialized-message-envelope';
         $serializer = $this->mockSerializer();
         $serializer
@@ -24,9 +26,11 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
         $producer
             ->expects($this->once())
             ->method('publish')
-            ->with($this->identicalTo($serializedMessageEnvelope));
+            ->with($this->identicalTo($serializedMessageEnvelope), $this->identicalTo($routingKey));
 
-        $publisher = new RabbitMQPublisher($serializer, $producer);
+        $routingKeyResolver = $this->routingKeyResolverStub($message, $routingKey);
+
+        $publisher = new RabbitMQPublisher($serializer, $producer, $routingKeyResolver);
 
         $publisher->publish($message);
     }
@@ -47,5 +51,17 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
     private function dummyMessage()
     {
         return $this->getMock('SimpleBus\Message\Message');
+    }
+
+    private function routingKeyResolverStub(Message $message, $routingKey)
+    {
+        $resolver = $this->getMock('SimpleBus\RabbitMQBundle\Routing\RoutingKeyResolver');
+        $resolver
+            ->expects($this->any())
+            ->method('resolveRoutingKeyFor')
+            ->with($this->identicalTo($message))
+            ->will($this->returnValue($routingKey));
+
+        return $resolver;
     }
 }

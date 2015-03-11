@@ -78,6 +78,13 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
                 'monolog.logger',
                 ['channel' => $loggerChannel]
             );
+
+        $loader->load('routing.yml');
+        $container
+            ->setAlias(
+                'simple_bus.rabbit_mq.routing.routing_key_resolver',
+                'simple_bus.rabbit_mq.routing.' . $mergedConfig['routing_key'] . '_routing_key_resolver'
+            );
     }
 
     private function requireBundle($bundleName, ContainerBuilder $container)
