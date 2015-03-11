@@ -59,6 +59,18 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     }
 
     /**
+     * @test
+     */
+    public function it_logs_errors()
+    {
+        $this->consumeMessagesFromQueue('asynchronous_commands');
+
+        $this->commandBus()->handle(new AlwaysFailingCommand());
+
+        $this->waitUntilLogFileContains('Failed to handle a message');
+    }
+
+    /**
      * @param $message
      */
     private function waitUntilLogFileContains($message)
@@ -70,7 +82,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
                     $message
                 );
             },
-            new Eventually(10000, 100)
+            new Eventually(5000, 100)
         );
     }
 

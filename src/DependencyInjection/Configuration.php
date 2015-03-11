@@ -37,6 +37,14 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('logging')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('channel')
+                            ->defaultValue('error')
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

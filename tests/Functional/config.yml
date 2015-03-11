@@ -30,6 +30,11 @@ services:
         tags:
             - { name: asynchronous_event_subscriber, subscribes_to: SimpleBus\RabbitMQBundle\Tests\Functional\Event }
 
+    always_failing_command_handler:
+        class: SimpleBus\RabbitMQBundle\Tests\Functional\AlwaysFailingCommandHandler
+        tags:
+            - { name: asynchronous_command_handler, handles: SimpleBus\RabbitMQBundle\Tests\Functional\AlwaysFailingCommand }
+
 old_sound_rabbit_mq:
     connections:
         default:

@@ -56,7 +56,7 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
 
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         foreach (['command' => 'commands', 'event' => 'events'] as $messageType => $configurationKey) {
             if (!$mergedConfig[$configurationKey]['enabled']) {
@@ -69,6 +69,15 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
                 $mergedConfig[$configurationKey]['producer_service_id']
             );
         }
+
+        $loader->load('error_handling.yml');
+        $loggerChannel = $mergedConfig['logging']['channel'];
+        $container
+            ->findDefinition('simple_bus.rabbit_mq.logging_error_handler')
+            ->addTag(
+                'monolog.logger',
+                ['channel' => $loggerChannel]
+            );
     }
 
     private function requireBundle($bundleName, ContainerBuilder $container)

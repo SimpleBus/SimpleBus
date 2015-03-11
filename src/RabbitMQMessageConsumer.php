@@ -2,9 +2,11 @@
 
 namespace SimpleBus\RabbitMQBundle;
 
+use Exception;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer;
+use SimpleBus\RabbitMQBundle\ErrorHandling\ErrorHandler;
 
 class RabbitMQMessageConsumer implements ConsumerInterface
 {
@@ -13,16 +15,23 @@ class RabbitMQMessageConsumer implements ConsumerInterface
      */
     private $consumer;
 
-    public function __construct(SerializedEnvelopeConsumer $consumer)
+    /**
+     * @var ErrorHandler
+     */
+    private $errorHandler;
+
+    public function __construct(SerializedEnvelopeConsumer $consumer, ErrorHandler $errorHandler)
     {
         $this->consumer = $consumer;
+        $this->errorHandler = $errorHandler;
     }
 
-    /**
-     * Consume a message
-     */
     public function execute(AMQPMessage $msg)
     {
-        $this->consumer->consume($msg->body);
+        try {
+            $this->consumer->consume($msg->body);
+        } catch (Exception $exception) {
+            $this->errorHandler->handle($msg, $exception);
+        }
     }
 }

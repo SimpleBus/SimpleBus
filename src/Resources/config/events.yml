@@ -15,5 +15,4 @@ services:
         arguments:
             # defined by SimpleBusAsynchronousBundle
             - @simple_bus.asynchronous.standard_serialized_event_envelope_consumer
-            # defined by SimpleBusAsynchronousBundle
-            - @simple_bus.asynchronous.event_bus
+            - @simple_bus.rabbit_mq.delegating_error_handler
