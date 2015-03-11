@@ -3,6 +3,7 @@
 namespace SimpleBus\RabbitMQBundle\Tests;
 
 use Exception;
+use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 use SimpleBus\RabbitMQBundle\Event\Events;
 use SimpleBus\RabbitMQBundle\Event\MessageConsumed;
@@ -27,7 +28,8 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
         $eventDispatcher = $this->eventDispatcherDispatchesMessageConsumedEvent($message);
         $consumer = new RabbitMQMessageConsumer($serializedEnvelopeConsumer, $eventDispatcher);
 
-        $consumer->execute($message);
+        $result = $consumer->execute($message);
+        $this->assertSame(ConsumerInterface::MSG_ACK, $result);
     }
 
     /**
@@ -47,7 +49,8 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
 
         $consumer = new RabbitMQMessageConsumer($serializedEnvelopeConsumer, $eventDispatcher);
 
-        $consumer->execute($message);
+        $result = $consumer->execute($message);
+        $this->assertSame(ConsumerInterface::MSG_REJECT, $result);
     }
 
     private function newAMQPMessage($messageBody = '')
