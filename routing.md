@@ -31,7 +31,7 @@ old_sound_rabbit_mq:
             callback:         simple_bus.rabbit_mq.events_consumer
 ```
 
-## Custom routing keys
+## Custom routing keys {#custom-routing-keys}
 
 If you want to define routing keys in a custom way (not based on the class of a `Message`), create a class that
 implements `RoutingKeyResolver`:
@@ -68,7 +68,7 @@ simple_bus_rabbit_mq:
     routing_key_resolver: my_custom_routing_key_resolver
 ```
 
-> ## Fair dispatching
+> ## Fair dispatching {#fair-dispatching}
 >
 > If you are looking for a way to evenly distribute messages over several workers, you may not be better off using a
 > "topic" exchange. Instead, you could just use a "direct" exchange, spin up several workers, and configure
