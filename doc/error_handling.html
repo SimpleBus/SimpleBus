@@ -42,7 +42,7 @@
                                         Getting started
                                     </a>
                                 </li>
-                                                            <li class="">
+                                                            <li class="active">
                                     <a href="http://simplebus.github.io/RabbitMQBundle/doc/error_handling.html">
                                         Error handling
                                     </a>
@@ -53,8 +53,30 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Change log</h1>
-<h2>[Unreleased][unreleased]</h2>
+                    <h1>Error handling</h1>
+<p>When an exception is thrown while a <code>Message</code> is being consumed, the exception is not allowed to bubble up so it won't
+cause the consumer process to fail. That way, one <code>Message</code> that can't be processed is no danger to any other <code>Message</code>.</p>
+<p>The AMQP message containing the <code>Message</code> that caused the failure will be logged, together with the <code>Exception</code> that was
+thrown.</p>
+<p>If you want to implement some other error handling behaviour (e.g. storing the message to be published again later), you
+only need to implement the <code>ErrorHandler</code> interface:</p>
+<pre><code class="language-php">use SimpleBus\RabbitMQBundle\ErrorHandling\ErrorHandler;
+use PhpAmqpLib\Message\AMQPMessage;
+use Exception;
+
+class MyErrorHandler implements ErrorHandler
+{
+    public function handle(AMQPMessage $message, Exception $exception)
+    {
+        ...
+    }
+}</code></pre>
+<p>Now register your error handler as a service with the tag <code>simple_bus.rabbit_mq.error_handler</code>:</p>
+<pre><code class="language-yaml">services:
+    my_error_handler:
+        class: MyErrorHandler
+        tags:
+            - { name: simple_bus.rabbit_mq.error_handler }</code></pre>
                 </section>
 
             </div>
