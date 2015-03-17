@@ -15,3 +15,7 @@ menu:
             itemId: consuming_messages
             text: Consuming messages
             relativeUrl: "doc/consuming_messages.html"
+        routing_keys:
+            itemId: routing_keys
+            text: Routing keys
+            relativeUrl: "doc/routing_keys.html"
