@@ -1,4 +1,6 @@
-# DoctrineORMBridge
+# SimpleBus/DoctrineORMBridge
+
+[![Build Status](https://travis-ci.org/SimpleBus/DoctrineORMBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/DoctrineORMBridge) [![Coverage Status](https://coveralls.io/repos/SimpleBus/DoctrineORMBridge/badge.svg)](https://coveralls.io/r/SimpleBus/DoctrineORMBridge)
 
 By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
 
