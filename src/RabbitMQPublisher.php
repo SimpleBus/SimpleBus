@@ -4,7 +4,7 @@ namespace SimpleBus\RabbitMQBundle;
 
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use SimpleBus\Asynchronous\Publisher\Publisher;
-use SimpleBus\RabbitMQBundle\Routing\RoutingKeyResolver;
+use SimpleBus\Asynchronous\Routing\RoutingKeyResolver;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
 use SimpleBus\Message\Message;
 

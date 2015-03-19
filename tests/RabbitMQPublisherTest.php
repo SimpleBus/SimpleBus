@@ -55,7 +55,7 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
 
     private function routingKeyResolverStub(Message $message, $routingKey)
     {
-        $resolver = $this->getMock('SimpleBus\RabbitMQBundle\Routing\RoutingKeyResolver');
+        $resolver = $this->getMock('SimpleBus\Asynchronous\Routing\RoutingKeyResolver');
         $resolver
             ->expects($this->any())
             ->method('resolveRoutingKeyFor')
