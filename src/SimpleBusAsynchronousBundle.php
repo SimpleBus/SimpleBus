@@ -5,7 +5,6 @@ namespace SimpleBus\AsynchronousBundle;
 use SimpleBus\AsynchronousBundle\DependencyInjection\SimpleBusAsynchronousExtension;
 use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\ConfigureMiddlewares;
 use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\RegisterHandlers;
-use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\RegisterLoggingMiddleware;
 use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\RegisterSubscribers;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -20,14 +19,6 @@ class SimpleBusAsynchronousBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(
-            new RegisterLoggingMiddleware(
-                'simple_bus.asynchronous.command_bus.logging_middleware',
-                'simple_bus.asynchronous.command_bus.logging.enabled',
-                'simple_bus.asynchronous.command_bus.logging.channel',
-                'asynchronous_command_bus_middleware'
-            )
-        );
-        $container->addCompilerPass(
             new ConfigureMiddlewares('simple_bus.asynchronous.command_bus', 'asynchronous_command_bus_middleware')
         );
         $container->addCompilerPass(
@@ -38,14 +29,6 @@ class SimpleBusAsynchronousBundle extends Bundle
             )
         );
 
-        $container->addCompilerPass(
-            new RegisterLoggingMiddleware(
-                'simple_bus.asynchronous.event_bus.logging_middleware',
-                'simple_bus.asynchronous.event_bus.logging.enabled',
-                'simple_bus.asynchronous.event_bus.logging.channel',
-                'asynchronous_event_bus_middleware'
-            )
-        );
         $container->addCompilerPass(
             new ConfigureMiddlewares('simple_bus.asynchronous.event_bus', 'asynchronous_event_bus_middleware')
         );

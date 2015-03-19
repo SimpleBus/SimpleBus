@@ -77,14 +77,9 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
             $config['publisher_service_id']
         );
 
-        $container->setParameter(
-            'simple_bus.asynchronous.command_bus.logging.enabled',
-            $config['logging']['enabled']
-        );
-        $container->setParameter(
-            'simple_bus.asynchronous.command_bus.logging.channel',
-            $config['logging']['channel']
-        );
+        if ($config['logging']['enabled']) {
+            $loader->load('asynchronous_commands_logging.yml');
+        }
     }
 
     private function loadAsynchronousEventBus(array $config, ContainerBuilder $container, LoaderInterface $loader)
@@ -102,13 +97,8 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
             $config['publisher_service_id']
         );
 
-        $container->setParameter(
-            'simple_bus.asynchronous.event_bus.logging.enabled',
-            $config['logging']['enabled']
-        );
-        $container->setParameter(
-            'simple_bus.asynchronous.event_bus.logging.channel',
-            $config['logging']['channel']
-        );
+        if ($config['logging']['enabled']) {
+            $loader->load('asynchronous_events_logging.yml');
+        }
     }
 }
