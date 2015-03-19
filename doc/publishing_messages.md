@@ -51,6 +51,7 @@ use SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Message;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 
 // $commandBus is an instance of MessageBusSupportingMiddleware
 $commandBus = ...;
@@ -61,7 +62,10 @@ $publisher = ...;
 // $logger is an instance of LoggerInterface
 $logger = ...;
 
-$commandBus->appendMiddleware(new PublishesUnhandledMessages($publisher, $logger));
+// $logLevel is one of the class constants of LogLevel
+$logLevel = LogLevel::DEBUG;
+
+$commandBus->appendMiddleware(new PublishesUnhandledMessages($publisher, $logger, $logLevel));
 
 // $command is an instance of Message
 $command = ...;
@@ -73,7 +77,6 @@ Because of the nature of commands (they have a one-to-one correspondence with th
 always publish a command. Instead, it should only be published when it *couldn't be handled by your application*.
 Possibly some other process knows how to handle it.
 
-If no command handler was found and the command is published, this will be logged as a `debug` message using the
-provided `$logger`.
+If no command handler was found and the command is published, this will be logged using the provided `$logger`.
 
 *Continue reading about [consuming messages](consume.md)*

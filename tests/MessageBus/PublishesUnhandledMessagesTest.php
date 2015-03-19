@@ -3,6 +3,7 @@
 namespace SimpleBus\Asynchronous\Tests\MessageBus;
 
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 use SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Handler\Map\Exception\NoHandlerForMessageName;
@@ -18,7 +19,7 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
         $message = $this->dummyMessage();
 
         $nextCallableCalled = false;
-        $alwaysSucceedingNextCallable = function(Message $actualMessage) use ($message, &$nextCallableCalled) {
+        $alwaysSucceedingNextCallable = function (Message $actualMessage) use ($message, &$nextCallableCalled) {
             $nextCallableCalled = true;
             $this->assertSame($message, $actualMessage);
         };
@@ -28,7 +29,7 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
             ->expects($this->never())
             ->method('publish');
 
-        $middleware = new PublishesUnhandledMessages($publisher, $this->dummyLogger());
+        $middleware = new PublishesUnhandledMessages($publisher, $this->dummyLogger(), $this->dummyLogLevel());
 
         $middleware->handle($message, $alwaysSucceedingNextCallable);
 
@@ -43,7 +44,7 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
         $message = $this->dummyMessage();
 
         $nextCallableCalled = false;
-        $alwaysSucceedingNextCallable = function(Message $actualMessage) use ($message, &$nextCallableCalled) {
+        $alwaysSucceedingNextCallable = function (Message $actualMessage) use ($message, &$nextCallableCalled) {
             $nextCallableCalled = true;
             $this->assertSame($message, $actualMessage);
 
@@ -56,13 +57,18 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
             ->method('publish')
             ->with($this->identicalTo($message));
 
+        $logLevel = LogLevel::DEBUG;
         $logger = $this->mockLogger();
         $logger
             ->expects($this->once())
-            ->method('debug')
-            ->with('No message handler found, trying to handle it asynchronously', ['type' => get_class($message)]);
+            ->method('log')
+            ->with(
+                $logLevel,
+                'No message handler found, trying to handle it asynchronously',
+                ['type' => get_class($message)]
+            );
 
-        $middleware = new PublishesUnhandledMessages($publisher, $logger);
+        $middleware = new PublishesUnhandledMessages($publisher, $logger, $logLevel);
 
         $middleware->handle($message, $alwaysSucceedingNextCallable);
 
@@ -99,5 +105,10 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
     private function mockLogger()
     {
         return $this->getMock('Psr\Log\LoggerInterface');
+    }
+
+    private function dummyLogLevel()
+    {
+        return LogLevel::DEBUG;
     }
 }

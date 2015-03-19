@@ -20,10 +20,16 @@ class PublishesUnhandledMessages implements MessageBusMiddleware
      */
     private $logger;
 
-    public function __construct(Publisher $publisher, LoggerInterface $logger)
+    /**
+     * @var string
+     */
+    private $logLevel;
+
+    public function __construct(Publisher $publisher, LoggerInterface $logger, $logLevel)
     {
         $this->publisher = $publisher;
         $this->logger = $logger;
+        $this->logLevel = $logLevel;
     }
 
     /**
@@ -38,7 +44,8 @@ class PublishesUnhandledMessages implements MessageBusMiddleware
         try {
             $next($message);
         } catch (NoHandlerForMessageName $exception) {
-            $this->logger->debug(
+            $this->logger->log(
+                $this->logLevel,
                 'No message handler found, trying to handle it asynchronously',
                 [
                     'type' => get_class($message)
