@@ -10,5 +10,8 @@ before_script:
 script:
   - vendor/bin/phpunit
 
+after_script:
+  - vendor/bin/coveralls
+
 notifications:
   email: matthiasnoback@gmail.com
