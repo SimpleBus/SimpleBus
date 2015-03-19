@@ -85,7 +85,7 @@ old_sound_rabbit_mq:
             exchange_options: { name: 'asynchronous_events', type: direct }
             queue_options:    { name: 'asynchronous_events' }
             # use the consumer provided by SimpleBusRabbitMQBundle
-            callback:         simple_bus.rabbit_mq.asynchronous_events
+            callback:         simple_bus.rabbit_mq.events_consumer
 ```
 
 Now enable asynchronous event handling:
