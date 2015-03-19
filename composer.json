@@ -29,8 +29,7 @@
     },
     "require-dev": {
         "matthiasnoback/doctrine-orm-test-service-provider": "~2.0",
-        "phpunit/phpunit": "~4.6@dev"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+        "phpunit/phpunit": "~4.5",
+        "satooshi/php-coveralls": "~0.6"
+    }
 }
