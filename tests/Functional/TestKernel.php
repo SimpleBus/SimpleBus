@@ -5,7 +5,7 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 use JMS\SerializerBundle\JMSSerializerBundle;
 use OldSound\RabbitMqBundle\OldSoundRabbitMqBundle;
 use SimpleBus\AsynchronousBundle\SimpleBusAsynchronousBundle;
-use SimpleBus\JMSSerializerBundle\SimpleBusJMSSerializerBundle;
+use SimpleBus\JMSSerializerBundleBridge\SimpleBusJMSSerializerBundleBridgeBundle;
 use SimpleBus\RabbitMQBundleBridge\SimpleBusRabbitMQBundleBridgeBundle;
 use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
 use SimpleBus\SymfonyBridge\SimpleBusEventBusBundle;
@@ -34,7 +34,7 @@ class TestKernel extends Kernel
             new SimpleBusAsynchronousBundle(),
             new SimpleBusRabbitMQBundleBridgeBundle(),
             new JMSSerializerBundle(),
-            new SimpleBusJMSSerializerBundle()
+            new SimpleBusJMSSerializerBundleBridgeBundle()
         ];
     }
 
