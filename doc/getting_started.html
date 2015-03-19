@@ -84,7 +84,7 @@ simple_bus_asynchronous:
 automatically registers command and event publishers to publish serialized messages to a RabbitMQ exchange.</p>
 </blockquote>
 <h2>Logging</h2>
-<p>To see what messages are being consumed, enable logging for commands and/or events:</p>
+<p>To get some insight into what goes on in the consumer process, enable logging:</p>
 <pre><code class="language-yaml"># in config.yml
 simple_bus_asynchronous:
     commands:
@@ -93,19 +93,7 @@ simple_bus_asynchronous:
     events:
         ...
         logging: ~</code></pre>
-<p>Optionally, provide a logger channel:</p>
-<pre><code class="language-yaml"># in config.yml
-simple_bus_asynchronous:
-    commands:
-        ...
-        logging:
-            # default is asynchronous_command_bus
-            channel: my_commands_channel
-    events:
-        ...
-        logging:
-            # default is asynchronous_event_bus
-            channel: my_events_channel</code></pre>
+<p>This will log consumed messages to the <code>asynchronous_command_bus</code> and <code>asynchronous_event_bus</code> channels respectively.</p>
                 </section>
 
             </div>
