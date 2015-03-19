@@ -92,7 +92,8 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
                     $message
                 );
             },
-            new Eventually($this->timeoutMs, 100)
+            new Eventually($this->timeoutMs, 100),
+            sprintf('The log file does not contain "%s"', $message)
         );
     }
 
