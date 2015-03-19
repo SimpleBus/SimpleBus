@@ -3,3 +3,4 @@ phpunit.xml
 composer.lock
 /tests/Functional/cache/
 /tests/Functional/temp/
+/build/
