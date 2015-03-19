@@ -28,7 +28,7 @@ old_sound_rabbit_mq:
             connection:       default
             exchange_options: { name: 'asynchronous_commands', type: topic }
             queue_options:    { name: 'asynchronous_commands', routing_keys: ['Acme.Command.#'] }
-            callback:         simple_bus.rabbit_mq.events_consumer
+            callback:         simple_bus.rabbit_mq_bundle_bridge.events_consumer
 ```
 
 ## Custom routing keys {#custom-routing-keys}
@@ -37,7 +37,7 @@ If you want to define routing keys in a custom way (not based on the class of a 
 implements `RoutingKeyResolver`:
 
 ```php
-use SimpleBus\RabbitMQBundle\Routing\RoutingKeyResolver;
+use SimpleBus\RabbitMQBundleBridge\Routing\RoutingKeyResolver;
 use SimpleBus\Message\Message;
 
 class MyCustomRoutingKeyResolver implements RoutingKeyResolver
@@ -64,7 +64,7 @@ Finally, mention your routing key resolver service id in the bundle configuratio
 
 ```yaml
 # in config.yml
-simple_bus_rabbit_mq:
+simple_bus_rabbit_mq_bundle_bridge:
     routing_key_resolver: my_custom_routing_key_resolver
 ```
 

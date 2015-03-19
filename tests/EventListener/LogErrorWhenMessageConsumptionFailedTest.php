@@ -1,12 +1,12 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle\Tests\ErrorHandling;
+namespace SimpleBus\RabbitMQBundleBridge\Tests\ErrorHandling;
 
 use Exception;
 use PhpAmqpLib\Message\AMQPMessage;
 use Psr\Log\LogLevel;
-use SimpleBus\RabbitMQBundle\Event\MessageConsumptionFailed;
-use SimpleBus\RabbitMQBundle\EventListener\LogErrorWhenMessageConsumptionFailed;
+use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
+use SimpleBus\RabbitMQBundleBridge\EventListener\LogErrorWhenMessageConsumptionFailed;
 
 class LogErrorWhenMessageConsumptionFailedTest extends \PHPUnit_Framework_TestCase
 {

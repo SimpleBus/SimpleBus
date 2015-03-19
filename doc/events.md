@@ -14,11 +14,11 @@ thrown.
 
 If you want to implement some other error handling behaviour (e.g. storing the message to be published again later), you
 only need to implement an event subscriber (or listener if you want to) which subscribes to the event
-`simple_bus.rabbit_mq.message_consumption_failed`:
+`simple_bus.rabbit_mq_bundle_bridge.message_consumption_failed`:
 
 ```php
-use SimpleBus\RabbitMQBundle\Event\Events;
-use SimpleBus\RabbitMQBundle\Event\MessageConsumptionFailed;
+use SimpleBus\RabbitMQBundleBridge\Event\Events;
+use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MyErrorHandler implements EventSubscriberInterface
@@ -50,12 +50,12 @@ services:
 ## Successful message consumption
 
 When a `Message` has been handled successfully you may want to perform some additional actions. You can do this by
-creating an event subscriber which subscribes to the `simple_bus.rabbit_mq.message_consumed` event:
+creating an event subscriber which subscribes to the `simple_bus.rabbit_mq_bundle_bridge.message_consumed` event:
 
 
 ```php
-use SimpleBus\RabbitMQBundle\Event\Events;
-use SimpleBus\RabbitMQBundle\Event\MessageConsumed;
+use SimpleBus\RabbitMQBundleBridge\Event\Events;
+use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumed;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MySuccessHandler implements EventSubscriberInterface

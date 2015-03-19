@@ -1,14 +1,14 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle\Tests;
+namespace SimpleBus\RabbitMQBundleBridge\Tests;
 
 use Exception;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
-use SimpleBus\RabbitMQBundle\Event\Events;
-use SimpleBus\RabbitMQBundle\Event\MessageConsumed;
-use SimpleBus\RabbitMQBundle\Event\MessageConsumptionFailed;
-use SimpleBus\RabbitMQBundle\RabbitMQMessageConsumer;
+use SimpleBus\RabbitMQBundleBridge\Event\Events;
+use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumed;
+use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
+use SimpleBus\RabbitMQBundleBridge\RabbitMQMessageConsumer;
 
 class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
 {

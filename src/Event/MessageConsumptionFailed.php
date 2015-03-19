@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle\Event;
+namespace SimpleBus\RabbitMQBundleBridge\Event;
 
 use Exception;
 use PhpAmqpLib\Message\AMQPMessage;

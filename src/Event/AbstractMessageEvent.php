@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle\Event;
+namespace SimpleBus\RabbitMQBundleBridge\Event;
 
 use PhpAmqpLib\Message\AMQPMessage;
 use Symfony\Component\EventDispatcher\Event;

@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle\Tests\Functional;
+namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use Matthias\PhpUnitAsynchronicity\Eventually;
 use SimpleBus\Message\Bus\MessageBus;
@@ -31,7 +31,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     protected static function getKernelClass()
     {
-        return 'SimpleBus\RabbitMQBundle\Tests\Functional\TestKernel';
+        return 'SimpleBus\RabbitMQBundleBridge\Tests\Functional\TestKernel';
     }
 
     protected function setUp()

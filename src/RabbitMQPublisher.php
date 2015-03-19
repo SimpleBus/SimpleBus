@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle;
+namespace SimpleBus\RabbitMQBundleBridge;
 
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use SimpleBus\Asynchronous\Publisher\Publisher;

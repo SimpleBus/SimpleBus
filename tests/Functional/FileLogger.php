@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle\Tests\Functional;
+namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use Psr\Log\AbstractLogger;
 

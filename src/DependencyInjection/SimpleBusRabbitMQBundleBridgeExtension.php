@@ -1,15 +1,14 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle\DependencyInjection;
+namespace SimpleBus\RabbitMQBundleBridge\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 
-class SimpleBusRabbitMQExtension extends ConfigurableExtension implements PrependExtensionInterface
+class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
     private $alias;
 
@@ -32,7 +31,7 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
                 'simple_bus_asynchronous',
                 [
                     'commands' => [
-                        'publisher_service_id' => 'simple_bus.rabbit_mq.command_publisher'
+                        'publisher_service_id' => 'simple_bus.rabbit_mq_bundle_bridge.command_publisher'
                     ]
                 ]
             );
@@ -43,7 +42,7 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
                 'simple_bus_asynchronous',
                 [
                     'events' => [
-                        'publisher_service_id' => 'simple_bus.rabbit_mq.event_publisher'
+                        'publisher_service_id' => 'simple_bus.rabbit_mq_bundle_bridge.event_publisher'
                     ]
                 ]
             );
@@ -66,7 +65,7 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
 
             $loader->load($configurationKey . '.yml');
             $container->setAlias(
-                'simple_bus.rabbit_mq.' . $messageType . '_producer',
+                'simple_bus.rabbit_mq_bundle_bridge.' . $messageType . '_producer',
                 $mergedConfig[$configurationKey]['producer_service_id']
             );
         }
@@ -74,7 +73,7 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
         $loader->load('error_handling.yml');
         $loggerChannel = $mergedConfig['logging']['channel'];
         $container
-            ->findDefinition('simple_bus.rabbit_mq.error_logging_event_subscriber')
+            ->findDefinition('simple_bus.rabbit_mq_bundle_bridge.error_logging_event_subscriber')
             ->addTag(
                 'monolog.logger',
                 ['channel' => $loggerChannel]
@@ -83,14 +82,14 @@ class SimpleBusRabbitMQExtension extends ConfigurableExtension implements Prepen
         $loader->load('routing.yml');
         if (in_array($mergedConfig['routing_key_resolver'], ['empty', 'class_based'])) {
             $routingKeyResolverId = sprintf(
-                'simple_bus.rabbit_mq.routing.%s_routing_key_resolver',
+                'simple_bus.rabbit_mq_bundle_bridge.routing.%s_routing_key_resolver',
                 $mergedConfig['routing_key_resolver']
             );
         } else {
             $routingKeyResolverId = $mergedConfig['routing_key_resolver'];
         }
         $container->setAlias(
-            'simple_bus.rabbit_mq.routing.routing_key_resolver',
+            'simple_bus.rabbit_mq_bundle_bridge.routing.routing_key_resolver',
              $routingKeyResolverId
         );
     }

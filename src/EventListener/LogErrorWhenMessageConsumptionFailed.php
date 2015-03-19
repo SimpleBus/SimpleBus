@@ -1,10 +1,10 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle\EventListener;
+namespace SimpleBus\RabbitMQBundleBridge\EventListener;
 
 use Psr\Log\LoggerInterface;
-use SimpleBus\RabbitMQBundle\Event\Events;
-use SimpleBus\RabbitMQBundle\Event\MessageConsumptionFailed;
+use SimpleBus\RabbitMQBundleBridge\Event\Events;
+use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class LogErrorWhenMessageConsumptionFailed implements EventSubscriberInterface

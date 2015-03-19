@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../bootstrap.php';
 
-use SimpleBus\RabbitMQBundle\Tests\Functional\TestKernel;
+use SimpleBus\RabbitMQBundleBridge\Tests\Functional\TestKernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;

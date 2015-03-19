@@ -1,9 +1,9 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle\Tests;
+namespace SimpleBus\RabbitMQBundleBridge\Tests;
 
 use SimpleBus\Message\Message;
-use SimpleBus\RabbitMQBundle\RabbitMQPublisher;
+use SimpleBus\RabbitMQBundleBridge\RabbitMQPublisher;
 
 class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
 {

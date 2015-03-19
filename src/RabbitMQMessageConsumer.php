@@ -1,14 +1,14 @@
 <?php
 
-namespace SimpleBus\RabbitMQBundle;
+namespace SimpleBus\RabbitMQBundleBridge;
 
 use Exception;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
 use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer;
-use SimpleBus\RabbitMQBundle\Event\Events;
-use SimpleBus\RabbitMQBundle\Event\MessageConsumed;
-use SimpleBus\RabbitMQBundle\Event\MessageConsumptionFailed;
+use SimpleBus\RabbitMQBundleBridge\Event\Events;
+use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumed;
+use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RabbitMQMessageConsumer implements ConsumerInterface

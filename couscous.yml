@@ -1,6 +1,6 @@
-title: SimpleBus/RabbitMQBundle
-subTitle: Use RabbitMQ with SimpleBus/Asynchronous
-baseUrl: http://simplebus.github.io/RabbitMQBundle
+title: SimpleBus/RabbitMQBundleBridge
+subTitle: Use OldSoundRabbitMQBundle with SimpleBus/AsynchronousBundle
+baseUrl: http://simplebus.github.io/RabbitMQBundleBridge
 menu:
     items:
         home:

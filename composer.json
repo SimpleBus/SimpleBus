@@ -1,9 +1,9 @@
 {
-    "name": "simple-bus/rabbitmq-bundle",
+    "name": "simple-bus/rabbitmq-bundle-bridge",
     "type": "library",
-    "description": "Use RabbitMQ with SimpleBus/Asynchronous",
+    "description": "Use OldSoundRabbitMQBundle with SimpleBus/AsynchronousBundle",
     "keywords": ["RabbitMQ", "messages", "message bus", "event bus", "command bus"],
-    "homepage": "http://github.com/SimpleBus/RabbitMQBundle",
+    "homepage": "http://github.com/SimpleBus/RabbitMQBundleBridge",
     "license": "MIT",
     "authors": [
         {
@@ -30,10 +30,10 @@
         "matthiasnoback/phpunit-asynchronicity": "dev-master"
     },
     "autoload": {
-        "psr-4" : { "SimpleBus\\RabbitMQBundle\\" : "src" }
+        "psr-4" : { "SimpleBus\\RabbitMQBundleBridge\\" : "src" }
     },
     "autoload-dev": {
-        "psr-4": { "SimpleBus\\RabbitMQBundle\\Tests\\": "tests" }
+        "psr-4": { "SimpleBus\\RabbitMQBundleBridge\\Tests\\": "tests" }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

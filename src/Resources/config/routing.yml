@@ -1,8 +1,8 @@
 services:
-    simple_bus.rabbit_mq.routing.class_based_routing_key_resolver:
+    simple_bus.rabbit_mq_bundle_bridge.routing.class_based_routing_key_resolver:
         class: SimpleBus\Asynchronous\Routing\ClassBasedRoutingKeyResolver
         public: false
 
-    simple_bus.rabbit_mq.routing.empty_routing_key_resolver:
+    simple_bus.rabbit_mq_bundle_bridge.routing.empty_routing_key_resolver:
         class: SimpleBus\Asynchronous\Routing\EmptyRoutingKeyResolver
         public: false

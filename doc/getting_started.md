@@ -4,12 +4,12 @@ currentMenu: getting_started
 
 # Using RabbitMQ for publishing messages
 
-The `SimpleBusRabbitMQBundle` allows you to publish and consume SimpleBus messages using RabbitMQ.
+The `SimpleBusRabbitMQBundleBridgeBundle` allows you to publish and consume SimpleBus messages using RabbitMQ.
 
 ## Getting started
 
 First, enable [SimpleBusAsynchronousBundle](https://github.com/SimpleBus/AsynchronousBundle) in your Symfony project.
-Next enable `SimpleBusRabbitMQBundle` and [OldSoundRabbitMqBundle](https://github.com/videlalvaro/RabbitMqBundle).
+Next enable `SimpleBusRabbitMQBundleBridgeBundle` and [OldSoundRabbitMqBundle](https://github.com/videlalvaro/RabbitMqBundle).
 
 ### Handling commands asynchronously
 
@@ -31,16 +31,15 @@ old_sound_rabbit_mq:
             connection:       default
             exchange_options: { name: 'asynchronous_commands', type: direct }
             queue_options:    { name: 'asynchronous_commands' }
-            # use the consumer provided by SimpleBusRabbitMQBundle
-            callback:         simple_bus.rabbit_mq.commands_consumer
+            # use the consumer provided by SimpleBusRabbitMQBundleBridgeBundle
+            callback:         simple_bus.rabbit_mq_bundle_bridge.commands_consumer
 ```
 
 Now enable asynchronous command handling:
 
 ```yaml
 # in config.yml
-
-simple_bus_rabbit_mq:
+simple_bus_rabbit_mq_bundle_bridge:
     commands:
         # this producer service will be defined by OldSoundRabbitMqBundle,
         # its name is old_sound_rabbit_mq.%producer_name%_producer
@@ -84,16 +83,15 @@ old_sound_rabbit_mq:
             connection:       default
             exchange_options: { name: 'asynchronous_events', type: direct }
             queue_options:    { name: 'asynchronous_events' }
-            # use the consumer provided by SimpleBusRabbitMQBundle
-            callback:         simple_bus.rabbit_mq.asynchronous_events
+            # use the consumer provided by SimpleBusRabbitMQBundleBridgeBundle
+            callback:         simple_bus.rabbit_mq_bundle_bridge.asynchronous_events
 ```
 
 Now enable asynchronous event handling:
 
 ```yaml
 # in config.yml
-
-simple_bus_rabbit_mq:
+simple_bus_rabbit_mq_bundle_bridge:
     events:
         # this producer service will be defined by OldSoundRabbitMqBundle,
         # its name is old_sound_rabbit_mq.%producer_name%_producer
