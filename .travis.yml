@@ -20,5 +20,8 @@ before_script:
 script:
   - vendor/bin/phpunit --exclude-group functional
 
+after_script:
+  - vendor/bin/coveralls
+
 notifications:
   email: matthiasnoback@gmail.com
