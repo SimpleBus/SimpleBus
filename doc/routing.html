@@ -4,21 +4,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>SimpleBus/RabbitMQBundle</title>
+        <title>SimpleBus/RabbitMQBundleBridge</title>
 
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/main.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://simplebus.github.io/RabbitMQBundle/">
-                SimpleBus/RabbitMQBundle
+            <a class="navbar-brand" href="http://simplebus.github.io/RabbitMQBundleBridge/">
+                SimpleBus/RabbitMQBundleBridge
                 <small class="hidden-xs hidden-sm">
-                    Use RabbitMQ with SimpleBus/Asynchronous
+                    Use OldSoundRabbitMQBundle with SimpleBus/AsynchronousBundle
                 </small>
             </a>
 
@@ -33,22 +33,22 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/doc/getting_started.html">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/getting_started.html">
                                         Getting started
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/doc/events.html">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/events.html">
                                         Events
                                     </a>
                                 </li>
                                                             <li class="active">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/doc/routing.html">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/routing.html">
                                         Routing
                                     </a>
                                 </li>
@@ -77,11 +77,11 @@ old_sound_rabbit_mq:
             connection:       default
             exchange_options: { name: 'asynchronous_commands', type: topic }
             queue_options:    { name: 'asynchronous_commands', routing_keys: ['Acme.Command.#'] }
-            callback:         simple_bus.rabbit_mq.events_consumer</code></pre>
+            callback:         simple_bus.rabbit_mq_bundle_bridge.events_consumer</code></pre>
 <h2 id="custom-routing-keys">Custom routing keys</h2>
 <p>If you want to define routing keys in a custom way (not based on the class of a <code>Message</code>), create a class that
 implements <code>RoutingKeyResolver</code>:</p>
-<pre><code class="language-php">use SimpleBus\RabbitMQBundle\Routing\RoutingKeyResolver;
+<pre><code class="language-php">use SimpleBus\RabbitMQBundleBridge\Routing\RoutingKeyResolver;
 use SimpleBus\Message\Message;
 
 class MyCustomRoutingKeyResolver implements RoutingKeyResolver
@@ -100,7 +100,7 @@ class MyCustomRoutingKeyResolver implements RoutingKeyResolver
         class: MyCustomRoutingKeyResolver</code></pre>
 <p>Finally, mention your routing key resolver service id in the bundle configuration:</p>
 <pre><code class="language-yaml"># in config.yml
-simple_bus_rabbit_mq:
+simple_bus_rabbit_mq_bundle_bridge:
     routing_key_resolver: my_custom_routing_key_resolver</code></pre>
 <blockquote>
 <h2 id="fair-dispatching">Fair dispatching</h2>

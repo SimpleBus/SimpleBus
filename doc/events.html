@@ -4,21 +4,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>SimpleBus/RabbitMQBundle</title>
+        <title>SimpleBus/RabbitMQBundleBridge</title>
 
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/main.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://simplebus.github.io/RabbitMQBundle/">
-                SimpleBus/RabbitMQBundle
+            <a class="navbar-brand" href="http://simplebus.github.io/RabbitMQBundleBridge/">
+                SimpleBus/RabbitMQBundleBridge
                 <small class="hidden-xs hidden-sm">
-                    Use RabbitMQ with SimpleBus/Asynchronous
+                    Use OldSoundRabbitMQBundle with SimpleBus/AsynchronousBundle
                 </small>
             </a>
 
@@ -33,22 +33,22 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/doc/getting_started.html">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/getting_started.html">
                                         Getting started
                                     </a>
                                 </li>
                                                             <li class="active">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/doc/events.html">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/events.html">
                                         Events
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/doc/routing.html">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/routing.html">
                                         Routing
                                     </a>
                                 </li>
@@ -66,9 +66,9 @@ cause the consumer process to fail. That way, one <code>Message</code> that can'
 thrown.</p>
 <p>If you want to implement some other error handling behaviour (e.g. storing the message to be published again later), you
 only need to implement an event subscriber (or listener if you want to) which subscribes to the event
-<code>simple_bus.rabbit_mq.message_consumption_failed</code>:</p>
-<pre><code class="language-php">use SimpleBus\RabbitMQBundle\Event\Events;
-use SimpleBus\RabbitMQBundle\Event\MessageConsumptionFailed;
+<code>simple_bus.rabbit_mq_bundle_bridge.message_consumption_failed</code>:</p>
+<pre><code class="language-php">use SimpleBus\RabbitMQBundleBridge\Event\Events;
+use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MyErrorHandler implements EventSubscriberInterface
@@ -93,9 +93,9 @@ class MyErrorHandler implements EventSubscriberInterface
             - { name: kernel.event_subscriber }</code></pre>
 <h2>Successful message consumption</h2>
 <p>When a <code>Message</code> has been handled successfully you may want to perform some additional actions. You can do this by
-creating an event subscriber which subscribes to the <code>simple_bus.rabbit_mq.message_consumed</code> event:</p>
-<pre><code class="language-php">use SimpleBus\RabbitMQBundle\Event\Events;
-use SimpleBus\RabbitMQBundle\Event\MessageConsumed;
+creating an event subscriber which subscribes to the <code>simple_bus.rabbit_mq_bundle_bridge.message_consumed</code> event:</p>
+<pre><code class="language-php">use SimpleBus\RabbitMQBundleBridge\Event\Events;
+use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumed;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MySuccessHandler implements EventSubscriberInterface

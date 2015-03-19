@@ -4,21 +4,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>SimpleBus/RabbitMQBundle</title>
+        <title>SimpleBus/RabbitMQBundleBridge</title>
 
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundle/css/main.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://simplebus.github.io/RabbitMQBundle/">
-                SimpleBus/RabbitMQBundle
+            <a class="navbar-brand" href="http://simplebus.github.io/RabbitMQBundleBridge/">
+                SimpleBus/RabbitMQBundleBridge
                 <small class="hidden-xs hidden-sm">
-                    Use RabbitMQ with SimpleBus/Asynchronous
+                    Use OldSoundRabbitMQBundle with SimpleBus/AsynchronousBundle
                 </small>
             </a>
 
@@ -33,22 +33,22 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="active">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/doc/getting_started.html">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/getting_started.html">
                                         Getting started
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/doc/events.html">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/events.html">
                                         Events
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundle/doc/routing.html">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/routing.html">
                                         Routing
                                     </a>
                                 </li>
@@ -59,10 +59,10 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>Using RabbitMQ for publishing messages</h1>
-<p>The <code>SimpleBusRabbitMQBundle</code> allows you to publish and consume SimpleBus messages using RabbitMQ.</p>
+<p>The <code>SimpleBusRabbitMQBundleBridgeBundle</code> allows you to publish and consume SimpleBus messages using RabbitMQ.</p>
 <h2>Getting started</h2>
 <p>First, enable <a href="https://github.com/SimpleBus/AsynchronousBundle">SimpleBusAsynchronousBundle</a> in your Symfony project.
-Next enable <code>SimpleBusRabbitMQBundle</code> and <a href="https://github.com/videlalvaro/RabbitMqBundle">OldSoundRabbitMqBundle</a>.</p>
+Next enable <code>SimpleBusRabbitMQBundleBridgeBundle</code> and <a href="https://github.com/videlalvaro/RabbitMqBundle">OldSoundRabbitMqBundle</a>.</p>
 <h3>Handling commands asynchronously</h3>
 <p>If you want commands to be handled asynchronously, you should first configure <code>OldSoundRabbitMqBundle</code>:</p>
 <pre><code class="language-yaml"># in config.yml
@@ -80,12 +80,11 @@ old_sound_rabbit_mq:
             connection:       default
             exchange_options: { name: 'asynchronous_commands', type: direct }
             queue_options:    { name: 'asynchronous_commands' }
-            # use the consumer provided by SimpleBusRabbitMQBundle
-            callback:         simple_bus.rabbit_mq.commands_consumer</code></pre>
+            # use the consumer provided by SimpleBusRabbitMQBundleBridgeBundle
+            callback:         simple_bus.rabbit_mq_bundle_bridge.commands_consumer</code></pre>
 <p>Now enable asynchronous command handling:</p>
 <pre><code class="language-yaml"># in config.yml
-
-simple_bus_rabbit_mq:
+simple_bus_rabbit_mq_bundle_bridge:
     commands:
         # this producer service will be defined by OldSoundRabbitMqBundle,
         # its name is old_sound_rabbit_mq.%producer_name%_producer
@@ -117,12 +116,11 @@ old_sound_rabbit_mq:
             connection:       default
             exchange_options: { name: 'asynchronous_events', type: direct }
             queue_options:    { name: 'asynchronous_events' }
-            # use the consumer provided by SimpleBusRabbitMQBundle
-            callback:         simple_bus.rabbit_mq.asynchronous_events</code></pre>
+            # use the consumer provided by SimpleBusRabbitMQBundleBridgeBundle
+            callback:         simple_bus.rabbit_mq_bundle_bridge.events_consumer</code></pre>
 <p>Now enable asynchronous event handling:</p>
 <pre><code class="language-yaml"># in config.yml
-
-simple_bus_rabbit_mq:
+simple_bus_rabbit_mq_bundle_bridge:
     events:
         # this producer service will be defined by OldSoundRabbitMqBundle,
         # its name is old_sound_rabbit_mq.%producer_name%_producer
