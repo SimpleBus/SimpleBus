@@ -1,9 +1,9 @@
 {
-    "name": "simple-bus/jms-serializer-bundle",
+    "name": "simple-bus/jms-serializer-bundle-bridge",
     "type": "bundle",
     "description": "Symfony bundle for using JMSSerializer as message serializer for SimpleBus/Asynchronous",
     "keywords": ["asynchronous", "message", "serializer"],
-    "homepage": "http://github.com/SimpleBus/JMSSerializerBundle",
+    "homepage": "http://github.com/SimpleBus/JMSSerializerBundleBridge",
     "license": "MIT",
     "authors": [
         {
@@ -23,10 +23,10 @@
         "phpunit/phpunit": "~4.0"
     },
     "autoload": {
-        "psr-4" : { "SimpleBus\\JMSSerializerBundle\\" : "src" }
+        "psr-4" : { "SimpleBus\\JMSSerializerBundleBridge\\" : "src" }
     },
     "autoload-dev": {
-        "psr-4": {"SimpleBus\\JMSSerializerBundle\\Tests\\": "tests"}
+        "psr-4": {"SimpleBus\\JMSSerializerBundleBridge\\Tests\\": "tests"}
     },
     "minimum-stability": "dev",
     "prefer-stable": true

@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\JMSSerializerBundle\Tests\Functional;
+namespace SimpleBus\JMSSerializerBundleBridge\Tests\Functional;
 
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -9,7 +9,7 @@ class JMSSerializerMessageSerializerTest extends KernelTestCase
 {
     protected static function getKernelClass()
     {
-        return 'SimpleBus\JMSSerializerBundle\Tests\Functional\TestKernel';
+        return 'SimpleBus\JMSSerializerBundleBridge\Tests\Functional\TestKernel';
     }
 
     /**

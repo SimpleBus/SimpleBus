@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\JMSSerializerBundle\Tests\Functional;
+namespace SimpleBus\JMSSerializerBundleBridge\Tests\Functional;
 
 use SimpleBus\Message\Message;
 use JMS\Serializer\Annotation as Serializer;

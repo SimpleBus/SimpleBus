@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\JMSSerializerBundle\DependencyInjection;
+namespace SimpleBus\JMSSerializerBundleBridge\DependencyInjection;
 
 use SimpleBus\JMSSerializerBridge\SerializerMetadata;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 
-class SimpleBusJMSSerializerExtension extends Extension implements PrependExtensionInterface
+class SimpleBusJMSSerializerBundleBridgeExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $config, ContainerBuilder $container)
     {
