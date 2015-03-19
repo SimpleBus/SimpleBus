@@ -16,7 +16,7 @@
         "php": ">=5.4",
         "beberlei/assert": "~2.0",
         "simple-bus/message-bus": "~1.0",
-        "simple-bus/asynchronous": "dev-master",
+        "simple-bus/asynchronous": "~1.0",
         "simple-bus/symfony-bridge": "^3.2.1",
         "symfony/framework-bundle": "~2.0"
     },
@@ -33,7 +33,5 @@
     },
     "autoload-dev": {
         "psr-4" : { "SimpleBus\\AsynchronousBundle\\Tests\\" : "tests" }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
