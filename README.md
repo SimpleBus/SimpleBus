@@ -1,6 +1,6 @@
 # SimpleBus/RabbitMQBundleBridge
 
-[![Build Status](https://travis-ci.org/SimpleBus/RabbitMQBundleBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/RabbitMQBundleBridge) [![Coverage Status](https://coveralls.io/repos/SimpleBus/RabbitMQBundleBridge/badge.svg)](https://coveralls.io/r/SimpleBus/RabbitMQBundleBridge)
+[![Build Status](https://travis-ci.org/SimpleBus/RabbitMQBundleBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/RabbitMQBundleBridge)
 
 By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
 
