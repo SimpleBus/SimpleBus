@@ -54,7 +54,7 @@ simple_bus_asynchronous:
 
 ## Logging
 
-To see what messages are being consumed, enable logging for commands and/or events:
+To get some insight into what goes on in the consumer process, enable logging:
 
 ```yaml
 # in config.yml
@@ -67,19 +67,4 @@ simple_bus_asynchronous:
         logging: ~
 ```
 
-Optionally, provide a logger channel:
-
-```yaml
-# in config.yml
-simple_bus_asynchronous:
-    commands:
-        ...
-        logging:
-            # default is asynchronous_command_bus
-            channel: my_commands_channel
-    events:
-        ...
-        logging:
-            # default is asynchronous_event_bus
-            channel: my_events_channel
-```
+This will log consumed messages to the `asynchronous_command_bus` and `asynchronous_event_bus` channels respectively.
