@@ -15,7 +15,7 @@
     "require": {
         "php": ">=5.4",
         "simple-bus/message-bus": "~1.0",
-        "simple-bus/serialization": "dev-master",
+        "simple-bus/serialization": "~1.0",
         "jms/serializer": "~0.12"
     },
     "require-dev": {
@@ -27,7 +27,5 @@
     },
     "autoload-dev": {
         "psr-4" : { "SimpleBus\\JMSSerializerBridge\\Tests\\" : "tests" }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
