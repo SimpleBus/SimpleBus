@@ -27,7 +27,8 @@
         "symfony/console": "~2.0",
         "symfony/finder": "~2.0",
         "symfony/process": "~2.0",
-        "matthiasnoback/phpunit-asynchronicity": "dev-master"
+        "matthiasnoback/phpunit-asynchronicity": "dev-master",
+        "satooshi/php-coveralls": "~0.6"
     },
     "autoload": {
         "psr-4" : { "SimpleBus\\RabbitMQBundleBridge\\" : "src" }
