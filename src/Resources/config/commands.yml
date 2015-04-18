@@ -7,6 +7,7 @@ services:
             # defined in this bundle's configuration
             - @simple_bus.rabbit_mq_bundle_bridge.command_producer
             - @simple_bus.rabbit_mq_bundle_bridge.routing.routing_key_resolver
+            - @simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver
 
     simple_bus.rabbit_mq_bundle_bridge.commands_consumer:
         class: SimpleBus\RabbitMQBundleBridge\RabbitMQMessageConsumer

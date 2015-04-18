@@ -3,6 +3,7 @@
 namespace SimpleBus\RabbitMQBundleBridge;
 
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Asynchronous\Routing\RoutingKeyResolver;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
@@ -24,14 +25,21 @@ class RabbitMQPublisher implements Publisher
      */
     private $routingKeyResolver;
 
+    /**
+     * @var AdditionalPropertiesResolver
+     */
+    private $additionalPropertiesResolver;
+
     public function __construct(
         MessageInEnvelopSerializer $messageSerializer,
         Producer $producer,
-        RoutingKeyResolver $routingKeyResolver
+        RoutingKeyResolver $routingKeyResolver,
+        AdditionalPropertiesResolver $additionalPropertiesResolver
     ) {
         $this->serializer = $messageSerializer;
         $this->producer = $producer;
         $this->routingKeyResolver = $routingKeyResolver;
+        $this->additionalPropertiesResolver = $additionalPropertiesResolver;
     }
 
     /**
@@ -43,7 +51,8 @@ class RabbitMQPublisher implements Publisher
     {
         $serializedMessage = $this->serializer->wrapAndSerialize($message);
         $routingKey = $this->routingKeyResolver->resolveRoutingKeyFor($message);
+        $additionalProperties = $this->additionalPropertiesResolver->resolveAdditionalPropertiesFor($message);
 
-        $this->producer->publish($serializedMessage, $routingKey);
+        $this->producer->publish($serializedMessage, $routingKey, $additionalProperties);
     }
 }

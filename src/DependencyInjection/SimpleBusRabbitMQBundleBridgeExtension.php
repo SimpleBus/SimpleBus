@@ -92,6 +92,8 @@ class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension imple
             'simple_bus.rabbit_mq_bundle_bridge.routing.routing_key_resolver',
              $routingKeyResolverId
         );
+
+        $loader->load('properties.yml');
     }
 
     private function requireBundle($bundleName, ContainerBuilder $container)

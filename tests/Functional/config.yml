@@ -35,6 +35,20 @@ services:
         tags:
             - { name: asynchronous_command_handler, handles: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AlwaysFailingCommand }
 
+    additional_properties_resolver:
+        class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AdditionalPropertiesResolverArray
+        arguments:
+            - { debug: string }
+        tags:
+            - { name: simple_bus.additional_properties_resolver }
+
+    simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.public:
+        alias: simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver
+
+    simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.producer_mock:
+        class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AdditionalPropertiesResolverProducerMock
+        arguments: [@old_sound_rabbit_mq.connection.default]
+
 old_sound_rabbit_mq:
     connections:
         default:

@@ -29,7 +29,9 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
 
         $routingKeyResolver = $this->routingKeyResolverStub($message, $routingKey);
 
-        $publisher = new RabbitMQPublisher($serializer, $producer, $routingKeyResolver);
+        $additionalPropertiesResolver = $this->additionalPropertiesResolverStub($message, []);
+
+        $publisher = new RabbitMQPublisher($serializer, $producer, $routingKeyResolver, $additionalPropertiesResolver);
 
         $publisher->publish($message);
     }
@@ -60,6 +62,18 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
             ->method('resolveRoutingKeyFor')
             ->with($this->identicalTo($message))
             ->will($this->returnValue($routingKey));
+
+        return $resolver;
+    }
+
+    private function additionalPropertiesResolverStub($message, $additionalProperties)
+    {
+        $resolver = $this->getMock('SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver');
+        $resolver
+            ->expects($this->any())
+            ->method('resolveAdditionalPropertiesFor')
+            ->with($this->identicalTo($message))
+            ->will($this->returnValue($additionalProperties));
 
         return $resolver;
     }

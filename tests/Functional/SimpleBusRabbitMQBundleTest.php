@@ -3,6 +3,7 @@
 namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use Matthias\PhpUnitAsynchronicity\Eventually;
+use SimpleBus\Asynchronous\Properties\DelegatingAdditionalPropertiesResolver;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Process\Process;
@@ -81,6 +82,30 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     }
 
     /**
+     * @test
+     */
+    public function it_resolve_properties()
+    {
+        $data = $this->additionalPropertiesResolver()->resolveAdditionalPropertiesFor($this->messageDummy());
+
+        $this->assertSame(array('debug' => 'string'), $data);
+    }
+
+    /**
+     * @test
+     */
+    public function it_sends_properties_to_producer()
+    {
+        $container = static::$kernel->getContainer();
+        $container->set('old_sound_rabbit_mq.asynchronous_commands_producer', $container->get('simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.producer_mock'));
+
+        $this->commandBus()->handle(new AsynchronousCommand());
+
+        $data = $container->get('simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.producer_mock')->getAdditionalProperties();
+        $this->assertSame(array('debug' => 'string'), $data);
+    }
+
+    /**
      * @param $message
      */
     private function waitUntilLogFileContains($message)
@@ -111,6 +136,22 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     private function eventBus()
     {
         return static::$kernel->getContainer()->get('event_bus');
+    }
+
+    /**
+     * @return DelegatingAdditionalPropertiesResolver
+     */
+    private function additionalPropertiesResolver()
+    {
+        return static::$kernel->getContainer()->get('simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.public');
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject|Message
+     */
+    private function messageDummy()
+    {
+        return $this->getMock('SimpleBus\Message\Message');
     }
 
     /**
