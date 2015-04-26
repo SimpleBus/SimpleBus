@@ -1,3 +1,4 @@
+/.couscous/*
 /.idea/*
 /build/*
 /composer.lock
