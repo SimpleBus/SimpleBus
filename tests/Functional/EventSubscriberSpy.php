@@ -2,14 +2,11 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
-use SimpleBus\Message\Message;
-use SimpleBus\Message\Subscriber\MessageSubscriber;
-
-class EventSubscriberSpy implements MessageSubscriber
+class EventSubscriberSpy
 {
     private $notifiedEvents = [];
 
-    public function notify(Message $message)
+    public function notify($message)
     {
         $this->notifiedEvents[] = $message;
     }

@@ -9,7 +9,7 @@ class PublisherSpy implements Publisher
 {
     private $publishedMessages = [];
 
-    public function publish(Message $message)
+    public function publish($message)
     {
         $this->publishedMessages[] = $message;
     }

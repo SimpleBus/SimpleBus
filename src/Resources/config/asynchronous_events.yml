@@ -31,13 +31,19 @@ services:
         tags:
             - { name: asynchronous_event_bus_middleware, priority: -1000 }
 
+    simple_bus.asynchronous.event_bus.callable_resolver:
+        class: SimpleBus\Message\CallableResolver\ServiceLocatorAwareCallableResolver
+        public: false
+        arguments:
+            - [@service_container, 'get']
+
     simple_bus.asynchronous.event_bus.event_subscribers_collection:
-        class: SimpleBus\Message\Subscriber\Collection\LazyLoadingMessageSubscriberCollection
+        class: SimpleBus\Message\CallableResolver\CallableCollection
         public: false
         arguments:
             # collection of event subscriber services ids, will be provided by the RegisterSubscribers compiler pas
             - []
-            - @simple_bus.asynchronous.event_bus.invokable_service_locator
+            - @simple_bus.asynchronous.event_bus.callable_resolver
 
     simple_bus.asynchronous.event_bus.event_subscribers_resolver:
         class: SimpleBus\Message\Subscriber\Resolver\NameBasedMessageSubscriberResolver
@@ -45,12 +51,6 @@ services:
         arguments:
             - @simple_bus.asynchronous.event_bus.event_name_resolver
             - @simple_bus.asynchronous.event_bus.event_subscribers_collection
-
-    simple_bus.asynchronous.event_bus.invokable_service_locator:
-        class: SimpleBus\SymfonyBridge\DependencyInjection\InvokableServiceLocator
-        public: false
-        arguments:
-            - @service_container
 
     simple_bus.asynchronous.standard_serialized_event_envelope_consumer:
         class: SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer

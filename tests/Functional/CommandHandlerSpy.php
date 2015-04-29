@@ -2,14 +2,11 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
-use SimpleBus\Message\Handler\MessageHandler;
-use SimpleBus\Message\Message;
-
-class CommandHandlerSpy implements MessageHandler
+class CommandHandlerSpy
 {
     private $handledCommands = [];
 
-    public function handle(Message $message)
+    public function handle($message)
     {
         $this->handledCommands[] = $message;
     }
