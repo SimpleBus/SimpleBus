@@ -2,8 +2,6 @@
 
 namespace SimpleBus\Serialization\Envelope;
 
-use SimpleBus\Message\Message;
-
 interface Envelope
 {
     /**
@@ -17,17 +15,17 @@ interface Envelope
      * The message
      *
      * @throws \LogicException When the Message has not been provided
-     * @return Message
+     * @return object
      */
     public function message();
 
     /**
      * A new instance of the same class, with the same type, but another message
      *
-     * @param Message $message
+     * @param object $message
      * @return Envelope
      */
-    public function withMessage(Message $message);
+    public function withMessage($message);
 
     /**
      * A new instance of the same class, with a serialized message of the same type

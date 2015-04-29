@@ -2,11 +2,9 @@
 
 namespace SimpleBus\Serialization\Envelope;
 
-use SimpleBus\Message\Message;
-
 class DefaultEnvelopeFactory implements EnvelopeFactory
 {
-    public function wrapMessageInEnvelope(Message $message)
+    public function wrapMessageInEnvelope($message)
     {
         return DefaultEnvelope::forMessage($message);
     }

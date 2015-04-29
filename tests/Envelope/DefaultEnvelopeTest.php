@@ -59,15 +59,6 @@ class DefaultEnvelopeTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_requires_the_type_to_be_a_subtype_of_message()
-    {
-        $this->setExpectedException('InvalidArgumentException', 'SimpleBus\Message\Message');
-        DefaultEnvelope::forSerializedMessage('NotAMessageClass', 'any message');
-    }
-
-    /**
-     * @test
-     */
     public function it_fails_when_the_serialized_message_is_unavailable()
     {
         $message = new DummyMessage();

@@ -5,7 +5,6 @@ namespace SimpleBus\Serialization\Envelope\Serializer;
 use SimpleBus\Serialization\Envelope\Envelope;
 use SimpleBus\Serialization\Envelope\EnvelopeFactory;
 use SimpleBus\Serialization\ObjectSerializer;
-use SimpleBus\Message\Message;
 
 class StandardMessageInEnvelopeSerializer implements MessageInEnvelopSerializer
 {
@@ -32,7 +31,7 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopSerializer
      *
      * @{inheritdoc}
      */
-    public function wrapAndSerialize(Message $message)
+    public function wrapAndSerialize($message)
     {
         $envelope = $this->envelopeFactory->wrapMessageInEnvelope($message);
 
@@ -86,7 +85,7 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopSerializer
      *
      * @param string $serializedMessage
      * @param string $messageClass
-     * @return Message Of type $messageClass
+     * @return object Of type $messageClass
      */
     private function deserializeMessage($serializedMessage, $messageClass)
     {

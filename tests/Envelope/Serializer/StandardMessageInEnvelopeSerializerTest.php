@@ -111,11 +111,11 @@ class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCas
     }
 
     /**
-     * @param Message $message
+     * @param object $message
      * @param Envelope $expectedEnvelope
      * @return \PHPUnit_Framework_MockObject_MockObject|EnvelopeFactory
      */
-    private function envelopeFactoryCreatesEnvelope(Message $message, Envelope $expectedEnvelope)
+    private function envelopeFactoryCreatesEnvelope($message, Envelope $expectedEnvelope)
     {
         $envelopeFactory = $this->getMock('SimpleBus\Serialization\Envelope\EnvelopeFactory');
         $envelopeFactory

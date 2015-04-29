@@ -3,7 +3,6 @@
 namespace SimpleBus\Serialization\Envelope;
 
 use Assert\Assertion;
-use SimpleBus\Message\Message;
 
 class DefaultEnvelope implements Envelope
 {
@@ -13,7 +12,7 @@ class DefaultEnvelope implements Envelope
     private $messageType;
 
     /**
-     * @var Message|null
+     * @var object|null
      */
     private $message;
 
@@ -22,7 +21,7 @@ class DefaultEnvelope implements Envelope
      */
     private $serializedMessage;
 
-    protected function __construct($messageType, Message $message = null, $serializedMessage = null)
+    protected function __construct($messageType, $message = null, $serializedMessage = null)
     {
         $this->setMessageType($messageType);
         $this->setMessage($message);
@@ -32,7 +31,7 @@ class DefaultEnvelope implements Envelope
     /**
      * @{inheritdoc}
      */
-    public static function forMessage(Message $message)
+    public static function forMessage($message)
     {
         $type = get_class($message);
 
@@ -85,8 +84,10 @@ class DefaultEnvelope implements Envelope
     /**
      * @{inheritdoc}
      */
-    public function withMessage(Message $message)
+    public function withMessage($message)
     {
+        Assertion::isObject($message);
+
         return new self($this->messageType, $message, $this->serializedMessage);
     }
 
@@ -103,15 +104,11 @@ class DefaultEnvelope implements Envelope
     private function setMessageType($messageType)
     {
         Assertion::string($messageType);
-        Assertion::true(
-            is_a($messageType, 'SimpleBus\Message\Message', true),
-            'The type of the message should be "SimpleBus\Message\Message"'
-        );
 
         $this->messageType = $messageType;
     }
 
-    private function setMessage(Message $message = null)
+    private function setMessage($message = null)
     {
         $this->message = $message;
     }
