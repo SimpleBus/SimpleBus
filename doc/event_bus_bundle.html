@@ -114,6 +114,15 @@ event subscribers by adding the <code>event_subscriber</code> tag to the event s
 <h4>Event subscribers are lazy-loaded</h4>
 <p>Since only some of the event subscribers are going to handle any particular event, event subscribers are lazy-loaded.
 This means that their services should be defined as public services (i.e. you can't use <code>public: false</code> for them).</p>
+<h4>Event subscribers are callables</h4>
+<p>Any service that is a <a href="http://php.net/manual/en/language.types.callable.php">PHP callable</a> itself can be used as an
+event subscriber. If a service itself is not callable, SimpleBus looks for a <code>notify</code> method and calls it. If you want
+to use a custom method, just add a <code>method</code> attribute to the <code>event_subscriber</code> tag:</p>
+<pre><code class="language-yaml">services:
+    user_registered_event_subscriber:
+        ...
+        tags:
+            - { name: event_subscriber, subscribes_to: ..., method: userRegistered }</code></pre>
 </blockquote>
 <h2>Setting the event name resolving strategy</h2>
 <p>To find the correct event subscribers for a given event, the name of the event is used. This can be either 1) its fully-
@@ -217,11 +226,7 @@ class PropelDomainEvents implements ContainsRecordedMessages
 <p>If you want to log every event that is being handled, enable logging in <code>config.yml</code>:</p>
 <pre><code class="language-yaml">event_bus:
     logging: ~</code></pre>
-<p>Optionally mention the channel that should be used for logging:</p>
-<pre><code class="language-yaml">event_bus:
-    logging:
-        # default channel: event_bus
-        channel: my_preferred_channel</code></pre>
+<p>Messages will be logged to the <code>event_bus</code> channel.</p>
 </blockquote>
                 </section>
 

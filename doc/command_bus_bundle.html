@@ -113,6 +113,15 @@ command handlers by adding the <code>command_handler</code> tag to the command h
 <h4>Command handlers are lazy-loaded</h4>
 <p>Since only one of the command handlers is going to handle any particular command, command handlers are lazy-loaded.
 This means that their services should be defined as public services (i.e. you can't use <code>public: false</code> for them).</p>
+<h4>Command handlers are callables</h4>
+<p>Any service that is a <a href="http://php.net/manual/en/language.types.callable.php">PHP callable</a> itself can be used as a
+command handler. If a service itself is not callable, SimpleBus looks for a <code>handle</code> method and calls it. If you want
+to use a custom method, just add a <code>method</code> attribute to the <code>command_handler</code> tag:</p>
+<pre><code class="language-yaml">services:
+    register_user_command_handler:
+        ...
+        tags:
+            - { name: command_handler, handles: ..., method: registerUser }</code></pre>
 </blockquote>
 <h2>Setting the command name resolving strategy</h2>
 <p>To find the correct command handler for a given command, the name of the command is used. This can be either 1) its
@@ -152,11 +161,7 @@ private</a></p>
 <p>If you want to log every command that is being handled, enable logging in <code>config.yml</code>:</p>
 <pre><code class="language-yaml">command_bus:
     logging: ~</code></pre>
-<p>Optionally mention the channel that should be used for logging:</p>
-<pre><code class="language-yaml">command_bus:
-    logging:
-        # default channel: command_bus
-        channel: my_preferred_channel</code></pre>
+<p>Messages will be logged to the <code>command_bus</code> channel.</p>
 </blockquote>
                 </section>
 
