@@ -49,7 +49,6 @@ the `PublishesUnhandledMessages` middleware to it:
 use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
 use SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
-use SimpleBus\Message\Message;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
@@ -67,7 +66,7 @@ $logLevel = LogLevel::DEBUG;
 
 $commandBus->appendMiddleware(new PublishesUnhandledMessages($publisher, $logger, $logLevel));
 
-// $command is an instance of Message
+// $command is an object
 $command = ...;
 
 $commandBus->handle($command);
