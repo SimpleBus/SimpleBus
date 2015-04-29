@@ -4,7 +4,6 @@ namespace SimpleBus\DoctrineORMBridge\Tests\MessageBus;
 
 use Exception;
 use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
-use SimpleBus\Message\Message;
 
 class WrapsMessageHandlingInTransactionTest extends \PHPUnit_Framework_TestCase
 {
@@ -15,7 +14,7 @@ class WrapsMessageHandlingInTransactionTest extends \PHPUnit_Framework_TestCase
     {
         $nextIsCalled = false;
         $message = $this->dummyMessage();
-        $nextMiddlewareCallable = function(Message $actualMessage) use ($message, &$nextIsCalled) {
+        $nextMiddlewareCallable = function($actualMessage) use ($message, &$nextIsCalled) {
             $this->assertSame($message, $actualMessage);
             $nextIsCalled = true;
         };

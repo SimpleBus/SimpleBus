@@ -6,7 +6,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use Exception;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
-use SimpleBus\Message\Message;
 
 class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
@@ -30,7 +29,7 @@ class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
         $this->entityManagerName = $entityManagerName;
     }
 
-    public function handle(Message $message, callable $next)
+    public function handle($message, callable $next)
     {
         $entityManager = $this->managerRegistry->getManager($this->entityManagerName);
         /** @var $entityManager EntityManager */
