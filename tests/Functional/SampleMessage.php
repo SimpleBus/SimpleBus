@@ -2,10 +2,9 @@
 
 namespace SimpleBus\JMSSerializerBundleBridge\Tests\Functional;
 
-use SimpleBus\Message\Message;
 use JMS\Serializer\Annotation as Serializer;
 
-class SampleMessage implements Message
+class SampleMessage
 {
     /**
      * @Serializer\Type("string")

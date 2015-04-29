@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=5.4",
-        "simple-bus/asynchronous-bundle": "~1.0",
+        "simple-bus/asynchronous-bundle": "~2.0",
         "simple-bus/jms-serializer-bridge": "~1.0",
         "jms/serializer-bundle": "~0.11",
         "symfony/framework-bundle": "~2.0"
