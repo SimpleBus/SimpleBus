@@ -5,8 +5,7 @@ namespace SimpleBus\Asynchronous\MessageBus;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
-use SimpleBus\Message\Handler\Map\Exception\NoHandlerForMessageName;
-use SimpleBus\Message\Message;
+use SimpleBus\Message\CallableResolver\Exception\UndefinedCallable;
 
 class PublishesUnhandledMessages implements MessageBusMiddleware
 {
@@ -36,14 +35,14 @@ class PublishesUnhandledMessages implements MessageBusMiddleware
      * Handle the message by letting the next middleware handle it. If no handler is defined for this message, then
      * it is published to be processed asynchronously
      *
-     * @param Message $message
+     * @param object $message
      * @param callable $next
      */
-    public function handle(Message $message, callable $next)
+    public function handle($message, callable $next)
     {
         try {
             $next($message);
-        } catch (NoHandlerForMessageName $exception) {
+        } catch (UndefinedCallable $exception) {
             $this->logger->log(
                 $this->logLevel,
                 'No message handler found, trying to handle it asynchronously',

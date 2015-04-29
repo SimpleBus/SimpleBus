@@ -4,7 +4,6 @@ namespace SimpleBus\Asynchronous\Tests\MessageBus;
 
 use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
-use SimpleBus\Message\Message;
 
 class AlwaysPublishesMessagesTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +20,7 @@ class AlwaysPublishesMessagesTest extends \PHPUnit_Framework_TestCase
             ->with($this->identicalTo($message));
 
         $nextCallableCalled = false;
-        $next = function (Message $actualMessage) use ($message, &$nextCallableCalled) {
+        $next = function ($actualMessage) use ($message, &$nextCallableCalled) {
             $nextCallableCalled = true;
             $this->assertSame($message, $actualMessage);
         };
@@ -41,10 +40,10 @@ class AlwaysPublishesMessagesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Message
+     * @return \PHPUnit_Framework_MockObject_MockObject|object
      */
     private function dummyMessage()
     {
-        return $this->getMock('SimpleBus\Message\Message');
+        return new \stdClass();
     }
 }

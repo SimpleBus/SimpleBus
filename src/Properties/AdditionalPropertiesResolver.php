@@ -2,15 +2,13 @@
 
 namespace SimpleBus\Asynchronous\Properties;
 
-use SimpleBus\Message\Message;
-
 interface AdditionalPropertiesResolver
 {
     /**
-     * Determine additional properties for messages containing a serialized version of this Message
+     * Determine additional properties for messages containing a serialized version of this message
      *
-     * @param Message $message
+     * @param object $message
      * @return array The array of additional properties or empty array
      */
-    public function resolveAdditionalPropertiesFor(Message $message);
+    public function resolveAdditionalPropertiesFor($message);
 }

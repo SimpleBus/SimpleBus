@@ -2,15 +2,13 @@
 
 namespace SimpleBus\Asynchronous\Routing;
 
-use SimpleBus\Message\Message;
-
 interface RoutingKeyResolver
 {
     /**
-     * Determine a routing key for messages containing a serialized version of this Message
+     * Determine a routing key for messages containing a serialized version of this message
      *
-     * @param Message $message
+     * @param object $message
      * @return string The routing key or empty string if no routing key needs to be used
      */
-    public function resolveRoutingKeyFor(Message $message);
+    public function resolveRoutingKeyFor($message);
 }

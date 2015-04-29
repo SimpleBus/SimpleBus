@@ -3,7 +3,6 @@
 namespace SimpleBus\Asynchronous\Tests\Routing;
 
 use SimpleBus\Asynchronous\Routing\EmptyRoutingKeyResolver;
-use SimpleBus\Message\Message;
 
 class EmptyRoutingKeyResolverTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,10 +16,10 @@ class EmptyRoutingKeyResolverTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Message
+     * @return \PHPUnit_Framework_MockObject_MockObject|object
      */
     private function messageDummy()
     {
-        return $this->getMock('SimpleBus\Message\Message');
+        return new \stdClass();
     }
 }

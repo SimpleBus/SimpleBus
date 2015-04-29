@@ -4,7 +4,6 @@ namespace SimpleBus\Asynchronous\Tests\Properties;
 
 use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
 use SimpleBus\Asynchronous\Properties\DelegatingAdditionalPropertiesResolver;
-use SimpleBus\Message\Message;
 
 class DelegatingAdditionalPropertiesResolverTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,12 +23,12 @@ class DelegatingAdditionalPropertiesResolverTest extends \PHPUnit_Framework_Test
     }
 
     /**
-     * @param Message $message
+     * @param object $message
      * @param array   $data
      *
      * @return \PHPUnit_Framework_MockObject_MockObject|AdditionalPropertiesResolver
      */
-    private function getResolver(Message $message, array $data)
+    private function getResolver($message, array $data)
     {
         $resolver = $this->getMock('SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver');
         $resolver->expects($this->once())
@@ -41,10 +40,10 @@ class DelegatingAdditionalPropertiesResolverTest extends \PHPUnit_Framework_Test
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Message
+     * @return \PHPUnit_Framework_MockObject_MockObject|object
      */
     private function messageDummy()
     {
-        return $this->getMock('SimpleBus\Message\Message');
+        return new \stdClass();
     }
 }

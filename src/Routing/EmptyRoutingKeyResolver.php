@@ -2,16 +2,14 @@
 
 namespace SimpleBus\Asynchronous\Routing;
 
-use SimpleBus\Message\Message;
-
 class EmptyRoutingKeyResolver implements RoutingKeyResolver
 {
     /**
      * Always use an empty routing key
      *
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
-    public function resolveRoutingKeyFor(Message $message)
+    public function resolveRoutingKeyFor($message)
     {
         return '';
     }

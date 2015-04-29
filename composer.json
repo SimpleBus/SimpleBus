@@ -14,8 +14,8 @@
     ],
     "require": {
         "php": ">=5.4",
-        "simple-bus/message-bus": "~1.0",
-        "simple-bus/serialization": "~1.0",
+        "simple-bus/message-bus": "~2.0",
+        "simple-bus/serialization": "~2.0",
         "beberlei/assert": "~2.0",
         "psr/log": "~1.0"
     },

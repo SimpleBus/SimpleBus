@@ -6,8 +6,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
-use SimpleBus\Message\Handler\Map\Exception\NoHandlerForMessageName;
-use SimpleBus\Message\Message;
+use SimpleBus\Message\CallableResolver\Exception\UndefinedCallable;
 
 class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,7 +18,7 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
         $message = $this->dummyMessage();
 
         $nextCallableCalled = false;
-        $alwaysSucceedingNextCallable = function (Message $actualMessage) use ($message, &$nextCallableCalled) {
+        $alwaysSucceedingNextCallable = function ($actualMessage) use ($message, &$nextCallableCalled) {
             $nextCallableCalled = true;
             $this->assertSame($message, $actualMessage);
         };
@@ -44,11 +43,11 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
         $message = $this->dummyMessage();
 
         $nextCallableCalled = false;
-        $alwaysSucceedingNextCallable = function (Message $actualMessage) use ($message, &$nextCallableCalled) {
+        $alwaysSucceedingNextCallable = function ($actualMessage) use ($message, &$nextCallableCalled) {
             $nextCallableCalled = true;
             $this->assertSame($message, $actualMessage);
 
-            throw new NoHandlerForMessageName('message name');
+            throw new UndefinedCallable('message name');
         };
 
         $publisher = $this->mockPublisher();
@@ -84,11 +83,11 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Message
+     * @return \PHPUnit_Framework_MockObject_MockObject|object
      */
     private function dummyMessage()
     {
-        return $this->getMock('SimpleBus\Message\Message');
+        return new \stdClass();
     }
 
     /**

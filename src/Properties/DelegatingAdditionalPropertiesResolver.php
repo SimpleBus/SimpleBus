@@ -2,8 +2,6 @@
 
 namespace SimpleBus\Asynchronous\Properties;
 
-use SimpleBus\Message\Message;
-
 class DelegatingAdditionalPropertiesResolver implements AdditionalPropertiesResolver
 {
     /**
@@ -19,9 +17,9 @@ class DelegatingAdditionalPropertiesResolver implements AdditionalPropertiesReso
     /**
      * Combine properties
      *
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
-    public function resolveAdditionalPropertiesFor(Message $message)
+    public function resolveAdditionalPropertiesFor($message)
     {
         $properties = [];
 
