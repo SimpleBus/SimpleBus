@@ -2,12 +2,9 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
-use SimpleBus\Message\Handler\MessageHandler;
-use SimpleBus\Message\Message;
-
-class AlwaysFailingCommandHandler implements MessageHandler
+class AlwaysFailingCommandHandler
 {
-    public function handle(Message $message)
+    public function handle()
     {
         throw new \Exception('I always fail');
     }

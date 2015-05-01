@@ -3,10 +3,8 @@
 namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use Psr\Log\LoggerInterface;
-use SimpleBus\Message\Message;
-use SimpleBus\Message\Subscriber\MessageSubscriber;
 
-class LoggingEventSubscriber implements MessageSubscriber
+class LoggingEventSubscriber
 {
     /**
      * @var LoggerInterface
@@ -18,7 +16,7 @@ class LoggingEventSubscriber implements MessageSubscriber
         $this->logger = $logger;
     }
 
-    public function notify(Message $message)
+    public function notify($message)
     {
         $this->logger->debug('Notified of message', ['type' => get_class($message)]);
     }

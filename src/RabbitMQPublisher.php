@@ -6,7 +6,6 @@ use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Asynchronous\Routing\RoutingKeyResolver;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
-use SimpleBus\Message\Message;
 
 class RabbitMQPublisher implements Publisher
 {
@@ -40,7 +39,7 @@ class RabbitMQPublisher implements Publisher
      *
      * @{inheritdoc}
      */
-    public function publish(Message $message)
+    public function publish($message)
     {
         $serializedMessage = $this->serializer->wrapAndSerialize($message);
         $routingKey = $this->routingKeyResolver->resolveRoutingKeyFor($message);

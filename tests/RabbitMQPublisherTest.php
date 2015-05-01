@@ -2,7 +2,6 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\Tests;
 
-use SimpleBus\Message\Message;
 use SimpleBus\RabbitMQBundleBridge\RabbitMQPublisher;
 
 class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
@@ -50,10 +49,10 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
 
     private function dummyMessage()
     {
-        return $this->getMock('SimpleBus\Message\Message');
+        return new \stdClass();
     }
 
-    private function routingKeyResolverStub(Message $message, $routingKey)
+    private function routingKeyResolverStub($message, $routingKey)
     {
         $resolver = $this->getMock('SimpleBus\Asynchronous\Routing\RoutingKeyResolver');
         $resolver

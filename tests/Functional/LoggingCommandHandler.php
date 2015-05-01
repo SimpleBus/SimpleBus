@@ -3,10 +3,8 @@
 namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use Psr\Log\LoggerInterface;
-use SimpleBus\Message\Handler\MessageHandler;
-use SimpleBus\Message\Message;
 
-class LoggingCommandHandler implements MessageHandler
+class LoggingCommandHandler
 {
     /**
      * @var LoggerInterface
@@ -18,7 +16,7 @@ class LoggingCommandHandler implements MessageHandler
         $this->logger = $logger;
     }
 
-    public function handle(Message $message)
+    public function handle($message)
     {
         $this->logger->debug('Handling message', ['type' => get_class($message)]);
     }
