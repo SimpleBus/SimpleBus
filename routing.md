@@ -33,16 +33,15 @@ old_sound_rabbit_mq:
 
 ## Custom routing keys {#custom-routing-keys}
 
-If you want to define routing keys in a custom way (not based on the class of a `Message`), create a class that
+If you want to define routing keys in a custom way (not based on the class of a message), create a class that
 implements `RoutingKeyResolver`:
 
 ```php
 use SimpleBus\RabbitMQBundleBridge\Routing\RoutingKeyResolver;
-use SimpleBus\Message\Message;
 
 class MyCustomRoutingKeyResolver implements RoutingKeyResolver
 {
-    public function resolveRoutingKeyFor(Message $message)
+    public function resolveRoutingKeyFor($message)
     {
         // determine the routing key for the given Message
         return ...;
