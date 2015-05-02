@@ -69,6 +69,26 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>Upgrade guide</h1>
+<h2>From 3.x to 4.0</h2>
+<p>Version <code>4.0</code> works with <code>SimpleBus/MessageBus</code> <code>2.0</code> so you have to make the changes descibred in its
+<a href="http://simplebus.github.io/MessageBus/doc/upgrade_guide.html">upgrade guide</a> as well.</p>
+<p>The biggest change for the <code>SymfonyBridge</code> package is that command handler and event subscriber services don't have to
+have <code>handle</code> or <code>notify</code> methods respectively:</p>
+<ol>
+<li>If the services are valid callables already (i.e. they have a public <code>__invoke()</code> method), then they are used as
+they are.</li>
+<li>If the service has a public <code>handle()</code> method, that method will be used.</li>
+<li>If the service has a public <code>notify()</code> method, that method will be used.</li>
+<li>Otherwise you have to specify which method should be called in the tag attributes:</li>
+</ol>
+<pre><code class="language-yaml">- { name: command_handler, handles: ..., method: theMethodThatShouldBeCalled }
+
+# or
+
+- { name: event_subscriber, subscribes_to: ..., method: theMethodThatShouldBeCalled }</code></pre>
+<p>This means that in theory you can now also have one handler handle different commands in different methods, and
+subscribers which subscribe to multiple events. This is not recommended in most cases, but at least you have this option
+now.</p>
 <h2>From 1.0 to 2.0</h2>
 <h3>Commands</h3>
 <p>Before:</p>

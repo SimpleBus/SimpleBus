@@ -164,11 +164,9 @@ private</a></p>
 <p>As explained <a href="http://simplebus.github.io/MessageBus/doc/message_recorder.html">in the documentation of MessageBus</a> you
 can collect events while a command is being handled. If you want to record new events you can inject the
 <code>event_recorder</code> service as a constructor argument of a command handler:</p>
-<pre><code class="language-php">use SimpleBus\Message\Handler\MessageHandler;
-use SimpleBus\Message\Message;
-use SimpleBus\Message\Recorder\RecordsMessages;
+<pre><code class="language-php">use SimpleBus\Message\Recorder\RecordsMessages;
 
-class SomeInterestingCommandHandler implements MessageHandler
+class SomeInterestingCommandHandler
 {
     private $eventRecorder;
 
@@ -177,11 +175,11 @@ class SomeInterestingCommandHandler implements MessageHandler
         $this-&gt;eventRecorder = $eventRecorder;
     }
 
-    public function handle(Message $message)
+    public function handle($command)
     {
         ...
 
-        // create an event (which is itself an instance of Message)
+        // create an event
         $event = new SomethingInterestingHappened();
 
         // record the event
@@ -200,7 +198,6 @@ class SomeInterestingCommandHandler implements MessageHandler
 <p>In case you have another source for recorded message (for instance a class that collects domain events like the
 <a href="https://github.com/SimpleBus/DoctrineORMBridge">DoctrineORMBridge</a> does), you can register it as a message recorder:</p>
 <pre><code class="language-php">use SimpleBus\Message\Recorder\ContainsRecordedMessages;
-use SimpleBus\Message\Message;
 
 class PropelDomainEvents implements ContainsRecordedMessages
 {
