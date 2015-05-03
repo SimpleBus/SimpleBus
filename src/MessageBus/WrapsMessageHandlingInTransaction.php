@@ -11,8 +11,7 @@ use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use SimpleBus\Message\Message;
 
 /**
- * @copyright Copyright (c) 2015 Matthias Noback
- * @author    Jasper N. Brouwer <jasper@nerdsweide.nl>
+ * @author Jasper N. Brouwer <jasper@nerdsweide.nl>
  */
 class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
