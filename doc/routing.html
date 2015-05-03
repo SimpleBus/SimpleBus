@@ -52,6 +52,11 @@
                                         Routing
                                     </a>
                                 </li>
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/additional_properties.html">
+                                        Additional properties
+                                    </a>
+                                </li>
                                                     </ul>
 
                     </nav>
@@ -79,14 +84,13 @@ old_sound_rabbit_mq:
             queue_options:    { name: 'asynchronous_commands', routing_keys: ['Acme.Command.#'] }
             callback:         simple_bus.rabbit_mq_bundle_bridge.events_consumer</code></pre>
 <h2 id="custom-routing-keys">Custom routing keys</h2>
-<p>If you want to define routing keys in a custom way (not based on the class of a <code>Message</code>), create a class that
+<p>If you want to define routing keys in a custom way (not based on the class of a message), create a class that
 implements <code>RoutingKeyResolver</code>:</p>
 <pre><code class="language-php">use SimpleBus\RabbitMQBundleBridge\Routing\RoutingKeyResolver;
-use SimpleBus\Message\Message;
 
 class MyCustomRoutingKeyResolver implements RoutingKeyResolver
 {
-    public function resolveRoutingKeyFor(Message $message)
+    public function resolveRoutingKeyFor($message)
     {
         // determine the routing key for the given Message
         return ...;
