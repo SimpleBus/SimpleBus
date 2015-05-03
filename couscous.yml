@@ -19,3 +19,7 @@ menu:
             itemId: routing
             text: Routing
             relativeUrl: "doc/routing.html"
+        additional_properties:
+            itemId: additional_properties
+            text: Additional properties
+            relativeUrl: "doc/additional_properties.html"
