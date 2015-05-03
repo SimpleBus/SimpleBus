@@ -93,7 +93,6 @@ the <code>PublishesUnhandledMessages</code> middleware to it:</p>
 <pre><code class="language-php">use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
 use SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
-use SimpleBus\Message\Message;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 
@@ -111,7 +110,7 @@ $logLevel = LogLevel::DEBUG;
 
 $commandBus-&gt;appendMiddleware(new PublishesUnhandledMessages($publisher, $logger, $logLevel));
 
-// $command is an instance of Message
+// $command is an object
 $command = ...;
 
 $commandBus-&gt;handle($command);</code></pre>

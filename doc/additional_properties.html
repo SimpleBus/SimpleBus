@@ -58,12 +58,39 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>SimpleBus/Asynchronous</h1>
-<p><a href="https://travis-ci.org/SimpleBus/Asynchronous"><img alt="Build Status" src="https://travis-ci.org/SimpleBus/Asynchronous.svg?branch=master" /></a> <a href="https://coveralls.io/r/SimpleBus/Asynchronous"><img alt="Coverage Status" src="https://coveralls.io/repos/SimpleBus/Asynchronous/badge.svg" /></a></p>
-<p>By <a href="http://php-and-symfony.matthiasnoback.nl/">Matthias Noback</a></p>
-<p>This package contains generic classes and interfaces which can be used to process messages asynchronously using
-a SimpleBus <a href="https://github.com/SimpleBus/MessageBus">MessageBus</a> instance.</p>
-<p><a href="http://simplebus.github.io/Asynchronous">Read the full documentation here</a></p>
+                    <h1>Additional properties</h1>
+<p>"Additional properties" is a concept that originates from RabbitMQ: it allows you to add metadata or otherwise configure
+a message before it is sent to the server.</p>
+<p>Whether or not you use RabbitMQ, you might need these additional (message) properties somewhere in your application.
+This library contains an interface <code>AdditionalPropertiesResolver</code> and one implementation of that interface, the
+<code>DelegatingAdditionalPropertiesResolver</code> which accepts an array of <code>AdditionalPropertiesResolver</code> instances. It lets
+them all step in and provide values:</p>
+<pre><code class="language-php">use SimpleBus\Asynchronous\Properties\DelegatingAdditionalPropertiesResolver;
+use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
+
+class MyPropertiesResolver implements AdditionalPropertiesResolver
+{
+    public function resolveAdditionalPropertiesFor($message)
+    {
+        // determine which properties to use
+
+        return [
+            'content-type' =&gt; 'application/xml'
+        ];
+    }
+}
+
+$delegatingResolver = new DelegatingAdditionalPropertiesResolver(
+    [
+        new MyPropertiesResolver(),
+        ...
+    ]
+);
+
+// $message is some message (e.g. a command or event)
+$message = ...;
+
+$properties = $delegatingResolver-&gt;resolveAdditionalPropertiesFor($message);</code></pre>
                 </section>
 
             </div>
