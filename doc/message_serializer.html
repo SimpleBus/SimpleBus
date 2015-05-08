@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Serialization</title>
+        <title>SimpleBus/Serialization</title>
 
         <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/bootstrap.min.css">
         <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/font-awesome.min.css">
@@ -16,7 +16,7 @@
         <header class="navbar navbar-default navbar-fixed-top">
 
             <a class="navbar-brand" href="http://simplebus.github.io/Serialization/">
-                Serialization
+                SimpleBus/Serialization
                 <small class="hidden-xs hidden-sm">
                     Generic classes and interfaces for serializing SimpleBus messages
                 </small>
@@ -59,8 +59,8 @@
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1>Message serializer</h1>
-<p>In order to to send a <code>Message</code> over the network it needs to be wrapped in an <code>Envelope</code>. At the other end it may be
-unwrapped and processed. This standard procedure is implemented inside the <code>StandardMessageInEnvelopeSerializer</code>:</p>
+<p>In order to to send a message (object) over the network it needs to be wrapped in an <code>Envelope</code>. At the other end it may
+be unwrapped and processed. This standard procedure is implemented inside the <code>StandardMessageInEnvelopeSerializer</code>:</p>
 <pre><code class="language-php">use SimpleBus\Serialization\Envelope\DefaultEnvelopeFactory;
 use SimpleBus\Serialization\NativeObjectSerializer;
 use SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSerializer;
@@ -70,7 +70,7 @@ $objectSerializer = new NativeObjectSerializer();
 
 $serializer = StandardMessageInEnvelopeSerializer($envelopeFactory, $objectSerializer);
 
-// $message is an instance of Message
+// $message is an object
 $message = ...;
 
 // $serializedEnvelope will be a string
@@ -81,7 +81,7 @@ $serializedEnvelope = $serializer-&gt;wrapAndSerialize($message);
 // $deserializedEnvelope will be an instance of the original Envelope
 $deserializedEnvelope = $serializer-&gt;unwrapAndDeserialize($serializedEnvelope);
 
-// $message will be an object which is a copy of the original Message
+// $message will be an object which is a copy of the original message
 $message = $deserializedEnvelope-&gt;message();</code></pre>
                 </section>
 

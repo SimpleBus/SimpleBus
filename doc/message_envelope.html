@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Serialization</title>
+        <title>SimpleBus/Serialization</title>
 
         <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/bootstrap.min.css">
         <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/font-awesome.min.css">
@@ -16,7 +16,7 @@
         <header class="navbar navbar-default navbar-fixed-top">
 
             <a class="navbar-brand" href="http://simplebus.github.io/Serialization/">
-                Serialization
+                SimpleBus/Serialization
                 <small class="hidden-xs hidden-sm">
                     Generic classes and interfaces for serializing SimpleBus messages
                 </small>
@@ -65,7 +65,7 @@ name - FQCN) and the message itself. <code>SimpleBus/Serialization</code> comes 
 can be used like this:</p>
 <pre><code class="language-php">use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 
-// $message is an instance of Message
+// $message is an object
 $message = ...;
 
 $envelope = DefaultEnvelope::forMessage($message);
