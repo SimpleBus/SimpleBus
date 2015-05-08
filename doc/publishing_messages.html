@@ -84,7 +84,7 @@ $publisher = ...;
 
 $eventBus-&gt;appendMiddleware(new AlwaysPublishesMessages($publisher));
 
-// $event is an instance of Message
+// $event is an object
 $event = ...;
 
 $eventBus-&gt;handle($event);</code></pre>
