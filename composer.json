@@ -14,7 +14,6 @@
     ],
     "require": {
         "php": ">=5.4",
-        "simple-bus/message-bus": ">=1.0",
         "simple-bus/serialization": ">=1.0",
         "jms/serializer": "~0.12"
     },
