@@ -12,7 +12,7 @@ can be used like this:
 ```php
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 
-// $message is an instance of Message
+// $message is an object
 $message = ...;
 
 $envelope = DefaultEnvelope::forMessage($message);

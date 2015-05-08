@@ -8,7 +8,7 @@ An object serializer is supposed to be able to serialize *any object* handed to 
 simple implementation of an object serializer, which uses the native PHP `serialize()` and `unserialize()` functions:
 
 ```php
-// $envelope is an instance of Envelope, containing a serialized Message
+// $envelope is an instance of Envelope, containing a serialized message
 $envelope = ...;
 
 $serializer = NativeObjectSerializer();

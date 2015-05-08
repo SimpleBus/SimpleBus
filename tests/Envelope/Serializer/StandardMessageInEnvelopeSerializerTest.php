@@ -8,7 +8,6 @@ use SimpleBus\Serialization\Envelope\EnvelopeFactory;
 use SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSerializer;
 use SimpleBus\Serialization\ObjectSerializer;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
-use SimpleBus\Message\Message;
 
 class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
 {
