@@ -78,4 +78,4 @@ Possibly some other process knows how to handle it.
 
 If no command handler was found and the command is published, this will be logged using the provided `$logger`.
 
-*Continue reading about [consuming messages](consume.md)*
+*Continue reading about [consuming messages](consuming_messages.md)*
