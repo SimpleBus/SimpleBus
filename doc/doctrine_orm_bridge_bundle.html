@@ -77,6 +77,11 @@ transaction</a></li>
 <li>A command bus middleware which <a href="http://simplebus.github.io/DoctrineORMBridge/doc/domain_events.html">collects domain events recorded by entities and lets the event bus handle
 them</a></li>
 </ul>
+<blockquote>
+<p>Install SimpleBus/DoctrineORMBridge</p>
+<p>Before you continue, first install the <code>simple-bus/doctrine-orm-bridge</code> package in your project:</p>
+<pre><code>composer require simple-bus/doctrine-orm-bridge</code></pre>
+</blockquote>
 <p>When you enable the <code>DoctrineORMBridgeBundle</code> in your project, both features will be automatically registered as
 command bus middlewares:</p>
 <pre><code class="language-php">class AppKernel extends Kernel
