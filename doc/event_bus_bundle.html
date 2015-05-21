@@ -92,7 +92,7 @@ for you.</p>
 <h2>Using the event bus</h2>
 <p>This bundle provides the <code>event_bus</code> service which is an instance of <code>MessageBus</code>. Wherever you like, you can let it
 handle events, e.g. by fetching it inside a container-aware controller:</p>
-<pre><code class="language-php">// $event is an instance of SimpleBus\Message\Type\Event
+<pre><code class="language-php">// $event is an arbitrary object that will be passed to the event subscriber
 $event = ...;
 
 $this-&gt;get('event_bus')-&gt;handle($event);</code></pre>
@@ -206,7 +206,7 @@ class PropelDomainEvents implements ContainsRecordedMessages
         // return an array of Message instances
     }
 
-    public function eraseRecordedMessages()
+    public function eraseMessages()
     {
         // clear the internal array containing the recorded messages
     }
