@@ -1,6 +1,6 @@
 title: SimpleBus/AsynchronousBundle
 subTitle: Symfony bundle for using SimpleBus/Asynchronous
-baseUrl: http://simplebus.github.io/AsynchronousBundle
+baseUrl: //simplebus.github.io/AsynchronousBundle
 menu:
     items:
         home:
