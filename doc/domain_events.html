@@ -6,16 +6,16 @@
 
         <title>SimpleBus/DoctrineORMBridge</title>
 
-        <link rel="stylesheet" href="http://simplebus.github.io/DoctrineORMBridge/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/DoctrineORMBridge/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/DoctrineORMBridge/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/DoctrineORMBridge/css/main.css">
+        <link rel="stylesheet" href="//simplebus.github.io/DoctrineORMBridge/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/DoctrineORMBridge/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/DoctrineORMBridge/css/highlight.dark.css">
+        <link rel="stylesheet" href="//simplebus.github.io/DoctrineORMBridge/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://simplebus.github.io/DoctrineORMBridge/">
+            <a class="navbar-brand" href="//simplebus.github.io/DoctrineORMBridge/">
                 SimpleBus/DoctrineORMBridge
                 <small class="hidden-xs hidden-sm">
                     Integrate SimpleBus/MessageBus with Doctrine ORM
@@ -33,22 +33,22 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/DoctrineORMBridge/">
+                                    <a href="//simplebus.github.io/DoctrineORMBridge/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/DoctrineORMBridge/doc/getting_started.html">
+                                    <a href="//simplebus.github.io/DoctrineORMBridge/doc/getting_started.html">
                                         Getting started
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/DoctrineORMBridge/doc/transactions.html">
+                                    <a href="//simplebus.github.io/DoctrineORMBridge/doc/transactions.html">
                                         Transactions
                                     </a>
                                 </li>
                                                             <li class="active">
-                                    <a href="http://simplebus.github.io/DoctrineORMBridge/doc/domain_events.html">
+                                    <a href="//simplebus.github.io/DoctrineORMBridge/doc/domain_events.html">
                                         Domain events
                                     </a>
                                 </li>
@@ -63,7 +63,7 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Domain events</h1>
+                    <h1 id="domain-events">Domain events</h1>
 <p>Using the <a href="http://simplebus.github.io/MessageBus/doc/message_recorder.html">message recorder facilities</a> from
 <code>SimpleBus/MessageBus</code> you can let Doctrine ORM collect domain events and subsequently let the event bus handle them.</p>
 <p>Make sure that your entities implement the <code>ContainsRecordedMessages</code> interface. Use the
@@ -104,7 +104,7 @@ $commandBus-&gt;appendMiddleware($eventDispatchingMiddleware);
 $transactionalMiddleware = new WrapsMessageHandlingInTransaction($entityManager);
 $commandBus-&gt;appendMiddleware($transactionalMiddleware);</code></pre>
 <blockquote>
-<h4>Prepend middleware</h4>
+<h4 id="prepend-middleware">Prepend middleware</h4>
 <p>The <code>MessageBusSupportingMiddleware</code> class also has a <code>prependMiddleware()</code> method, which you can use to prepend
 middleware instead of appending it.</p>
 </blockquote>
