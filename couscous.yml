@@ -1,6 +1,6 @@
 title: SimpleBus/Asynchronous
 subTitle: Generic classes and interfaces for asynchronous messaging using SimpleBus
-baseUrl: http://simplebus.github.io/Asynchronous
+baseUrl: //simplebus.github.io/Asynchronous
 menu:
     items:
         home:
