@@ -6,16 +6,16 @@
 
         <title>SimpleBus/Asynchronous</title>
 
-        <link rel="stylesheet" href="http://simplebus.github.io/Asynchronous/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/Asynchronous/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/Asynchronous/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/Asynchronous/css/main.css">
+        <link rel="stylesheet" href="//simplebus.github.io/Asynchronous/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/Asynchronous/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/Asynchronous/css/highlight.dark.css">
+        <link rel="stylesheet" href="//simplebus.github.io/Asynchronous/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://simplebus.github.io/Asynchronous/">
+            <a class="navbar-brand" href="//simplebus.github.io/Asynchronous/">
                 SimpleBus/Asynchronous
                 <small class="hidden-xs hidden-sm">
                     Generic classes and interfaces for asynchronous messaging using SimpleBus
@@ -33,27 +33,27 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/Asynchronous/">
+                                    <a href="//simplebus.github.io/Asynchronous/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="active">
-                                    <a href="http://simplebus.github.io/Asynchronous/doc/publishing_messages.html">
+                                    <a href="//simplebus.github.io/Asynchronous/doc/publishing_messages.html">
                                         Publishing messages
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/Asynchronous/doc/consuming_messages.html">
+                                    <a href="//simplebus.github.io/Asynchronous/doc/consuming_messages.html">
                                         Consuming messages
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/Asynchronous/doc/routing_keys.html">
+                                    <a href="//simplebus.github.io/Asynchronous/doc/routing_keys.html">
                                         Routing keys
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/Asynchronous/doc/additional_properties.html">
+                                    <a href="//simplebus.github.io/Asynchronous/doc/additional_properties.html">
                                         Additional properties
                                     </a>
                                 </li>
@@ -63,12 +63,12 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Publishing messages</h1>
+                    <h1 id="publishing-messages">Publishing messages</h1>
 <p>When a <code>Message</code> should not be handled by the message bus (i.e. command or event bus) immediately (i.e. synchronously),
 it can be <em>published</em> to be handled by some other process. This library comes with two strategies for publishing
 messages: either a message will always <em>also</em> be published, or it will only be published when the message bus isn't able
 to handle it because there is no handler defined for it.</p>
-<h2>Strategy 1: Always publish messages</h2>
+<h2 id="strategy-1-always-publish-messages">Strategy 1: Always publish messages</h2>
 <p>This strategy is very useful when you have an event bus that notifies event subscribers of events that have occurred.
 If you have set up the event bus, you can add the <code>AlwaysPublishesMessages</code> middleware to it:</p>
 <pre><code class="language-php">use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
@@ -92,7 +92,7 @@ $eventBus-&gt;handle($event);</code></pre>
 that it just calls the next middleware and lets it process the same message in the usual way.</p>
 <p>By applying this strategy you basically allow other processes to respond to any event that occurs within your
 application.</p>
-<h2>Strategy 2: Only publish messages that could not be handled</h2>
+<h2 id="strategy-2-only-publish-messages-that-could-not-be-handled">Strategy 2: Only publish messages that could not be handled</h2>
 <p>This strategy is useful if you have a command bus that handles commands. If you have set up the command bus, you can add
 the <code>PublishesUnhandledMessages</code> middleware to it:</p>
 <pre><code class="language-php">use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
