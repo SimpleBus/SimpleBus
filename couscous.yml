@@ -1,6 +1,6 @@
 title: SimpleBus/Serialization
 subTitle: Generic classes and interfaces for serializing SimpleBus messages
-baseUrl: http://simplebus.github.io/Serialization
+baseUrl: //simplebus.github.io/Serialization
 menu:
     items:
         home:
