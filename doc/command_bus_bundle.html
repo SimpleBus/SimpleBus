@@ -6,16 +6,16 @@
 
         <title>SimpleBus/SymfonyBridge</title>
 
-        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/SymfonyBridge/css/main.css">
+        <link rel="stylesheet" href="//simplebus.github.io/SymfonyBridge/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/SymfonyBridge/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/SymfonyBridge/css/highlight.dark.css">
+        <link rel="stylesheet" href="//simplebus.github.io/SymfonyBridge/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://simplebus.github.io/SymfonyBridge/">
+            <a class="navbar-brand" href="//simplebus.github.io/SymfonyBridge/">
                 SimpleBus/SymfonyBridge
                 <small class="hidden-xs hidden-sm">
                     Use SimpleBus/MessageBus in a Symfony application
@@ -33,32 +33,32 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/SymfonyBridge/">
+                                    <a href="//simplebus.github.io/SymfonyBridge/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/getting_started.html">
+                                    <a href="//simplebus.github.io/SymfonyBridge/doc/getting_started.html">
                                         Getting started
                                     </a>
                                 </li>
                                                             <li class="active">
-                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/command_bus_bundle.html">
+                                    <a href="//simplebus.github.io/SymfonyBridge/doc/command_bus_bundle.html">
                                         Command bus bundle
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/event_bus_bundle.html">
+                                    <a href="//simplebus.github.io/SymfonyBridge/doc/event_bus_bundle.html">
                                         Event bus bundle
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/doctrine_orm_bridge_bundle.html">
+                                    <a href="//simplebus.github.io/SymfonyBridge/doc/doctrine_orm_bridge_bundle.html">
                                         Doctrine ORM bridge bundle
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/SymfonyBridge/doc/upgrade_guide.html">
+                                    <a href="//simplebus.github.io/SymfonyBridge/doc/upgrade_guide.html">
                                         Upgrade guide
                                     </a>
                                 </li>
@@ -68,7 +68,7 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Command bus bundle</h1>
+                    <h1 id="command-bus-bundle">Command bus bundle</h1>
 <p>Using the building blocks supplied by the <a href="https://github.com/SimpleBus/MessageBus">SimpleBus/MessageBus library</a> you
 can create a command bus, which is basically a message bus, with some middlewares and a map of message handlers. This is
 described in the <a href="http://simplebus.github.io/MessageBus/doc/command_bus.html">documentation of MessageBus</a>.</p>
@@ -88,7 +88,7 @@ you.</p>
     }
     ...
 }</code></pre>
-<h2>Using the command bus</h2>
+<h2 id="using-the-command-bus">Using the command bus</h2>
 <p>This bundle provides the <code>command_bus</code> service which is an instance of <code>SimpleBus\Message\Bus\MessageBus</code>. Wherever you
 like, you can let it handle commands, e.g. inside a container-aware controller:</p>
 <pre><code class="language-php">// $command is an arbitrary object that will be passed to the command handler
@@ -100,7 +100,7 @@ $this-&gt;get('command_bus')-&gt;handle($command);</code></pre>
     some_service:
         arguments:
             - @command_bus</code></pre>
-<h2>Registering command handlers</h2>
+<h2 id="registering-command-handlers">Registering command handlers</h2>
 <p>As described in the <a href="http://simplebus.github.io/MessageBus/doc/command_bus.html">MessageBus documentation</a> you can
 delegate the handling of particular commands to command handlers. This bundle allows you to register your own
 command handlers by adding the <code>command_handler</code> tag to the command handler's service definition:</p>
@@ -110,10 +110,10 @@ command handlers by adding the <code>command_handler</code> tag to the command h
         tags:
             - { name: command_handler, handles: Fully\Qualified\Class\Name\Of\RegisterUser }</code></pre>
 <blockquote>
-<h4>Command handlers are lazy-loaded</h4>
+<h4 id="command-handlers-are-lazy-loaded">Command handlers are lazy-loaded</h4>
 <p>Since only one of the command handlers is going to handle any particular command, command handlers are lazy-loaded.
 This means that their services should be defined as public services (i.e. you can't use <code>public: false</code> for them).</p>
-<h4>Command handlers are callables</h4>
+<h4 id="command-handlers-are-callables">Command handlers are callables</h4>
 <p>Any service that is a <a href="http://php.net/manual/en/language.types.callable.php">PHP callable</a> itself can be used as a
 command handler. If a service itself is not callable, SimpleBus looks for a <code>handle</code> method and calls it. If you want
 to use a custom method, just add a <code>method</code> attribute to the <code>command_handler</code> tag:</p>
@@ -123,7 +123,7 @@ to use a custom method, just add a <code>method</code> attribute to the <code>co
         tags:
             - { name: command_handler, handles: ..., method: registerUser }</code></pre>
 </blockquote>
-<h2>Setting the command name resolving strategy</h2>
+<h2 id="setting-the-command-name-resolving-strategy">Setting the command name resolving strategy</h2>
 <p>To find the correct command handler for a given command, the name of the command is used. This can be either 1) its
 fully-qualified class name (FQCN) or, 2) if the command implements the <code>SimpleBus\Message\Name\NamedMessage</code> interface,
 the value returned by its static <code>messageName()</code> method. By default, the first strategy is used, but you can configure
@@ -139,7 +139,7 @@ service definitions:</p>
         tags:
             - { name: command_handler, handles: register_user }</code></pre>
 <p>Make sure that the value of <code>handles</code> matches the return value of <code>RegisterUser::messageName()</code>.</p>
-<h2>Adding command bus middleware</h2>
+<h2 id="adding-command-bus-middleware">Adding command bus middleware</h2>
 <p>As described in the <a href="http://simplebus.github.io/MessageBus/doc/command_bus.html">MessageBus documentation</a> you can
 extend the behavior of the command bus by adding middleware to it. This bundle allows you to register your own
 middleware by adding the <code>command_bus_middleware</code> tag to the middleware service definition:</p>
@@ -152,12 +152,12 @@ middleware by adding the <code>command_bus_middleware</code> tag to the middlewa
 <p>By providing a value for the <code>priority</code> tag attribute you can influence the order in which middlewares are added to the
 command bus.</p>
 <blockquote>
-<h4>Middlewares are not lazy-loaded</h4>
+<h4 id="middlewares-are-not-lazy-loaded">Middlewares are not lazy-loaded</h4>
 <p>Whenever you use the command bus, you also use all of its middlewares, so command bus middlewares are not lazy-loaded.
 This means that their services should be defined as private services (i.e. you should use <code>public: false</code>). See also:
 <a href="http://symfony.com/doc/current/components/dependency_injection/advanced.html#marking-services-as-public-private">Marking Services as public /
 private</a></p>
-<h2>Logging</h2>
+<h2 id="logging">Logging</h2>
 <p>If you want to log every command that is being handled, enable logging in <code>config.yml</code>:</p>
 <pre><code class="language-yaml">command_bus:
     logging: ~</code></pre>
