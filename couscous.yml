@@ -1,6 +1,6 @@
 title: SimpleBus/DoctrineORMBridge
 subTitle: Integrate SimpleBus/MessageBus with Doctrine ORM
-baseUrl: http://simplebus.github.io/DoctrineORMBridge
+baseUrl: //simplebus.github.io/DoctrineORMBridge
 menu:
     items:
         home:
