@@ -6,16 +6,16 @@
 
         <title>SimpleBus/AsynchronousBundle</title>
 
-        <link rel="stylesheet" href="http://simplebus.github.io/AsynchronousBundle/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/AsynchronousBundle/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/AsynchronousBundle/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/AsynchronousBundle/css/main.css">
+        <link rel="stylesheet" href="//simplebus.github.io/AsynchronousBundle/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/AsynchronousBundle/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/AsynchronousBundle/css/highlight.dark.css">
+        <link rel="stylesheet" href="//simplebus.github.io/AsynchronousBundle/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://simplebus.github.io/AsynchronousBundle/">
+            <a class="navbar-brand" href="//simplebus.github.io/AsynchronousBundle/">
                 SimpleBus/AsynchronousBundle
                 <small class="hidden-xs hidden-sm">
                     Symfony bundle for using SimpleBus/Asynchronous
@@ -33,12 +33,12 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/AsynchronousBundle/">
+                                    <a href="//simplebus.github.io/AsynchronousBundle/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="active">
-                                    <a href="http://simplebus.github.io/AsynchronousBundle/doc/getting_started.html">
+                                    <a href="//simplebus.github.io/AsynchronousBundle/doc/getting_started.html">
                                         Getting started
                                     </a>
                                 </li>
@@ -48,26 +48,26 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Getting started</h1>
-<h2>Introduction</h2>
+                    <h1 id="getting-started">Getting started</h1>
+<h2 id="introduction">Introduction</h2>
 <p>This bundle defines a new command and event bus, to be used for processing asynchronous commands and events. It
 also adds middleware to existing the command and event buses which publishes messages to be processed asynchronously.
 See also the documentation of <a href="http://simplebus.github.io/Asynchronous">SimpleBus/Asynchronous</a>.</p>
 <p>First, enable the <code>SimpleBusAsynchronousBundle</code> in your <code>AppKernel</code> class.</p>
-<h2>Provide an object serializer</h2>
+<h2 id="provide-an-object-serializer">Provide an object serializer</h2>
 <p>The first thing you need to do is to provide a service that is able to serialize any object. This service needs to
 implement <code>SimpleBus\Serialization\ObjectSerializer</code>.</p>
 <pre><code class="language-yaml"># in config.yml
 simple_bus_asynchronous:
     object_serializer_service_id: your_object_serializer</code></pre>
 <blockquote>
-<h2>Use an existing object serializer</h2>
+<h2 id="use-an-existing-object-serializer">Use an existing object serializer</h2>
 <p>Instead of creating your own object serializer, you should install the
 <a href="https://github.com/SimpleBus/JMSSerializerBundle">SimpleBus/JMSSerializerBundle</a>. Once you register this bundle in
 your <code>AppKernel</code> as well, it will automatically register itself as the preferred object serializer. So if you do,
 don't forget to remove the key <code>simple_bus_asynchronous.object_serializer_service_id</code> from your config file.</p>
 </blockquote>
-<h2>Provide message publishers</h2>
+<h2 id="provide-message-publishers">Provide message publishers</h2>
 <p>Next, you need to define services that are able to publish commands and events, for example to some message queue.
 These services should both implement <code>SimpleBus\Asynchronous\Publisher\Publisher</code>. When you have defined them as
 services, mention their service id in the configuration:</p>
@@ -78,12 +78,12 @@ simple_bus_asynchronous:
     events:
         publisher_service_id: your_event_publisher</code></pre>
 <blockquote>
-<h2>Use existing publishers</h2>
+<h2 id="use-existing-publishers">Use existing publishers</h2>
 <p>Instead of writing your own publishers, you can use existing publisher implementations.</p>
 <p>As part of SimpleBus a <a href="https://github.com/SimpleBus/RabbitMQBundle">RabbitMQBundle</a> has been provided which
 automatically registers command and event publishers to publish serialized messages to a RabbitMQ exchange.</p>
 </blockquote>
-<h2>Logging</h2>
+<h2 id="logging">Logging</h2>
 <p>To get some insight into what goes on in the consumer process, enable logging:</p>
 <pre><code class="language-yaml"># in config.yml
 simple_bus_asynchronous:
