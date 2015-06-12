@@ -6,16 +6,16 @@
 
         <title>SimpleBus/Serialization</title>
 
-        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/Serialization/css/main.css">
+        <link rel="stylesheet" href="//simplebus.github.io/Serialization/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/Serialization/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/Serialization/css/highlight.dark.css">
+        <link rel="stylesheet" href="//simplebus.github.io/Serialization/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://simplebus.github.io/Serialization/">
+            <a class="navbar-brand" href="//simplebus.github.io/Serialization/">
                 SimpleBus/Serialization
                 <small class="hidden-xs hidden-sm">
                     Generic classes and interfaces for serializing SimpleBus messages
@@ -33,22 +33,22 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/Serialization/">
+                                    <a href="//simplebus.github.io/Serialization/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="active">
-                                    <a href="http://simplebus.github.io/Serialization/doc/message_envelope.html">
+                                    <a href="//simplebus.github.io/Serialization/doc/message_envelope.html">
                                         Message envelopes
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/Serialization/doc/object_serializer.html">
+                                    <a href="//simplebus.github.io/Serialization/doc/object_serializer.html">
                                         Object serializer
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/Serialization/doc/message_serializer.html">
+                                    <a href="//simplebus.github.io/Serialization/doc/message_serializer.html">
                                         Message serializer
                                     </a>
                                 </li>
@@ -58,7 +58,7 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Message envelopes</h1>
+                    <h1 id="message-envelopes">Message envelopes</h1>
 <p>Before an instance of <code>SimpleBus\Message\Message</code> can be serialized to JSON, XML, etc. it has to be wrapped inside an
 envelope. The envelope contains some metadata about the message, e.g. the type of the message (its fully qualified class
 name - FQCN) and the message itself. <code>SimpleBus/Serialization</code> comes with a default implementation of an envelope, which
@@ -87,7 +87,7 @@ providing the actual message:</p>
 $deserializedMessage = ...;
 
 $envelopeWithActualMessage = $envelopeWithSerializedMessage-&gt;withMessage($deserializedMessage);</code></pre>
-<h2>Custom envelope types</h2>
+<h2 id="custom-envelope-types">Custom envelope types</h2>
 <p>You may want to use your own type of envelopes, containing extra metadata like a timestamp, or the identifier of
 the machine that produced the message. In that case you can just implement your own <code>Envelope</code> class:</p>
 <pre><code class="language-php">use SimpleBus\Serialization\Envelope\DefaultEnvelope;
@@ -103,7 +103,7 @@ class MyEnvelope implements Envelope
 {
     ...
 }</code></pre>
-<h2>Envelope factory</h2>
+<h2 id="envelope-factory">Envelope factory</h2>
 <p>The <a href="message_serializer.html">message serializer</a> uses an <code>EnvelopeFactory</code> to delegate the creation of envelopes to, so
 if you want to use your own type of envelopes, you should implement an envelope factory yourself as well:</p>
 <pre><code class="language-php">use SimpleBus\Serialization\Envelope\EnvelopeFactory;
