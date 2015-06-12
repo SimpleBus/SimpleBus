@@ -6,16 +6,16 @@
 
         <title>SimpleBus/RabbitMQBundleBridge</title>
 
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/main.css">
+        <link rel="stylesheet" href="//simplebus.github.io/RabbitMQBundleBridge/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/RabbitMQBundleBridge/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/RabbitMQBundleBridge/css/highlight.dark.css">
+        <link rel="stylesheet" href="//simplebus.github.io/RabbitMQBundleBridge/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://simplebus.github.io/RabbitMQBundleBridge/">
+            <a class="navbar-brand" href="//simplebus.github.io/RabbitMQBundleBridge/">
                 SimpleBus/RabbitMQBundleBridge
                 <small class="hidden-xs hidden-sm">
                     Use OldSoundRabbitMQBundle with SimpleBus/AsynchronousBundle
@@ -33,27 +33,27 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/">
+                                    <a href="//simplebus.github.io/RabbitMQBundleBridge/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="active">
-                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/getting_started.html">
+                                    <a href="//simplebus.github.io/RabbitMQBundleBridge/doc/getting_started.html">
                                         Getting started
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/events.html">
+                                    <a href="//simplebus.github.io/RabbitMQBundleBridge/doc/events.html">
                                         Events
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/routing.html">
+                                    <a href="//simplebus.github.io/RabbitMQBundleBridge/doc/routing.html">
                                         Routing
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/additional_properties.html">
+                                    <a href="//simplebus.github.io/RabbitMQBundleBridge/doc/additional_properties.html">
                                         Additional properties
                                     </a>
                                 </li>
@@ -63,12 +63,12 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Using RabbitMQ for publishing messages</h1>
+                    <h1 id="using-rabbitmq-for-publishing-messages">Using RabbitMQ for publishing messages</h1>
 <p>The <code>SimpleBusRabbitMQBundleBridgeBundle</code> allows you to publish and consume SimpleBus messages using RabbitMQ.</p>
-<h2>Getting started</h2>
+<h2 id="getting-started">Getting started</h2>
 <p>First, enable <a href="https://github.com/SimpleBus/AsynchronousBundle">SimpleBusAsynchronousBundle</a> in your Symfony project.
 Next enable <code>SimpleBusRabbitMQBundleBridgeBundle</code> and <a href="https://github.com/videlalvaro/RabbitMqBundle">OldSoundRabbitMqBundle</a>.</p>
-<h3>Handling commands asynchronously</h3>
+<h3 id="handling-commands-asynchronously">Handling commands asynchronously</h3>
 <p>If you want commands to be handled asynchronously, you should first configure <code>OldSoundRabbitMqBundle</code>:</p>
 <pre><code class="language-yaml"># in config.yml
 old_sound_rabbit_mq:
@@ -105,7 +105,7 @@ registering the handler using the tag <code>command_handler</code>, you should n
 <p>See also the documentation of <a href="https://github.com/SimpleBus/AsynchronousBundle">SimpleBus/AsynchronousBundle</a>.</p>
 <p>To actually consume command messages, you need to start (and keep running):</p>
 <pre><code>php app/console rabbitmq:consume asynchronous_commands</code></pre>
-<h3>Handling events asynchronously</h3>
+<h3 id="handling-events-asynchronously">Handling events asynchronously</h3>
 <p>If you want events to be handled asynchronously, you should first configure <code>OldSoundRabbitMqBundle</code>:</p>
 <pre><code class="language-yaml"># in config.yml
 old_sound_rabbit_mq:
@@ -141,7 +141,7 @@ use the <code>asynchronous_event_subscriber</code> tag:</p>
 <p>To actually consume event messages, you need to start (and keep running):</p>
 <pre><code>php app/console rabbitmq:consume asynchronous_events</code></pre>
 <blockquote>
-<h3>Tweak the configuration</h3>
+<h3 id="tweak-the-configuration">Tweak the configuration</h3>
 <p>You are encouraged to tweak the exchange/queue options and make them right for your project. Read more about your
 options in the <a href="http://www.rabbitmq.com/documentation.html">RabbitMQ documentation</a> and in the <a href="https://github.com/videlalvaro/RabbitMqBundle">documentation of
 OldSoundRabbitMQBundle</a>.</p>

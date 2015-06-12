@@ -6,16 +6,16 @@
 
         <title>SimpleBus/RabbitMQBundleBridge</title>
 
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/highlight.dark.css">
-        <link rel="stylesheet" href="http://simplebus.github.io/RabbitMQBundleBridge/css/main.css">
+        <link rel="stylesheet" href="//simplebus.github.io/RabbitMQBundleBridge/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/RabbitMQBundleBridge/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//simplebus.github.io/RabbitMQBundleBridge/css/highlight.dark.css">
+        <link rel="stylesheet" href="//simplebus.github.io/RabbitMQBundleBridge/css/main.css">
     </head>
     <body>
 
         <header class="navbar navbar-default navbar-fixed-top">
 
-            <a class="navbar-brand" href="http://simplebus.github.io/RabbitMQBundleBridge/">
+            <a class="navbar-brand" href="//simplebus.github.io/RabbitMQBundleBridge/">
                 SimpleBus/RabbitMQBundleBridge
                 <small class="hidden-xs hidden-sm">
                     Use OldSoundRabbitMQBundle with SimpleBus/AsynchronousBundle
@@ -33,27 +33,27 @@
 
                         <ul class="nav nav-pills nav-stacked">
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/">
+                                    <a href="//simplebus.github.io/RabbitMQBundleBridge/">
                                         Home
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/getting_started.html">
+                                    <a href="//simplebus.github.io/RabbitMQBundleBridge/doc/getting_started.html">
                                         Getting started
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/events.html">
+                                    <a href="//simplebus.github.io/RabbitMQBundleBridge/doc/events.html">
                                         Events
                                     </a>
                                 </li>
                                                             <li class="active">
-                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/routing.html">
+                                    <a href="//simplebus.github.io/RabbitMQBundleBridge/doc/routing.html">
                                         Routing
                                     </a>
                                 </li>
                                                             <li class="">
-                                    <a href="http://simplebus.github.io/RabbitMQBundleBridge/doc/additional_properties.html">
+                                    <a href="//simplebus.github.io/RabbitMQBundleBridge/doc/additional_properties.html">
                                         Additional properties
                                     </a>
                                 </li>
@@ -63,9 +63,9 @@
 
                 
                 <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1>Routing</h1>
-<p>By default, this bundle assumes that you want to use "direct" exchanges and use one queue for all commands, and one
-queue for all events. If you want to use "topic" exchanges and selectively consume messages using a routing key, this
+                    <h1 id="routing">Routing</h1>
+<p>By default, this bundle assumes that you want to use &quot;direct&quot; exchanges and use one queue for all commands, and one
+queue for all events. If you want to use &quot;topic&quot; exchanges and selectively consume messages using a routing key, this
 bundle can generate routing keys automatically for you based on the class name of the <code>Message</code>. Just change the
 bundle configuration:</p>
 <pre><code class="language-yaml"># in config.yml
@@ -109,7 +109,7 @@ simple_bus_rabbit_mq_bundle_bridge:
 <blockquote>
 <h2 id="fair-dispatching">Fair dispatching</h2>
 <p>If you are looking for a way to evenly distribute messages over several workers, you may not be better off using a
-"topic" exchange. Instead, you could just use a "direct" exchange, spin up several workers, and configure
+&quot;topic&quot; exchange. Instead, you could just use a &quot;direct&quot; exchange, spin up several workers, and configure
 consumers to prefetch only one message at a time:</p>
 <pre><code class="language-yaml"># in config.yml
 old_sound_rabbit_mq:
