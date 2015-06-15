@@ -1,10 +1,65 @@
-# SimpleBus/JMSSerializerBundleBridge
+---
+currentMenu: home
+---
+# Couscous Light template
 
-[![Build Status](https://travis-ci.org/SimpleBus/JMSSerializerBundleBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/JMSSerializerBundleBridge) [![Coverage Status](https://coveralls.io/repos/SimpleBus/JMSSerializerBundleBridge/badge.svg)](https://coveralls.io/r/SimpleBus/JMSSerializerBundleBridge)
+![](screenshot.png)
 
-By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
+## Usage
 
-This library contains a Symfony bundle which configures the `ObjectSerializer` from
-[SimpleBus/JMSSerializerBridge](https://github.com/SimpleBus/JMSSerializerBridge) as the default object serializer for
-[SimpleBus/AsynchronousBundle](https://github.com/SimpleBus/AsynchronousBundle). You only need to enable the
-`SimpleBusJMSSerializerBundleBridgeBundle` in your `AppKernel` to accomplish this.
+To use the template, set it up in your `couscous.yml` configuration file:
+
+```yaml
+template:
+    url: https://github.com/CouscousPHP/Template-Light
+```
+
+## Configuration
+
+Here are all the variables you can set in your `couscous.yml`:
+
+```yaml
+# Base URL of the published website
+baseUrl: http://username.github.io/project
+
+# Used to link to the GitHub project
+github:
+    user: myself
+    repo: my-project
+
+title: My project
+subTitle: This is a great project.
+
+# The left menu bar
+menu:
+    items:
+        home:
+            text: Home page
+            # You can use relative urls
+            relativeUrl: doc/faq.html
+        foo:
+            text: Another link
+            # Or absolute urls
+            absoluteUrl: https://example.com
+```
+
+Note that the menu items can also contain HTML:
+
+```yaml
+home:
+    text: "<i class=\"fa fa-github\"></i> Home page"
+    relativeUrl: doc/faq.html
+```
+
+## Menu
+
+To set the current menu item (i.e. highlighted menu item), set the `currentMenu`
+key in the Markdown files:
+
+```markdown
+---
+currentMenu: home
+---
+
+# Welcome
+```
