@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="simple_bus.bernard_bundle_bridge.event_publisher" class="SimpleBus\BernardBundleBridge\BernardPublisher">
+            <argument type="service" id="simple_bus.asynchronous.message_serializer" />
+            <argument type="service" id="bernard.producer" />
+            <argument type="service" id="simple_bus.bernard_bundle_bridge.routing.queue_name_resolver" />
+            <argument>event</argument>
+        </service>
+
+        <service id="simple_bus.bernard_bundle_bridge.event_consumer" class="SimpleBus\BernardBundleBridge\BernardConsumer">
+            <argument type="service" id="simple_bus.asynchronous.standard_serialized_event_envelope_consumer" />
+        </service>
+
+    </services>
+</container>

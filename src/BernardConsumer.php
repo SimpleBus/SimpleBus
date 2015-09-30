@@ -2,23 +2,16 @@
 
 namespace SimpleBus\BernardBundleBridge;
 
-use Bernard\Envelope;
 use Bernard\Message\DefaultMessage;
-use Bernard\Router;
 use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer;
 
-class BernardConsumer implements Router
+class BernardConsumer
 {
     private $consumer;
 
     public function __construct(SerializedEnvelopeConsumer $consumer)
     {
         $this->consumer = $consumer;
-    }
-
-    public function map(Envelope $envelope)
-    {
-        return $this;
     }
 
     public function __invoke(DefaultMessage $message)
