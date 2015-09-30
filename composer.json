@@ -16,7 +16,7 @@
         "bernard/bernard-bundle": "2.0.*@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0",
+        "phpunit/phpunit": "~4.0"
     },
     "autoload": {
         "psr-4": { "SimpleBus\\BernardBundleBridge\\": "" }
