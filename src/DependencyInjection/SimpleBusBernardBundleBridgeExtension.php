@@ -17,22 +17,43 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
         $this->alias = $alias;
     }
 
+    public function getConfiguration(array $config, ContainerBuilder $container)
+    {
+        return new Configuration($this->alias);
+    }
+
     public function prepend(ContainerBuilder $container)
     {
         $this->requireBundle('SimpleBusAsynchronousBundle', $container);
         $this->requireBundle('BernardBundle', $container);
+
+        $container->prependExtensionConfig('simple_bus_asynchronous', [
+            'commands' => [
+                'publisher_service_id' => 'simple_bus.bernard_bundle_bridge.command_publisher',
+            ],
+            'events' => [
+                'publisher_service_id' => 'simple_bus.bernard_bundle_bridge.event_publisher',
+            ],
+        ]);
     }
 
     protected function loadInternal(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        if ($config['queue_name_resolver'] === 'default') {
+            $serviceId = sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $config['queue_name_resolver']);
+        } else {
+            $serviceId = $config['queue_name_resolver'];
+        }
+
+        $container->setAlias('simple_bus.bernard_bundle_bridge.routing.queue_name_resolver', $serviceId);
     }
 
     private function requireBundle($bundleName, ContainerBuilder $container)
     {
-        $enabledBundles = $container->getParameter('kernel.bundles');
-        if (!isset($enabledBundles[$bundleName])) {
+        if (!isset($container->getParameter('kernel.bundles')[$bundleName])) {
             throw new \LogicException(sprintf('You need to enable "%s" as well', $bundleName));
         }
     }

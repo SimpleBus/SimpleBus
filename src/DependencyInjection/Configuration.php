@@ -21,23 +21,8 @@ class Configuration implements ConfigurationInterface
         $root = $treeBuilder->root($this->alias);
         $root
             ->children()
-                ->arrayNode('commands')
-                    ->canBeEnabled()
-                    ->children()
-                        ->scalarNode('producer_service_id')->isRequired()->end()
-                    ->end()
-                ->end()
-
-                ->arrayNode('events')
-                    ->canBeEnabled()
-                    ->children()
-                        ->scalarNode('producer_service_id')->isRequired()->end()
-                    ->end()
-                ->end()
-
                 ->scalarNode('queue_name_resolver')
                     ->info('Can be "default" or a service id.')
-                    ->isRequired()
                     ->defaultValue('default')
                 ->end()
             ->end()
