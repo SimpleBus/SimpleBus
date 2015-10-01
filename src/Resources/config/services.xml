@@ -8,7 +8,7 @@
         <service id="simple_bus.bernard_bundle_bridge.command_publisher" class="SimpleBus\BernardBundleBridge\BernardPublisher">
             <argument type="service" id="simple_bus.asynchronous.message_serializer" />
             <argument type="service" id="bernard.producer" />
-            <argument type="service" id="simple_bus.bernard_bundle_bridge.routing.default_queue_name_resolver" />
+            <argument type="service" id="simple_bus.bernard_bundle_bridge.routing.queue_name_resolver" />
             <argument>command</argument>
         </service>
 
@@ -30,6 +30,10 @@
         <!-- Routing -->
 
         <service id="simple_bus.bernard_bundle_bridge.routing.default_queue_name_resolver" class="SimpleBus\BernardBundleBridge\Routing\DefaultQueueNameResolver" />
+
+        <service id="simple_bus.bernard_bundle_bridge.routing.mapped_queue_name_resolver" class="SimpleBus\BernardBundleBridge\Routing\MappedQueueNameResolver">
+            <argument type="collection" />
+        </service>
 
     </services>
 </container>

@@ -22,8 +22,12 @@ class Configuration implements ConfigurationInterface
         $root
             ->children()
                 ->scalarNode('queue_name_resolver')
-                    ->info('Can be "default" or a service id.')
+                    ->info('Can be "default", "mapped" or a service id.')
                     ->defaultValue('default')
+                ->end()
+                ->arrayNode('queues_map')
+                    ->useAttributeAsKey(true)
+                    ->prototype('scalar')->isRequired()->cannotBeEmpty()->end()
                 ->end()
             ->end()
         ;
