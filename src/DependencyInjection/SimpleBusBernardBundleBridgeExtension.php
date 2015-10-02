@@ -42,6 +42,10 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
+        if ($container->getParameter('kernel.debug')) {
+            $loader->load('debug.xml');
+        }
+
         if (in_array($config['queue_name_resolver'], ['default', 'mapped'])) {
             $serviceId = sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $config['queue_name_resolver']);
         } else {
