@@ -11,9 +11,7 @@ class SimpleBusBernardBundleBridgeBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
-        $container
-            ->addCompilerPass(new ConfigureBernardPass())
-        ;
+        $container->addCompilerPass(new ConfigureBernardPass());
     }
 
     public function getContainerExtension()

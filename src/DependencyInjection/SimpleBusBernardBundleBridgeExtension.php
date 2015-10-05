@@ -101,6 +101,8 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
                 ])
             ;
             $container->setAlias('simple_bus.bernard_bundle_bridge.encrypter', 'simple_bus.bernard_bundle_bridge.encrypter.nelmio');
+        } else {
+            $container->setAlias('simple_bus.bernard_bundle_bridge.encrypter', $config['encrypter']);
         }
     }
 
