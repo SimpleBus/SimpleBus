@@ -30,6 +30,17 @@ class Configuration implements ConfigurationInterface
                     ->prototype('scalar')->isRequired()->cannotBeEmpty()->end()
                 ->end()
                 ->scalarNode('logger')->cannotBeEmpty()->end()
+                ->arrayNode('encryption')
+                    ->canBeEnabled()
+                    ->children()
+                        ->scalarNode('encrypter')
+                            ->info('Can be "nelmio" or a service id.')
+                            ->defaultValue('nelmio')
+                        ->end()
+                        ->scalarNode('algorithm')->defaultValue('rijndael-128')->end()
+                        ->scalarNode('secret')->defaultValue('%kernel.secret%')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

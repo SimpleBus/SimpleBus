@@ -26,6 +26,7 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
     public function prepend(ContainerBuilder $container)
     {
         $this->requireBundle('SimpleBusAsynchronousBundle', $container);
+        $this->requireBundle('SimpleBusJMSSerializerBundleBridgeBundle', $container);
         $this->requireBundle('BernardBundle', $container);
 
         $container->prependExtensionConfig('simple_bus_asynchronous', [
@@ -36,6 +37,15 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
                 'publisher_service_id' => 'simple_bus.bernard_bundle_bridge.event_publisher',
             ],
         ]);
+
+        $config = $container->getExtensionConfig($this->getAlias());
+        $merged = $this->processConfiguration($this->getConfiguration($config, $container), $config);
+
+        if (!empty($merged['encryption']['enabled'])) {
+            $container->prependExtensionConfig('simple_bus_asynchronous', [
+                'object_serializer_service_id' => 'simple_bus.bernard_bundle_bridge.encrypted_serializer',
+            ]);
+        }
     }
 
     protected function loadInternal(array $config, ContainerBuilder $container)
@@ -56,6 +66,12 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
                 ->setAbstract(false)
             ;
         }
+
+        if (!empty($config['encryption']['enabled'])) {
+            $loader->load('encryption.xml');
+
+            $this->configureEncryption($config['encryption'], $container);
+        }
     }
 
     private function configureQueueResolver(array $config, ContainerBuilder $container)
@@ -71,6 +87,21 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
         }
 
         $container->setAlias('simple_bus.bernard_bundle_bridge.routing.queue_name_resolver', $serviceId);
+    }
+
+    private function configureEncryption(array $config, ContainerBuilder $container)
+    {
+        if ($config['encrypter'] === 'nelmio') {
+            $container
+                ->getDefinition('simple_bus.bernard_bundle_bridge.encrypter.nelmio')
+                ->setAbstract(false)
+                ->setArguments([
+                    $config['secret'],
+                    $config['algorithm'],
+                ])
+            ;
+            $container->setAlias('simple_bus.bernard_bundle_bridge.encrypter', 'simple_bus.bernard_bundle_bridge.encrypter.nelmio');
+        }
     }
 
     private function requireBundle($bundleName, ContainerBuilder $container)
