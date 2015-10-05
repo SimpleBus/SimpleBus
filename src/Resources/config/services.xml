@@ -35,5 +35,12 @@
             <argument type="collection" />
         </service>
 
+        <!-- Listeners -->
+
+        <service id="simple_bus.bernard_bundle_bridge.listener.logger" class="SimpleBus\BernardBundleBridge\EventListener\LoggerListener" abstract="true">
+            <argument />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
     </services>
 </container>

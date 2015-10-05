@@ -29,6 +29,7 @@ class Configuration implements ConfigurationInterface
                     ->useAttributeAsKey(true)
                     ->prototype('scalar')->isRequired()->cannotBeEmpty()->end()
                 ->end()
+                ->scalarNode('logger')->cannotBeEmpty()->end()
             ->end()
         ;
 

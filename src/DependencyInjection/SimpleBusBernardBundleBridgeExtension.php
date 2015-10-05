@@ -6,6 +6,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implements PrependExtensionInterface
@@ -46,6 +47,19 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
             $loader->load('debug.xml');
         }
 
+        $this->configureQueueResolver($config, $container);
+
+        if (!empty($config['logger'])) {
+            $container
+                ->getDefinition('simple_bus.bernard_bundle_bridge.listener.logger')
+                ->replaceArgument(0, new Reference($config['logger']))
+                ->setAbstract(false)
+            ;
+        }
+    }
+
+    private function configureQueueResolver(array $config, ContainerBuilder $container)
+    {
         if (in_array($config['queue_name_resolver'], ['default', 'mapped'])) {
             $serviceId = sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $config['queue_name_resolver']);
         } else {
