@@ -25,12 +25,20 @@ class Configuration implements ConfigurationInterface
                     ->info('Can be "default", "mapped" or a service id.')
                     ->defaultValue('default')
                 ->end()
+
                 ->arrayNode('queues_map')
+                    ->info('Class name to queue name hash.')
                     ->useAttributeAsKey(true)
                     ->prototype('scalar')->isRequired()->cannotBeEmpty()->end()
                 ->end()
-                ->scalarNode('logger')->cannotBeEmpty()->end()
+
+                ->scalarNode('logger')
+                    ->info('Logger service id.')
+                    ->cannotBeEmpty()
+                ->end()
+
                 ->arrayNode('encryption')
+                    ->info('Encrypt messages on the wire.')
                     ->canBeEnabled()
                     ->children()
                         ->scalarNode('encrypter')

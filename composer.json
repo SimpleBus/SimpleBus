@@ -22,7 +22,8 @@
         "doctrine/dbal": "~2.4"
     },
     "suggests": {
-        "ext-mcrypt": "Allows encryption of messages."
+        "ext-mcrypt": "Allows encryption of messages.",
+        "simple-bus/jms-serializer-bundle-bridge": "Serialization of messages with JMS serializer."
     },
     "autoload": {
         "psr-4": { "SimpleBus\\BernardBundleBridge\\": "src" }

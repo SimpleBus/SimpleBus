@@ -26,7 +26,6 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
     public function prepend(ContainerBuilder $container)
     {
         $this->requireBundle('SimpleBusAsynchronousBundle', $container);
-        $this->requireBundle('SimpleBusJMSSerializerBundleBridgeBundle', $container);
         $this->requireBundle('BernardBundle', $container);
 
         $container->prependExtensionConfig('simple_bus_asynchronous', [
@@ -42,6 +41,12 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
         $merged = $this->processConfiguration($this->getConfiguration($config, $container), $config);
 
         if (!empty($merged['encryption']['enabled'])) {
+            if (!isset($container->getParameter('kernel.bundles')['SimpleBusJMSSerializerBundleBridgeBundle'])) {
+                throw new \RuntimeException('Encryption is only supported as a wrapper of JMSSerializer.');
+            }
+
+            $container->setAlias('simple_bus.bernard_bundle_bridge.serializer', 'simple_bus.jms_serializer.object_serializer');
+
             $container->prependExtensionConfig('simple_bus_asynchronous', [
                 'object_serializer_service_id' => 'simple_bus.bernard_bundle_bridge.encrypted_serializer',
             ]);
