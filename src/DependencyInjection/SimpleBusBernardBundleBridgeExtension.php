@@ -91,16 +91,16 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
 
     private function configureEncryption(array $config, ContainerBuilder $container)
     {
-        if ($config['encrypter'] === 'nelmio') {
+        if (in_array($config['encrypter'], ['nelmio', 'rot13'])) {
             $container
-                ->getDefinition('simple_bus.bernard_bundle_bridge.encrypter.nelmio')
+                ->getDefinition('simple_bus.bernard_bundle_bridge.encrypter.'.$config['encrypter'])
                 ->setAbstract(false)
                 ->setArguments([
                     $config['secret'],
                     $config['algorithm'],
                 ])
             ;
-            $container->setAlias('simple_bus.bernard_bundle_bridge.encrypter', 'simple_bus.bernard_bundle_bridge.encrypter.nelmio');
+            $container->setAlias('simple_bus.bernard_bundle_bridge.encrypter', 'simple_bus.bernard_bundle_bridge.encrypter.'.$config['encrypter']);
         } else {
             $container->setAlias('simple_bus.bernard_bundle_bridge.encrypter', $config['encrypter']);
         }

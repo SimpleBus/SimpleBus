@@ -34,7 +34,7 @@ class Configuration implements ConfigurationInterface
                     ->canBeEnabled()
                     ->children()
                         ->scalarNode('encrypter')
-                            ->info('Can be "nelmio" or a service id.')
+                            ->info('Can be "nelmio", "rot13" or a service id.')
                             ->defaultValue('nelmio')
                         ->end()
                         ->scalarNode('algorithm')->defaultValue('rijndael-128')->end()
