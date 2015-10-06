@@ -1,0 +1,5 @@
+/.idea
+/bin
+/vendor
+/composer.lock
+/phpunit.xml

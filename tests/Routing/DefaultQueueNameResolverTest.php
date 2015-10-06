@@ -10,13 +10,13 @@ class DefaultQueueNameResolverTest extends \PHPUnit_Framework_TestCase
      * @dataProvider getData
      *
      * @param object $message
-     * @param string $producer
+     * @param string $expected
      */
-    public function testResolveAdditionalPropertiesFor($message, $producer)
+    public function testResolveRoutingKeyFor($message, $expected)
     {
-        $props = (new DefaultQueueNameResolver())->resolveRoutingKeyFor($message);
+        $queueName = (new DefaultQueueNameResolver())->resolveRoutingKeyFor($message);
 
-        $this->assertEquals(['producer' => $producer], $props);
+        $this->assertEquals($expected, $queueName);
     }
 
     public function getData()
