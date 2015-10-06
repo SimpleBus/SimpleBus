@@ -63,7 +63,7 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
             $container
                 ->getDefinition('simple_bus.bernard_bundle_bridge.listener.logger')
                 ->replaceArgument(0, new Reference($config['logger']))
-                ->setAbstract(false)
+                ->addTag('kernel.event_subscriber')
             ;
         }
 
