@@ -92,6 +92,7 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
                 $definition->replaceArgument(0, $config[$type]['queue_name']);
             } elseif ($queueNameResolver === 'mapped') {
                 $definition->replaceArgument(0, $config[$type]['queues_map']);
+                $definition->replaceArgument(1, $config[$type]['queue_name']);
             }
 
             $container->setDefinition(

@@ -37,6 +37,7 @@
 
         <service id="simple_bus.bernard_bundle_bridge.routing.mapped_queue_name_resolver" class="SimpleBus\BernardBundleBridge\Routing\MappedQueueNameResolver" public="false">
             <argument type="collection" />
+            <argument />
         </service>
 
         <!-- Listeners -->
