@@ -4,7 +4,7 @@ namespace SimpleBus\BernardBundleBridge\Routing;
 
 use SimpleBus\Asynchronous\Routing\RoutingKeyResolver;
 
-class DefaultQueueNameResolver implements RoutingKeyResolver
+class ClassBasedQueueNameResolver implements RoutingKeyResolver
 {
     public function resolveRoutingKeyFor($message)
     {

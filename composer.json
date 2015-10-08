@@ -19,7 +19,8 @@
     "require-dev": {
         "phpunit/phpunit": "~4.0",
         "symfony/console": "~2.4",
-        "doctrine/dbal": "~2.4"
+        "doctrine/dbal": "~2.4",
+        "matthiasnoback/symfony-config-test": "~1.3"
     },
     "suggests": {
         "ext-mcrypt": "Allows encryption of messages.",

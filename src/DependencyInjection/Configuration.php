@@ -20,17 +20,10 @@ class Configuration implements ConfigurationInterface
 
         $root = $treeBuilder->root($this->alias);
         $root
+            ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('queue_name_resolver')
-                    ->info('Can be "default", "mapped" or a service id.')
-                    ->defaultValue('default')
-                ->end()
-
-                ->arrayNode('queues_map')
-                    ->info('Class name to queue name hash.')
-                    ->useAttributeAsKey(true)
-                    ->prototype('scalar')->isRequired()->cannotBeEmpty()->end()
-                ->end()
+                ->append($this->addConfigurationNode('commands'))
+                ->append($this->addConfigurationNode('events'))
 
                 ->scalarNode('logger')
                     ->info('Logger service id.')
@@ -53,5 +46,46 @@ class Configuration implements ConfigurationInterface
         ;
 
         return $treeBuilder;
+    }
+
+
+    private function addConfigurationNode($type)
+    {
+        $treeBuilder = new TreeBuilder();
+
+        $node = $treeBuilder->root($type);
+        $node
+            ->addDefaultsIfNotSet()
+            ->beforeNormalization()
+                ->ifString()
+                    ->then(function ($name) {
+                        return array(
+                            'queue_name_resolver' => 'fixed',
+                            'queue_name' => $name,
+                        );
+                    })
+            ->end()
+            ->children()
+                ->scalarNode('queue_name_resolver')
+                    ->info('Can be "class_based", "mapped", "fixed" or a service id.')
+                    ->defaultValue('fixed')
+                    ->isRequired()
+                ->end()
+                ->scalarNode('queue_name')
+                    ->info('This default name of the queue')
+                    ->defaultValue(sprintf('asynchronous_%s', $type))
+                ->end()
+                ->arrayNode('queues_map')
+                    ->info('Class name to queue name hash. If class is not found, "default" key is used.')
+                    ->useAttributeAsKey(true)
+                    ->prototype('scalar')
+                        ->isRequired()
+                        ->cannotBeEmpty()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
+        return $node;
     }
 }

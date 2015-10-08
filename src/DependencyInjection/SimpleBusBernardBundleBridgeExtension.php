@@ -4,6 +4,7 @@ namespace SimpleBus\BernardBundleBridge\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
@@ -62,7 +63,8 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
             $loader->load('debug.xml');
         }
 
-        $this->configureQueueResolver($config, $container);
+        $this->configureQueueResolverForType($config, $container, 'commands');
+        $this->configureQueueResolverForType($config, $container, 'events');
 
         if (!empty($config['logger'])) {
             $container
@@ -79,19 +81,29 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
         }
     }
 
-    private function configureQueueResolver(array $config, ContainerBuilder $container)
+    private function configureQueueResolverForType(array $config, ContainerBuilder $container, $type)
     {
-        if (in_array($config['queue_name_resolver'], ['default', 'mapped'])) {
-            $serviceId = sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $config['queue_name_resolver']);
+        $queueNameResolver = $config[$type]['queue_name_resolver'];
+
+        if (in_array($queueNameResolver, ['fixed', 'class_based', 'mapped'])) {
+            $definition = clone $container->getDefinition(sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $queueNameResolver));
+
+            if ($queueNameResolver === 'fixed') {
+                $definition->replaceArgument(0, $config[$type]['queue_name']);
+            } elseif ($queueNameResolver === 'mapped') {
+                $definition->replaceArgument(0, $config[$type]['queues_map']);
+            }
+
+            $container->setDefinition(
+                sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $type),
+                $definition
+            );
         } else {
-            $serviceId = $config['queue_name_resolver'];
+            $container->setAlias(
+                sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $type),
+                $queueNameResolver
+            );
         }
-
-        if ($config['queue_name_resolver'] === 'mapped') {
-            $container->getDefinition($serviceId)->replaceArgument(0, $config['queues_map']);
-        }
-
-        $container->setAlias('simple_bus.bernard_bundle_bridge.routing.queue_name_resolver', $serviceId);
     }
 
     private function configureEncryption(array $config, ContainerBuilder $container)

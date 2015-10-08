@@ -2,9 +2,9 @@
 
 namespace SimpleBus\BernardBundleBridge\Tests\Routing;
 
-use SimpleBus\BernardBundleBridge\Routing\DefaultQueueNameResolver;
+use SimpleBus\BernardBundleBridge\Routing\ClassBasedQueueNameResolver;
 
-class DefaultQueueNameResolverTest extends \PHPUnit_Framework_TestCase
+class ClassBasedQueueNameResolverTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getData
@@ -14,7 +14,7 @@ class DefaultQueueNameResolverTest extends \PHPUnit_Framework_TestCase
      */
     public function testResolveRoutingKeyFor($message, $expected)
     {
-        $queueName = (new DefaultQueueNameResolver())->resolveRoutingKeyFor($message);
+        $queueName = (new ClassBasedQueueNameResolver())->resolveRoutingKeyFor($message);
 
         $this->assertEquals($expected, $queueName);
     }
