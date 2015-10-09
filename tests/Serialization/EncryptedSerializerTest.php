@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\BernardBundleBridge\tests\Serialization;
+namespace SimpleBus\BernardBundleBridge\Tests\Serialization;
 
 use SimpleBus\BernardBundleBridge\Serialization\EncryptedSerializer;
 use SimpleBus\Serialization\NativeObjectSerializer;

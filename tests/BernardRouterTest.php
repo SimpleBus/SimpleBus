@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\BernardBundleBridge\tests;
+namespace SimpleBus\BernardBundleBridge\Tests;
 
 use Bernard\Envelope;
 use Bernard\Message\DefaultMessage;

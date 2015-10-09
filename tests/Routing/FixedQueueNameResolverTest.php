@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\BernardBundleBridge\tests\Routing;
+namespace SimpleBus\BernardBundleBridge\Tests\Routing;
 
 use SimpleBus\BernardBundleBridge\Routing\FixedQueueNameResolver;
 use stdClass;

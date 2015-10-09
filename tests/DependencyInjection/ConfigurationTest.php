@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\BernardBundleBridge\tests\DependencyInjection;
+namespace SimpleBus\BernardBundleBridge\Tests\DependencyInjection;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use SimpleBus\BernardBundleBridge\DependencyInjection\Configuration;
