@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\BernardBundleBridge\Tests\Routing;
+namespace SimpleBus\BernardBundleBridge\tests\Routing;
 
 use SimpleBus\BernardBundleBridge\Routing\MappedQueueNameResolver;
 
@@ -19,10 +19,6 @@ class MappedQueueNameResolverTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo_bar_queue', $resolver->resolveRoutingKeyFor(new FooBarCommand()));
         $this->assertEquals('foo_bar_event_queue', $resolver->resolveRoutingKeyFor(new FooBarEvent()));
         $this->assertEquals('foo_bar_command_queue', $resolver->resolveRoutingKeyFor(new FooBarCommandEvent()));
-        $this->assertEquals('my-fallback-queue', $resolver->resolveRoutingKeyFor(new \stdClass));
+        $this->assertEquals('my-fallback-queue', $resolver->resolveRoutingKeyFor(new \stdClass()));
     }
-}
-
-class Baz
-{
 }

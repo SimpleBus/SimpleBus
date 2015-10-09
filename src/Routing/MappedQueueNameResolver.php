@@ -27,7 +27,7 @@ class MappedQueueNameResolver implements RoutingKeyResolver
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolveRoutingKeyFor($message)
     {

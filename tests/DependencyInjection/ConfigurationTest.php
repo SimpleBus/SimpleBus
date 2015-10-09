@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\BernardBundleBridge\Tests\DependencyInjection;
+namespace SimpleBus\BernardBundleBridge\tests\DependencyInjection;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use SimpleBus\BernardBundleBridge\DependencyInjection\Configuration;
@@ -19,24 +19,24 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_work_with_an_empty_configuration()
     {
-        $this->assertProcessedConfigurationEquals(array(), array(
-            'commands' => array(
+        $this->assertProcessedConfigurationEquals([], [
+            'commands' => [
                 'queue_name_resolver' => 'fixed',
                 'queue_name' => 'asynchronous_commands',
-                'queues_map' => array(),
-            ),
-            'events' => array(
+                'queues_map' => [],
+            ],
+            'events' => [
                 'queue_name_resolver' => 'fixed',
                 'queue_name' => 'asynchronous_events',
-                'queues_map' => array(),
-            ),
-            'encryption' => array(
+                'queues_map' => [],
+            ],
+            'encryption' => [
                 'enabled' => false,
                 'encrypter' => 'nelmio',
                 'algorithm' => 'rijndael-128',
                 'secret' => '%kernel.secret%',
-            ),
-        ));
+            ],
+        ]);
     }
 
     /**
@@ -45,15 +45,15 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_normalize_commands_and_events_to_fixed_queue_name($type)
     {
-        $this->assertProcessedConfigurationEquals(array(
-            array($type => 'my-queue-name')
-        ), array(
-            $type => array(
+        $this->assertProcessedConfigurationEquals([
+            [$type => 'my-queue-name'],
+        ], [
+            $type => [
                 'queue_name_resolver' => 'fixed',
                 'queue_name' => 'my-queue-name',
-                'queues_map' => array(),
-            )
-        ), $type);
+                'queues_map' => [],
+            ],
+        ], $type);
     }
 
     /**
@@ -62,23 +62,23 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_be_possible_to_set_a_queue_name_map($type)
     {
-        $this->assertProcessedConfigurationEquals(array(
-            array($type => array(
+        $this->assertProcessedConfigurationEquals([
+            [$type => [
                 'queue_name_resolver' => 'mapped',
                 'queue_name' => 'my_default_queue_when_mapping_fails',
-                'queues_map' => array(
-                    'MyBundle\GenerateThumbnail' => 'heavy_lifting'
-                )
-            ))
-        ), array(
-            $type => array(
+                'queues_map' => [
+                    'MyBundle\GenerateThumbnail' => 'heavy_lifting',
+                ],
+            ]],
+        ], [
+            $type => [
                 'queue_name_resolver' => 'mapped',
                 'queue_name' => 'my_default_queue_when_mapping_fails',
-                'queues_map' => array(
-                    'MyBundle\GenerateThumbnail' => 'heavy_lifting'
-                ),
-            )
-        ), $type);
+                'queues_map' => [
+                    'MyBundle\GenerateThumbnail' => 'heavy_lifting',
+                ],
+            ],
+        ], $type);
     }
 
     /**
@@ -87,17 +87,17 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_be_possible_to_set_a_class_based_name_resolver($type)
     {
-        $this->assertProcessedConfigurationEquals(array(
-            array($type => array(
+        $this->assertProcessedConfigurationEquals([
+            [$type => [
                 'queue_name_resolver' => 'class_based',
-            ))
-        ), array(
-            $type => array(
+            ]],
+        ], [
+            $type => [
                 'queue_name_resolver' => 'class_based',
-                'queue_name' => 'asynchronous_' . $type,
-                'queues_map' => array(),
-            )
-        ), $type);
+                'queue_name' => 'asynchronous_'.$type,
+                'queues_map' => [],
+            ],
+        ], $type);
     }
 
     /**
@@ -106,17 +106,17 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_be_possible_to_set_a_service_as_name_resolver($type)
     {
-        $this->assertProcessedConfigurationEquals(array(
-            array($type => array(
+        $this->assertProcessedConfigurationEquals([
+            [$type => [
                 'queue_name_resolver' => 'my.service.id',
-            ))
-        ), array(
-            $type => array(
+            ]],
+        ], [
+            $type => [
                 'queue_name_resolver' => 'my.service.id',
-                'queue_name' => 'asynchronous_' . $type,
-                'queues_map' => array(),
-            )
-        ), $type);
+                'queue_name' => 'asynchronous_'.$type,
+                'queues_map' => [],
+            ],
+        ], $type);
     }
 
     public function commandsAndEventsProvider()

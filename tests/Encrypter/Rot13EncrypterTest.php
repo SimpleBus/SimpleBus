@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\BernardBundleBridge\Tests\Encrypter;
+namespace SimpleBus\BernardBundleBridge\tests\Encrypter;
 
 use SimpleBus\BernardBundleBridge\Encrypter\Rot13Encrypter;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleBus\BernardBundleBridge\Tests\EventListener;
+namespace SimpleBus\BernardBundleBridge\tests\EventListener;
 
 use Bernard\Command\ConsumeCommand;
 use Doctrine\DBAL\Connection;

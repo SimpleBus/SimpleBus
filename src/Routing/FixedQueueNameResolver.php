@@ -20,7 +20,7 @@ class FixedQueueNameResolver implements RoutingKeyResolver
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolveRoutingKeyFor($message)
     {

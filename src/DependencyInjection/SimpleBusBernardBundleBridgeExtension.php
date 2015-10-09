@@ -4,7 +4,7 @@ namespace SimpleBus\BernardBundleBridge\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
@@ -63,8 +63,8 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
             $loader->load('debug.xml');
         }
 
-        $this->configureQueueResolverForType($config, $container, 'commands');
-        $this->configureQueueResolverForType($config, $container, 'events');
+        $this->configureQueueResolverForType($config['commands'], $container, 'commands');
+        $this->configureQueueResolverForType($config['events'], $container, 'events');
 
         if (!empty($config['logger'])) {
             $container
@@ -83,16 +83,16 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
 
     private function configureQueueResolverForType(array $config, ContainerBuilder $container, $type)
     {
-        $queueNameResolver = $config[$type]['queue_name_resolver'];
+        $queueNameResolver = $config['queue_name_resolver'];
 
         if (in_array($queueNameResolver, ['fixed', 'class_based', 'mapped'])) {
-            $definition = clone $container->getDefinition(sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $queueNameResolver));
+            $definition = new DefinitionDecorator(sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $queueNameResolver));
 
             if ($queueNameResolver === 'fixed') {
-                $definition->replaceArgument(0, $config[$type]['queue_name']);
+                $definition->replaceArgument(0, $config['queue_name']);
             } elseif ($queueNameResolver === 'mapped') {
-                $definition->replaceArgument(0, $config[$type]['queues_map']);
-                $definition->replaceArgument(1, $config[$type]['queue_name']);
+                $definition->replaceArgument(0, $config['queues_map']);
+                $definition->replaceArgument(1, $config['queue_name']);
             }
 
             $container->setDefinition(

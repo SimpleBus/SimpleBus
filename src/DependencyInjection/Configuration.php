@@ -48,7 +48,6 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-
     private function addConfigurationNode($type)
     {
         $treeBuilder = new TreeBuilder();
@@ -58,12 +57,12 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->beforeNormalization()
                 ->ifString()
-                    ->then(function ($name) {
-                        return array(
-                            'queue_name_resolver' => 'fixed',
-                            'queue_name' => $name,
-                        );
-                    })
+                ->then(function ($name) {
+                    return [
+                        'queue_name_resolver' => 'fixed',
+                        'queue_name' => $name,
+                    ];
+                })
             ->end()
             ->children()
                 ->scalarNode('queue_name_resolver')
@@ -72,7 +71,7 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                 ->end()
                 ->scalarNode('queue_name')
-                    ->info('This default name of the queue')
+                    ->info('Default name of the queue.')
                     ->defaultValue(sprintf('asynchronous_%s', $type))
                 ->end()
                 ->arrayNode('queues_map')
