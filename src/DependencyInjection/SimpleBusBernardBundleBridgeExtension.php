@@ -37,21 +37,6 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
                 'publisher_service_id' => 'simple_bus.bernard_bundle_bridge.event_publisher',
             ],
         ]);
-
-        $config = $container->getExtensionConfig($this->getAlias());
-        $merged = $this->processConfiguration($this->getConfiguration($config, $container), $config);
-
-        if (!empty($merged['encryption']['enabled'])) {
-            if (!isset($container->getParameter('kernel.bundles')['SimpleBusJMSSerializerBundleBridgeBundle'])) {
-                throw new \RuntimeException('Encryption is only supported as a wrapper of JMSSerializer.');
-            }
-
-            $container->setAlias('simple_bus.bernard_bundle_bridge.serializer', 'simple_bus.jms_serializer.object_serializer');
-
-            $container->prependExtensionConfig('simple_bus_asynchronous', [
-                'object_serializer_service_id' => 'simple_bus.bernard_bundle_bridge.encrypted_serializer',
-            ]);
-        }
     }
 
     protected function loadInternal(array $config, ContainerBuilder $container)
@@ -77,8 +62,10 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
         if (!empty($config['encryption']['enabled'])) {
             $loader->load('encryption.xml');
 
-            $this->configureEncryption($config['encryption'], $container);
+            $this->configureEncrypter($config['encryption'], $container);
         }
+
+        $container->setParameter('simple_bus.bernard_bundle_bridge.encryption.enabled', $config['encryption']['enabled']);
     }
 
     private function configureQueueResolverForType(array $config, ContainerBuilder $container, $type)
@@ -107,7 +94,7 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
         }
     }
 
-    private function configureEncryption(array $config, ContainerBuilder $container)
+    private function configureEncrypter(array $config, ContainerBuilder $container)
     {
         if (in_array($config['encrypter'], ['nelmio', 'rot13'])) {
             $container

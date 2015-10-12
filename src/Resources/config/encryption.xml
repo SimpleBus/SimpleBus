@@ -10,7 +10,7 @@
         <service id="simple_bus.bernard_bundle_bridge.encrypter.rot13" class="SimpleBus\BernardBundleBridge\Encrypter\Rot13Encrypter" abstract="false" />
 
         <service id="simple_bus.bernard_bundle_bridge.encrypted_serializer" class="SimpleBus\BernardBundleBridge\Serialization\EncryptedSerializer">
-            <argument type="service" id="simple_bus.bernard_bundle_bridge.serializer" />
+            <argument /><!--- Original serializer -->
             <argument type="service" id="simple_bus.bernard_bundle_bridge.encrypter" />
         </service>
 
