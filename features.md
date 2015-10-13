@@ -2,7 +2,7 @@
 
 ## Encryption
 
-_SimpleBusBernardBundleBridge_ supports message encryption. This is useful when transfering sensitive data using some 3rd party service or over unencrypted channel.
+_SimpleBusBernardBundleBridge_ supports messages encryption. This is useful when transfering sensitive data using some 3rd party service or over unencrypted channel.
 
 Minimal configuration to enable encryption is as follows:
 
@@ -11,7 +11,7 @@ simple_bus_bernard_bundle_bridge:
     encryption: ~
 ```
 
-By default _nelmio_ encryper is used, hence _mcrypt_ PHP extensions must be installed. You can also adjust a secret key and encryption algorithm:
+By default _nelmio_ encrypter is used, hence _mcrypt_ PHP extension must be installed. You can also adjust a secret key and encryption algorithm:
 
 ```yaml
 simple_bus_bernard_bundle_bridge:
@@ -21,7 +21,7 @@ simple_bus_bernard_bundle_bridge:
         algorithm: des    # default: rijndael-128
 ```
 
-Alternative lightweight `rot13` encrypter is supported, not recommended for production use though. Custom encrypter service is supported as well by implementing `SimpleBus\BernardBundleBridge\Encrypter\Encrypter` interface:
+Alternative lightweight `rot13` encrypter is supported, but not recommended for production use though. Custom encrypter service is available as well by implementing `SimpleBus\BernardBundleBridge\Encrypter\Encrypter` interface:
 
 ```yaml
 simple_bus_bernard_bundle_bridge:
