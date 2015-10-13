@@ -25,3 +25,15 @@ simple_bus_bernard_bundle_bridge:
         queues_map:
             My\GeoBundle\Model\Event\LocationUpdatedEvent: geo_location
 ```
+
+## Setting up failure queue
+
+While consuming a message handler can throw an exception, thus leaving the message unacknowledged. In drivers like SQS this will result in same message being processed over and over again. To overcome this you can re-route all rejected messages to another queue for later evaluation:
+
+```yaml
+bernard:
+    listeners:
+        failure: failures
+```
+
+Bernard will catch exception thrown by a handler, acknowledge a message and re-route to the `failures` queue. 
