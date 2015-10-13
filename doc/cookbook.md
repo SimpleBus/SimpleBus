@@ -79,7 +79,7 @@ Register your custom publisher:
 ```yaml
 services:
     my.simple_bus.event_publisher:
-        class: Floydtech\Bundle\CoreBundle\SimpleBus\ValidatedBernardPublisher
+        class: My\AppBundle\SimpleBus\ValidatedBernardPublisher
         arguments: [@simple_bus.bernard_bundle_bridge.event_publisher]
 ```
 
