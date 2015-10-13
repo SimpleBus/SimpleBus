@@ -59,13 +59,13 @@ process_name = %(program_name)s_%(process_num)01d
 programs = geo_location,mailer_webhook,mailer_delivery
 ```
 
-Start jobs:
+Starting _Bernard_ processes:
 
 ```bash
-$ supervisorctl start bernard:*
+# supervisorctl start bernard:*
 ```
 
-Above will spawn 4 `bernard:consume` instances. 1 process for _geo_location_ and _mailer_webhook_ and 2 processes for _mailer_delivery_. The latter queue processes faster as two workers deal with it.
+Above will spawn 4 `bernard:consume` instances. 1 process for _geo_location_ and _mailer_webhook_ and 2 processes for _mailer_delivery_. The latter queue is processed faster as two workers deal with it.
 
 ## Next
 
