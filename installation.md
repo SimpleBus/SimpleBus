@@ -104,4 +104,4 @@ $ ./app/console bernard:consume asynchronous_events
 
 ## Next
 
-Read next about other [routing](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/routing.md) options.
+Read next about [routing](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/routing.md) options.
