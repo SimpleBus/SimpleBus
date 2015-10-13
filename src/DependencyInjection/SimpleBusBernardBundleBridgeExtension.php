@@ -29,43 +29,57 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
         $this->requireBundle('SimpleBusAsynchronousBundle', $container);
         $this->requireBundle('BernardBundle', $container);
 
-        $container->prependExtensionConfig('simple_bus_asynchronous', [
-            'commands' => [
-                'publisher_service_id' => 'simple_bus.bernard_bundle_bridge.command_publisher',
-            ],
-            'events' => [
-                'publisher_service_id' => 'simple_bus.bernard_bundle_bridge.event_publisher',
-            ],
-        ]);
+        $config = $container->getExtensionConfig($this->getAlias());
+        $merged = $this->processConfiguration($this->getConfiguration($config, $container), $config);
+
+        if (isset($merged['commands'])) {
+            $container->prependExtensionConfig('simple_bus_asynchronous', [
+                'commands' => [
+                    'publisher_service_id' => 'simple_bus.bernard_bundle_bridge.command_publisher',
+                ],
+            ]);
+        }
+
+        if (isset($merged['events'])) {
+            $container->prependExtensionConfig('simple_bus_asynchronous', [
+                'events' => [
+                    'publisher_service_id' => 'simple_bus.bernard_bundle_bridge.event_publisher',
+                ],
+            ]);
+        }
     }
 
     protected function loadInternal(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
+        $loader->load('routing.xml');
 
-        if ($container->getParameter('kernel.debug')) {
-            $loader->load('debug.xml');
+        foreach (['events', 'commands'] as $type) {
+            if (isset($config[$type])) {
+                $loader->load($type.'.xml');
+                $this->configureQueueResolverForType($config[$type], $container, $type);
+            }
         }
 
-        $this->configureQueueResolverForType($config['commands'], $container, 'commands');
-        $this->configureQueueResolverForType($config['events'], $container, 'events');
-
+        // Enable logging.
         if (!empty($config['logger'])) {
+            $loader->load('logging.xml');
             $container
                 ->getDefinition('simple_bus.bernard_bundle_bridge.listener.logger')
                 ->replaceArgument(0, new Reference($config['logger']))
-                ->addTag('kernel.event_subscriber')
             ;
         }
 
+        // Enable encryption.
         if (!empty($config['encryption']['enabled'])) {
             $loader->load('encryption.xml');
-
             $this->configureEncrypter($config['encryption'], $container);
         }
 
-        $container->setParameter('simple_bus.bernard_bundle_bridge.encryption.enabled', $config['encryption']['enabled']);
+        // Configure doctrine for development use.
+        if ($container->getParameter('kernel.debug')) {
+            $loader->load('doctrine.xml');
+        }
     }
 
     private function configureQueueResolverForType(array $config, ContainerBuilder $container, $type)
@@ -97,14 +111,18 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
     private function configureEncrypter(array $config, ContainerBuilder $container)
     {
         if (in_array($config['encrypter'], ['nelmio', 'rot13'])) {
-            $container
+            $definition = $container
                 ->getDefinition('simple_bus.bernard_bundle_bridge.encrypter.'.$config['encrypter'])
                 ->setAbstract(false)
-                ->setArguments([
+            ;
+
+            if ($config['encrypter'] === 'nelmio') {
+                $definition->setArguments([
                     $config['secret'],
                     $config['algorithm'],
-                ])
-            ;
+                ]);
+            }
+
             $container->setAlias('simple_bus.bernard_bundle_bridge.encrypter', 'simple_bus.bernard_bundle_bridge.encrypter.'.$config['encrypter']);
         } else {
             $container->setAlias('simple_bus.bernard_bundle_bridge.encrypter', $config['encrypter']);

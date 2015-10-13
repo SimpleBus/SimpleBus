@@ -52,16 +52,31 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
 
+        $defaultQueueName = sprintf('asynchronous_%s', $type);
+
+        $defaults = function ($queueName) {
+            return [
+                'queue_name_resolver' => 'fixed',
+                'queue_name' => $queueName,
+            ];
+        };
+
         $node = $treeBuilder->root($type);
         $node
-            ->addDefaultsIfNotSet()
             ->beforeNormalization()
                 ->ifString()
-                ->then(function ($name) {
-                    return [
-                        'queue_name_resolver' => 'fixed',
-                        'queue_name' => $name,
-                    ];
+                ->then($defaults)
+            ->end()
+            ->beforeNormalization()
+                ->ifNull()
+                ->then(function () use ($defaults, $defaultQueueName) {
+                    return $defaults($defaultQueueName);
+                })
+            ->end()
+            ->beforeNormalization()
+                ->ifTrue()
+                ->then(function () use ($defaults, $defaultQueueName) {
+                    return $defaults($defaultQueueName);
                 })
             ->end()
             ->children()
@@ -70,10 +85,12 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('fixed')
                     ->isRequired()
                 ->end()
+
                 ->scalarNode('queue_name')
                     ->info('Default name of the queue.')
-                    ->defaultValue(sprintf('asynchronous_%s', $type))
+                    ->defaultValue($defaultQueueName)
                 ->end()
+
                 ->arrayNode('queues_map')
                     ->info('Class name to queue name hash. If class is not found, "default" key is used.')
                     ->useAttributeAsKey(true)

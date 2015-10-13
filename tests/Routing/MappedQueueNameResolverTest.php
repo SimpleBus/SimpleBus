@@ -6,7 +6,10 @@ use SimpleBus\BernardBundleBridge\Routing\MappedQueueNameResolver;
 
 class MappedQueueNameResolverTest extends \PHPUnit_Framework_TestCase
 {
-    public function testResolveRoutingKeyFor()
+    /**
+     * @test
+     */
+    public function it_should_map_a_message_class_to_a_queue_name()
     {
         $resolver = new MappedQueueNameResolver([
             __NAMESPACE__.'\\FooBar' => 'foo_queue',

@@ -4,17 +4,16 @@ namespace SimpleBus\BernardBundleBridge\Tests\EventListener;
 
 use Bernard\Command\ConsumeCommand;
 use Doctrine\DBAL\Connection;
-use SimpleBus\BernardBundleBridge\EventListener\DebugListener;
+use SimpleBus\BernardBundleBridge\EventListener\DisableDoctrineLoggerListener;
 use Symfony\Component\Console\Event\ConsoleEvent;
-use Symfony\Component\DependencyInjection\Container;
 
-class DebugListenerTest extends \PHPUnit_Framework_TestCase
+class DisableDoctrineLoggerListenerTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var DebugListener */
-    private $listener;
-
     /** @var \PHPUnit_Framework_MockObject_MockObject */
     private $config;
+
+    /** @var DisableDoctrineLoggerListener */
+    private $listener;
 
     public function setUp()
     {
@@ -23,16 +22,27 @@ class DebugListenerTest extends \PHPUnit_Framework_TestCase
             ->getMock()
         ;
 
-        $container = new Container();
-        $container->set('doctrine.dbal.default_connection', new Connection([], $this->getMock('Doctrine\DBAL\Driver'), $this->config));
+        $registry = $this->getMock('Doctrine\Common\Persistence\ConnectionRegistry');
+        $registry
+            ->expects($this->any())
+            ->method('getConnections')
+            ->willReturn([
+                new Connection([], $this->getMock('Doctrine\DBAL\Driver'), $this->config),
+                new Connection([], $this->getMock('Doctrine\DBAL\Driver'), $this->config),
+                new Connection([], $this->getMock('Doctrine\DBAL\Driver'), $this->config),
+            ])
+        ;
 
-        $this->listener = new DebugListener($container);
+        $this->listener = new DisableDoctrineLoggerListener($registry);
     }
 
-    public function testSQLLoggingIsTurnedOff()
+    /**
+     * @test
+     */
+    public function it_should_turn_off_sql_logging()
     {
         $this->config
-            ->expects($this->once())
+            ->expects($this->exactly(3))
             ->method('setSQLLogger')
             ->with($this->equalTo(null))
         ;
@@ -46,7 +56,10 @@ class DebugListenerTest extends \PHPUnit_Framework_TestCase
         $this->listener->onCommand($event);
     }
 
-    public function testSQLLoggingIsIntact()
+    /**
+     * @test
+     */
+    public function it_should_leave_sql_logging_intact()
     {
         $this->config->expects($this->never())->method('setSQLLogger');
 

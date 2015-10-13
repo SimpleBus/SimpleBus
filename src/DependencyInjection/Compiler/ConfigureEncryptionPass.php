@@ -9,7 +9,7 @@ class ConfigureEncryptionPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        if ($container->getParameter('simple_bus.bernard_bundle_bridge.encryption.enabled')) {
+        if ($container->hasDefinition('simple_bus.bernard_bundle_bridge.encrypted_serializer')) {
             // Retrieve original serializer.
             $serializer = $container->findDefinition('simple_bus.asynchronous.object_serializer');
 

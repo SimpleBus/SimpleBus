@@ -7,7 +7,10 @@ use SimpleBus\BernardBundleBridge\BernardConsumer;
 
 class BernardConsumerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testInvokeRetrievesData()
+    /**
+     * @test
+     */
+    public function it_should_consume_a_message()
     {
         $consumer = $this->getMock('SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer');
         $consumer

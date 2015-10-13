@@ -7,12 +7,14 @@ use SimpleBus\BernardBundleBridge\Routing\ClassBasedQueueNameResolver;
 class ClassBasedQueueNameResolverTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @test
+     *
      * @dataProvider getData
      *
      * @param object $message
      * @param string $expected
      */
-    public function testResolveRoutingKeyFor($message, $expected)
+    public function it_should_resolve_a_queue_based_on_message_instance($message, $expected)
     {
         $queueName = (new ClassBasedQueueNameResolver())->resolveRoutingKeyFor($message);
 

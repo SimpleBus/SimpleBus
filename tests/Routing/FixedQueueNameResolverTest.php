@@ -7,7 +7,10 @@ use stdClass;
 
 class FixedQueueNameResolverTest extends \PHPUnit_Framework_TestCase
 {
-    public function testResolveRoutingKeyFor()
+    /**
+     * @test
+     */
+    public function it_should_resolve_to_a_fixed_queued_name()
     {
         $queueName = (new FixedQueueNameResolver('fixed-queue-name'))->resolveRoutingKeyFor(new stdClass());
 

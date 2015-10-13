@@ -7,23 +7,27 @@ use SimpleBus\BernardBundleBridge\Encrypter\Rot13Encrypter;
 class Rot13EncrypterTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @test
+     *
      * @dataProvider getData
      *
      * @param string $string
      * @param string $encrypted
      */
-    public function testEncrypt($string, $encrypted)
+    public function it_encrypts_a_string($string, $encrypted)
     {
         $this->assertEquals($encrypted, (new Rot13Encrypter())->encrypt($string));
     }
 
     /**
+     * @test
+     *
      * @dataProvider getData
      *
      * @param string $string
      * @param string $encrypted
      */
-    public function testDecrypt($string, $encrypted)
+    public function it_decrypts_a_string($string, $encrypted)
     {
         $this->assertEquals($string, (new Rot13Encrypter())->decrypt($encrypted));
     }

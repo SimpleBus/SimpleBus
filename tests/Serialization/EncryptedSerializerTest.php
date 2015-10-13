@@ -19,7 +19,10 @@ class EncryptedSerializerTest extends \PHPUnit_Framework_TestCase
         $this->serializer = new EncryptedSerializer(new NativeObjectSerializer(), $this->encrypter);
     }
 
-    public function testSerialize()
+    /**
+     * @test
+     */
+    public function it_should_serialize_and_encrypt()
     {
         $this->encrypter
             ->expects($this->once())
@@ -30,7 +33,10 @@ class EncryptedSerializerTest extends \PHPUnit_Framework_TestCase
         $this->serializer->serialize((object) ['foo' => 'bar', 'baz' => 'qux']);
     }
 
-    public function testDeserialize()
+    /**
+     * @test
+     */
+    public function it_should_decrypt_and_deserialize()
     {
         $this->encrypter
             ->expects($this->once())

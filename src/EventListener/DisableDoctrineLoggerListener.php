@@ -3,18 +3,18 @@
 namespace SimpleBus\BernardBundleBridge\EventListener;
 
 use Bernard\Command\ConsumeCommand;
+use Doctrine\Common\Persistence\ConnectionRegistry;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleEvent;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class DebugListener implements EventSubscriberInterface
+class DisableDoctrineLoggerListener implements EventSubscriberInterface
 {
-    private $container;
+    private $doctrine;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ConnectionRegistry $doctrine)
     {
-        $this->container = $container;
+        $this->doctrine = $doctrine;
     }
 
     public static function getSubscribedEvents()
@@ -32,9 +32,9 @@ class DebugListener implements EventSubscriberInterface
             return;
         }
 
-        /* @var \Doctrine\DBAL\Connection $db */
-        $db = $this->container->get('doctrine.dbal.default_connection');
-
-        $db->getConfiguration()->setSQLLogger(null);
+        foreach ($this->doctrine->getConnections() as $conn) {
+            /* @var \Doctrine\DBAL\Connection $conn */
+            $conn->getConfiguration()->setSQLLogger(null);
+        }
     }
 }

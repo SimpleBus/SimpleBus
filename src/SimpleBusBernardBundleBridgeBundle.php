@@ -3,6 +3,7 @@
 namespace SimpleBus\BernardBundleBridge;
 
 use SimpleBus\BernardBundleBridge\DependencyInjection\Compiler\ConfigureBernardPass;
+use SimpleBus\BernardBundleBridge\DependencyInjection\Compiler\ConfigureDisableDoctrineLoggerPass;
 use SimpleBus\BernardBundleBridge\DependencyInjection\Compiler\ConfigureEncryptionPass;
 use SimpleBus\BernardBundleBridge\DependencyInjection\SimpleBusBernardBundleBridgeExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -15,6 +16,7 @@ class SimpleBusBernardBundleBridgeBundle extends Bundle
         $container
             ->addCompilerPass(new ConfigureBernardPass())
             ->addCompilerPass(new ConfigureEncryptionPass())
+            ->addCompilerPass(new ConfigureDisableDoctrineLoggerPass())
         ;
     }
 

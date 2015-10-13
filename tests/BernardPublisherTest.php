@@ -8,7 +8,10 @@ use SimpleBus\BernardBundleBridge\BernardPublisher;
 
 class BernardPublisherTest extends \PHPUnit_Framework_TestCase
 {
-    public function testPublish()
+    /**
+     * @test
+     */
+    public function it_should_produce_a_message_with_bernard()
     {
         $message = new \stdClass();
 

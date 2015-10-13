@@ -8,7 +8,10 @@ use SimpleBus\BernardBundleBridge\BernardRouter;
 
 class BernardRouterTest extends \PHPUnit_Framework_TestCase
 {
-    public function testMap()
+    /**
+     * @test
+     */
+    public function it_should_retrieve_a_consumer_for_type()
     {
         $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $container

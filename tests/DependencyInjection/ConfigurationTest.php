@@ -17,37 +17,30 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_should_work_with_an_empty_configuration()
+    public function it_should_not_enable_commands_or_events_by_default()
     {
         $this->assertProcessedConfigurationEquals([], [
-            'commands' => [
-                'queue_name_resolver' => 'fixed',
-                'queue_name' => 'asynchronous_commands',
-                'queues_map' => [],
-            ],
-            'events' => [
-                'queue_name_resolver' => 'fixed',
-                'queue_name' => 'asynchronous_events',
-                'queues_map' => [],
-            ],
             'encryption' => [
-                'enabled' => false,
+                'enabled'   => false,
                 'encrypter' => 'nelmio',
                 'algorithm' => 'rijndael-128',
-                'secret' => '%kernel.secret%',
+                'secret'    => '%kernel.secret%',
             ],
         ]);
     }
 
     /**
      * @test
+     *
      * @dataProvider commandsAndEventsProvider
+     *
+     * @param string $type
      */
     public function it_should_normalize_commands_and_events_to_fixed_queue_name($type)
     {
-        $this->assertProcessedConfigurationEquals([
-            [$type => 'my-queue-name'],
-        ], [
+        $config = [$type => 'my-queue-name'];
+
+        $this->assertProcessedConfigurationEquals([$config], [
             $type => [
                 'queue_name_resolver' => 'fixed',
                 'queue_name' => 'my-queue-name',
@@ -58,19 +51,44 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @dataProvider commandsAndEventsProvider
+     *
+     * @param string $type
+     */
+    public function it_should_normalize_commands_and_events_to_default_fixed_queue_name($type)
+    {
+        $config = [$type => true];
+
+        $this->assertProcessedConfigurationEquals([$config], [
+            $type => [
+                'queue_name_resolver' => 'fixed',
+                'queue_name' => sprintf('asynchronous_%s', $type),
+                'queues_map' => [],
+            ],
+        ], $type);
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider commandsAndEventsProvider
+     *
+     * @param string $type
      */
     public function it_should_be_possible_to_set_a_queue_name_map($type)
     {
-        $this->assertProcessedConfigurationEquals([
-            [$type => [
+        $config = [
+            $type => [
                 'queue_name_resolver' => 'mapped',
                 'queue_name' => 'my_default_queue_when_mapping_fails',
                 'queues_map' => [
                     'MyBundle\GenerateThumbnail' => 'heavy_lifting',
                 ],
-            ]],
-        ], [
+            ],
+        ];
+
+        $this->assertProcessedConfigurationEquals([$config], [
             $type => [
                 'queue_name_resolver' => 'mapped',
                 'queue_name' => 'my_default_queue_when_mapping_fails',
@@ -83,15 +101,20 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @dataProvider commandsAndEventsProvider
+     *
+     * @param string $type
      */
     public function it_should_be_possible_to_set_a_class_based_name_resolver($type)
     {
-        $this->assertProcessedConfigurationEquals([
-            [$type => [
+        $config = [
+            $type => [
                 'queue_name_resolver' => 'class_based',
-            ]],
-        ], [
+            ],
+        ];
+
+        $this->assertProcessedConfigurationEquals([$config], [
             $type => [
                 'queue_name_resolver' => 'class_based',
                 'queue_name' => 'asynchronous_'.$type,
@@ -102,15 +125,20 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     *
      * @dataProvider commandsAndEventsProvider
+     *
+     * @param string $type
      */
     public function it_should_be_possible_to_set_a_service_as_name_resolver($type)
     {
-        $this->assertProcessedConfigurationEquals([
-            [$type => [
+        $config = [
+            $type => [
                 'queue_name_resolver' => 'my.service.id',
-            ]],
-        ], [
+            ],
+        ];
+
+        $this->assertProcessedConfigurationEquals([$config], [
             $type => [
                 'queue_name_resolver' => 'my.service.id',
                 'queue_name' => 'asynchronous_'.$type,

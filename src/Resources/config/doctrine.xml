@@ -5,8 +5,8 @@
 
     <services>
 
-        <service id="simple_bus.bernard_bundle_bridge.listener.debug" class="SimpleBus\BernardBundleBridge\EventListener\DebugListener">
-            <argument type="service" id="service_container" />
+        <service id="simple_bus.bernard_bundle_bridge.listener.disable_doctrine_logger" class="SimpleBus\BernardBundleBridge\EventListener\DisableDoctrineLoggerListener">
+            <argument type="service" id="doctrine" />
             <tag name="kernel.event_subscriber" />
         </service>
 
