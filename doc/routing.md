@@ -50,7 +50,7 @@ In above example we use 3 queues for 6 async messages. Commands and events not s
 
 ## Custom queue resolver
 
-You can specify your own queue resolver by implementing `SimpleBus\Asynchronous\Routing\RoutingKeyResolver\ClassBasedQueueNameResolver` interface. Register the service in container and update the config:
+You can specify your own queue resolver by implementing `SimpleBus\Asynchronous\Routing\RoutingKeyResolver` interface. Register the service in container and update the config:
 
 ```yaml
 simple_bus_bernard_bundle_bridge:
