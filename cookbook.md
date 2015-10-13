@@ -45,6 +45,8 @@ _SimpleBus_ always publishes events when _asynchronous_ events are enabled. This
 Sometimes this is not what you want as it is impossible to mix sync and async events. To overcome this a custom event publisher can be implementd. Consider the following example:
 
 ```php
+namespace My\AppBundle\SimpleBus;
+
 use SimpleBus\Asynchronous\Publisher\Publisher;
 
 class MyEventPublisher implements Publisher
@@ -79,7 +81,7 @@ Register your custom publisher:
 ```yaml
 services:
     my.simple_bus.event_publisher:
-        class: My\AppBundle\SimpleBus\ValidatedBernardPublisher
+        class: My\AppBundle\SimpleBus\MyEventPublisher
         arguments: [@simple_bus.bernard_bundle_bridge.event_publisher]
 ```
 
