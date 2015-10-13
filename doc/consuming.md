@@ -6,9 +6,9 @@ To consume messages in the queue run the following:
 ./app/console bernard:consume <queue-name>
 ```
 
-Above will start a PHP process (essentially a loop), looking up for the messages in specified queue. To end the process press `CTLR+C`.
+Above will start a PHP process (essentially a loop), looking up for the messages in specified queue. To end the process press `CTLR+c`.
 
-PHP is meant to die, hence it is not recommended to rely on endless `bernard:consume` execution. Especially when you deal with Doctrine, fill it's identity map with objects, thus consuming more and more memory. Extra care must be taken to clear _EntityManager_ approprietly, make sure garbage collector is executed by running `gc_collect_cycles` etc. Unless you know what you're doing it is expected for `bernard:consume` to exit.
+PHP is meant to die, hence it is not recommended to rely on endless `bernard:consume` execution. Especially when you deal with Doctrine, filling it's identity map with objects, thus consuming more and more memory. Extra care must be taken to clear _EntityManager_ approprietly, make sure garbage collector is executed by running `gc_collect_cycles()` function etc. Unless you know what you're doing it is expected for `bernard:consume` to exit.
 
 ## Using cron
 
@@ -18,7 +18,7 @@ Below example consumes messages for 5 minutes and exits:
 */5 * * * * /var/www/symfony/app/console bernard:consume --max-runtime=300 >> /var/log/symfony/cron.log 2>&1
 ```
 
-In other words, run a cron job of consuming messages every 5 minutes for 5 minutes. You process is restared each 5 minutes.
+In other words, run a cron job of consuming messages every 5 minutes for 5 minutes i.e. the process is restarted each 5 minutes.
 
 When amount of incoming messages is low, you could do something like this:
 
@@ -30,7 +30,7 @@ Consume 90 messages once per 3 minutes. You need to make sure you app can proces
 
 ## Using supervisor
 
-The best way to keep your process alive is with [supervisor](http://supervisord.org).
+The best way to keep the process alive is with [supervisor](http://supervisord.org).
 
 Consider below example:
 
@@ -69,4 +69,4 @@ Above will spawn 4 `bernard:consume` instances. 1 process for _geo_location_ and
 
 ## Next
 
-Read next about messages [encryption](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/features.md) and logging.
+Read next about messages [encryption and logging](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/features.md).
