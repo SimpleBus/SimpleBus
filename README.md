@@ -6,4 +6,10 @@
 
 ## Documentation
 
-Read here for [installation instructions](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/installation.md).
+Topics: 
+
+- [Installation](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/installation.md)
+- [Routing](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/routing.md)
+- [Consuming messages](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/consuming.md)
+- [Encryption and logging](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/features.md)
+- [Cookbook](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/cookbook.md)
