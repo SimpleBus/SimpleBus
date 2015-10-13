@@ -68,6 +68,8 @@ bernard:
 
 More info about _Bernard_ [configuration](https://github.com/bernardphp/BernardBundle).
 
+#### Async commands
+
 Minimal config to enable asynchrounous commands:
 
 ```yaml
@@ -76,6 +78,8 @@ simple_bus_bernard_bundle_bridge:
 ```
 
 All asynchrounous commands will be routed to `asynchronous_commands` queue.
+
+#### Async events
 
 Minimal config to enable asynchrounous events:
 
@@ -88,11 +92,12 @@ All asynchrounous events will be routed to `asynchronous_events` queue.
 
 ## Console
 
-To consume a queue in _Bernard_, please, run:
+To consume _SimpleBus_ messages in _Bernard_, please, run:
 
 ```bash
 $ # Consume commands
 $ ./app/console bernard:consume asynchronous_commands
+$
 $ # Consume events
 $ ./app/console bernard:consume asynchronous_events
 ```
