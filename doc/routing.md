@@ -20,7 +20,7 @@ simple_bus_bernard_bundle_bridge:
         queue_name_resolver: class_based
 ```
 
-Let's say you have `SendEmailCommand` and `BounceEmailCommand`. `SendEmailCommand` will be routed to _send_email_command_ and `BounceEmailCommand` to _bounce_email_command_ queue.
+Let's say you have `SendEmailCommand` and `BounceEmailCommand`. `SendEmailCommand` will be routed to _send_email_command_ queue and `BounceEmailCommand` to _bounce_email_command_ queue.
 
 Same config option works for events.
 
