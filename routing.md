@@ -46,11 +46,11 @@ simple_bus_bernard_bundle_bridge:
             My\MediaBundle\Model\Event\FormatCreatedEvent: media_processor
 ```
 
-In above example we use 3 queues for 6 async messages. Commands and events not specified in the map will be routing to _other_messages_ queue.
+In above example we use 3 queues for 6 async messages. Commands and events not specified in the map will be routed to _other_messages_ queue.
 
 ## Custom queue resolver
 
-You can specify your own queue resolver by implementing `SimpleBus\Asynchronous\Routing\RoutingKeyResolver\ClassBasedQueueNameResolver` interface. Register your service in container and update the config:
+You can specify your own queue resolver by implementing `SimpleBus\Asynchronous\Routing\RoutingKeyResolver\ClassBasedQueueNameResolver` interface. Register the service in container and update the config:
 
 ```yaml
 simple_bus_bernard_bundle_bridge:
@@ -60,3 +60,7 @@ simple_bus_bernard_bundle_bridge:
 ```
 
 Above example uses custom queue resolver for commands, however, all events routed to _queue_for_events_ queue.
+
+## Next
+
+Read about various ways to [consume](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/consuming.md) async messages.
