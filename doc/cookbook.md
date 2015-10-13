@@ -40,9 +40,11 @@ Bernard will catch an exception thrown by a handler, acknowledge a message and r
 
 ## Custom SimpleBus publisher
 
-_SimpleBus_ always publishes events when _asynchronous_ events are enabled. This is because `AlwaysPublishesMessages` publisher is used for events (more info [here](http://simplebus.github.io/Asynchronous/doc/publishing_messages.html)).
+_SimpleBus_ always publishes events when asynchronous events are enabled. This is because `AlwaysPublishesMessages` publisher is used for events (more info [here](http://simplebus.github.io/Asynchronous/doc/publishing_messages.html)).
 
-Sometimes this is not what you want as it is impossible to mix sync and async events. To overcome this a custom event publisher can be implementd. Consider the following example:
+Sometimes this is not what you want as it is impossible to mix sync and async events. In other words synchronous events are published to the queue even if you don't intend to process them asynchronously.
+
+To overcome this a custom event publisher can be implementd. Consider the following example:
 
 ```php
 namespace My\AppBundle\SimpleBus;
