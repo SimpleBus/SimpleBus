@@ -36,4 +36,86 @@ bernard:
         failure: failures
 ```
 
-Bernard will catch exception thrown by a handler, acknowledge a message and re-route to the `failures` queue. 
+Bernard will catch an exception thrown by a handler, acknowledge a message and re-route to the `failures` queue. 
+
+## Custom SimpleBus publisher
+
+_SimpleBus_ always publishes events when _asynchronous_ events are enabled. This is because `AlwaysPublishesMessages` publisher is used for events (more info [here](http://simplebus.github.io/Asynchronous/doc/publishing_messages.html)).
+
+Sometimes this is not what you want as it is impossible to mix sync and async events. To overcome this a custom event publisher can be implementd. Consider the following example:
+
+```php
+use SimpleBus\Asynchronous\Publisher\Publisher;
+
+class MyEventPublisher implements Publisher
+{
+    private $publisher;
+    private $cache = [];
+
+    public function __construct(Publisher $publisher)
+    {
+        $this->publisher = $publisher;
+    }
+
+    public function publish($message)
+    {
+        $class = get_class($message);
+
+        if (!array_key_exists($class, $this->cache)) {
+            $docBlock = (new \ReflectionObject($message))->getDocComment();
+
+            $this->cache[$class] = (boolean) preg_match('/@ExclusionPolicy\(/', $docBlock);
+        }
+
+        if ($this->cache[$class]) {
+            $this->publisher->publish($message);
+        }
+    }
+}
+```
+
+Register your custom publisher:
+
+```yaml
+services:
+    my.simple_bus.event_publisher:
+        class: Floydtech\Bundle\CoreBundle\SimpleBus\ValidatedBernardPublisher
+        arguments: [@simple_bus.bernard_bundle_bridge.event_publisher]
+```
+
+Update _SimpleBus_ config:
+
+```yaml
+simple_bus_asynchronous:
+    events:
+        publisher_service_id: my.simple_bus.event_publisher
+```
+
+From now on only events with `@ExclusionPolicy` docblock will be processed asynchronously.
+
+Example of async event:
+
+```php
+namespace My\AwsBundle\Model\Command;
+
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Type;
+
+/**
+ * @ExclusionPolicy("NONE")
+ */
+class RemoveObjectCommand
+{
+    /**
+     * @Type("string")
+     */
+    public $bucket;
+
+    /**
+     * @Type("string")
+     */
+    public $key;
+}
+
+```
+
