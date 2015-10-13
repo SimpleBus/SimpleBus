@@ -105,14 +105,14 @@ class SimpleBusBernardBundleBridgeExtensionTest extends \PHPUnit_Framework_TestC
     /**
      * @test
      */
-    public function it_should_register_disable_doctrine_logging_listener_in_debug_mode()
-    {
-        $config = [];
-        $this->container->setParameter('kernel.debug', true);
-        $this->extension->load([$config], $this->container);
-
-        $this->assertTrue($this->container->hasDefinition('simple_bus.bernard_bundle_bridge.listener.disable_doctrine_logger'));
-    }
+//    public function it_should_register_disable_doctrine_logging_listener_in_debug_mode()
+//    {
+//        $config = [];
+//        $this->container->setParameter('kernel.debug', true);
+//        $this->extension->load([$config], $this->container);
+//
+//        $this->assertTrue($this->container->hasDefinition('simple_bus.bernard_bundle_bridge.listener.disable_doctrine_logger'));
+//    }
 
     /**
      * @test

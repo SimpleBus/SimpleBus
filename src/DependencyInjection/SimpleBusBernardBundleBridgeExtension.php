@@ -75,11 +75,6 @@ class SimpleBusBernardBundleBridgeExtension extends ConfigurableExtension implem
             $loader->load('encryption.xml');
             $this->configureEncrypter($config['encryption'], $container);
         }
-
-        // Configure doctrine for development use.
-        if ($container->getParameter('kernel.debug')) {
-            $loader->load('doctrine.xml');
-        }
     }
 
     private function configureQueueResolverForType(array $config, ContainerBuilder $container, $type)
