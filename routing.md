@@ -17,6 +17,7 @@ It is a common practice to have a separate queue for each asynchronous job type.
 ```yaml
 simple_bus_bernard_bundle_bridge:
     commands:
+        queue_name: my_queue_for_commands
         queue_name_resolver: class_based
 ```
 
