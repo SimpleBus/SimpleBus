@@ -10,6 +10,8 @@ Above will start a PHP process (essentially a loop), looking up for the messages
 
 PHP is meant to die, hence it is not recommended to rely on endless `bernard:consume` execution. Especially when you deal with Doctrine, filling it's identity map with objects, thus consuming more and more memory. Extra care must be taken to clear _EntityManager_ approprietly, make sure garbage collector is executed by running `gc_collect_cycles()` function etc. Unless you know what you're doing it is expected for `bernard:consume` to exit.
 
+If you don't want to deal with this yourself, you can enable the [LongRunningBundle](https://github.com/LongRunning/LongRunning) to automatically cleanup after a message is consumed.
+
 ## Using cron
 
 Below example consumes messages for 5 minutes and exits:
