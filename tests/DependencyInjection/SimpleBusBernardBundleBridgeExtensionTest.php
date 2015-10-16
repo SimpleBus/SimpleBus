@@ -1,23 +1,17 @@
 <?php
 
-namespace SimpleBus\BernardBundleBridge\Tests\DependencyInjection;
+namespace SimpleBus\BernardBundleBridge\tests\DependencyInjection;
 
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use SimpleBus\BernardBundleBridge\DependencyInjection\SimpleBusBernardBundleBridgeExtension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class SimpleBusBernardBundleBridgeExtensionTest extends \PHPUnit_Framework_TestCase
+class SimpleBusBernardBundleBridgeExtensionTest extends AbstractExtensionTestCase
 {
-    /** @var SimpleBusBernardBundleBridgeExtension */
-    private $extension;
-
-    /** @var ContainerBuilder */
-    private $container;
-
     public function setUp()
     {
-        $this->extension = new SimpleBusBernardBundleBridgeExtension('prefix');
-        $this->container = new ContainerBuilder();
-        $this->container->setParameter('kernel.debug', false);
+        parent::setUp();
+
+        $this->setParameter('kernel.debug', false);
     }
 
     /**
@@ -25,14 +19,11 @@ class SimpleBusBernardBundleBridgeExtensionTest extends \PHPUnit_Framework_TestC
      */
     public function it_should_register_queue_name_resolvers_by_default()
     {
-        $config = [];
-        $this->extension->load([$config], $this->container);
+        $this->load();
 
         foreach (['class_based', 'fixed', 'mapped'] as $type) {
-            $this->assertInstanceOf(
-                'SimpleBus\Asynchronous\Routing\RoutingKeyResolver',
-                $this->container->get(sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $type))
-            );
+            $serviceId = sprintf('simple_bus.bernard_bundle_bridge.routing.%s_queue_name_resolver', $type);
+            $this->assertContainerBuilderHasService($serviceId);
         }
 
         // No other services are registered.
@@ -44,17 +35,19 @@ class SimpleBusBernardBundleBridgeExtensionTest extends \PHPUnit_Framework_TestC
      */
     public function it_should_register_rot13_encrypter()
     {
-        $config = [
+        $this->load([
             'encryption' => [
                 'encrypter' => 'rot13',
             ],
-        ];
-        $this->extension->load([$config], $this->container);
+        ]);
 
-        $this->assertTrue($this->container->hasAlias('simple_bus.bernard_bundle_bridge.encrypter'));
-        $this->assertInstanceOf(
-            'SimpleBus\BernardBundleBridge\Encrypter\Rot13Encrypter',
-            $this->container->get('simple_bus.bernard_bundle_bridge.encrypter')
+        $this->assertContainerBuilderHasAlias(
+            'simple_bus.bernard_bundle_bridge.encrypter',
+            'simple_bus.bernard_bundle_bridge.encrypter.rot13'
+        );
+        $this->assertContainerBuilderHasService(
+            'simple_bus.bernard_bundle_bridge.encrypter.rot13',
+            'SimpleBus\BernardBundleBridge\Encrypter\Rot13Encrypter'
         );
     }
 
@@ -67,24 +60,32 @@ class SimpleBusBernardBundleBridgeExtensionTest extends \PHPUnit_Framework_TestC
             $this->markTestSkipped();
         }
 
-        $config = [
+        $this->load([
             'encryption' => [
                 'encrypter' => 'nelmio',
                 'secret' => '__secret__',
                 'algorithm' => MCRYPT_DES,
             ],
-        ];
-        $this->extension->load([$config], $this->container);
+        ]);
 
-        $this->assertInstanceOf(
-            'SimpleBus\BernardBundleBridge\Encrypter\NelmioEncrypter',
-            $this->container->get('simple_bus.bernard_bundle_bridge.encrypter')
+        $this->assertContainerBuilderHasAlias(
+            'simple_bus.bernard_bundle_bridge.encrypter',
+            'simple_bus.bernard_bundle_bridge.encrypter.nelmio'
         );
-
-        $definition = $this->container->findDefinition('simple_bus.bernard_bundle_bridge.encrypter');
-
-        $this->assertEquals('__secret__', $definition->getArgument(0));
-        $this->assertEquals(MCRYPT_DES, $definition->getArgument(1));
+        $this->assertContainerBuilderHasService(
+            'simple_bus.bernard_bundle_bridge.encrypter.nelmio',
+            'SimpleBus\BernardBundleBridge\Encrypter\NelmioEncrypter'
+        );
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'simple_bus.bernard_bundle_bridge.encrypter.nelmio',
+            0,
+            '__secret__'
+        );
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'simple_bus.bernard_bundle_bridge.encrypter.nelmio',
+            1,
+            MCRYPT_DES
+        );
     }
 
     /**
@@ -92,39 +93,30 @@ class SimpleBusBernardBundleBridgeExtensionTest extends \PHPUnit_Framework_TestC
      */
     public function it_should_register_logger_listener()
     {
-        $config = ['logger' => 'custom_logger'];
-        $this->extension->load([$config], $this->container);
+        $this->load(['logger' => 'custom_logger']);
 
-        $this->assertTrue($this->container->hasDefinition('simple_bus.bernard_bundle_bridge.listener.logger'));
-        $this->assertEquals(
-            'custom_logger',
-            $this->container->getDefinition('simple_bus.bernard_bundle_bridge.listener.logger')->getArgument(0)
+        $this->assertContainerBuilderHasService('simple_bus.bernard_bundle_bridge.listener.logger');
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'simple_bus.bernard_bundle_bridge.listener.logger',
+            0,
+            'custom_logger'
         );
     }
 
     /**
      * @test
      */
-//    public function it_should_register_disable_doctrine_logging_listener_in_debug_mode()
-//    {
-//        $config = [];
-//        $this->container->setParameter('kernel.debug', true);
-//        $this->extension->load([$config], $this->container);
-//
-//        $this->assertTrue($this->container->hasDefinition('simple_bus.bernard_bundle_bridge.listener.disable_doctrine_logger'));
-//    }
-
-    /**
-     * @test
-     */
     public function is_should_register_async_commands()
     {
-        $config = ['commands' => true];
-        $this->extension->load([$config], $this->container);
+        $this->load(['commands' => true]);
 
-        $this->assertTrue($this->container->hasDefinition('simple_bus.bernard_bundle_bridge.command_publisher'));
-        $this->assertFalse($this->container->hasDefinition('simple_bus.bernard_bundle_bridge.event_publisher'));
-        $this->assertEquals('command', $this->container->getDefinition('simple_bus.bernard_bundle_bridge.command_publisher')->getArgument(3));
+        $this->assertContainerBuilderHasService('simple_bus.bernard_bundle_bridge.command_publisher');
+        $this->assertContainerBuilderNotHasService('simple_bus.bernard_bundle_bridge.event_publisher');
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'simple_bus.bernard_bundle_bridge.command_publisher',
+            3,
+            'command'
+        );
     }
 
     /**
@@ -132,11 +124,21 @@ class SimpleBusBernardBundleBridgeExtensionTest extends \PHPUnit_Framework_TestC
      */
     public function is_should_register_async_events()
     {
-        $config = ['events' => true];
-        $this->extension->load([$config], $this->container);
+        $this->load(['events' => true]);
 
-        $this->assertTrue($this->container->hasDefinition('simple_bus.bernard_bundle_bridge.event_publisher'));
-        $this->assertFalse($this->container->hasDefinition('simple_bus.bernard_bundle_bridge.command_publisher'));
-        $this->assertEquals('event', $this->container->getDefinition('simple_bus.bernard_bundle_bridge.event_publisher')->getArgument(3));
+        $this->assertContainerBuilderHasService('simple_bus.bernard_bundle_bridge.event_publisher');
+        $this->assertContainerBuilderNotHasService('simple_bus.bernard_bundle_bridge.command_publisher');
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'simple_bus.bernard_bundle_bridge.event_publisher',
+            3,
+            'event'
+        );
+    }
+
+    protected function getContainerExtensions()
+    {
+        return [
+            new SimpleBusBernardBundleBridgeExtension('simple_bus_bernard_bundle_bridge'),
+        ];
     }
 }
