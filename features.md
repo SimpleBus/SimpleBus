@@ -62,7 +62,7 @@ Please, refer to [BernardBundle](https://github.com/bernardphp/BernardBundle) do
 
 ## Using doctrine driver
 
-_Bernard_ supports `doctrine` adapter, which uses SQL tables to store messages. If this is the case, then _SimpleBusBernardBundleBridge_ turns SQL logging off for all registered _Doctrine_ connnections when running `bernard:consume` console command. It prevents the consume process to run ouf of memory.
+_Bernard_ supports `doctrine` adapter, which uses SQL tables to store messages. If this is the case, then _SimpleBusBernardBundleBridge_ turns SQL logging off for all registered _Doctrine_ connections when running `bernard:consume` console command. It prevents the consume process to run ouf of memory.
 
 ## Next
 
