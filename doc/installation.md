@@ -70,25 +70,25 @@ More info about _Bernard_ [configuration](https://github.com/bernardphp/BernardB
 
 ##### Async commands
 
-Minimal config to enable asynchrounous commands:
+Minimal config to enable asynchronous commands:
 
 ```yaml
 simple_bus_bernard_bundle_bridge:
     commands: ~
 ```
 
-All asynchrounous commands will be routed to `asynchronous_commands` queue.
+All asynchronous commands will be routed to `asynchronous_commands` queue.
 
 ##### Async events
 
-Minimal config to enable asynchrounous events:
+Minimal config to enable asynchronous events:
 
 ```yaml
 simple_bus_bernard_bundle_bridge:
     events: ~
 ```
 
-All asynchrounous events will be routed to `asynchronous_events` queue.
+All asynchronous events will be routed to `asynchronous_events` queue.
 
 ## Consuming messages
 
