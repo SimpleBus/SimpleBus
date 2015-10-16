@@ -5,15 +5,17 @@ namespace SimpleBus\BernardBundleBridge\Tests\EventListener;
 use Bernard\Command\ConsumeCommand;
 use Doctrine\DBAL\Connection;
 use SimpleBus\BernardBundleBridge\EventListener\DisableDoctrineLoggerListener;
+use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleEvent;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class DisableDoctrineLoggerListenerTest extends \PHPUnit_Framework_TestCase
 {
     /** @var \PHPUnit_Framework_MockObject_MockObject */
     private $config;
 
-    /** @var DisableDoctrineLoggerListener */
-    private $listener;
+    /** @var EventDispatcher */
+    private $dispatcher;
 
     public function setUp()
     {
@@ -33,7 +35,8 @@ class DisableDoctrineLoggerListenerTest extends \PHPUnit_Framework_TestCase
             ])
         ;
 
-        $this->listener = new DisableDoctrineLoggerListener($registry);
+        $this->dispatcher = new EventDispatcher();
+        $this->dispatcher->addSubscriber(new DisableDoctrineLoggerListener($registry));
     }
 
     /**
@@ -53,7 +56,7 @@ class DisableDoctrineLoggerListenerTest extends \PHPUnit_Framework_TestCase
             $this->getMock('Symfony\Component\Console\Output\OutputInterface')
         );
 
-        $this->listener->onCommand($event);
+        $this->dispatcher->dispatch(ConsoleEvents::COMMAND, $event);
     }
 
     /**
@@ -74,7 +77,7 @@ class DisableDoctrineLoggerListenerTest extends \PHPUnit_Framework_TestCase
             $this->getMock('Symfony\Component\Console\Output\OutputInterface')
         );
 
-        $this->listener->onCommand($event);
+        $this->dispatcher->dispatch(ConsoleEvents::COMMAND, $event);
     }
 
     /**

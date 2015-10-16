@@ -1,5 +1,7 @@
 /.idea
 /bin
+/build
 /vendor
 /composer.lock
 /phpunit.xml
+/.coveralls.yml
