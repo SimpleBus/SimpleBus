@@ -58,15 +58,17 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_normalize_commands_and_events_to_default_fixed_queue_name($type)
     {
-        $config = [$type => true];
+        foreach ([true, null] as $value) {
+            $config = [$type => $value];
 
-        $this->assertProcessedConfigurationEquals([$config], [
-            $type => [
-                'queue_name_resolver' => 'fixed',
-                'queue_name' => sprintf('asynchronous_%s', $type),
-                'queues_map' => [],
-            ],
-        ], $type);
+            $this->assertProcessedConfigurationEquals([$config], [
+                $type => [
+                    'queue_name_resolver' => 'fixed',
+                    'queue_name' => sprintf('asynchronous_%s', $type),
+                    'queues_map' => [],
+                ],
+            ], $type);
+        }
     }
 
     /**
