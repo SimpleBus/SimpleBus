@@ -17,7 +17,7 @@ class SimpleBusBernardBundleBridgeExtensionTest extends AbstractExtensionTestCas
     /**
      * @test
      */
-    public function it_should_register_queue_name_resolvers_by_default()
+    public function it_should_register_queue_name_resolver_templates_by_default()
     {
         $this->load();
 
@@ -91,6 +91,22 @@ class SimpleBusBernardBundleBridgeExtensionTest extends AbstractExtensionTestCas
     /**
      * @test
      */
+    public function it_should_register_custom_encrypter()
+    {
+        $this->registerService('my_encrypter', 'FooEncrypter');
+
+        $this->load([
+            'encryption' => [
+                'encrypter' => 'my_encrypter',
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasAlias('simple_bus.bernard_bundle_bridge.encrypter', 'my_encrypter');
+    }
+
+    /**
+     * @test
+     */
     public function it_should_register_logger_listener()
     {
         $this->load(['logger' => 'custom_logger']);
@@ -132,6 +148,91 @@ class SimpleBusBernardBundleBridgeExtensionTest extends AbstractExtensionTestCas
             'simple_bus.bernard_bundle_bridge.event_publisher',
             3,
             'event'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_register_fixed_queue_name_resolver_by_default()
+    {
+        $this->load(['commands' => true]);
+
+        $this->assertContainerBuilderHasServiceDefinitionWithParent(
+            'simple_bus.bernard_bundle_bridge.routing.commands_queue_name_resolver',
+            'simple_bus.bernard_bundle_bridge.routing.fixed_queue_name_resolver'
+        );
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'simple_bus.bernard_bundle_bridge.routing.commands_queue_name_resolver',
+            0,
+            'asynchronous_commands'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_register_class_based_queue_name_resolver()
+    {
+        $this->load([
+            'commands' => [
+                'queue_name_resolver' => 'class_based',
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasServiceDefinitionWithParent(
+            'simple_bus.bernard_bundle_bridge.routing.commands_queue_name_resolver',
+            'simple_bus.bernard_bundle_bridge.routing.class_based_queue_name_resolver'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_register_mapped_queue_name_resolver()
+    {
+        $this->load([
+            'commands' => [
+                'queue_name_resolver' => 'mapped',
+                'queues_map' => [
+                    'Foo' => 'foo',
+                    'Bar' => 'bar',
+                ],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasServiceDefinitionWithParent(
+            'simple_bus.bernard_bundle_bridge.routing.commands_queue_name_resolver',
+            'simple_bus.bernard_bundle_bridge.routing.mapped_queue_name_resolver'
+        );
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'simple_bus.bernard_bundle_bridge.routing.commands_queue_name_resolver',
+            0,
+            ['Foo' => 'foo', 'Bar' => 'bar']
+        );
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'simple_bus.bernard_bundle_bridge.routing.commands_queue_name_resolver',
+            1,
+            'asynchronous_commands'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function is_should_register_custom_queue_name_resolver()
+    {
+        $this->registerService('my_queue_name_resolver', 'FooResolver');
+
+        $this->load([
+            'commands' => [
+                'queue_name_resolver' => 'my_queue_name_resolver',
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasAlias(
+            'simple_bus.bernard_bundle_bridge.routing.commands_queue_name_resolver',
+            'my_queue_name_resolver'
         );
     }
 

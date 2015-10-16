@@ -14,6 +14,10 @@ class ConfigureDisableDoctrineLoggerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
+        if (!$container->has('bernard.driver')) {
+            return;
+        }
+
         if ($container->findDefinition('bernard.driver')->getClass() === 'Bernard\Driver\DoctrineDriver') {
             $listenerClass = 'SimpleBus\BernardBundleBridge\EventListener\DisableDoctrineLoggerListener';
 
