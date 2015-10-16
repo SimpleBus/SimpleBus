@@ -20,7 +20,7 @@ Below example consumes messages for 5 minutes and exits:
 */5 * * * * /var/www/symfony/app/console bernard:consume --max-runtime=300 >> /var/log/symfony/cron.log 2>&1
 ```
 
-In other words, run a cron job of consuming messages every 5 minutes for 5 minutes i.e. the process is restarted each 5 minutes.
+In other words, a cron job is run in 5 minutes interval consuming messages during 5 minutes i.e. there is always an active process.
 
 When amount of incoming messages is low, you could do something like this:
 
@@ -28,7 +28,7 @@ When amount of incoming messages is low, you could do something like this:
 */3 * * * * /var/www/symfony/app/console bernard:consume --max-messages=90 >> /var/log/symfony/cron.log 2>&1
 ```
 
-Consume 90 messages once per 3 minutes. You need to make sure you app can process 30 messages per minute. Adjust amount of messages and time to process it accordingly. It is OK for crons to overlap, but you probably don't want to spawn another long running process each 3 minutes.
+Consume 90 messages once per 3 minutes. You need to make sure your app can process 30 messages per minute. Adjust amount of messages and time to process it accordingly.
 
 ## Using supervisor
 
