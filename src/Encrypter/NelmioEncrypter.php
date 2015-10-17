@@ -4,8 +4,6 @@ namespace SimpleBus\BernardBundleBridge\Encrypter;
 
 /**
  * Copied from https://github.com/nelmio/NelmioSecurityBundle/blob/master/Encrypter.php.
- *
- * @codeCoverageIgnore
  */
 class NelmioEncrypter implements Encrypter
 {
