@@ -13,7 +13,7 @@ install:
     - composer install --no-progress
 
 script:
-    - bin/phpunit --exclude-group functional
+    - bin/phpunit
 
 after_script:
     - bin/coveralls

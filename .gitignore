@@ -5,3 +5,4 @@
 /composer.lock
 /phpunit.xml
 /.coveralls.yml
+/tests/Functional/temp
