@@ -11,3 +11,9 @@ before_install:
 
 install:
     - composer install --no-progress
+
+script:
+    - bin/phpunit --exclude-group functional
+
+after_script:
+    - bin/coveralls
