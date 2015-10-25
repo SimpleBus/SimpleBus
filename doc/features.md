@@ -66,4 +66,4 @@ _Bernard_ supports `doctrine` adapter, which uses SQL tables to store messages. 
 
 ## Next
 
-Read the [cookbook](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/cookbook.md) for various recipes how to use _SimpleBusBernardBundleBridge_ together with _Bernard_.
+Read the [cookbook](https://github.com/SimpleBus/SimpleBusBernardBundleBridge/blob/master/doc/cookbook.md) for various recipes how to use _SimpleBusBernardBundleBridge_ together with _Bernard_.

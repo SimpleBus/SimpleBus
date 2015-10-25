@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Use BernardBundle with SimpleBus/AsynchronousBundle.",
     "keywords": [ "bernard", "messages", "message bus", "event bus", "command bus" ],
-    "homepage": "https://github.com/lakiboy/SimpleBusBernardBundleBridge",
+    "homepage": "https://github.com/SimpleBus/SimpleBusBernardBundleBridge",
     "license": "MIT",
     "authors": [
         { "name": "Dmitri Lakachauskis", "email": "dmitri@devmachine.net" }
