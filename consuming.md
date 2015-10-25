@@ -71,4 +71,4 @@ Above will spawn 4 `bernard:consume` instances. 1 process for _geo_location_ and
 
 ## Next
 
-Read next about messages [encryption and logging](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/features.md).
+Read next about messages [encryption and logging](https://github.com/SimpleBus/SimpleBusBernardBundleBridge/blob/master/doc/features.md).

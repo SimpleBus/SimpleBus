@@ -64,4 +64,4 @@ Above example uses custom queue resolver for commands, however, all events route
 
 ## Next
 
-Read about various ways to [consume](https://github.com/lakiboy/SimpleBusBernardBundleBridge/blob/master/doc/consuming.md) async messages.
+Read about various ways to [consume](https://github.com/SimpleBus/SimpleBusBernardBundleBridge/blob/master/doc/consuming.md) async messages.
