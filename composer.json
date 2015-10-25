@@ -9,7 +9,7 @@
         { "name": "Dmitri Lakachauskis", "email": "dmitri@devmachine.net" }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": "^5.4|^7.0",
         "simple-bus/message-bus": "~2.0",
         "simple-bus/asynchronous-bundle": "~2.0",
         "simple-bus/asynchronous": "~2.0",
