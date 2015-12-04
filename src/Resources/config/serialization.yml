@@ -13,6 +13,6 @@ services:
         class: SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSerializer
         public: false
         arguments:
-            - @simple_bus.asynchronous.envelope_factory
+            - '@simple_bus.asynchronous.envelope_factory'
             # configured inside the bundle configuration
-            - @simple_bus.asynchronous.object_serializer
+            - '@simple_bus.asynchronous.object_serializer'

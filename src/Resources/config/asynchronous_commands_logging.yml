@@ -6,8 +6,8 @@ services:
         class: SimpleBus\Message\Logging\LoggingMiddleware
         public: false
         arguments:
-            - @logger
-            - %simple_bus.asynchronous.command_bus.logging.level%
+            - '@logger'
+            - '%simple_bus.asynchronous.command_bus.logging.level%'
         tags:
             - { name: monolog.logger, channel: asynchronous_command_bus }
             - { name: asynchronous_command_bus_middleware, priority: -999 }

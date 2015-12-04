@@ -12,7 +12,7 @@ services:
         class: SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages
         public: false
         arguments:
-            - @simple_bus.asynchronous.event_publisher
+            - '@simple_bus.asynchronous.event_publisher'
         tags:
             # insert before the middleware that actually notifies a message subscriber of the message
             - { name: event_bus_middleware, priority: 0 }
@@ -27,7 +27,7 @@ services:
         class: SimpleBus\Message\Subscriber\NotifiesMessageSubscribersMiddleware
         public: false
         arguments:
-            - @simple_bus.asynchronous.event_bus.event_subscribers_resolver
+            - '@simple_bus.asynchronous.event_bus.event_subscribers_resolver'
         tags:
             - { name: asynchronous_event_bus_middleware, priority: -1000 }
 
@@ -35,7 +35,7 @@ services:
         class: SimpleBus\Message\CallableResolver\ServiceLocatorAwareCallableResolver
         public: false
         arguments:
-            - [@service_container, 'get']
+            - ['@service_container', 'get']
 
     simple_bus.asynchronous.event_bus.event_subscribers_collection:
         class: SimpleBus\Message\CallableResolver\CallableCollection
@@ -43,18 +43,18 @@ services:
         arguments:
             # collection of event subscriber services ids, will be provided by the RegisterSubscribers compiler pas
             - []
-            - @simple_bus.asynchronous.event_bus.callable_resolver
+            - '@simple_bus.asynchronous.event_bus.callable_resolver'
 
     simple_bus.asynchronous.event_bus.event_subscribers_resolver:
         class: SimpleBus\Message\Subscriber\Resolver\NameBasedMessageSubscriberResolver
         public: false
         arguments:
-            - @simple_bus.asynchronous.event_bus.event_name_resolver
-            - @simple_bus.asynchronous.event_bus.event_subscribers_collection
+            - '@simple_bus.asynchronous.event_bus.event_name_resolver'
+            - '@simple_bus.asynchronous.event_bus.event_subscribers_collection'
 
     simple_bus.asynchronous.standard_serialized_event_envelope_consumer:
         class: SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer
         public: false
         arguments:
-            - @simple_bus.asynchronous.message_serializer
-            - @simple_bus.asynchronous.event_bus
+            - '@simple_bus.asynchronous.message_serializer'
+            - '@simple_bus.asynchronous.event_bus'
