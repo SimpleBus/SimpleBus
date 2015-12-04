@@ -3,5 +3,5 @@ services:
         class: SimpleBus\JMSSerializerBridge\JMSSerializerObjectSerializer
         public: false
         arguments:
-            - @jms_serializer
-            - "json"
+            - '@jms_serializer'
+            - 'json'
