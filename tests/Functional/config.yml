@@ -29,12 +29,12 @@ services:
     asynchronous_command_consumer:
         class: SimpleBus\AsynchronousBundle\Tests\Functional\MessageConsumer
         arguments:
-            - @simple_bus.asynchronous.standard_serialized_command_envelope_consumer
+            - '@simple_bus.asynchronous.standard_serialized_command_envelope_consumer'
 
     asynchronous_event_consumer:
         class: SimpleBus\AsynchronousBundle\Tests\Functional\MessageConsumer
         arguments:
-            - @simple_bus.asynchronous.standard_serialized_event_envelope_consumer
+            - '@simple_bus.asynchronous.standard_serialized_event_envelope_consumer'
 
 simple_bus_asynchronous:
     object_serializer_service_id: native_object_serializer
