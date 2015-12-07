@@ -12,21 +12,28 @@
             "homepage": "http://php-and-symfony.matthiasnoback.nl"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "comment": "Waiting for PR https://github.com/videlalvaro/RabbitMqBundle/pull/313",
+            "url": "http://github.com/ruudk/RabbitMqBundle"
+        }
+    ],
     "require": {
         "php": ">=5.4",
         "beberlei/assert": "~2.0",
         "simple-bus/message-bus": "~2.0",
         "simple-bus/asynchronous-bundle": "~2.0",
         "simple-bus/asynchronous": "~2.0",
-        "oldsound/rabbitmq-bundle": "~1.0",
-        "symfony/monolog-bundle": "~2.3"
+        "oldsound/rabbitmq-bundle": "dev-patch-3",
+        "symfony/monolog-bundle": "~2.3 || ~3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
         "simple-bus/jms-serializer-bundle-bridge": "~2.0",
-        "symfony/console": "~2.0",
-        "symfony/finder": "~2.0",
-        "symfony/process": "~2.0",
+        "symfony/console": "~2.0 || ~3.0",
+        "symfony/finder": "~2.0 || ~3.0",
+        "symfony/process": "~2.0 || ~3.0",
         "matthiasnoback/phpunit-asynchronicity": "~1.0",
         "satooshi/php-coveralls": "~0.6"
     },
