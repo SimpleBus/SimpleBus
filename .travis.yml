@@ -1,13 +1,30 @@
 language: php
 
-php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
 
-before_script:
+matrix:
+  include:
+    - php: 5.4
+    - php: 5.5
+    - php: 5.6
+      env: SYMFONY_VERSION=2.7.*
+    - php: 5.6
+      env: SYMFONY_VERSION=3.0.*
+    - php: 7.0
+      env: SYMFONY_VERSION=2.7.*
+    - php: 7.0
+      env: SYMFONY_VERSION=3.0.*
+
+env:
+  global:
+    - SYMFONY_VERSION=""
+
+before_install:
   - composer selfupdate
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/console "$SYMFONY_VERSION"; fi
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/finder "$SYMFONY_VERSION"; fi
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/process "$SYMFONY_VERSION"; fi
+
+install:
   - composer install --prefer-dist
 
 script:
