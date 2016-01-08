@@ -3,15 +3,15 @@ services:
         class: SimpleBus\RabbitMQBundleBridge\RabbitMQPublisher
         arguments:
             # defined by SimpleBusAsynchronousBundle
-            - @simple_bus.asynchronous.message_serializer
+            - '@simple_bus.asynchronous.message_serializer'
             # defined in this bundle's configuration
-            - @simple_bus.rabbit_mq_bundle_bridge.command_producer
-            - @simple_bus.rabbit_mq_bundle_bridge.routing.routing_key_resolver
-            - @simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver
+            - '@simple_bus.rabbit_mq_bundle_bridge.command_producer'
+            - '@simple_bus.rabbit_mq_bundle_bridge.routing.routing_key_resolver'
+            - '@simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver'
 
     simple_bus.rabbit_mq_bundle_bridge.commands_consumer:
         class: SimpleBus\RabbitMQBundleBridge\RabbitMQMessageConsumer
         arguments:
             # defined by SimpleBusAsynchronousBundle
-            - @simple_bus.asynchronous.standard_serialized_command_envelope_consumer
-            - @event_dispatcher
+            - '@simple_bus.asynchronous.standard_serialized_command_envelope_consumer'
+            - '@event_dispatcher'
