@@ -4,10 +4,6 @@ parameters:
 
 services:
     # needed to make JMSSerializerBundle work
-    translator:
-        class: stdClass
-
-    # needed to make JMSSerializerBundle work
     annotation_reader:
         class: Doctrine\Common\Annotations\AnnotationReader
 
@@ -19,14 +15,14 @@ services:
     asynchronous_command_handler:
         class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\LoggingCommandHandler
         arguments:
-            - @logger
+            - '@logger'
         tags:
             - { name: asynchronous_command_handler, handles: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AsynchronousCommand }
 
     asynchronous_event_subscriber:
         class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\LoggingEventSubscriber
         arguments:
-            - @logger
+            - '@logger'
         tags:
             - { name: asynchronous_event_subscriber, subscribes_to: SimpleBus\RabbitMQBundleBridge\Tests\Functional\Event }
 
@@ -47,7 +43,7 @@ services:
 
     simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.producer_mock:
         class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AdditionalPropertiesResolverProducerMock
-        arguments: [@old_sound_rabbit_mq.connection.default]
+        arguments: ['@old_sound_rabbit_mq.connection.default']
 
 old_sound_rabbit_mq:
     connections:

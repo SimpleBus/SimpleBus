@@ -8,9 +8,6 @@ use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Process\Process;
 
-/**
- * @group functional
- */
 class SimpleBusRabbitMQBundleTest extends KernelTestCase
 {
     /**
@@ -46,6 +43,18 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     /**
      * @test
      */
+    public function it_is_able_to_load_the_bundle()
+    {
+        /*
+         * There's no need to do anything here. This alone will prove that the bundle behaves well,
+         * i.e. its services and configuration can be loaded.
+         */
+    }
+
+    /**
+     * @test
+     * @group functional
+     */
     public function it_handles_commands_asynchronously()
     {
         $this->consumeMessagesFromQueue('asynchronous_commands');
@@ -59,6 +68,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     /**
      * @test
+     * @group functional
      */
     public function it_handles_events_asynchronously()
     {
@@ -71,6 +81,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     /**
      * @test
+     * @group functional
      */
     public function it_logs_errors()
     {
@@ -83,6 +94,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     /**
      * @test
+     * @group functional
      */
     public function it_resolve_properties()
     {
@@ -93,6 +105,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     /**
      * @test
+     * @group functional
      */
     public function it_sends_properties_to_producer()
     {
