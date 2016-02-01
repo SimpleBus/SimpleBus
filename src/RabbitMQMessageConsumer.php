@@ -39,14 +39,14 @@ class RabbitMQMessageConsumer implements ConsumerInterface
                 new MessageConsumed($msg)
             );
 
-            return true;
+            return self::MSG_ACK;
         } catch (Exception $exception) {
             $this->eventDispatcher->dispatch(
                 Events::MESSAGE_CONSUMPTION_FAILED,
                 new MessageConsumptionFailed($msg, $exception)
             );
 
-            return false;
+            return self::MSG_REJECT;
         }
     }
 }

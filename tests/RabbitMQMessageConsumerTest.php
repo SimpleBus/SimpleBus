@@ -29,7 +29,7 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
         $consumer = new RabbitMQMessageConsumer($serializedEnvelopeConsumer, $eventDispatcher);
 
         $result = $consumer->execute($message);
-        $this->assertSame(true, $result);
+        $this->assertSame(ConsumerInterface::MSG_ACK, $result);
     }
 
     /**
@@ -50,7 +50,7 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
         $consumer = new RabbitMQMessageConsumer($serializedEnvelopeConsumer, $eventDispatcher);
 
         $result = $consumer->execute($message);
-        $this->assertSame(false, $result);
+        $this->assertSame(ConsumerInterface::MSG_REJECT, $result);
     }
 
     private function newAMQPMessage($messageBody = '')
