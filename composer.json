@@ -18,7 +18,7 @@
         "simple-bus/message-bus": "~2.0",
         "simple-bus/asynchronous-bundle": "~2.0",
         "simple-bus/asynchronous": "~2.0",
-        "oldsound/rabbitmq-bundle": "~1.0",
+        "php-amqplib/rabbitmq-bundle": "~1.0",
         "symfony/monolog-bundle": "~2.3 || ~3.0"
     },
     "require-dev": {
