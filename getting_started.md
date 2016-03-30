@@ -68,3 +68,15 @@ simple_bus_asynchronous:
 ```
 
 This will log consumed messages to the `asynchronous_command_bus` and `asynchronous_event_bus` channels respectively.
+
+## Choose event strategy
+
+When handling events you have two strategies to choose from. Either you publish *all* events to the message queue or
+you only publish the events that have a registered subscriber. If your application is the only one that consuming messages
+you should consider using the **predefined** strategy. This will reduce the message overhead on the message queue. 
+
+```yaml
+simple_bus_asynchronous:
+  events:
+    strategy: 'predefined' # default: 'always'
+```
