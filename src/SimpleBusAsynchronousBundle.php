@@ -2,6 +2,7 @@
 
 namespace SimpleBus\AsynchronousBundle;
 
+use SimpleBus\AsynchronousBundle\DependencyInjection\Compiler\CollectAsynchronousEventNames;
 use SimpleBus\AsynchronousBundle\DependencyInjection\SimpleBusAsynchronousExtension;
 use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\ConfigureMiddlewares;
 use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\RegisterHandlers;
@@ -39,5 +40,7 @@ class SimpleBusAsynchronousBundle extends Bundle
                 'subscribes_to'
             )
         );
+
+        $container->addCompilerPass(new CollectAsynchronousEventNames());
     }
 }
