@@ -5,9 +5,12 @@ currentMenu: publishing_messages
 # Publishing messages
 
 When a `Message` should not be handled by the message bus (i.e. command or event bus) immediately (i.e. synchronously),
-it can be *published* to be handled by some other process. This library comes with two strategies for publishing
-messages: either a message will always *also* be published, or it will only be published when the message bus isn't able
-to handle it because there is no handler defined for it.
+it can be *published* to be handled by some other process. This library comes with three strategies for publishing
+messages:
+
+1. A message will always *also* be published.
+2. A message will only be published when the message bus isn't able to handle it because there is no handler defined for it.
+3. A message will be published only if its name exists in a predefined list.
 
 ## Strategy 1: Always publish messages
 
@@ -77,5 +80,36 @@ always publish a command. Instead, it should only be published when it *couldn't
 Possibly some other process knows how to handle it.
 
 If no command handler was found and the command is published, this will be logged using the provided `$logger`.
+
+## Strategy 3: Only publish predefined messages
+
+This strategy is useful when you know what messages you want to publish. 
+
+```php
+use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
+use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
+use SimpleBus\Asynchronous\Publisher\Publisher;
+use SimpleBus\Message\Message;
+use SimpleBus\Message\Name\MessageNameResolver;
+
+// $eventBus is an instance of MessageBusSupportingMiddleware
+$eventBus = ...;
+
+// $publisher is an instance of Publisher
+$publisher = ...;
+
+// $messageNameResolver is an instance of MessageNameResolver
+$messageNameResolver = ...;
+
+// The list of names will depend on what MessageNameResolver you are using. 
+$names = ['My\\Event', 'My\\Other\\Event'];
+
+$eventBus->appendMiddleware(new PublishesPredefinedMessages($publisher, $messageNameResolver, $names));
+
+// $event is an object
+$event = ...;
+
+$eventBus->handle($event);
+```
 
 *Continue reading about [consuming messages](consuming_messages.md)*
