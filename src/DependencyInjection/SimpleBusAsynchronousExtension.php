@@ -53,12 +53,7 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
     {
         $enabledBundles = $container->getParameter('kernel.bundles');
         if (!isset($enabledBundles[$bundleName])) {
-            throw new \LogicException(
-                sprintf(
-                    'You need to enable "%s" as well',
-                    $bundleName
-                )
-            );
+            throw new \LogicException(sprintf('You need to enable "%s" as well', $bundleName));
         }
     }
 
