@@ -5,7 +5,6 @@ namespace SimpleBus\AsynchronousBundle\Tests\Unit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use SimpleBus\AsynchronousBundle\DependencyInjection\SimpleBusAsynchronousExtension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
 {
@@ -25,7 +24,7 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function it_uses_strategy_allways_by_default()
+    public function it_uses_strategy_always_by_default()
     {
         $this->container->setParameter('kernel.bundles', ['SimpleBusCommandBusBundle'=>true, 'SimpleBusEventBusBundle'=>true]);
         $this->load();
@@ -43,7 +42,18 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasServiceDefinitionWithTag('simple_bus.asynchronous.publishes_predefined_messages_middleware', 'event_bus_middleware', ['priority'=>0]);
     }
-    
+
+    /**
+     * @test
+     * @expectedException \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     * @expectedExceptionMessageRegExp ".*custom_strategy.*"
+     */
+    public function it_uses_custom_strategy_when_configured()
+    {
+        $this->container->setParameter('kernel.bundles', ['SimpleBusCommandBusBundle'=>true, 'SimpleBusEventBusBundle'=>true]);
+        $this->load(['events'=>['strategy'=>['strategy_service_id'=>'custom_strategy']]]);
+    }
+
     /**
      * @test
      * @expectedException \LogicException
@@ -54,7 +64,7 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
         $this->container->setParameter('kernel.bundles', ['SimpleBusEventBusBundle'=>true]);
         $this->load(['events'=>['strategy'=>'predefined']]);
     }
-    
+
     /**
      * @test
      * @expectedException \LogicException

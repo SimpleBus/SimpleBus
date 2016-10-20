@@ -96,12 +96,7 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
             $loader->load('asynchronous_events_logging.yml');
         }
 
-
-        if ($config['strategy'] === 'always') {
-            $eventMiddleware = 'simple_bus.asynchronous.always_publishes_messages_middleware';
-        } else {
-            $eventMiddleware = 'simple_bus.asynchronous.publishes_predefined_messages_middleware';
-        }
+        $eventMiddleware = $config['strategy']['strategy_service_id'];
 
         // insert before the middleware that actually notifies a message subscriber of the message
         $container->getDefinition($eventMiddleware)->addTag('event_bus_middleware', ['priority' => 0]);
