@@ -7,6 +7,10 @@
     "license": "MIT",
     "authors": [
         {
+            "name": "Cliff Odijk",
+            "email": "cliff@jcid.nl"
+        },
+        {
             "name": "Matthias Noback",
             "email": "matthiasnoback@gmail.com",
             "homepage": "http://php-and-symfony.matthiasnoback.nl"
@@ -30,9 +34,13 @@
         "matthiasnoback/symfony-dependency-injection-test": "^0.7"
     },
     "autoload": {
-        "psr-4" : { "SimpleBus\\AsynchronousBundle\\" : "src" }
+        "psr-4": {
+            "SimpleBus\\AsynchronousBundle\\": "src"
+        }
     },
     "autoload-dev": {
-        "psr-4" : { "SimpleBus\\AsynchronousBundle\\Tests\\" : "tests" }
+        "psr-4": {
+            "SimpleBus\\AsynchronousBundle\\Tests\\": "tests"
+        }
     }
 }
