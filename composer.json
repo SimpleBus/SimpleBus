@@ -6,7 +6,10 @@
     "homepage": "https://github.com/SimpleBus/SimpleBusBernardBundleBridge",
     "license": "MIT",
     "authors": [
-        { "name": "Dmitri Lakachauskis", "email": "dmitri@devmachine.net" }
+        {
+            "name": "Dmitri Lakachauskis",
+            "email": "dmitri@devmachine.net"
+        }
     ],
     "require": {
         "php": "^5.4|^7.0",
@@ -27,15 +30,19 @@
         "symfony/finder": "~2.4",
         "doctrine/dbal": "~2.4"
     },
-    "suggests": {
+    "suggest": {
         "ext-mcrypt": "Allows encryption of messages.",
         "simple-bus/jms-serializer-bundle-bridge": "Serialization of messages with JMS serializer."
     },
     "autoload": {
-        "psr-4": { "SimpleBus\\BernardBundleBridge\\": "src" }
+        "psr-4": {
+            "SimpleBus\\BernardBundleBridge\\": "src"
+        }
     },
     "autoload-dev": {
-        "psr-4": { "SimpleBus\\BernardBundleBridge\\Tests\\": "tests" }
+        "psr-4": {
+            "SimpleBus\\BernardBundleBridge\\Tests\\": "tests"
+        }
     },
     "config": {
         "bin-dir": "bin"
