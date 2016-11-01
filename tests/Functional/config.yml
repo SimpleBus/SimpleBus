@@ -13,13 +13,13 @@ services:
 
     asynchronous_command_handler:
         class: SimpleBus\BernardBundleBridge\Tests\Functional\Demo\LoggingCommandHandler
-        arguments: [ @logger ]
+        arguments: [ "@logger" ]
         tags:
             - { name: asynchronous_command_handler, handles: SimpleBus\BernardBundleBridge\Tests\Functional\Demo\AsynchronousCommand }
 
     asynchronous_event_subscriber:
         class: SimpleBus\BernardBundleBridge\Tests\Functional\Demo\LoggingEventSubscriber
-        arguments: [ @logger ]
+        arguments: [ "@logger" ]
         tags:
             - { name: asynchronous_event_subscriber, subscribes_to: SimpleBus\BernardBundleBridge\Tests\Functional\Demo\Event }
 
