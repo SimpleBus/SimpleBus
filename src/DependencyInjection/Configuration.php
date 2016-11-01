@@ -43,10 +43,27 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('events')
                     ->canBeEnabled()
                     ->children()
-                        ->enumNode('strategy')
+                        ->arrayNode('strategy')
+                            ->addDefaultsIfNotSet()
+                            ->beforeNormalization()
+                                ->ifInArray(['always', 'predefined'])
+                                ->then(function ($v) {
+                                    $map = [
+                                        'always'     => 'simple_bus.asynchronous.always_publishes_messages_middleware',
+                                        'predefined' => 'simple_bus.asynchronous.publishes_predefined_messages_middleware',
+                                    ];
+
+                                    return [
+                                        'strategy_service_id' => $map[$v]
+                                    ];
+                                })
+                            ->end()
                             ->info('What strategy to use to publish messages')
-                            ->defaultValue('always')
-                            ->values(['always', 'predefined'])
+                            ->children()
+                                ->scalarNode('strategy_service_id')
+                                ->defaultValue('simple_bus.asynchronous.always_publishes_messages_middleware')
+                                ->end()
+                            ->end()
                         ->end()
                         ->scalarNode('publisher_service_id')
                             ->info('Service id of an instance of Publisher')
