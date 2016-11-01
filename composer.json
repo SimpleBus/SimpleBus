@@ -7,6 +7,10 @@
     "license": "MIT",
     "authors": [
         {
+            "name": "Cliff Odijk",
+            "email": "cliff@jcid.nl"
+        },
+        {
             "name": "Matthias Noback",
             "email": "matthiasnoback@gmail.com",
             "homepage": "http://php-and-symfony.matthiasnoback.nl"
@@ -22,10 +26,14 @@
         "simple-bus/symfony-bridge": "Bridge for using command buses and event buses with Symfony"
     },
     "autoload": {
-        "psr-4" : { "SimpleBus\\DoctrineORMBridge\\" : "src" }
+        "psr-4": {
+            "SimpleBus\\DoctrineORMBridge\\": "src"
+        }
     },
     "autoload-dev": {
-        "psr-4" : { "SimpleBus\\DoctrineORMBridge\\Tests\\" : "tests" }
+        "psr-4": {
+            "SimpleBus\\DoctrineORMBridge\\Tests\\": "tests"
+        }
     },
     "require-dev": {
         "matthiasnoback/doctrine-orm-test-service-provider": "~2.0",
