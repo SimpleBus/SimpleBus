@@ -118,7 +118,7 @@ Routing
 -------
 
 Customizing queue names
-.......................
+'''''''''''''''''''''''
 
 .. code:: yaml
 
@@ -130,7 +130,7 @@ All commands and events will be routed to *my\_queue\_for\_commands* and
 *my\_queue\_for\_events* respectively.
 
 Resolving queue name automatically
-..................................
+''''''''''''''''''''''''''''''''''
 
 It is a common practice to have a separate queue for each asynchronous
 job type.
@@ -149,7 +149,7 @@ Let's say you have ``SendEmailCommand`` and ``BounceEmailCommand``.
 Same config option works for events.
 
 Map message to queue manually
-.............................
+'''''''''''''''''''''''''''''
 
 Class based approach works fine, when amount of async messages is not
 high. Remember, you need to run
@@ -179,7 +179,7 @@ events not specified in the map will be routed to *other\_messages*
 queue.
 
 Custom queue resolver
-.....................
+'''''''''''''''''''''
 
 You can specify your own queue resolver by implementing
 ``SimpleBus\Asynchronous\Routing\RoutingKeyResolver`` interface.
@@ -220,7 +220,7 @@ If you don't want to deal with this yourself, you can enable the
 automatically cleanup after a message is consumed.
 
 Using cron
-..........
+''''''''''
 
 Below example consumes messages for 5 minutes and exits:
 
@@ -243,7 +243,7 @@ can process 30 messages per minute. Adjust amount of messages and time
 to process it accordingly.
 
 Using supervisor
-................
+''''''''''''''''
 
 The best way to keep the process alive is with
 `supervisor <http://supervisord.org>`__.
@@ -290,7 +290,7 @@ Features
 --------
 
 Encryption
-..........
+''''''''''
 
 *SimpleBusBernardBundleBridge* supports messages encryption. This is
 useful when transfering sensitive data using some 3rd party service or
@@ -327,7 +327,7 @@ well by implementing
             encrypter: my_encrypter
 
 Logging
-.......
+'''''''
 
 You can enable logger listener to debug messages production, consumption
 and rejection. Consider below example in development config:
@@ -362,7 +362,7 @@ Please, refer to
 documention how to implement your own listeners.
 
 Using doctrine driver
-.....................
+'''''''''''''''''''''
 
 *Bernard* supports ``doctrine`` adapter, which uses SQL tables to store
 messages. If this is the case, then *SimpleBusBernardBundleBridge* turns
@@ -374,13 +374,13 @@ Cookbook
 --------
 
 Setting up SQS
-..............
+''''''''''''''
 
 Install `AWS SDK for PHP <https://aws.amazon.com/sdk-for-php/>`__ and
 register *SQS* client service in container. Then you can do something
 like this:
 
-.. code:: yaml:
+.. code:: yaml
 
     bernard:
         driver: sqs
@@ -403,7 +403,7 @@ like this:
                 My\GeoBundle\Model\Event\LocationUpdatedEvent: geo_location
 
 Setting up failure queue
-........................
+''''''''''''''''''''''''
 
 While consuming a message an appropriate handler can throw an exception,
 thus leaving the message unacknowledged. In drivers like *SQS* this will
@@ -421,7 +421,7 @@ Bernard will catch an exception thrown by a handler, acknowledge a
 message and re-route to the ``failures`` queue.
 
 Custom SimpleBus publisher
-..........................
+''''''''''''''''''''''''''
 
 *SimpleBus* always publishes events when asynchronous events are
 enabled. This is because ``AlwaysPublishesMessages`` publisher is used

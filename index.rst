@@ -26,21 +26,22 @@ Why so many packages. Refer to Matthias Noback's Principle of package design.
 
 .. toctree::
     :maxdepth: 1
+    :glob:
     :caption: Components
 
-    Components/Asynchronous
-    Components/DoctrineDBALBridge
-    Components/DoctrineORMBridge
-    Components/JMSSerializerBridge
-    Components/Serialization
+    Components/*
 
 .. toctree::
     :maxdepth: 1
+    :glob:
     :caption: Bundles
 
-    Bundles/AsynchronousBundle
-    Bundles/BernardBundleBridge
-    Bundles/CommandBusBundle
-    Bundles/DoctrineOrmBridgeBundle
-    Bundles/EventBusBundle
-    Bundles/RabbitMQBundleBridge
+    Bundles/*
+
+.. toctree::
+    :maxdepth: 1
+    :glob:
+    :caption: TODO
+
+    MessageBus/*
+    SymfonyBridge/*
