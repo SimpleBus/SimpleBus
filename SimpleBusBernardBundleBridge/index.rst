@@ -1,8 +1,6 @@
 SimpleBusBernardBundleBridge
 ============================
 
-|Build Status| |Coverage Status|
-
 `Bernard <https://github.com/bernardphp/bernard>`__ integration with
 `SimpleBus <http://simplebus.github.io/MessageBus>`__ via
 `BernardBundle <https://github.com/bernardphp/BernardBundle>`__ i.e.
@@ -20,17 +18,3 @@ Topics:
 -  `Encryption and
    logging <https://github.com/SimpleBus/SimpleBusBernardBundleBridge/blob/master/doc/features.md>`__
 -  `Cookbook <https://github.com/SimpleBus/SimpleBusBernardBundleBridge/blob/master/doc/cookbook.md>`__
-
-.. |Build Status| image:: https://travis-ci.org/SimpleBus/SimpleBusBernardBundleBridge.svg?branch=master
-   :target: https://travis-ci.org/SimpleBus/SimpleBusBernardBundleBridge
-.. |Coverage Status| image:: https://coveralls.io/repos/SimpleBus/SimpleBusBernardBundleBridge/badge.svg?branch=master&service=github
-   :target: https://coveralls.io/github/SimpleBus/SimpleBusBernardBundleBridge?branch=master
-
-.. toctree::
-   :maxdepth: 1
-
-   consuming
-   cookbook
-   features
-   installation
-   routing
