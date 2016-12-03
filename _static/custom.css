@@ -7,3 +7,10 @@
 .wy-menu-vertical p.caption .caption-text {
     font-size: 120%;
 }
+
+blockquote {
+    padding: 11.5px 23px;
+    margin: 0 0 23px;
+    font-size: 16.25px;
+    border-left: 5px solid #eee;
+}
