@@ -19,3 +19,10 @@ entities <http://simplebus.github.io/DoctrineORMBridge/doc/domain_events.html>`_
    :target: https://travis-ci.org/SimpleBus/DoctrineORMBridge
 .. |Coverage Status| image:: https://coveralls.io/repos/SimpleBus/DoctrineORMBridge/badge.svg
    :target: https://coveralls.io/r/SimpleBus/DoctrineORMBridge
+
+.. toctree::
+   :maxdepth: 1
+
+   domain_events
+   getting_started
+   transactions

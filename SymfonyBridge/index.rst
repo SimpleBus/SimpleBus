@@ -21,3 +21,12 @@ guide <http://simplebus.github.io/SymfonyBridge/doc/upgrade_guide.html>`__.
    :target: https://travis-ci.org/SimpleBus/SymfonyBridge
 .. |Coverage Status| image:: https://coveralls.io/repos/SimpleBus/SymfonyBridge/badge.svg
    :target: https://coveralls.io/r/SimpleBus/SymfonyBridge
+
+.. toctree::
+   :maxdepth: 1
+
+   command_bus_bundle
+   doctrine_orm_bridge_bundle
+   event_bus_bundle
+   getting_started
+   upgrade_guide

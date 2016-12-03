@@ -25,3 +25,12 @@ Topics:
    :target: https://travis-ci.org/SimpleBus/SimpleBusBernardBundleBridge
 .. |Coverage Status| image:: https://coveralls.io/repos/SimpleBus/SimpleBusBernardBundleBridge/badge.svg?branch=master&service=github
    :target: https://coveralls.io/github/SimpleBus/SimpleBusBernardBundleBridge?branch=master
+
+.. toctree::
+   :maxdepth: 1
+
+   consuming
+   cookbook
+   features
+   installation
+   routing

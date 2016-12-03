@@ -15,3 +15,12 @@ bus <http://simplebus.github.io/MessageBus/doc/event_bus.html>`__.
    :target: https://travis-ci.org/SimpleBus/MessageBus
 .. |Coverage Status| image:: https://coveralls.io/repos/SimpleBus/MessageBus/badge.svg
    :target: https://coveralls.io/r/SimpleBus/MessageBus
+
+.. toctree::
+   :maxdepth: 1
+
+   command_bus
+   event_bus
+   getting_started
+   message_recorder
+   upgrade_guide

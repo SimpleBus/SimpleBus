@@ -17,3 +17,9 @@ transaction.
    :target: https://travis-ci.org/SimpleBus/DoctrineDBALBridge
 .. |Coverage Status| image:: https://coveralls.io/repos/SimpleBus/DoctrineDBALBridge/badge.svg
    :target: https://coveralls.io/r/SimpleBus/DoctrineDBALBridge
+
+.. toctree::
+   :maxdepth: 1
+
+   getting_started
+   transactions
