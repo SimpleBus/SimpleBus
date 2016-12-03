@@ -228,3 +228,7 @@ dummy:
 spelling:
 	$(SPHINXBUILD) -b spelling $(ALLSPHINXOPTS) $(BUILDDIR)/spelling
 	@echo "Spelling report generated in $(BUILDDIR)/spelling/output.txt"
+
+autobuild:
+	@echo "Auto generate files during development"
+	sphinx-autobuild -i .idea/ . $(BUILDDIR)/html/
