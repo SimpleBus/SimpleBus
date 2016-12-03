@@ -15,18 +15,14 @@ Package design
 
 Why so many packages. Refer to Matthias Noback's Principle of package design.
 
-
-
 .. toctree::
    :maxdepth: 1
 
-   Asynchronous/index
-   AsynchronousBundle/index
-   DoctrineDBALBridge/index
-   DoctrineORMBridge/index
-   MessageBus/index
-   RabbitMQBundleBridge/index
-   Serialization/index
-   SimpleBusBernardBundleBridge/index
-   SymfonyBridge/index
+   Components/Asynchronous
+
+.. toctree::
+   :maxdepth: 1
+   :capitation: Bundles
+
+   Bundles/AsynchronousBundle
 
