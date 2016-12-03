@@ -1,6 +1,13 @@
 Welcome to SimpleBus's documentation!
 =====================================
 
+Simplebus is a organization that helps you to use CQRS and event sourcing in your application.
+Get started by reaing more about these concepts LINK or by digging in to common use cases LINK.
+
+
+
+
+
 .. toctree::
    :maxdepth: 1
 
@@ -13,12 +20,4 @@ Welcome to SimpleBus's documentation!
    Serialization/index
    SimpleBusBernardBundleBridge/index
    SymfonyBridge/index
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
