@@ -21,6 +21,7 @@ Why so many packages. Refer to Matthias Noback's Principle of package design.
    Components/Asynchronous
    Components/DoctrineDBALBridge
    Components/DoctrineORMBridge
+   Components/JMSSerializerBridge
 
 .. toctree::
    :maxdepth: 1

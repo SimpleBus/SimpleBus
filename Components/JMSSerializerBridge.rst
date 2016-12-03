@@ -1,0 +1,4 @@
+JMSSerializerBridge
+===================
+
+@TODO Add docs
