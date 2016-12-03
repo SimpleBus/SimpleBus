@@ -231,4 +231,4 @@ spelling:
 
 autobuild:
 	@echo "Auto generate files during development"
-	sphinx-autobuild -i .idea/ . $(BUILDDIR)/html/
+	sphinx-autobuild --ignore ".git/*" . $(BUILDDIR)/html/
