@@ -5,11 +5,23 @@ This bundle integrates async component with the Symfony framework
 
 Install with
 
-```bash
-composer install simple-bus/asynchronous-bundle
-```
-// Add to appkernel.php
+.. code:: bash
 
+    composer require simple-bus/asynchronous-bundle
+
+.. code:: php
+
+    class AppKernel extends Kernel
+    {
+        public function registerBundles()
+        {
+            $bundles = array(
+                ...
+                new SimpleBus\AsynchronousBundle\SimpleBusAsynchronousBundle(),
+                ...
+            );
+        }
+    }
 
 Configuration
 -------------

@@ -2,7 +2,7 @@ Welcome to SimpleBus's documentation!
 =====================================
 
 Simplebus is a organization that helps you to use CQRS and event sourcing in your application.
-Get started by reaing more about these concepts LINK or by digging in to common use cases LINK.
+Get started by reading more about these concepts LINK or by digging in to common use cases LINK.
 
 
 Features and limitations
@@ -14,6 +14,15 @@ Package design
 ==============
 
 Why so many packages. Refer to Matthias Noback's Principle of package design.
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Introduction
+
+    Introduction/getting-started
+    Introduction/organization-overview
+    Introduction/cqrs-and-event-sourcing
+    Introduction/asynchronous-example
 
 .. toctree::
     :maxdepth: 1
@@ -30,8 +39,8 @@ Why so many packages. Refer to Matthias Noback's Principle of package design.
     :caption: Bundles
 
     Bundles/AsynchronousBundle
+    Bundles/BernardBundleBridge
+    Bundles/CommandBusBundle
     Bundles/DoctrineOrmBridgeBundle
+    Bundles/EventBusBundle
     Bundles/RabbitMQBundleBridge
-    Bundles/SimpleBusBernardBundleBridge
-    Bundles/SimpleBusCommandBusBundle
-    Bundles/SimpleBusEventBusBundle
