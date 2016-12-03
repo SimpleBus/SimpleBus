@@ -9,6 +9,8 @@ integrate
 It provides an easy way to wrap command handling in a database
 transaction.
 
+@TODO The intro should explain what it does.
+
 Getting started
 ---------------
 
