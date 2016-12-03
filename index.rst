@@ -16,18 +16,22 @@ Package design
 Why so many packages. Refer to Matthias Noback's Principle of package design.
 
 .. toctree::
-   :maxdepth: 1
+    :maxdepth: 1
+    :caption: Components
 
-   Components/Asynchronous
-   Components/DoctrineDBALBridge
-   Components/DoctrineORMBridge
-   Components/JMSSerializerBridge
-   Components/RabbitMQBundleBridge
-   Components/Serialization
+    Components/Asynchronous
+    Components/DoctrineDBALBridge
+    Components/DoctrineORMBridge
+    Components/JMSSerializerBridge
+    Components/Serialization
 
 .. toctree::
-   :maxdepth: 1
-   :capitation: Bundles
+    :maxdepth: 1
+    :caption: Bundles
 
-   Bundles/AsynchronousBundle
-
+    Bundles/AsynchronousBundle
+    Bundles/DoctrineOrmBridgeBundle
+    Bundles/RabbitMQBundleBridge
+    Bundles/SimpleBusBernardBundleBridge
+    Bundles/SimpleBusCommandBusBundle
+    Bundles/SimpleBusEventBusBundle
