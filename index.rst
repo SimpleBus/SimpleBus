@@ -1,20 +1,18 @@
 Welcome to SimpleBus's documentation!
 =====================================
 
-Contents:
-
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-         Asynchronous/index
-         AsynchronousBundle/index
-         DoctrineDBALBridge/index
-         DoctrineORMBridge/index
-         MessageBus/index
-         RabbitMQBundleBridge/index
-         Serialization/index
-         SimpleBusBernardBundleBridge/index
-         SymfonyBridge/index
+   Asynchronous/index
+   AsynchronousBundle/index
+   DoctrineDBALBridge/index
+   DoctrineORMBridge/index
+   MessageBus/index
+   RabbitMQBundleBridge/index
+   Serialization/index
+   SimpleBusBernardBundleBridge/index
+   SymfonyBridge/index
 
 
 Indices and tables

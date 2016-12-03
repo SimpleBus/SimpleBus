@@ -1,0 +1,3 @@
+sphinx-rtd-theme==0.1.6
+sphinxcontrib-spelling
+pyenchant
