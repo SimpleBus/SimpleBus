@@ -79,10 +79,7 @@ the name of the entity manager that you want to use.
 
     $commandBus->addMiddleware($transactionalMiddleware);
 
-    .. rubric:: Don't call ``flush()`` yourself
-:name: dont-call-flush-yourself
-
-    Once you have added this middleware, you shouldn't call
+.. note:: Once you have added this middleware, you shouldn't call
     ``EntityManager::flush()`` manually from inside your command
     handlers anymore.
 
@@ -147,9 +144,6 @@ middleware that is responsible for handling the transaction.
     $transactionalMiddleware = new WrapsMessageHandlingInTransaction($entityManager);
     $commandBus->appendMiddleware($transactionalMiddleware);
 
-    .. rubric:: Prepend middleware
-:name: prepend-middleware
-
-    The ``MessageBusSupportingMiddleware`` class also has a
+.. note:: The ``MessageBusSupportingMiddleware`` class also has a
     ``prependMiddleware()`` method, which you can use to prepend
     middleware instead of appending it.

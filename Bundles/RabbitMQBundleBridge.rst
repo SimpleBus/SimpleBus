@@ -131,9 +131,7 @@ running):
 
     php app/console rabbitmq:consume asynchronous_events
 
-.. rubric:: Tweak the configuration
-   :name: tweak-the-configuration
-
+.. note::
     You are encouraged to tweak the exchange/queue options and make them
     right for your project. Read more about your options in the
     `RabbitMQ
@@ -305,26 +303,27 @@ configuration:
     simple_bus_rabbit_mq_bundle_bridge:
         routing_key_resolver: my_custom_routing_key_resolver
 
-    .. rubric:: Fair dispatching
-:name: fair-dispatching
+Fair dispatching
+................
 
-    If you are looking for a way to evenly distribute messages over
-    several workers, you may not be better off using a "topic" exchange.
-    Instead, you could just use a "direct" exchange, spin up several
-    workers, and configure consumers to prefetch only one message at a
-    time:
+If you are looking for a way to evenly distribute messages over
+several workers, you may not be better off using a "topic" exchange.
+Instead, you could just use a "direct" exchange, spin up several
+workers, and configure consumers to prefetch only one message at a
+time:
 
-    .. code:: yaml
+.. code:: yaml
 
-        # in config.yml
-        old_sound_rabbit_mq:
-            consumers:
+    # in config.yml
+    old_sound_rabbit_mq:
+        consumers:
+            ...
+            asynchronous_commands:
                 ...
-                asynchronous_commands:
-                    ...
-                    qos_options:
-                        prefetch_count: 1
+                qos_options:
+                    prefetch_count: 1
 
+.. note::
     See also `Fair
     dispatching <https://github.com/videlalvaro/RabbitMqBundle#fair-dispatching>`__
     in the bundle's official documentation.

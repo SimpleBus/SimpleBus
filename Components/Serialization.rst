@@ -124,9 +124,7 @@ of an object serializer, which uses the native PHP ``serialize()`` and
 
     $deserializedEnvelope = $serializer->deserialize($serializedEnvelope, get_class($envelope));
 
-    .. rubric:: Use another serializer
-:name: use-another-serializer
-
+.. note::
     You are encouraged to use a more advanced serializer like the
     `JMSSerializer <https://github.com/schmittjoh/serializer>`__.
     `SimpleBus/JMSSerializerBridge <https://github.com/SimpleBus/JMSSerializerBridge>`__
