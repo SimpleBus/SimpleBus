@@ -20,6 +20,17 @@ import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
+# -- Syntax highlighting ------------------------------------------------
+
+import shlex
+from sphinx.highlighting import lexers
+from pygments.lexers.web import PhpLexer
+
+lexers['php'] = PhpLexer(startinline=True, linenos=1)
+
+primary_domain = 'php'
+highlight_language = 'php'
+
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -169,6 +180,7 @@ html_static_path = ['_static']
 
 def setup(app):
     app.add_stylesheet('custom.css')
+    app.add_stylesheet('highlight.css')
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
