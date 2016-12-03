@@ -23,6 +23,7 @@ Why so many packages. Refer to Matthias Noback's Principle of package design.
    Components/DoctrineORMBridge
    Components/JMSSerializerBridge
    Components/RabbitMQBundleBridge
+   Components/Serialization
 
 .. toctree::
    :maxdepth: 1
