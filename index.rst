@@ -19,6 +19,7 @@ Why so many packages. Refer to Matthias Noback's Principle of package design.
    :maxdepth: 1
 
    Components/Asynchronous
+   Components/DoctrineDBALBridge
 
 .. toctree::
    :maxdepth: 1
