@@ -1,5 +1,5 @@
-SimpleBus/SymfonyBridge
-=======================
+SymfonyBridge
+=============
 
 |Build Status| |Coverage Status|
 

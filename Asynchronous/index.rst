@@ -1,5 +1,5 @@
-SimpleBus/Asynchronous
-======================
+Asynchronous
+============
 
 |Build Status| |Coverage Status|
 

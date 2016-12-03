@@ -1,5 +1,5 @@
-SimpleBus/MessageBus
-====================
+MessageBus
+==========
 
 |Build Status| |Coverage Status|
 

@@ -1,5 +1,5 @@
-SimpleBus/DoctrineDBALBridge
-============================
+DoctrineDBALBridge
+==================
 
 |Build Status| |Coverage Status|
 

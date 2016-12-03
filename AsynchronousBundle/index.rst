@@ -1,5 +1,5 @@
-SimpleBus/AsynchronousBundle
-============================
+AsynchronousBundle
+==================
 
 |Build Status| |Coverage Status|
 

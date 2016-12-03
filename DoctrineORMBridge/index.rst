@@ -1,5 +1,5 @@
-SimpleBus/DoctrineORMBridge
-===========================
+DoctrineORMBridge
+=================
 
 |Build Status| |Coverage Status|
 

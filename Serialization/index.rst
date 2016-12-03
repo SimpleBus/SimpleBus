@@ -1,5 +1,5 @@
-SimpleBus/Serialization
-=======================
+Serialization
+=============
 
 |Build Status| |Coverage Status|
 

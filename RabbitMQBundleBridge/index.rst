@@ -1,5 +1,5 @@
-SimpleBus/RabbitMQBundleBridge
-==============================
+RabbitMQBundleBridge
+====================
 
 |Build Status|
 
