@@ -130,7 +130,9 @@ Consuming Messages
 ------------------
 
 There is different strategies you could use to consume messages from the queue.
-One simple solution is to use a cronjob to run the following commands every minute.
+One simple solution is to run the following commands. They will start listening
+on incoming messages and consume them. If you are using these commands it is recommended
+to set up ``supervisord``.
 
 .. code-block::  bash
 
