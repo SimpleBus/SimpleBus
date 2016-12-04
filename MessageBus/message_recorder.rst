@@ -10,7 +10,7 @@ This can be accomplished by using *message recorders*. These are objects
 with the ability to record messages. From the outside these messages can
 be retrieved, and erased:
 
-.. code:: php
+.. code-block::  php
 
     interface ContainsRecordedMessages
     {
@@ -28,7 +28,7 @@ Publicly
 The default implementation, which has a public ``record()`` method as
 well, is the ``PublicMessageRecorder``:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Recorder\PublicMessageRecorder;
 
@@ -49,7 +49,7 @@ while you change them. You record those events inside the entity. Later,
 when the changes have been persisted and the database transaction has
 succeeded, you should collect the recorded events and handle them:
 
-.. code:: php
+.. code-block::  php
 
     $entity->changeSomething();
     // $entity generates a SomethingChanged event and records it internally
@@ -69,7 +69,7 @@ You can give your entities the ability to record their own events by
 letting them implement the ``RecordsMessages`` interface and using the
 ``PrivateMessageRecorderCapabilities`` trait:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Recorder\RecordsMessages;
     use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
@@ -100,7 +100,7 @@ a piece of middleware to the command bus. This middleware needs the
 handling of a command, and it needs the *event bus* to actually handle
 the recorded events:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Recorder\HandlesRecordedMessagesMiddleware;
 
@@ -150,7 +150,7 @@ If you have multiple ways in which you record events, e.g. using the
 ``PublicMessageRecorder`` and using domain events, you can combine those
 into one message recorder, which aggregates the recorded messages:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Recorder\AggregatesRecordedMessages;
 
@@ -166,7 +166,7 @@ Finally, you can provide this aggregating message recorder to the
 ``HandlesRecordedMessagesMiddleware`` and it will act as if it is a
 single message recorder.
 
-.. code:: php
+.. code-block::  php
 
     $commandBus->appendMiddleware(new HandlesRecordedMessagesMiddleware(
         $aggregatingMessageRecorder,

@@ -6,7 +6,7 @@ Installation
 
 Using `Composer <https://getcomposer.org/>`__:
 
-.. code:: bash
+.. code-block::  bash
 
     composer require simple-bus/symfony-bridge
 

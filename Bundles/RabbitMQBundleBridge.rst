@@ -20,7 +20,7 @@ Handling commands asynchronously
 If you want commands to be handled asynchronously, you should first
 configure ``OldSoundRabbitMqBundle``:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
     old_sound_rabbit_mq:
@@ -42,7 +42,7 @@ configure ``OldSoundRabbitMqBundle``:
 
 Now enable asynchronous command handling:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
     simple_bus_rabbit_mq_bundle_bridge:
@@ -56,7 +56,7 @@ no regular handler defined for it. Instead of registering the handler
 using the tag ``command_handler``, you should now register it using the
 tag ``asynchronous_command_handler``:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         my_asynchronous_command_handler:
@@ -70,7 +70,7 @@ See also the documentation of
 To actually consume command messages, you need to start (and keep
 running):
 
-.. code:: bash
+.. code-block::  bash
 
     php app/console rabbitmq:consume asynchronous_commands
 
@@ -80,7 +80,7 @@ Handling events asynchronously
 If you want events to be handled asynchronously, you should first
 configure ``OldSoundRabbitMqBundle``:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
     old_sound_rabbit_mq:
@@ -101,7 +101,7 @@ configure ``OldSoundRabbitMqBundle``:
 
 Now enable asynchronous event handling:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
     simple_bus_rabbit_mq_bundle_bridge:
@@ -116,7 +116,7 @@ asynchronously, instead of registering the subscriber using the tag
 ``event_subscriber`` tag, you should now use the
 ``asynchronous_event_subscriber`` tag:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         my_asynchronous_event_subscriber:
@@ -127,7 +127,7 @@ asynchronously, instead of registering the subscriber using the tag
 To actually consume event messages, you need to start (and keep
 running):
 
-.. code:: bash
+.. code-block::  bash
 
     php app/console rabbitmq:consume asynchronous_events
 
@@ -159,7 +159,7 @@ implement an event subscriber (or listener if you want to) which
 subscribes to the event
 ``simple_bus.rabbit_mq_bundle_bridge.message_consumption_failed``:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\RabbitMQBundleBridge\Event\Events;
     use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
@@ -183,7 +183,7 @@ subscribes to the event
 Don't forget to define a service for it and tag it as
 ``kernel.event_subscriber``:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         my_error_handler:
@@ -199,7 +199,7 @@ some additional actions. You can do this by creating an event subscriber
 which subscribes to the
 ``simple_bus.rabbit_mq_bundle_bridge.message_consumed`` event:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\RabbitMQBundleBridge\Event\Events;
     use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumed;
@@ -222,7 +222,7 @@ which subscribes to the
 Don't forget to define a service for it and tag it as
 ``kernel.event_subscriber``:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         my_success_handler:
@@ -240,7 +240,7 @@ routing key, this bundle can generate routing keys automatically for you
 based on the class name of the ``Message``. Just change the bundle
 configuration:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
     simple_bus_rabbit_mq:
@@ -252,7 +252,7 @@ published to the queue, its routing key will be
 ``Acme.Command.RegisterUser``. Now you can define consumers for specific
 messages, based on this routing key:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
     old_sound_rabbit_mq:
@@ -271,7 +271,7 @@ If you want to define routing keys in a custom way (not based on the
 class of a message), create a class that implements
 ``RoutingKeyResolver``:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\RabbitMQBundleBridge\Routing\RoutingKeyResolver;
 
@@ -288,7 +288,7 @@ class of a message), create a class that implements
 
 Now register this class as a service:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         my_custom_routing_key_resolver:
@@ -297,7 +297,7 @@ Now register this class as a service:
 Finally, mention your routing key resolver service id in the bundle
 configuration:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
     simple_bus_rabbit_mq_bundle_bridge:
@@ -312,7 +312,7 @@ Instead, you could just use a "direct" exchange, spin up several
 workers, and configure consumers to prefetch only one message at a
 time:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
     old_sound_rabbit_mq:
@@ -341,7 +341,7 @@ resolvers <http://simplebus.github.io/Asynchronous/doc/additional_properties.md>
 Define your resolvers as a service and tag them as
 ``simple_bus.additional_properties_resolver``:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         your_additional_property_resolver:

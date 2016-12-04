@@ -14,7 +14,7 @@ library <https://github.com/SimpleBus/SymfonyBridge>`__ comes with the
 
 First enable the bundle in your application's kernel:
 
-.. code:: php
+.. code-block::  php
 
     class AppKernel extends Kernel
     {
@@ -36,7 +36,7 @@ This bundle provides the ``command_bus`` service which is an instance of
 ``SimpleBus\Message\Bus\MessageBus``. Wherever you like, you can let it
 handle commands, e.g. inside a container-aware controller:
 
-.. code:: php
+.. code-block::  php
 
     // $command is an arbitrary object that will be passed to the command handler
     $command = ...;
@@ -46,7 +46,7 @@ handle commands, e.g. inside a container-aware controller:
 However, you are encouraged to properly inject the ``command_bus``
 service as a dependency whenever you need it:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         some_service:
@@ -63,7 +63,7 @@ handlers. This bundle allows you to register your own command handlers
 by adding the ``command_handler`` tag to the command handler's service
 definition:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         register_user_command_handler:
@@ -89,7 +89,7 @@ definition:
     you want to use a custom method, just add a ``method`` attribute to
     the ``command_handler`` tag:
 
-    .. code:: yaml
+    .. code-block::  yaml
 
         services:
             register_user_command_handler:
@@ -107,7 +107,7 @@ command is used. This can be either 1) its fully-qualified class name
 its static ``messageName()`` method. By default, the first strategy is
 used, but you can configure it in your application configuration:
 
-.. code:: yaml
+.. code-block::  yaml
 
     command_bus:
         # default value for this key is "class_based"
@@ -116,7 +116,7 @@ used, but you can configure it in your application configuration:
 When you change the strategy, you also have to change the value of the
 ``handles`` attribute of your command handler service definitions:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         register_user_command_handler:
@@ -136,7 +136,7 @@ you can extend the behavior of the command bus by adding middleware to
 it. This bundle allows you to register your own middleware by adding the
 ``command_bus_middleware`` tag to the middleware service definition:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         specialized_command_bus_middleware:
@@ -164,7 +164,7 @@ Logging
 If you want to log every command that is being handled, enable logging
 in ``config.yml``:
 
-.. code:: yaml
+.. code-block::  yaml
 
     command_bus:
         logging: ~

@@ -15,7 +15,7 @@ Setting up the event bus
 
 At least we need an instance of ``MessageBusSupportingMiddleware``:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
 
@@ -27,7 +27,7 @@ Finish handling an event, before handling the next
 We want to make sure that events are always fully handled before other
 events will be handled, so we add a specialized middleware for that:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext;
 
@@ -42,7 +42,7 @@ available in the application. We should make this *event subscriber
 collection* lazy-loading, or every event subscriber will be fully
 loaded, even though it is not going to be used:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\CallableResolver\CallableCollection;
     use SimpleBus\Message\CallableResolver\ServiceLocatorAwareCallableResolver;
@@ -69,7 +69,7 @@ Each of the provided "callables" can be one of the following things:
 For backwards compatibility an object with a ``notify()`` method also
 counts as a "callable".
 
-.. code:: php
+.. code-block::  php
 
     // Provide a service locator callable. It will be used to instantiate a subscriber service whenever requested.
     $serviceLocator = function ($serviceId) {
@@ -92,7 +92,7 @@ The name of an event
 First we need a way to resolve the name of an event. You can use the
 fully-qualified class name (FQCN) of an event object as its name:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Name\ClassBasedNameResolver;
 
@@ -100,7 +100,7 @@ fully-qualified class name (FQCN) of an event object as its name:
 
 Or you can ask event objects what their name is:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Name\NamedMessageNameResolver;
 
@@ -108,7 +108,7 @@ Or you can ask event objects what their name is:
 
 In that case your events have to implement ``NamedMessage``:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Name\NamedMessage;
 
@@ -134,7 +134,7 @@ Using the ``MessageNameResolver`` of your choice, you can now let the
 *event subscribers resolver* find the right event subscribers for a
 given event.
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Subscriber\Resolver\NameBasedMessageSubscriberResolver;
 
@@ -146,7 +146,7 @@ given event.
 Finally, we should add some middleware to the event bus that notifies
 all of the resolved event subscribers:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Subscriber\NotifiesMessageSubscribersMiddleware;
 
@@ -161,7 +161,7 @@ Using the event bus: an example
 
 Consider the following event:
 
-.. code:: php
+.. code-block::  php
 
     class UserRegistered
     {
@@ -185,7 +185,7 @@ upon the event.
 
 A subscriber for this event looks like this:
 
-.. code:: php
+.. code-block::  php
 
     class SendWelcomeMailWhenUserRegistered
     {
@@ -206,7 +206,7 @@ creating a new event object and let the event bus handle it. Eventually
 the event will be passed as a message to the
 ``SendWelcomeMailWhenUserRegistered`` event subscriber:
 
-.. code:: php
+.. code-block::  php
 
     $userId = $this->userRepository->nextIdentity();
 
@@ -220,7 +220,7 @@ the event will be passed as a message to the
     It's very easy to extend the behavior of the event bus. You can
     create a class that implements ``MessageBusMiddleware``:
 
-    .. code:: php
+    .. code-block::  php
 
         use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
@@ -251,7 +251,7 @@ the event will be passed as a message to the
     ``MessageBusSupportingMiddleware`` instance (like the event bus we
     created earlier):
 
-    .. code:: php
+    .. code-block::  php
 
         $eventBus->appendMiddleware(new StoreDomainEvents());
 
@@ -270,7 +270,7 @@ the event will be passed as a message to the
     `PSR-3 compliant logger <http://www.php-fig.org/psr/psr-3/>`__
     first:
 
-    .. code:: php
+    .. code-block::  php
 
         use Psr\Log\LoggerInterface;
         use Psr\Log\LogLevel;

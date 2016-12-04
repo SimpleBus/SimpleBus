@@ -14,7 +14,7 @@ Setting up the command bus
 
 At least we need an instance of ``MessageBusSupportingMiddleware``:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
 
@@ -26,7 +26,7 @@ Finish handling a command, before handling the next
 We want to make sure that commands are always fully handled before other
 commands will be handled, so we add a specialized middleware for that:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext;
 
@@ -43,7 +43,7 @@ the application. We should make this *command handler map* lazy-loading,
 or every command handler will be fully loaded, even though it is not
 going to be used:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\CallableResolver\CallableMap;
     use SimpleBus\Message\CallableResolver\ServiceLocatorAwareCallableResolver;
@@ -66,7 +66,7 @@ Each of the provided "callables" can be one of the following things:
 For backwards compatibility an object with a ``handle()`` method also
 counts as a "callable".
 
-.. code:: php
+.. code-block::  php
 
     // Provide a service locator callable. It will be used to instantiate a handler service whenever requested.
     $serviceLocator = function ($serviceId) {
@@ -89,7 +89,7 @@ The name of a command
 First we need a way to resolve the name of a command. You can use the
 fully-qualified class name (FQCN) of a command object as its name:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Name\ClassBasedNameResolver;
 
@@ -97,7 +97,7 @@ fully-qualified class name (FQCN) of a command object as its name:
 
 Or you can ask command objects what their name is:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Name\NamedMessageNameResolver;
 
@@ -105,7 +105,7 @@ Or you can ask command objects what their name is:
 
 In that case your commands have to implement ``NamedMessage``:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Name\NamedMessage;
 
@@ -131,7 +131,7 @@ Using the ``MessageNameResolver`` of your choice, you can now let the
 *command handler resolver* find the right command handler for a given
 command.
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Handler\Resolver\NameBasedMessageHandlerResolver;
 
@@ -143,7 +143,7 @@ command.
 Finally, we should add some middleware to the command bus that calls the
 resolved command handler:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Handler\DelegatesToMessageHandlerMiddleware;
 
@@ -158,7 +158,7 @@ Using the command bus: an example
 
 Consider the following command:
 
-.. code:: php
+.. code-block::  php
 
     class RegisterUser
     {
@@ -188,7 +188,7 @@ This information is required to execute the desired behavior.
 
 The handler for this command looks like this:
 
-.. code:: php
+.. code-block::  php
 
     class RegisterUserCommandHandler
     {
@@ -212,7 +212,7 @@ new command object and let the command bus handle it. Eventually the
 command will be passed as a message to the
 ``RegisterUserCommandHandler``:
 
-.. code:: php
+.. code-block::  php
 
     $command = new RegisterUser(
         'matthiasnoback@gmail.com',
@@ -227,7 +227,7 @@ command will be passed as a message to the
     It's very easy to extend the behavior of the command bus. You can
     create a class that implements ``MessageBusMiddleware``:
 
-    .. code:: php
+    .. code-block::  php
 
         use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
@@ -258,7 +258,7 @@ command will be passed as a message to the
     ``MessageBusSupportingMiddleware`` instance (like the command bus we
     created earlier):
 
-    .. code:: php
+    .. code-block::  php
 
         $commandBus->appendMiddleware(new HandleCommandsAsynchronously());
 
@@ -277,7 +277,7 @@ command will be passed as a message to the
     `PSR-3 compliant logger <http://www.php-fig.org/psr/psr-3/>`__
     first:
 
-    .. code:: php
+    .. code-block::  php
 
         use Psr\Log\LoggerInterface;
         use Psr\Log\LogLevel;

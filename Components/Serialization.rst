@@ -17,7 +17,7 @@ contains some metadata about the message, e.g. the type of the message
 ``SimpleBus/Serialization`` comes with a default implementation of an
 envelope, which can be used like this:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 
@@ -34,7 +34,7 @@ plain text in order to travel over a network, you should serialize the
 message itself using an `object serializer <object_serializer.md>`__ and
 get a new envelope instance with the serialized message:
 
-.. code:: php
+.. code-block::  php
 
     // $serializedMessage is a string
     $serializedMessage = ...;
@@ -49,7 +49,7 @@ If an ``Envelope`` contains a serialized message and you have
 deserialized that message, you can get a new envelope by providing the
 actual message:
 
-.. code:: php
+.. code-block::  php
 
     // $deserializedMessage is an instance of Message
     $deserializedMessage = ...;
@@ -64,7 +64,7 @@ metadata like a timestamp, or the identifier of the machine that
 produced the message. In that case you can just implement your own
 ``Envelope`` class:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 
@@ -88,7 +88,7 @@ The `message serializer <message_serializer.md>`__ uses an
 want to use your own type of envelopes, you should implement an envelope
 factory yourself as well:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Serialization\Envelope\EnvelopeFactory;
     use SimpleBus\Message\Message;
@@ -114,7 +114,7 @@ handed to it. ``SimpleBus/Serializer`` contains a simple implementation
 of an object serializer, which uses the native PHP ``serialize()`` and
 ``unserialize()`` functions:
 
-.. code:: php
+.. code-block::  php
 
     // $envelope is an instance of Envelope, containing a serialized message
     $envelope = ...;
@@ -143,7 +143,7 @@ wrapped in an ``Envelope``. At the other end it may be unwrapped and
 processed. This standard procedure is implemented inside the
 ``StandardMessageInEnvelopeSerializer``:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Serialization\Envelope\DefaultEnvelopeFactory;
     use SimpleBus\Serialization\NativeObjectSerializer;

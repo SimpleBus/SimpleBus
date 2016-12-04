@@ -26,7 +26,7 @@ import shlex
 from sphinx.highlighting import lexers
 from pygments.lexers.web import PhpLexer
 
-lexers['php'] = PhpLexer(startinline=True, linenos=1)
+lexers['php'] = PhpLexer(startinline=True)
 
 primary_domain = 'php'
 highlight_language = 'php'
@@ -41,7 +41,12 @@ highlight_language = 'php'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinxcontrib.spelling'
+    'sensio.sphinx.bestpractice',
+    'sensio.sphinx.codeblock',
+    'sensio.sphinx.configurationblock',
+    'sensio.sphinx.phpcode',
+    'sensio.sphinx.refinclude',
+    'sphinxcontrib.spelling',
 ]
 
 # Spelling configuration

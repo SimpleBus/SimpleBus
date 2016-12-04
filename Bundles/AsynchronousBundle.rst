@@ -5,11 +5,11 @@ This bundle integrates async component with the Symfony framework
 
 Install with
 
-.. code:: bash
+.. code-block::  bash
 
     composer require simple-bus/asynchronous-bundle
 
-.. code:: php
+.. code-block::  php
 
     class AppKernel extends Kernel
     {
@@ -57,7 +57,7 @@ The first thing you need to do is to provide a service that is able to
 serialize any object. This service needs to implement
 ``SimpleBus\Serialization\ObjectSerializer``.
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
     simple_bus_asynchronous:
@@ -82,7 +82,7 @@ events, for example to some message queue. These services should both
 implement ``SimpleBus\Asynchronous\Publisher\Publisher``. When you have
 defined them as services, mention their service id in the configuration:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
     simple_bus_asynchronous:
@@ -107,7 +107,7 @@ Logging
 To get some insight into what goes on in the consumer process, enable
 logging:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
     simple_bus_asynchronous:
@@ -131,7 +131,7 @@ subscriber (*predefined* strategy). If your application is the only one
 that is consuming messages you should consider using the **predefined**
 strategy. This will reduce the message overhead on the message queue.
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_asynchronous:
         events:
@@ -140,7 +140,7 @@ strategy. This will reduce the message overhead on the message queue.
 You can also use Your own strategy by defining custom
 **strategy\_service\_id**
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_asynchronous:
         events:

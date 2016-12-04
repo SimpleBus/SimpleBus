@@ -11,7 +11,7 @@ Installation
 
 Add the following to your composer.json:
 
-.. code:: bash
+.. code-block::  bash
 
     composer require simple-bus/bernard-bundle-bridge
     composer require simple-bus/jms-serializer-bundle-bridge
@@ -29,7 +29,7 @@ library itself is tagged appropriately. If you don't allow dev packages
 in your *composer.json* with ``minimum-stability`` option (which is a
 right thing to do), then add below lines to your composer.json as well:
 
-.. code:: bash
+.. code-block::  bash
 
     composer require bernard/bernard-bundle@dev
     composer require bernard/bernard@dev
@@ -39,7 +39,7 @@ I believe this requirement is temporary and will be solved eventually by
 
 Register bundle in the kernel:
 
-.. code:: php
+.. code-block::  php
 
     class AppKernel extends Kernel
     {
@@ -68,7 +68,7 @@ Configuration
 
 Choose *Bernard* driver:
 
-.. code:: yaml
+.. code-block::  yaml
 
     bernard:
         driver: doctrine
@@ -81,7 +81,7 @@ Async commands
 
 Minimal config to enable asynchronous commands:
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_bernard_bundle_bridge:
         commands: ~
@@ -94,7 +94,7 @@ Async events
 
 Minimal config to enable asynchronous events:
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_bernard_bundle_bridge:
         events: ~
@@ -106,7 +106,7 @@ Consuming messages
 
 To consume *SimpleBus* messages in *Bernard*, please, run:
 
-.. code:: bash
+.. code-block::  bash
 
     # Consume commands
     ./app/console bernard:consume asynchronous_commands
@@ -120,7 +120,7 @@ Routing
 Customizing queue names
 '''''''''''''''''''''''
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_bernard_bundle_bridge:
         commands: my_queue_for_commands
@@ -135,7 +135,7 @@ Resolving queue name automatically
 It is a common practice to have a separate queue for each asynchronous
 job type.
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_bernard_bundle_bridge:
         commands:
@@ -156,7 +156,7 @@ high. Remember, you need to run
 ``./app/console bernard:consume <queue-name>`` for each queue.
 *SimpleBusBernardBundleBridge* supports mapped queue name resolver:
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_bernard_bundle_bridge:
         commands:
@@ -185,7 +185,7 @@ You can specify your own queue resolver by implementing
 ``SimpleBus\Asynchronous\Routing\RoutingKeyResolver`` interface.
 Register the service in container and update the config:
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_bernard_bundle_bridge:
         commands:
@@ -200,7 +200,7 @@ Consuming messages
 
 To consume messages in the queue run the following:
 
-.. code:: bash
+.. code-block::  bash
 
     ./app/console bernard:consume <queue-name>
 
@@ -224,7 +224,7 @@ Using cron
 
 Below example consumes messages for 5 minutes and exits:
 
-.. code:: bash
+.. code-block::  bash
 
     */5 * * * * /var/www/symfony/app/console bernard:consume --max-runtime=300 >> /var/log/symfony/cron.log 2>&1
 
@@ -234,7 +234,7 @@ messages during 5 minutes i.e. there is always an active process.
 When amount of incoming messages is low, you could do something like
 this:
 
-.. code:: bash
+.. code-block::  bash
 
     */3 * * * * /var/www/symfony/app/console bernard:consume --max-messages=90 >> /var/log/symfony/cron.log 2>&1
 
@@ -250,7 +250,7 @@ The best way to keep the process alive is with
 
 Consider below example:
 
-.. code:: ini
+.. code-block::  ini
 
     [program:geo_location]
     directory   = /var/www/symfony
@@ -277,7 +277,7 @@ Consider below example:
 
 Starting *Bernard* processes:
 
-.. code:: bash
+.. code-block::  bash
 
     sudo supervisorctl start bernard:*
 
@@ -298,7 +298,7 @@ over unencrypted channel.
 
 Minimal configuration to enable encryption is as follows:
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_bernard_bundle_bridge:
         encryption: ~
@@ -307,7 +307,7 @@ By default *nelmio* encrypter is used. This requires *mcrypt* PHP
 extension to be installed. You can also adjust a secret key and
 encryption algorithm:
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_bernard_bundle_bridge:
         encryption:
@@ -320,7 +320,7 @@ recommended for production use. Custom encrypter service is available as
 well by implementing
 ``SimpleBus\BernardBundleBridge\Encrypter\Encrypter`` interface:
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_bernard_bundle_bridge:
         encryption:
@@ -332,7 +332,7 @@ Logging
 You can enable logger listener to debug messages production, consumption
 and rejection. Consider below example in development config:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # config_dev.yml
 
@@ -353,7 +353,7 @@ and rejection. Consider below example in development config:
 
 Then just tail the logs with:
 
-.. code:: bash
+.. code-block::  bash
 
     tail -f app/logs/bernard.dev.log
 
@@ -380,7 +380,7 @@ Install `AWS SDK for PHP <https://aws.amazon.com/sdk-for-php/>`__ and
 register *SQS* client service in container. Then you can do something
 like this:
 
-.. code:: yaml
+.. code-block::  yaml
 
     bernard:
         driver: sqs
@@ -411,7 +411,7 @@ result in same message being processed over and over again. To overcome
 this you can re-route all rejected messages to another queue for later
 evaluation:
 
-.. code:: yaml
+.. code-block::  yaml
 
     bernard:
         listeners:
@@ -435,7 +435,7 @@ queue even if you don't intend to process them asynchronously.
 To overcome this a custom event publisher can be implementd. Consider
 the following example:
 
-.. code:: php
+.. code-block::  php
 
     namespace My\AppBundle\SimpleBus;
 
@@ -469,7 +469,7 @@ the following example:
 
 Register your custom publisher:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         my.simple_bus.event_publisher:
@@ -478,7 +478,7 @@ Register your custom publisher:
 
 Update *SimpleBus* config:
 
-.. code:: yaml
+.. code-block::  yaml
 
     simple_bus_asynchronous:
         events:
@@ -489,7 +489,7 @@ processed asynchronously.
 
 Example of async event:
 
-.. code:: php
+.. code-block::  php
 
     namespace My\AwsBundle\Model\Command;
 

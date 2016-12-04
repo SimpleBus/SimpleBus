@@ -24,7 +24,7 @@ provides:
 When you enable the ``DoctrineORMBridgeBundle`` in your project, both
 features will be automatically registered as command bus middlewares:
 
-.. code:: php
+.. code-block::  php
 
     class AppKernel extends Kernel
     {
@@ -42,7 +42,7 @@ features will be automatically registered as command bus middlewares:
 You can optionally configure which entity manager and connection should
 be used:
 
-.. code:: yaml
+.. code-block::  yaml
 
     # in config.yml
 

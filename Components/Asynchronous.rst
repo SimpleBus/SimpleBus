@@ -28,7 +28,7 @@ This strategy is very useful when you have an event bus that notifies
 event subscribers of events that have occurred. If you have set up the
 event bus, you can add the ``AlwaysPublishesMessages`` middleware to it:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
     use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
@@ -62,7 +62,7 @@ This strategy is useful if you have a command bus that handles commands.
 If you have set up the command bus, you can add the
 ``PublishesUnhandledMessages`` middleware to it:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
     use SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages;
@@ -102,7 +102,7 @@ Strategy 3: Only publish predefined messages
 
 This strategy is useful when you know what messages you want to publish.
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
     use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
@@ -148,7 +148,7 @@ implementation of a ``SerializedEnvelopeConsumer``. It deserializes a
 serialized ``Envelope``, then lets the message bus handle the
 ``Message`` contained in the ``Envelope``.
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer;
     use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
@@ -206,7 +206,7 @@ implementation of that interface, the
 ``AdditionalPropertiesResolver`` instances. It lets them all step in and
 provide values:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Asynchronous\Properties\DelegatingAdditionalPropertiesResolver;
     use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;

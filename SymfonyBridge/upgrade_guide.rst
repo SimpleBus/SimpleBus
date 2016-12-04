@@ -22,7 +22,7 @@ handler and event subscriber services don't have to have ``handle`` or
 4. Otherwise you have to specify which method should be called in the
    tag attributes:
 
-.. code:: yaml
+.. code-block::  yaml
 
     - { name: command_handler, handles: ..., method: theMethodThatShouldBeCalled }
 
@@ -43,7 +43,7 @@ Commands
 
 Before:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Command\Command;
 
@@ -57,7 +57,7 @@ Before:
 
 After:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Type\Command;
 
@@ -68,7 +68,7 @@ After:
 
 Or:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Type\Command;
     use SimpleBus\Message\Name\NamedMessage;
@@ -88,7 +88,7 @@ Events
 
 Before:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Event\Event;
 
@@ -102,7 +102,7 @@ Before:
 
 After:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Type\Event;
 
@@ -113,7 +113,7 @@ After:
 
 Or:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Type\Event;
     use SimpleBus\Message\Name\NamedMessage;
@@ -133,7 +133,7 @@ Command handlers
 
 Before:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Command\Handler\CommandHandler;
     use SimpleBus\Command\Command;
@@ -148,7 +148,7 @@ Before:
 
 After:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Handler\MessageHandler;
     use SimpleBus\Message\Message;
@@ -163,7 +163,7 @@ After:
 
 You can register this handler like this:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         foo_command_handler:
@@ -173,7 +173,7 @@ You can register this handler like this:
 
 Or, if you let commands implement ``NamedMessage``:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         foo_command_handler:
@@ -186,7 +186,7 @@ Event subscribers
 
 Before:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Event\Handler\EventHandler;
     use SimpleBus\Event\Event;
@@ -201,7 +201,7 @@ Before:
 
 After:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Subscriber\MessageSubscriber;
     use SimpleBus\Message\Message;
@@ -216,7 +216,7 @@ After:
 
 You can register this subscriber like this:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         bar_event_subscriber:
@@ -226,7 +226,7 @@ You can register this subscriber like this:
 
 Or, if you let events implement ``NamedMessage``:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         bar_event_subscriber:
@@ -241,7 +241,7 @@ If instead of the FQCN you want to keep using the command/event name as
 returned by its ``messageName()`` method, you should configure this in
 ``config.yml``:
 
-.. code:: yaml
+.. code-block::  yaml
 
     command_bus:
         # the name of a command is considered to be its FQCN
@@ -260,7 +260,7 @@ Previously you could define your own command bus and event bus behaviors
 by implementing ``CommandBus`` or ``EventBus``. As of version 2.0 in
 both cases you should implement ``MessageBusMiddleware`` instead:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
@@ -282,7 +282,7 @@ Instead of calling ``$this->next()`` you should now call
 
 You should register command bus middleware like this:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         specialized_command_bus_middleware:
@@ -305,7 +305,7 @@ trait ``PrivateMessageRecorderCapabilities`` instead of
 ``EventProviderCapabilities``. The ``raise()`` method has been renamed
 to ``record()``.
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Recorder\ContainsRecordedMessages;
     use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;

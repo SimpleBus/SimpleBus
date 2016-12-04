@@ -15,7 +15,7 @@ with the ``SimpleBusEventBusBundle`` which handles it for you.
 
 First enable the bundle in your application's kernel:
 
-.. code:: php
+.. code-block::  php
 
     class AppKernel extends Kernel
     {
@@ -37,7 +37,7 @@ This bundle provides the ``event_bus`` service which is an instance of
 ``MessageBus``. Wherever you like, you can let it handle events, e.g. by
 fetching it inside a container-aware controller:
 
-.. code:: php
+.. code-block::  php
 
     // $event is an arbitrary object that will be passed to the event subscriber
     $event = ...;
@@ -47,7 +47,7 @@ fetching it inside a container-aware controller:
 However, you are encouraged to properly inject the ``event_bus`` service
 as a dependency whenever you need it:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         some_service:
@@ -64,7 +64,7 @@ event. This bundle allows you to register your own event subscribers by
 adding the ``event_subscriber`` tag to the event subscriber's service
 definition:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         user_registered_event_subscriber:
@@ -90,7 +90,7 @@ definition:
     If you want to use a custom method, just add a ``method`` attribute
     to the ``event_subscriber`` tag:
 
-    .. code:: yaml
+    .. code-block::  yaml
 
         services:
             user_registered_event_subscriber:
@@ -108,7 +108,7 @@ event is used. This can be either 1) its fully- qualified class name
 its static ``messageName()`` method. By default, the first strategy is
 used, but you can configure it in your application configuration:
 
-.. code:: yaml
+.. code-block::  yaml
 
     event_bus:
         # default value for this key is "class_based"
@@ -118,7 +118,7 @@ When you change the strategy, you also have to change the value of the
 ``subscribes_to`` attribute of your event subscriber service
 definitions:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         user_registered_event_subscriber:
@@ -138,7 +138,7 @@ you can extend the behavior of the event bus by adding middlewares to
 it. This bundle allows you to register your own middlewares by adding
 the ``event_bus_middleware`` tag to middleware service definitions:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         specialized_event_bus_middleware:
@@ -171,7 +171,7 @@ you can collect events while a command is being handled. If you want to
 record new events you can inject the ``event_recorder`` service as a
 constructor argument of a command handler:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Recorder\RecordsMessages;
 
@@ -198,7 +198,7 @@ constructor argument of a command handler:
 
 The corresponding service definition looks like this:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         some_interesting_command_handler:
@@ -218,7 +218,7 @@ class that collects domain events like the
 `DoctrineORMBridge <https://github.com/SimpleBus/DoctrineORMBridge>`__
 does), you can register it as a message recorder:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
@@ -237,7 +237,7 @@ does), you can register it as a message recorder:
 
 The corresponding service definition looks like this:
 
-.. code:: yaml
+.. code-block::  yaml
 
     services:
         propel_domain_events:
@@ -252,7 +252,7 @@ The corresponding service definition looks like this:
     If you want to log every event that is being handled, enable logging
     in ``config.yml``:
 
-    .. code:: yaml
+    .. code-block::  yaml
 
         event_bus:
             logging: ~

@@ -21,7 +21,7 @@ Installation
 
 Using `Composer <https://getcomposer.org/>`__:
 
-.. code:: bash
+.. code-block::  bash
 
     composer require simple-bus/doctrine-orm-bridge
 
@@ -34,7 +34,7 @@ an `event
 bus <http://simplebus.github.io/MessageBus/doc/event_bus.html>`__, if
 you didn't already do this:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
 
@@ -46,7 +46,7 @@ you didn't already do this:
 
 Make sure to also properly set up an entity manager:
 
-.. code:: php
+.. code-block::  php
 
     // $entityManager is an instance of Doctrine\ORM\EntityManager
     $entityManager = ...;
@@ -64,7 +64,7 @@ transaction. If you want to do this, add the
 Provide an instance of the Doctrine ``ManagerRegistry`` interface and
 the name of the entity manager that you want to use.
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
 
@@ -95,7 +95,7 @@ Make sure that your entities implement the ``ContainsRecordedMessages``
 interface. Use the ``PrivateMessageRecorderCapabilities`` trait to
 conveniently record events from inside the entity:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\Message\Recorder\ContainsRecordedMessages;
     use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
@@ -114,7 +114,7 @@ conveniently record events from inside the entity:
 
 Then set up the *event recorder* for Doctrine entities:
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\DoctrineORMBridge\EventListener\CollectsEventsFromEntities;
 
@@ -131,7 +131,7 @@ should be handled by the event bus. This is done by a specialized
 middleware, which should be appended to the command bus *before* the
 middleware that is responsible for handling the transaction.
 
-.. code:: php
+.. code-block::  php
 
     use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
 
