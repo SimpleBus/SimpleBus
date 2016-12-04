@@ -8,5 +8,5 @@ install:
     - pip install --user -r requirements.txt
 
 script:
-    - make SPHINXOPTS='-nW' html
+    - make SPHINXOPTS='-n' html
     - make spelling
