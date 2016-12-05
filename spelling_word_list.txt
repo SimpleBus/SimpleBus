@@ -16,7 +16,6 @@ deserializes
 deserializing
 dev
 docblock
-documention
 encrypter
 implementd
 json
