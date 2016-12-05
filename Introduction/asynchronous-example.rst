@@ -40,7 +40,7 @@ Register the bundles in Symfony's AppKernel.php
     }
 
 Configuration
------------
+-------------
 
 There is quite a lot of moving parts in this configuration. Most if it is to configure
 the queue and make sure RabbitMqBundle is aware of SimpleBus' consumers and producers.
