@@ -14,11 +14,12 @@ For this we use `Sphinx <http://www.sphinx-doc.org>`__,  a tool that makes it ea
 Download GIT repository
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Before you can start contributing the documentations you have to clone this GIT repository.
+Before you can start contributing the documentations you have to, fork the repository, clone it and create a new branch with the following commands:
 
 .. code-block:: bash
 
-    $ git clone https://github.com/SimpleBus/docs.git
+    $ git clone https://github.com/your-name/repo-name.git
+    $ git checkout -b documentation-description
 
 After cloning the documentation repository you can open these files in your preferred IDE. Now it's time to start editing one of the the ``.rst`` files. For example the ``contributing.rst`` and add the information you are missing in the project.
 
