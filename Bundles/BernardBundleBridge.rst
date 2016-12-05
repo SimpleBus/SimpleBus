@@ -359,7 +359,7 @@ Then just tail the logs with:
 
 Please, refer to
 `BernardBundle <https://github.com/bernardphp/BernardBundle>`__
-documention how to implement your own listeners.
+documentation how to implement your own listeners.
 
 Using doctrine driver
 '''''''''''''''''''''
