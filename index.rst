@@ -1,5 +1,5 @@
-Welcome to SimpleBus's documentation!
-=====================================
+Welcome to SimpleBus' documentation!
+====================================
 
 Simplebus is a organization that helps you to use CQRS and event sourcing in your application.
 Get started by reading more about these concepts LINK or by digging in to common use cases LINK.
