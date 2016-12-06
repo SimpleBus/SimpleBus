@@ -34,7 +34,7 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loader->load('serialization.yml');
+        $loader->load('asynchronous_serialization.yml');
         $container->setAlias(
             'simple_bus.asynchronous.object_serializer',
             $mergedConfig['object_serializer_service_id']
