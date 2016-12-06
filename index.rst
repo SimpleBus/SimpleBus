@@ -22,7 +22,13 @@ Why so many packages. Refer to Matthias Noback's Principle of package design.
     Introduction/getting-started
     Introduction/organization-overview
     Introduction/cqrs-and-event-sourcing
-    Introduction/asynchronous-example
+
+.. toctree::
+    :maxdepth: 1
+    :glob:
+    :caption: Guides
+
+    Guides/*
 
 .. toctree::
     :maxdepth: 1
@@ -43,5 +49,4 @@ Why so many packages. Refer to Matthias Noback's Principle of package design.
     :glob:
     :caption: TODO
 
-    MessageBus/*
     SymfonyBridge/*
