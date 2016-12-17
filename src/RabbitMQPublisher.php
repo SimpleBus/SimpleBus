@@ -4,6 +4,7 @@ namespace SimpleBus\RabbitMQBundleBridge;
 
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use OldSound\RabbitMqBundle\RabbitMq\Fallback;
+use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Asynchronous\Routing\RoutingKeyResolver;
@@ -17,7 +18,7 @@ class RabbitMQPublisher implements Publisher
     private $serializer;
 
     /**
-     * @var Producer|Fallback
+     * @var Producer|Fallback|ProducerInterface
      */
     private $producer;
 
@@ -37,9 +38,9 @@ class RabbitMQPublisher implements Publisher
         RoutingKeyResolver $routingKeyResolver,
         AdditionalPropertiesResolver $additionalPropertiesResolver
     ) {
-        if(!$producer instanceof Producer && !$producer instanceof Fallback)
+        if(!$producer instanceof Producer && !$producer instanceof Fallback && !$producer instanceof ProducerInterface)
         {
-            throw new \LogicException('Producer must be an instance of OldSound\RabbitMqBundle\RabbitMq\Producer or OldSound\RabbitMqBundle\RabbitMq\Fallback');
+            throw new \LogicException('Producer must implement OldSound\RabbitMqBundle\RabbitMq\ProducerInterface or be an instance of OldSound\RabbitMqBundle\RabbitMq\Producer or OldSound\RabbitMqBundle\RabbitMq\Fallback');
         }
 
         $this->serializer = $messageSerializer;
