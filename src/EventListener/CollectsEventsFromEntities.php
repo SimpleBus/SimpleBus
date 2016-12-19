@@ -3,7 +3,8 @@
 namespace SimpleBus\DoctrineORMBridge\EventListener;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\OnFlushEventArgs;
+use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\ORM\Events;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
@@ -14,25 +15,29 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
     public function getSubscribedEvents()
     {
         return array(
-            Events::postPersist,
-            Events::postUpdate,
-            Events::postRemove,
+            Events::onFlush,
+            Events::postFlush,
         );
     }
 
-    public function postPersist(LifecycleEventArgs $event)
+    public function onFlush(OnFlushEventArgs $eventArgs)
     {
-        $this->collectEventsFromEntity($event);
+        $em = $eventArgs->getEntityManager();
+        $uow = $em->getUnitOfWork();
+        foreach ($uow->getScheduledEntityDeletions() as $entity) {
+            $this->collectEventsFromEntity($entity);
+        }
     }
 
-    public function postUpdate(LifecycleEventArgs $event)
+    public function postFlush(PostFlushEventArgs $args)
     {
-        $this->collectEventsFromEntity($event);
-    }
-
-    public function postRemove(LifecycleEventArgs $event)
-    {
-        $this->collectEventsFromEntity($event);
+        $em = $args->getEntityManager();
+        $uow = $em->getUnitOfWork();
+        foreach ($uow->getIdentityMap() as $entities) {
+            foreach ($entities as $entity){
+                $this->collectEventsFromEntity($entity);
+            }
+        }
     }
 
     public function recordedMessages()
@@ -45,15 +50,12 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
         $this->collectedEvents = array();
     }
 
-    private function collectEventsFromEntity(LifecycleEventArgs $event)
+    private function collectEventsFromEntity($entity)
     {
-        $entity = $event->getEntity();
-
         if ($entity instanceof ContainsRecordedMessages) {
             foreach ($entity->recordedMessages() as $event) {
                 $this->collectedEvents[] = $event;
             }
-
             $entity->eraseMessages();
         }
     }

@@ -8,6 +8,7 @@ use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Entity\EventRecordi
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityAboutToBeRemoved;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityChanged;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityCreated;
+use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityNotDirty;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
 class CollectsEventsFromEntitiesTest extends AbstractTestCaseWithEntityManager
@@ -74,6 +75,23 @@ class CollectsEventsFromEntitiesTest extends AbstractTestCaseWithEntityManager
         $this->removeAndFlush($entity);
 
         $this->assertEquals([new EntityAboutToBeRemoved()], $this->eventSubscriber->recordedMessages());
+
+        $this->assertEntityHasNoRecordedEvents($entity);
+    }
+
+    /**
+     * @test
+     */
+    public function it_collects_events_from_not_dirty_entities_and_erases_them_afterwards()
+    {
+        $entity = new EventRecordingEntity();
+        $this->persistAndFlush($entity);
+        $this->eraseRecordedMessages();
+
+        $entity->recordMessageWithoutStateChange();
+        $this->persistAndFlush($entity);
+
+        $this->assertEquals([new EntityNotDirty()], $this->eventSubscriber->recordedMessages());
 
         $this->assertEntityHasNoRecordedEvents($entity);
     }
