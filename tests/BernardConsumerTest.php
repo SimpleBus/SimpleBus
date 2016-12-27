@@ -2,7 +2,7 @@
 
 namespace SimpleBus\BernardBundleBridge\Tests;
 
-use Bernard\Message\DefaultMessage;
+use Bernard\Message\PlainMessage;
 use SimpleBus\BernardBundleBridge\BernardConsumer;
 
 class BernardConsumerTest extends \PHPUnit_Framework_TestCase
@@ -21,6 +21,6 @@ class BernardConsumerTest extends \PHPUnit_Framework_TestCase
 
         $bernard = new BernardConsumer($consumer);
 
-        $bernard(new DefaultMessage('name', ['data' => '__data__']));
+        $bernard(new PlainMessage('name', ['data' => '__data__']));
     }
 }

@@ -36,7 +36,7 @@ class BernardPublisherTest extends \PHPUnit_Framework_TestCase
         $publisher = new BernardPublisher($serializer, $producer, $queueResolver, 'foo');
         $publisher->publish($message);
 
-        $this->assertInstanceOf('Bernard\Message\DefaultMessage', $producer->message);
+        $this->assertInstanceOf('Bernard\Message\PlainMessage', $producer->message);
         $this->assertEquals('queue_name', $producer->queueName);
         $this->assertEquals('serialized_data', $producer->message->get('data'));
         $this->assertEquals('foo', $producer->message->get('type'));
@@ -46,7 +46,7 @@ class BernardPublisherTest extends \PHPUnit_Framework_TestCase
 
 class CaptureProducer extends Producer
 {
-    /** @var \Bernard\Message\DefaultMessage */
+    /** @var \Bernard\Message\PlainMessage */
     public $message;
     public $queueName;
 

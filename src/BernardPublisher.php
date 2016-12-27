@@ -2,7 +2,7 @@
 
 namespace SimpleBus\BernardBundleBridge;
 
-use Bernard\Message\DefaultMessage;
+use Bernard\Message\PlainMessage;
 use Bernard\Producer;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Asynchronous\Routing\RoutingKeyResolver;
@@ -28,6 +28,6 @@ class BernardPublisher implements Publisher
         $queue = $this->queueResolver->resolveRoutingKeyFor($message);
         $data = $this->serializer->wrapAndSerialize($message);
 
-        $this->bernard->produce(new DefaultMessage($queue, ['data' => $data, 'type' => $this->type]), $queue);
+        $this->bernard->produce(new PlainMessage($queue, ['data' => $data, 'type' => $this->type]), $queue);
     }
 }

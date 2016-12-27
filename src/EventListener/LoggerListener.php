@@ -27,7 +27,7 @@ class LoggerListener implements EventSubscriberInterface
 
     public function onProduce(EnvelopeEvent $event)
     {
-        /* @var \Bernard\Message\DefaultMessage $message */
+        /* @var \Bernard\Message\PlainMessage $message */
         $message = $event->getEnvelope()->getMessage();
 
         $this->logger->info(sprintf('Produced %s into "%s" queue', $message->get('type'), $message->getName()), [
@@ -38,7 +38,7 @@ class LoggerListener implements EventSubscriberInterface
 
     public function onInvoke(EnvelopeEvent $event)
     {
-        /* @var \Bernard\Message\DefaultMessage $message */
+        /* @var \Bernard\Message\PlainMessage $message */
         $message = $event->getEnvelope()->getMessage();
 
         $this->logger->info(sprintf('Invoking %s from "%s" queue', $message->get('type'), $message->getName()), [
@@ -49,7 +49,7 @@ class LoggerListener implements EventSubscriberInterface
 
     public function onReject(RejectEnvelopeEvent $event)
     {
-        /* @var \Bernard\Message\DefaultMessage $message */
+        /* @var \Bernard\Message\PlainMessage $message */
         $message = $event->getEnvelope()->getMessage();
 
         $this->logger->error(sprintf('Error processing %s from "%s" queue', $message->get('type'), $message->getName()), [

@@ -2,7 +2,7 @@
 
 namespace SimpleBus\BernardBundleBridge;
 
-use Bernard\Message\DefaultMessage;
+use Bernard\Message\PlainMessage;
 use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer;
 
 class BernardConsumer
@@ -14,7 +14,7 @@ class BernardConsumer
         $this->consumer = $consumer;
     }
 
-    public function __invoke(DefaultMessage $message)
+    public function __invoke(PlainMessage $message)
     {
         $this->consumer->consume($message->get('data'));
     }

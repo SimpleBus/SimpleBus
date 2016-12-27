@@ -17,7 +17,7 @@ class BernardRouter implements Router
 
     public function map(Envelope $envelope)
     {
-        /* @var \Bernard\Message\DefaultMessage $message */
+        /* @var \Bernard\Message\PlainMessage $message */
         $message = $envelope->getMessage();
 
         $serviceId = sprintf('simple_bus.bernard_bundle_bridge.%s_consumer', $message->get('type'));

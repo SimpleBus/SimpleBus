@@ -5,7 +5,7 @@ namespace SimpleBus\BernardBundleBridge\Tests\EventListener;
 use Bernard\Envelope;
 use Bernard\Event\EnvelopeEvent;
 use Bernard\Event\RejectEnvelopeEvent;
-use Bernard\Message\DefaultMessage;
+use Bernard\Message\PlainMessage;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
 use SimpleBus\BernardBundleBridge\EventListener\LoggerListener;
@@ -31,7 +31,7 @@ class LoggerListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_log_on_produce()
     {
-        $message  = new DefaultMessage('test', ['type' => 'command']);
+        $message  = new PlainMessage('test', ['type' => 'command']);
         $envelope = new Envelope($message);
         $event    = new EnvelopeEvent($envelope, $this->getMock('Bernard\Queue'));
 
@@ -52,7 +52,7 @@ class LoggerListenerTest extends \PHPUnit_Framework_TestCase
      */
     public function it_should_log_on_invoke()
     {
-        $message  = new DefaultMessage('test', ['type' => 'event']);
+        $message  = new PlainMessage('test', ['type' => 'event']);
         $envelope = new Envelope($message);
         $event    = new EnvelopeEvent($envelope, $this->getMock('Bernard\Queue'));
 
@@ -74,7 +74,7 @@ class LoggerListenerTest extends \PHPUnit_Framework_TestCase
     public function it_should_log_on_reject()
     {
         $exception = new \RuntimeException();
-        $message   = new DefaultMessage('test', ['type' => 'event']);
+        $message   = new PlainMessage('test', ['type' => 'event']);
         $envelope  = new Envelope($message);
         $event     = new RejectEnvelopeEvent($envelope, $this->getMock('Bernard\Queue'), $exception);
 

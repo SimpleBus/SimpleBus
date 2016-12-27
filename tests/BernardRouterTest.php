@@ -3,7 +3,7 @@
 namespace SimpleBus\BernardBundleBridge\Tests;
 
 use Bernard\Envelope;
-use Bernard\Message\DefaultMessage;
+use Bernard\Message\PlainMessage;
 use SimpleBus\BernardBundleBridge\BernardRouter;
 
 class BernardRouterTest extends \PHPUnit_Framework_TestCase
@@ -25,7 +25,7 @@ class BernardRouterTest extends \PHPUnit_Framework_TestCase
 
         $router = new BernardRouter($container);
 
-        $router->map(new Envelope(new DefaultMessage('name', ['type' => 'foo'])));
-        $router->map(new Envelope(new DefaultMessage('name', ['type' => 'bar'])));
+        $router->map(new Envelope(new PlainMessage('name', ['type' => 'foo'])));
+        $router->map(new Envelope(new PlainMessage('name', ['type' => 'bar'])));
     }
 }
