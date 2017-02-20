@@ -19,6 +19,7 @@ Why so many packages. Refer to Matthias Noback's Principle of package design.
     :maxdepth: 1
     :caption: Introduction
 
+    Home <self>
     Introduction/getting-started
     Introduction/organization-overview
     Introduction/cqrs-and-event-sourcing
