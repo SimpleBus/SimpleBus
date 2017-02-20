@@ -4,7 +4,7 @@ Event bus bundle
 Using the building blocks supplied by the ``SimpleBus/MessageBus``
 library you can create an event bus, which is basically a message bus,
 with some middlewares and a collection of message subscribers. This is
-described in the :doc:`documentation of EventBus <Gudles/event_bus>`.
+described in the :doc:`documentation of EventBus <Guides/event_bus>`.
 
 Using the event bus
 -------------------
@@ -34,7 +34,7 @@ as a dependency whenever you need it:
 Registering event subscribers
 -----------------------------
 
-As described in the :doc:`EventBus documentation <Gudles/event_bus>`
+As described in the :doc:`EventBus documentation <Guides/event_bus>`
 you can notify event subscribers about the occurrence of a particular
 event. This bundle allows you to register your own event subscribers by
 adding the ``event_subscriber`` tag to the event subscriber's service

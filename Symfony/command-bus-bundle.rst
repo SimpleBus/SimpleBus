@@ -3,7 +3,7 @@ CommandBusBundle
 
 Using the building blocks supplied by the ``SimpleBus/MessageBus``
 library you can create a command bus, which is basically a message bus,
-with some middlewares anda map of message handlers. This is described
+with some middlewares and a map of message handlers. This is described
 in the :doc:`documentation of CommandBus  <Guides/command_bus>`.
 
 
