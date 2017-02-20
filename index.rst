@@ -41,13 +41,17 @@ Why so many packages. Refer to Matthias Noback's Principle of package design.
 .. toctree::
     :maxdepth: 1
     :glob:
-    :caption: Bundles
+    :caption: Symfony
 
-    Bundles/*
+    Symfony/getting-started
+    Symfony/command-bus-bundle
+    Symfony/event-bus-bundle
+    Symfony/doctrine-orm-bridge-bundle
+    Symfony/upgrade-guide
 
 .. toctree::
     :maxdepth: 1
     :glob:
-    :caption: TODO
+    :caption: Symfony Bundles
 
-    SymfonyBridge/*
+    Bundles/*
