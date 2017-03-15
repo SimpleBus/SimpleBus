@@ -18,7 +18,6 @@
     ],
     "require": {
         "php": ">=5.4",
-        "beberlei/assert": "~2.0",
         "simple-bus/message-bus": "~2.0",
         "doctrine/orm": "~2.2"
     },
