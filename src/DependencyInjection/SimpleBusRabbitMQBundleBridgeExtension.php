@@ -88,9 +88,16 @@ class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension imple
         } else {
             $routingKeyResolverId = $mergedConfig['routing_key_resolver'];
         }
+        $commandsRoutingKey = isset($mergedConfig['commands']['routing_key_resolver']) ? $mergedConfig['commands']['routing_key_resolver'] : $routingKeyResolverId;
+        $eventsRoutingKey = isset($mergedConfig['events']['routing_key_resolver']) ? $mergedConfig['events']['routing_key_resolver'] : $routingKeyResolverId;
+
         $container->setAlias(
-            'simple_bus.rabbit_mq_bundle_bridge.routing.routing_key_resolver',
-             $routingKeyResolverId
+            'simple_bus.rabbit_mq_bundle_bridge.routing.command_routing_key_resolver',
+            $commandsRoutingKey
+        );
+        $container->setAlias(
+            'simple_bus.rabbit_mq_bundle_bridge.routing.events_routing_key_resolver',
+            $eventsRoutingKey
         );
 
         $loader->load('properties.yml');
