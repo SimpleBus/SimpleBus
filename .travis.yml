@@ -22,8 +22,5 @@ script:
   - vendor/bin/phpunit
   - vendor/bin/phpcs --report=full --standard=PSR2 --encoding=utf-8 src
 
-after_script:
-  - vendor/bin/coveralls
-
-notifications:
-  email: jasper@nerdsweide.nl
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
