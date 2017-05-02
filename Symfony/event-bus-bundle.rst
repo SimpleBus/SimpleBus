@@ -1,34 +1,10 @@
 Event bus bundle
 ================
 
-Using the building blocks supplied by the `SimpleBus/MessageBus
-library <https://github.com/SimpleBus/MessageBus>`__ you can create an
-event bus, which is basically a message bus, with some middlewares and a
-collection of message subscribers. This is described in the
-`documentation of
-MessageBus <http://simplebus.github.io/MessageBus/doc/event_bus.html>`__.
-
-If you use Symfony, you don't have to manually configure an event bus in
-each project. The `SimpleBus/SymfonyBridge
-library <https://github.com/SimpleBus/SymfonyBridge>`__ package comes
-with the ``SimpleBusEventBusBundle`` which handles it for you.
-
-First enable the bundle in your application's kernel:
-
-.. code-block::  php
-
-    class AppKernel extends Kernel
-    {
-        public function registerBundles()
-        {
-            $bundles = array(
-                ...
-                new SimpleBus\SymfonyBridge\SimpleBusEventBusBundle()
-            )
-            ...
-        }
-        ...
-    }
+Using the building blocks supplied by the ``SimpleBus/MessageBus``
+library you can create an event bus, which is basically a message bus,
+with some middlewares and a collection of message subscribers. This is
+described in the :doc:`documentation of EventBus <Guides/event_bus>`.
 
 Using the event bus
 -------------------
@@ -51,14 +27,14 @@ as a dependency whenever you need it:
 
     services:
         some_service:
+            class: Acme\Foobar
             arguments:
-                - @event_bus
+                - "@event_bus"
 
 Registering event subscribers
 -----------------------------
 
-As described in the `MessageBus
-documentation <http://simplebus.github.io/MessageBus/doc/event_bus.html>`__
+As described in the :doc:`EventBus documentation <Guides/event_bus>`
 you can notify event subscribers about the occurrence of a particular
 event. This bundle allows you to register your own event subscribers by
 adding the ``event_subscriber`` tag to the event subscriber's service
@@ -72,31 +48,30 @@ definition:
             tags:
                 - { name: event_subscriber, subscribes_to: Fully\Qualified\Class\Name\Of\UserRegistered }
 
-    .. rubric:: Event subscribers are lazy-loaded
-       :name: event-subscribers-are-lazy-loaded
+.. note:: Event subscribers are lazy-loaded
 
     Since only some of the event subscribers are going to handle any
     particular event, event subscribers are lazy-loaded. This means that
     their services should be defined as public services (i.e. you can't
     use ``public: false`` for them).
 
-    .. rubric:: Event subscribers are callables
-       :name: event-subscribers-are-callables
+Event subscribers are callables
+```````````````````````````````
 
-    Any service that is a `PHP
-    callable <http://php.net/manual/en/language.types.callable.php>`__
-    itself can be used as an event subscriber. If a service itself is
-    not callable, SimpleBus looks for a ``notify`` method and calls it.
-    If you want to use a custom method, just add a ``method`` attribute
-    to the ``event_subscriber`` tag:
+Any service that is a `PHP
+callable <http://php.net/manual/en/language.types.callable.php>`__
+itself can be used as an event subscriber. If a service itself is
+not callable, SimpleBus looks for a ``notify`` method and calls it.
+If you want to use a custom method, just add a ``method`` attribute
+to the ``event_subscriber`` tag:
 
-    .. code-block::  yaml
+.. code-block::  yaml
 
-        services:
-            user_registered_event_subscriber:
-                ...
-                tags:
-                    - { name: event_subscriber, subscribes_to: ..., method: userRegistered }
+    services:
+        user_registered_event_subscriber:
+            ...
+            tags:
+                - { name: event_subscriber, subscribes_to: ..., method: userRegistered }
 
 Setting the event name resolving strategy
 -----------------------------------------
@@ -150,8 +125,7 @@ the ``event_bus_middleware`` tag to middleware service definitions:
 By providing a value for the ``priority`` tag attribute you can
 influence the order in which middlewares are added to the event bus.
 
-    .. rubric:: Middlewares are not lazy-loaded
-       :name: middlewares-are-not-lazy-loaded
+.. note:: Middlewares are not lazy-loaded
 
     Whenever you use the event bus, you also use all of its middlewares,
     so event bus middlewares are not lazy-loaded. This means that their
@@ -163,10 +137,10 @@ Event recorders
 ---------------
 
 Recording events
-~~~~~~~~~~~~~~~~
+````````````````
 
-As explained `in the documentation of
-MessageBus <http://simplebus.github.io/MessageBus/doc/message_recorder.html>`__
+As explained :doc:`in the documentation of
+MessageBus <Guides/message_recorder>`
 you can collect events while a command is being handled. If you want to
 record new events you can inject the ``event_recorder`` service as a
 constructor argument of a command handler:
@@ -211,11 +185,11 @@ Recorded events will be handled after the command has been completely
 handled.
 
 Registering your own message recorders
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``````````````````````````````````````
 
 In case you have another source for recorded message (for instance a
 class that collects domain events like the
-`DoctrineORMBridge <https://github.com/SimpleBus/DoctrineORMBridge>`__
+:doc:`DoctrineORMBridge <Components/DoctrineORMBridge>`
 does), you can register it as a message recorder:
 
 .. code-block::  php
@@ -246,15 +220,14 @@ The corresponding service definition looks like this:
             tags:
                 - { name: event_recorder }
 
-    .. rubric:: Logging
-       :name: logging
+.. note:: Logging
 
     If you want to log every event that is being handled, enable logging
     in ``config.yml``:
 
-    .. code-block::  yaml
+.. code-block::  yaml
 
-        event_bus:
-            logging: ~
+    event_bus:
+        logging: ~
 
-    Messages will be logged to the ``event_bus`` channel.
+Messages will be logged to the ``event_bus`` channel.

@@ -1,4 +1,0 @@
-EventBusBundle
-==============
-
-@TODO

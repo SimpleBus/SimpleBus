@@ -1,33 +1,11 @@
-Command bus bundle
-==================
+CommandBusBundle
+================
 
-Using the building blocks supplied by the `SimpleBus/MessageBus
-library <https://github.com/SimpleBus/MessageBus>`__ you can create a
-command bus, which is basically a message bus, with some middlewares and
-a map of message handlers. This is described in the `documentation of
-MessageBus <http://simplebus.github.io/MessageBus/doc/command_bus.html>`__.
+Using the building blocks supplied by the ``SimpleBus/MessageBus``
+library you can create a command bus, which is basically a message bus,
+with some middlewares and a map of message handlers. This is described
+in the :doc:`documentation of CommandBus  <Guides/command_bus>`.
 
-If you use Symfony, you don't have to manually configure a command bus
-in each project. The `SimpleBus/SymfonyBridge
-library <https://github.com/SimpleBus/SymfonyBridge>`__ comes with the
-``SimpleBusCommandBusBundle`` which handles it for you.
-
-First enable the bundle in your application's kernel:
-
-.. code-block::  php
-
-    class AppKernel extends Kernel
-    {
-        public function registerBundles()
-        {
-            $bundles = array(
-                ...
-                new SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle()
-            )
-            ...
-        }
-        ...
-    }
 
 Using the command bus
 ---------------------
@@ -50,14 +28,14 @@ service as a dependency whenever you need it:
 
     services:
         some_service:
+            class: Acme\Foobar
             arguments:
-                - @command_bus
+                - "@command_bus"
 
 Registering command handlers
 ----------------------------
 
-As described in the `MessageBus
-documentation <http://simplebus.github.io/MessageBus/doc/command_bus.html>`__
+As described in the :doc:`MessageBus documentation <Guides/command_bus>`
 you can delegate the handling of particular commands to command
 handlers. This bundle allows you to register your own command handlers
 by adding the ``command_handler`` tag to the command handler's service
@@ -71,31 +49,32 @@ definition:
             tags:
                 - { name: command_handler, handles: Fully\Qualified\Class\Name\Of\RegisterUser }
 
-    .. rubric:: Command handlers are lazy-loaded
-       :name: command-handlers-are-lazy-loaded
+.. note::
+
+    **Command handlers are lazy-loaded**
 
     Since only one of the command handlers is going to handle any
     particular command, command handlers are lazy-loaded. This means
     that their services should be defined as public services (i.e. you
     can't use ``public: false`` for them).
 
-    .. rubric:: Command handlers are callables
-       :name: command-handlers-are-callables
+Command handlers are callables
+``````````````````````````````
 
-    Any service that is a `PHP
-    callable <http://php.net/manual/en/language.types.callable.php>`__
-    itself can be used as a command handler. If a service itself is not
-    callable, SimpleBus looks for a ``handle`` method and calls it. If
-    you want to use a custom method, just add a ``method`` attribute to
-    the ``command_handler`` tag:
+Any service that is a `PHP
+callable <http://php.net/manual/en/language.types.callable.php>`__
+itself can be used as a command handler. If a service itself is not
+callable, SimpleBus looks for a ``handle`` method and calls it. If
+you want to use a custom method, just add a ``method`` attribute to
+the ``command_handler`` tag:
 
-    .. code-block::  yaml
+.. code-block::  yaml
 
-        services:
-            register_user_command_handler:
-                ...
-                tags:
-                    - { name: command_handler, handles: ..., method: registerUser }
+    services:
+        register_user_command_handler:
+            ...
+            tags:
+                - { name: command_handler, handles: ..., method: registerUser }
 
 Setting the command name resolving strategy
 -------------------------------------------
@@ -109,6 +88,7 @@ used, but you can configure it in your application configuration:
 
 .. code-block::  yaml
 
+    # app/config/config.yml
     command_bus:
         # default value for this key is "class_based"
         command_name_resolver_strategy: named_message
@@ -148,15 +128,14 @@ it. This bundle allows you to register your own middleware by adding the
 By providing a value for the ``priority`` tag attribute you can
 influence the order in which middlewares are added to the command bus.
 
-    .. rubric:: Middlewares are not lazy-loaded
-       :name: middlewares-are-not-lazy-loaded
+.. note:: Middlewares are not lazy-loaded
 
-    Whenever you use the command bus, you also use all of its
-    middlewares, so command bus middlewares are not lazy-loaded. This
-    means that their services should be defined as private services
-    (i.e. you should use ``public: false``). See also: `Marking Services
-    as public /
-    private <http://symfony.com/doc/current/components/dependency_injection/advanced.html#marking-services-as-public-private>`__
+      Whenever you use the command bus, you also use all of its
+      middlewares, so command bus middlewares are not lazy-loaded. This
+      means that their services should be defined as private services
+      (i.e. you should use ``public: false``). See also: `Marking Services
+      as public /
+      private <http://symfony.com/doc/current/components/dependency_injection/advanced.html#marking-services-as-public-private>`__
 
 Logging
 -------
@@ -166,6 +145,7 @@ in ``config.yml``:
 
 .. code-block::  yaml
 
+    # app/config/config.yml
     command_bus:
         logging: ~
 
