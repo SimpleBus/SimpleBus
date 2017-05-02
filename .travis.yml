@@ -4,22 +4,25 @@ language: php
 
 matrix:
   include:
-    - php: 5.4
     - php: 5.6
-      env: SYMFONY_VERSION=2.7.*
-    - php: 5.6
-      env: SYMFONY_VERSION=3.0.*
     - php: 7.0
+    - php: 7.1
+      env: SYMFONY_VERSION=2.7.*
+    - php: 7.1
+      env: SYMFONY_VERSION=2.8.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.3.*
 
 env:
   global:
     - SYMFONY_VERSION=""
 
 before_install:
-  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/framework-bundle "$SYMFONY_VERSION"; fi
+  - composer self-update
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/framework-bundle:$SYMFONY_VERSION; fi
 
 install:
-  - composer install --prefer-source
+  - composer install --prefer-dist
 
 script:
   - vendor/bin/phpunit
