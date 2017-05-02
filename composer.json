@@ -26,13 +26,13 @@
         "symfony/monolog-bundle": "~2.3 || ~3.0"
     },
     "require-dev": {
+        "matthiasnoback/phpunit-asynchronicity": "~1.0",
         "phpunit/phpunit": "~4.0",
         "simple-bus/jms-serializer-bundle-bridge": "~2.0",
         "symfony/console": "~2.0 || ~3.0",
         "symfony/finder": "~2.0 || ~3.0",
         "symfony/process": "~2.0 || ~3.0",
-        "matthiasnoback/phpunit-asynchronicity": "~1.0",
-        "satooshi/php-coveralls": "~0.6"
+        "symfony/translation": "~2.0 || ~3.0"
     },
     "autoload": {
         "psr-4": {
