@@ -10,6 +10,7 @@ use SimpleBus\RabbitMQBundleBridge\SimpleBusRabbitMQBundleBridgeBundle;
 use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
 use SimpleBus\SymfonyBridge\SimpleBusEventBusBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -28,13 +29,14 @@ class TestKernel extends Kernel
     {
         return [
             new FrameworkBundle(),
+            new JMSSerializerBundle(),
+            new MonologBundle(),
             new OldSoundRabbitMqBundle(),
+            new SimpleBusAsynchronousBundle(),
             new SimpleBusCommandBusBundle(),
             new SimpleBusEventBusBundle(),
-            new SimpleBusAsynchronousBundle(),
+            new SimpleBusJMSSerializerBundleBridgeBundle(),
             new SimpleBusRabbitMQBundleBridgeBundle(),
-            new JMSSerializerBundle(),
-            new SimpleBusJMSSerializerBundleBridgeBundle()
         ];
     }
 

@@ -4,6 +4,12 @@ parameters:
 
 services:
     # needed to make JMSSerializerBundle work
+    translator:
+        class: Symfony\Component\Translation\Translator
+        arguments:
+            - 'nl'
+
+    # needed to make JMSSerializerBundle work
     annotation_reader:
         class: Doctrine\Common\Annotations\AnnotationReader
 
