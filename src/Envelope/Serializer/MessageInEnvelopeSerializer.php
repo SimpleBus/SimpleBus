@@ -4,7 +4,7 @@ namespace SimpleBus\Serialization\Envelope\Serializer;
 
 use SimpleBus\Serialization\Envelope\Envelope;
 
-interface MessageInEnvelopSerializer
+interface MessageInEnvelopeSerializer
 {
     /**
      * Serialize a Message to a string representation of that Message wrapped in an Envelope
