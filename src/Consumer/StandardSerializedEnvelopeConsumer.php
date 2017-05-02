@@ -2,7 +2,7 @@
 
 namespace SimpleBus\Asynchronous\Consumer;
 
-use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
+use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 use SimpleBus\Message\Bus\MessageBus;
 
 /**
@@ -11,7 +11,7 @@ use SimpleBus\Message\Bus\MessageBus;
 class StandardSerializedEnvelopeConsumer implements SerializedEnvelopeConsumer
 {
     /**
-     * @var MessageInEnvelopSerializer
+     * @var MessageInEnvelopeSerializer
      */
     private $messageInEnvelopeSerializer;
 
@@ -20,7 +20,7 @@ class StandardSerializedEnvelopeConsumer implements SerializedEnvelopeConsumer
      */
     private $messageBus;
 
-    public function __construct(MessageInEnvelopSerializer $messageInEnvelopeSerializer, MessageBus $messageBus)
+    public function __construct(MessageInEnvelopeSerializer $messageInEnvelopeSerializer, MessageBus $messageBus)
     {
         $this->messageInEnvelopeSerializer = $messageInEnvelopeSerializer;
         $this->messageBus = $messageBus;
