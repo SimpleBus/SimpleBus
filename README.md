@@ -1,6 +1,6 @@
 # SimpleBus/Asynchronous
 
-[![Build Status](https://travis-ci.org/SimpleBus/Asynchronous.svg?branch=master)](https://travis-ci.org/SimpleBus/Asynchronous) [![Coverage Status](https://coveralls.io/repos/SimpleBus/Asynchronous/badge.svg)](https://coveralls.io/r/SimpleBus/Asynchronous)
+[![Build Status](https://travis-ci.org/SimpleBus/Asynchronous.svg?branch=master)](https://travis-ci.org/SimpleBus/Asynchronous) [![codecov](https://codecov.io/gh/SimpleBus/Asynchronous/branch/master/graph/badge.svg)](https://codecov.io/gh/SimpleBus/Asynchronous)
 
 By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
 
