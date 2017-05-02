@@ -151,10 +151,10 @@ serialized ``Envelope``, then lets the message bus handle the
 .. code-block::  php
 
     use SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer;
-    use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
+    use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
     use SimpleBus\Message\Bus\MessageBus;
 
-    // $messageSerializer is an instance of MessageInEnvelopSerializer
+    // $messageSerializer is an instance of MessageInEnvelopeSerializer
     $messageSerializer = ...;
 
     // $messageBus is an instance of MessageBus
