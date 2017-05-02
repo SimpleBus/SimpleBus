@@ -20,5 +20,5 @@ install:
 script:
     - bin/phpunit
 
-after_script:
-    - bin/coveralls
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
