@@ -4,6 +4,7 @@ namespace SimpleBus\DoctrineORMBridge\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
+use Doctrine\ORM\Proxy\Proxy;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
