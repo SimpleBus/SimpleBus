@@ -3,8 +3,9 @@
 namespace SimpleBus\DoctrineORMBridge\EventListener;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
+use Doctrine\ORM\Event\PreFlushEventArgs;
+use Doctrine\ORM\Event\PostFlushEventArgs;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
 class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMessages
@@ -15,6 +16,7 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
     {
         return array(
             Events::preFlush,
+            Events::postFlush
         );
     }
 
@@ -27,11 +29,25 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
                 $this->collectEventsFromEntity($entity);
             }
         }
-        foreach ($uow->getScheduledEntityInsertions() as $entity) {
-            $this->collectEventsFromEntity($entity);
-        }
         foreach ($uow->getScheduledEntityDeletions() as $entity) {
             $this->collectEventsFromEntity($entity);
+        }
+    }
+
+    /**
+     * We need to listen on postFlush for Lifecycle Events
+     * All Lifecycle callback events are triggered after the onFlush event
+     *
+     * @param PostFlushEventArgs $eventArgs
+     */
+    public function postFlush(PostFlushEventArgs $eventArgs)
+    {
+        $em = $eventArgs->getEntityManager();
+        $uow = $em->getUnitOfWork();
+        foreach ($uow->getIdentityMap() as $entities) {
+            foreach ($entities as $entity){
+                $this->collectEventsFromEntity($entity);
+            }
         }
     }
 
@@ -47,7 +63,11 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
 
     private function collectEventsFromEntity($entity)
     {
-        if ($entity instanceof ContainsRecordedMessages) {
+        if ($entity instanceof ContainsRecordedMessages
+            && ( !$entity instanceof Proxy
+                || ($entity instanceof Proxy && $entity->__isInitialized__)
+            )
+        ) {
             foreach ($entity->recordedMessages() as $event) {
                 $this->collectedEvents[] = $event;
             }

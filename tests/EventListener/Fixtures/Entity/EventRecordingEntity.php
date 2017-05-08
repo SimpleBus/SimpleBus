@@ -5,12 +5,15 @@ namespace SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Entity;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityAboutToBeRemoved;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityChanged;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityCreated;
+use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityCreatedPrePersist;
+use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityChangedPreUpdate;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityNotDirty;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
 
 /**
  * @Entity
+ * @HasLifecycleCallbacks()
  */
 class EventRecordingEntity implements ContainsRecordedMessages
 {
@@ -42,6 +45,11 @@ class EventRecordingEntity implements ContainsRecordedMessages
         $this->record(new EntityChanged());
     }
 
+    public function changeSomethingWithoutRecording()
+    {
+        $this->something = 'changed value';
+    }
+
     public function prepareForRemoval()
     {
         $this->something = 'changed for the last time';
@@ -52,5 +60,21 @@ class EventRecordingEntity implements ContainsRecordedMessages
     public function recordMessageWithoutStateChange()
     {
         $this->record(new EntityNotDirty());
+    }
+
+    /**
+     * @PrePersist
+     */
+    public function recordMessageDuringPrePersistLifecycleCallback()
+    {
+        $this->record(new EntityCreatedPrePersist());
+    }
+
+    /**
+     * @PreUpdate
+     */
+    public function recordMessageDuringPreUpdateLifecycleCallback()
+    {
+        $this->record(new EntityChangedPreUpdate());
     }
 }
