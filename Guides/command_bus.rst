@@ -224,68 +224,68 @@ command will be passed as a message to the
     .. rubric:: Implementing your own command bus middleware
        :name: implementing-your-own-command-bus-middleware
 
-    It's very easy to extend the behavior of the command bus. You can
-    create a class that implements ``MessageBusMiddleware``:
+It's very easy to extend the behavior of the command bus. You can
+create a class that implements ``MessageBusMiddleware``:
 
-    .. code-block::  php
+.. code-block::  php
 
-        use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
+    use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
-        /**
-         * Marker interface for commands that should be handled asynchronously
-         */
-        interface IsHandledAsynchronously
+    /**
+     * Marker interface for commands that should be handled asynchronously
+     */
+    interface IsHandledAsynchronously
+    {
+    }
+
+    class HandleCommandsAsynchronously implements MessageBusMiddleware
+    {
+        ...
+
+        public function handle($message, callable $next)
         {
-        }
-
-        class HandleCommandsAsynchronously implements MessageBusMiddleware
-        {
-            ...
-
-            public function handle($message, callable $next)
-            {
-                if ($message instanceof IsHandledAsynchronously) {
-                    // handle the message asynchronously using a message queue
-                    $this->messageQueue->add($message);
-                } else {
-                    // handle the message synchronously, i.e. right-away
-                    $next($message);
-                }
+            if ($message instanceof IsHandledAsynchronously) {
+                // handle the message asynchronously using a message queue
+                $this->messageQueue->add($message);
+            } else {
+                // handle the message synchronously, i.e. right-away
+                $next($message);
             }
         }
+    }
 
-    You should add an instance of that class as middleware to any
-    ``MessageBusSupportingMiddleware`` instance (like the command bus we
-    created earlier):
+You should add an instance of that class as middleware to any
+``MessageBusSupportingMiddleware`` instance (like the command bus we
+created earlier):
 
-    .. code-block::  php
+.. code-block::  php
 
-        $commandBus->appendMiddleware(new HandleCommandsAsynchronously());
+    $commandBus->appendMiddleware(new HandleCommandsAsynchronously());
 
-    Make sure that you do this at the right place, before or after you
-    add the other middlewares.
+Make sure that you do this at the right place, before or after you
+add the other middlewares.
 
-    Calling ``$next($message)`` will make sure that the next middleware
-    in line is able to handle the message.
+Calling ``$next($message)`` will make sure that the next middleware
+in line is able to handle the message.
 
     .. rubric:: Logging messages
        :name: logging-messages
 
-    To log every message that passes through the command bus, add the
-    ``LoggingMiddleware`` right before the
-    ``DelegatesToMessageHandlerMiddleware``. Make sure to set up a
-    `PSR-3 compliant logger <http://www.php-fig.org/psr/psr-3/>`__
-    first:
+To log every message that passes through the command bus, add the
+``LoggingMiddleware`` right before the
+``DelegatesToMessageHandlerMiddleware``. Make sure to set up a
+`PSR-3 compliant logger <http://www.php-fig.org/psr/psr-3/>`__
+first:
 
-    .. code-block::  php
+.. code-block::  php
 
-        use Psr\Log\LoggerInterface;
-        use Psr\Log\LogLevel;
+    use Psr\Log\LoggerInterface;
+    use Psr\Log\LogLevel;
 
-        // $logger is an instance of LoggerInterface
-        $logger = ...;
-        $loggingMiddleware = new LoggingMiddleware($logger, LogLevel::DEBUG);
-        $commandBus->appendMiddleware($loggingMiddleware);
+    // $logger is an instance of LoggerInterface
+    $logger = ...;
+    $loggingMiddleware = new LoggingMiddleware($logger, LogLevel::DEBUG);
+    $commandBus->appendMiddleware($loggingMiddleware);
 
 Continue to read about the perfect complement to the command bus: the
 `event bus <event_bus.md>`__.
