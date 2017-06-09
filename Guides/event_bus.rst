@@ -214,72 +214,72 @@ the event will be passed as a message to the
 
     $eventBus->handle($event);
 
-    .. rubric:: Implementing your own event bus middleware
-       :name: implementing-your-own-event-bus-middleware
+Implementing your own event bus middleware
+------------------------------------------
 
-    It's very easy to extend the behavior of the event bus. You can
-    create a class that implements ``MessageBusMiddleware``:
+It's very easy to extend the behavior of the event bus. You can
+create a class that implements ``MessageBusMiddleware``:
 
-    .. code-block::  php
+.. code-block::  php
 
-        use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
+    use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
-        /**
-         * Marker interface for domain events that should be stored in the event store
-         */
-        interface DomainEvent
+    /**
+     * Marker interface for domain events that should be stored in the event store
+     */
+    interface DomainEvent
+    {
+    }
+
+    class StoreDomainEvents implements MessageBusMiddleware
+    {
+       // ...
+
+        public function handle($message, callable $next)
         {
-        }
-
-        class StoreDomainEvents implements MessageBusMiddleware
-        {
-            ...
-
-            public function handle($message, callable $next)
-            {
-                if ($message instanceof DomainEvent) {
-                    // store the domain event
-                    $this->eventStore->add($message);
-                }
-
-                // let other middlewares do their job
-                $next($message);
+            if ($message instanceof DomainEvent) {
+                // store the domain event
+                $this->eventStore->add($message);
             }
+
+            // let other middlewares do their job
+            $next($message);
         }
+    }
 
-    You should add an instance of that class as middleware to any
-    ``MessageBusSupportingMiddleware`` instance (like the event bus we
-    created earlier):
+You should add an instance of that class as middleware to any
+``MessageBusSupportingMiddleware`` instance (like the event bus we
+created earlier):
 
-    .. code-block::  php
+.. code-block::  php
 
-        $eventBus->appendMiddleware(new StoreDomainEvents());
+    $eventBus->appendMiddleware(new StoreDomainEvents());
 
-    Make sure that you do this at the right place, before or after you
-    add the other middlewares.
+Make sure that you do this at the right place, before or after you
+add the other middlewares.
 
-    Calling ``$next($message)`` will make sure that the next middleware
-    in line is able to handle the message.
+Calling ``$next($message)`` will make sure that the next middleware
+in line is able to handle the message.
 
-    .. rubric:: Logging messages
-       :name: logging-messages
+Logging messages
+----------------
 
-    To log every message that passes through the event bus, add the
-    ``LoggingMiddleware`` right before the
-    ``NotifiesMessageSubscribersMiddleware``. Make sure to set up a
-    `PSR-3 compliant logger <http://www.php-fig.org/psr/psr-3/>`__
-    first:
+To log every message that passes through the event bus, add the
+``LoggingMiddleware`` right before the
+``NotifiesMessageSubscribersMiddleware``. Make sure to set up a
+`PSR-3 compliant logger <http://www.php-fig.org/psr/psr-3/>`__
+first:
 
-    .. code-block::  php
+.. code-block::  php
 
-        use Psr\Log\LoggerInterface;
-        use Psr\Log\LogLevel;
-        use SimpleBus\Message\Logging\LoggingMiddleware;
+    use Psr\Log\LoggerInterface;
+    use Psr\Log\LogLevel;
+    use SimpleBus\Message\Logging\LoggingMiddleware;
 
-        // $logger is an instance of LoggerInterface
-        $logger = ...;
-        $loggingMiddleware = new LoggingMiddleware($logger, LogLevel::DEBUG);
-        $eventBus->appendMiddleware($loggingMiddleware);
+    // $logger is an instance of LoggerInterface
+    $logger = ...;
+    $loggingMiddleware = new LoggingMiddleware($logger, LogLevel::DEBUG);
+    $eventBus->appendMiddleware($loggingMiddleware);
 
 Continue to read about `recording events and handling
 them <message_recorder.md>`__.
