@@ -9,11 +9,11 @@ The `SimpleBusRabbitMQBundleBridgeBundle` allows you to publish and consume Simp
 ## Getting started
 
 First, enable [SimpleBusAsynchronousBundle](https://github.com/SimpleBus/AsynchronousBundle) in your Symfony project.
-Next enable `SimpleBusRabbitMQBundleBridgeBundle` and [OldSoundRabbitMqBundle](https://github.com/videlalvaro/RabbitMqBundle).
+Next enable `SimpleBusRabbitMQBundleBridgeBundle` and [RabbitMQBundle](https://github.com/php-amqplib/RabbitMqBundle).
 
 ### Handling commands asynchronously
 
-If you want commands to be handled asynchronously, you should first configure `OldSoundRabbitMqBundle`:
+If you want commands to be handled asynchronously, you should first configure `RabbitMQBundle`:
 
 ```yaml
 # in config.yml
@@ -41,7 +41,7 @@ Now enable asynchronous command handling:
 # in config.yml
 simple_bus_rabbit_mq_bundle_bridge:
     commands:
-        # this producer service will be defined by OldSoundRabbitMqBundle,
+        # this producer service will be defined by RabbitMQBundle,
         # its name is old_sound_rabbit_mq.%producer_name%_producer
         producer_service_id: old_sound_rabbit_mq.asynchronous_commands_producer
 ```
@@ -66,7 +66,7 @@ To actually consume command messages, you need to start (and keep running):
 
 ### Handling events asynchronously
 
-If you want events to be handled asynchronously, you should first configure `OldSoundRabbitMqBundle`:
+If you want events to be handled asynchronously, you should first configure `RabbitMQBundle`:
 
 ```yaml
 # in config.yml
@@ -93,7 +93,7 @@ Now enable asynchronous event handling:
 # in config.yml
 simple_bus_rabbit_mq_bundle_bridge:
     events:
-        # this producer service will be defined by OldSoundRabbitMqBundle,
+        # this producer service will be defined by RabbitMQBundle,
         # its name is old_sound_rabbit_mq.%producer_name%_producer
         producer_service_id: old_sound_rabbit_mq.asynchronous_events_producer
 ```
@@ -118,4 +118,4 @@ To actually consume event messages, you need to start (and keep running):
 >
 > You are encouraged to tweak the exchange/queue options and make them right for your project. Read more about your
 > options in the [RabbitMQ documentation](http://www.rabbitmq.com/documentation.html) and in the [documentation of
-> OldSoundRabbitMQBundle](https://github.com/videlalvaro/RabbitMqBundle).
+> RabbitMQBundle](https://github.com/php-amqplib/RabbitMqBundle).

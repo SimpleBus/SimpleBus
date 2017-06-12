@@ -5,7 +5,7 @@ currentMenu: additional_properties
 # Additional properties
 
 Besides the raw message and a [routing key](/doc/routing.md) the RabbitMQ
-[producer](https://github.com/videlalvaro/RabbitMqBundle#producer) accepts several [additional
+[producer](https://github.com/php-amqplib/RabbitMqBundle#producer) accepts several [additional
 properties](https://github.com/videlalvaro/php-amqplib#optimized-message-publishing). You can determine them dynamically
 using [additional property resolvers](http://simplebus.github.io/Asynchronous/doc/additional_properties.md). Define your
 resolvers as a service and tag them as `simple_bus.additional_properties_resolver`:

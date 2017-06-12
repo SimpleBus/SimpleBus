@@ -84,5 +84,5 @@ simple_bus_rabbit_mq_bundle_bridge:
 >                 prefetch_count: 1
 > ```
 >
-> See also [Fair dispatching](https://github.com/videlalvaro/RabbitMqBundle#fair-dispatching) in the bundle's official
+> See also [Fair dispatching](https://github.com/php-amqplib/RabbitMqBundle#fair-dispatching) in the bundle's official
 > documentation.

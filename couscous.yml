@@ -1,5 +1,5 @@
 title: SimpleBus/RabbitMQBundleBridge
-subTitle: Use OldSoundRabbitMQBundle with SimpleBus/AsynchronousBundle
+subTitle: Use RabbitMQBundle with SimpleBus/AsynchronousBundle
 baseUrl: //simplebus.github.io/RabbitMQBundleBridge
 menu:
     items:

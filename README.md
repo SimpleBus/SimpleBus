@@ -5,6 +5,6 @@
 By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
 
 The `SimpleBusRabbitMQBundleBridgeBundle` allows you to publish and consume SimpleBus messages using the
-[OldSoundRabbitMQBundle](https://github.com/videlalvaro/RabbitMqBundle).
+[RabbitMQBundle](https://github.com/php-amqplib/RabbitMqBundle).
 
 [Read the full documentation here](http://simplebus.github.io/RabbitMQBundleBridge)
