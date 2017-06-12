@@ -11,6 +11,11 @@ matrix:
     - php: 7.1
       env: SYMFONY_VERSION=2.8.*
     - php: 7.1
+      env: SYMFONY_VERSION=3.2.*
+    - php: 7.1
+      env: SYMFONY_VERSION=3.3.*
+  allow_failures:
+    - php: 7.1
       env: SYMFONY_VERSION=3.3.*
 
 env:
