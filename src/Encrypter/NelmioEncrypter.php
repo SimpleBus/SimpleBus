@@ -27,7 +27,7 @@ class NelmioEncrypter implements Encrypter
                 $this->algorithm));
         }
 
-        $this->ivSize = mcrypt_enc_get_iv_size($this->module);
+        $this->ivSize = @mcrypt_enc_get_iv_size($this->module);
     }
 
     public function encrypt($input)
@@ -36,11 +36,11 @@ class NelmioEncrypter implements Encrypter
             return;
         }
 
-        $iv = mcrypt_create_iv($this->ivSize, MCRYPT_RAND);
+        $iv = @mcrypt_create_iv($this->ivSize, MCRYPT_RAND);
 
-        mcrypt_generic_init($this->module, $this->secret, $iv);
+        @mcrypt_generic_init($this->module, $this->secret, $iv);
 
-        return rtrim(base64_encode($iv.mcrypt_generic($this->module, (string) $input)), '=');
+        return rtrim(base64_encode($iv.@mcrypt_generic($this->module, (string) $input)), '=');
     }
 
     public function decrypt($input)
@@ -64,6 +64,6 @@ class NelmioEncrypter implements Encrypter
             return;
         }
 
-        return rtrim(mdecrypt_generic($this->module, $encryptedData), "\0");
+        return rtrim(@mdecrypt_generic($this->module, $encryptedData), "\0");
     }
 }

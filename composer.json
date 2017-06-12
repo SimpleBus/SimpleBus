@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "php": "^5.4|^7.0",
+        "php": "^5.6 || ^7.0",
         "simple-bus/message-bus": "~2.0",
         "simple-bus/asynchronous-bundle": "~2.0",
         "simple-bus/asynchronous": "~2.0",
@@ -42,8 +42,5 @@
         "psr-4": {
             "SimpleBus\\BernardBundleBridge\\Tests\\": "tests"
         }
-    },
-    "config": {
-        "bin-dir": "bin"
     }
 }
