@@ -33,17 +33,29 @@ old_sound_rabbit_mq:
     consumers:
         ...
         asynchronous_commands_fallback:
-            connection:       default
-            exchange_options: { name: 'asynchronous_commands_fallback', type: direct }
-            queue_options:    { name: 'asynchronous_commands_fallback' }
-            # use the consumer provided by SimpleBusRabbitMQBundleBridgeBundle
-            callback:         simple_bus.rabbit_mq_bundle_bridge.commands_consumer
+            connection:             default
+            exchange_options:       { name: 'asynchronous_commands_fallback', type: topic }
+            queue_options:          { name: 'asynchronous_commands_fallback', routing_keys: ['#'] }
+            callback:               'simple_bus.rabbit_mq_bundle_bridge.commands_consumer'
+            qos_options:            { prefetch_size: 0, prefetch_count: 10, global: false }
         asynchronous_commands:
-            connection:       default
-            exchange_options: { name: 'asynchronous_commands', type: direct }
-            queue_options:    { name: 'asynchronous_commands', arguments: {'x-dead-letter-exchange': ['S', 'asynchronous_commands_fallback']} }
-            # use the consumer provided by SimpleBusRabbitMQBundleBridgeBundle
-            callback:         simple_bus.rabbit_mq_bundle_bridge.commands_consumer
+            connection:             default
+            exchange_options:       { name: 'asynchronous_commands', type: topic }
+            queue_options:          { name: 'asynchronous_commands', routing_keys: [''], arguments: {'x-dead-letter-exchange': ['S', 'asynchronous_commands_fallback']} }
+            callback:               'simple_bus.rabbit_mq_bundle_bridge.commands_consumer'
+            qos_options:            { prefetch_size: 0, prefetch_count: 10, global: false }
+        asynchronous_events_fallback:
+            connection:             default
+            exchange_options:       { name: 'asynchronous_events_fallback', type: topic }
+            queue_options:          { name: 'asynchronous_events_fallback', routing_keys: ['#'] }
+            callback:               'simple_bus.rabbit_mq_bundle_bridge.commands_consumer'
+            qos_options:            { prefetch_size: 0, prefetch_count: 10, global: false }
+        asynchronous_events:
+            connection:             default
+            exchange_options:       { name: 'asynchronous_events', type: topic }
+            queue_options:          { name: 'asynchronous_events', routing_keys: [''], arguments: {'x-dead-letter-exchange': ['S', 'asynchronous_events_fallback']} }
+            callback:               'simple_bus.rabbit_mq_bundle_bridge.events_consumer'
+            qos_options:            { prefetch_size: 0, prefetch_count: 10, global: false }
 ```
 
 ### Manually
@@ -68,20 +80,35 @@ old_sound_rabbit_mq:
     producers:
         ...
         asynchronous_commands:
-            connection:       default
-            exchange_options: { name: 'asynchronous_commands', type: direct }
+            connection:             default
+            exchange_options:       { name: 'asynchronous_commands', type: topic }
+        asynchronous_events:
+            connection:             default
+            exchange_options:       { name: 'asynchronous_events', type: topic }
     consumers:
         ...
         asynchronous_commands_fallback:
-            connection:       default
-            exchange_options: { name: 'asynchronous_commands_fallback', type: direct }
-            queue_options:    { name: 'asynchronous_commands_fallback', arguments: {'x-dead-letter-exchange': ['S', 'asynchronous_commands'], 'x-message-ttl': ['I', 3600000]} }
-            # use the consumer provided by SimpleBusRabbitMQBundleBridgeBundle
-            callback:         simple_bus.rabbit_mq_bundle_bridge.commands_consumer
+            connection:             default
+            exchange_options:       { name: 'asynchronous_commands_fallback', type: topic }
+            queue_options:          { name: 'asynchronous_commands_fallback', routing_keys: ['#'], arguments: {'x-dead-letter-exchange': ['S', 'asynchronous_commands'], 'x-message-ttl': ['I', 3600000]} }
+            callback:               'simple_bus.rabbit_mq_bundle_bridge.commands_consumer'
+            qos_options:            { prefetch_size: 0, prefetch_count: 10, global: false }
         asynchronous_commands:
-            connection:       default
-            exchange_options: { name: 'asynchronous_commands', type: direct }
-            queue_options:    { name: 'asynchronous_commands', arguments: {'x-dead-letter-exchange': ['S', 'asynchronous_commands_fallback']} }
-            # use the consumer provided by SimpleBusRabbitMQBundleBridgeBundle
-            callback:         simple_bus.rabbit_mq_bundle_bridge.commands_consumer
+            connection:             default
+            exchange_options:       { name: 'asynchronous_commands', type: topic }
+            queue_options:          { name: 'asynchronous_commands', routing_keys: [''], arguments: {'x-dead-letter-exchange': ['S', 'asynchronous_commands_fallback']} }
+            callback:               'simple_bus.rabbit_mq_bundle_bridge.commands_consumer'
+            qos_options:            { prefetch_size: 0, prefetch_count: 10, global: false }
+        asynchronous_events_fallback:
+            connection:             default
+            exchange_options:       { name: 'asynchronous_events_fallback', type: topic }
+            queue_options:          { name: 'asynchronous_events_fallback', routing_keys: ['#'], arguments: {'x-dead-letter-exchange': ['S', 'asynchronous_events'], 'x-message-ttl': ['I', 3600000]} }
+            callback:               'simple_bus.rabbit_mq_bundle_bridge.commands_consumer'
+            qos_options:            { prefetch_size: 0, prefetch_count: 10, global: false }
+        asynchronous_events:
+            connection:             default
+            exchange_options:       { name: 'asynchronous_events', type: topic }
+            queue_options:          { name: 'asynchronous_events', routing_keys: [''], arguments: {'x-dead-letter-exchange': ['S', 'asynchronous_events_fallback']} }
+            callback:               'simple_bus.rabbit_mq_bundle_bridge.events_consumer'
+            qos_options:            { prefetch_size: 0, prefetch_count: 10, global: false }
 ```
