@@ -23,7 +23,7 @@ class BernardPublisherTest extends \PHPUnit_Framework_TestCase
             ->willReturn('queue_name')
         ;
 
-        $serializer = $this->getMock('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer');
+        $serializer = $this->getMock('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer');
         $serializer
             ->expects($this->once())
             ->method('wrapAndSerialize')
