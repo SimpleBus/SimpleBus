@@ -3,8 +3,10 @@
 namespace SimpleBus\DoctrineORMBridge\EventListener;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
+use Doctrine\ORM\Proxy\Proxy;
+use Doctrine\ORM\Event\PreFlushEventArgs;
+use Doctrine\ORM\Event\PostFlushEventArgs;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
 class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMessages
@@ -14,25 +16,40 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
     public function getSubscribedEvents()
     {
         return array(
-            Events::postPersist,
-            Events::postUpdate,
-            Events::postRemove,
+            Events::preFlush,
+            Events::postFlush
         );
     }
 
-    public function postPersist(LifecycleEventArgs $event)
+    public function preFlush(PreFlushEventArgs $eventArgs)
     {
-        $this->collectEventsFromEntity($event);
+        $em = $eventArgs->getEntityManager();
+        $uow = $em->getUnitOfWork();
+        foreach ($uow->getIdentityMap() as $entities) {
+            foreach ($entities as $entity){
+                $this->collectEventsFromEntity($entity);
+            }
+        }
+        foreach ($uow->getScheduledEntityDeletions() as $entity) {
+            $this->collectEventsFromEntity($entity);
+        }
     }
 
-    public function postUpdate(LifecycleEventArgs $event)
+    /**
+     * We need to listen on postFlush for Lifecycle Events
+     * All Lifecycle callback events are triggered after the onFlush event
+     *
+     * @param PostFlushEventArgs $eventArgs
+     */
+    public function postFlush(PostFlushEventArgs $eventArgs)
     {
-        $this->collectEventsFromEntity($event);
-    }
-
-    public function postRemove(LifecycleEventArgs $event)
-    {
-        $this->collectEventsFromEntity($event);
+        $em = $eventArgs->getEntityManager();
+        $uow = $em->getUnitOfWork();
+        foreach ($uow->getIdentityMap() as $entities) {
+            foreach ($entities as $entity){
+                $this->collectEventsFromEntity($entity);
+            }
+        }
     }
 
     public function recordedMessages()
@@ -45,15 +62,16 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
         $this->collectedEvents = array();
     }
 
-    private function collectEventsFromEntity(LifecycleEventArgs $event)
+    private function collectEventsFromEntity($entity)
     {
-        $entity = $event->getEntity();
-
-        if ($entity instanceof ContainsRecordedMessages) {
+        if ($entity instanceof ContainsRecordedMessages
+            && ( !$entity instanceof Proxy
+                || ($entity instanceof Proxy && $entity->__isInitialized__)
+            )
+        ) {
             foreach ($entity->recordedMessages() as $event) {
                 $this->collectedEvents[] = $event;
             }
-
             $entity->eraseMessages();
         }
     }
