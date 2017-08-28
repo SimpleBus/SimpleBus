@@ -18,8 +18,8 @@
     ],
     "require": {
         "php": "^5.6 || ^7.0",
-        "simple-bus/message-bus": "~2.0",
-        "simple-bus/serialization": "~2.0",
+        "simple-bus/message-bus": "~3.0",
+        "simple-bus/serialization": "~3.0",
         "beberlei/assert": "~2.0",
         "psr/log": "~1.0"
     },
