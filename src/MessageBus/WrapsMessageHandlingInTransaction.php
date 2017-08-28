@@ -8,7 +8,6 @@ namespace SimpleBus\DoctrineDBALBridge\MessageBus;
 
 use Doctrine\DBAL\Driver\Connection;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
-use SimpleBus\Message\Message;
 
 /**
  * @author Jasper N. Brouwer <jasper@nerdsweide.nl>
@@ -31,7 +30,7 @@ class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
     /**
      * {@inheritdoc}
      */
-    public function handle(Message $message, callable $next)
+    public function handle($message, callable $next)
     {
         $this->connection->beginTransaction();
 
