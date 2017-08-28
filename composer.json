@@ -13,9 +13,9 @@
     ],
     "require": {
         "php": "^5.6 || ^7.0",
-        "simple-bus/message-bus": "~2.0",
-        "simple-bus/asynchronous-bundle": "~2.0",
-        "simple-bus/asynchronous": "~2.0",
+        "simple-bus/message-bus": "~3.0",
+        "simple-bus/asynchronous-bundle": "~3.0",
+        "simple-bus/asynchronous": "~3.0",
         "bernard/bernard-bundle": "2.0.*@dev",
         "bernard/bernard": "1.0.*@dev"
     },

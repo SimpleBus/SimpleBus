@@ -5,8 +5,8 @@ Add the following to your composer.json:
 ```javascript
 {
     "require": {
-        "simple-bus/bernard-bundle-bridge": "~1.0",
-        "simple-bus/jms-serializer-bundle-bridge": "~2.0"
+        "simple-bus/bernard-bundle-bridge": "~2.0",
+        "simple-bus/jms-serializer-bundle-bridge": "~3.0"
     }
 }
 ```
