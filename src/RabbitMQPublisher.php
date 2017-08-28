@@ -8,12 +8,12 @@ use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Asynchronous\Routing\RoutingKeyResolver;
-use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopSerializer;
+use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 
 class RabbitMQPublisher implements Publisher
 {
     /**
-     * @var MessageInEnvelopSerializer
+     * @var MessageInEnvelopeSerializer
      */
     private $serializer;
 
@@ -33,7 +33,7 @@ class RabbitMQPublisher implements Publisher
     private $additionalPropertiesResolver;
 
     public function __construct(
-        MessageInEnvelopSerializer $messageSerializer,
+        MessageInEnvelopeSerializer $messageSerializer,
         $producer,
         RoutingKeyResolver $routingKeyResolver,
         AdditionalPropertiesResolver $additionalPropertiesResolver
