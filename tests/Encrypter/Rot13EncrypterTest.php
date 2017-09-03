@@ -4,7 +4,7 @@ namespace SimpleBus\BernardBundleBridge\Tests\Encrypter;
 
 use SimpleBus\BernardBundleBridge\Encrypter\Rot13Encrypter;
 
-class Rot13EncrypterTest extends \PHPUnit_Framework_TestCase
+class Rot13EncrypterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

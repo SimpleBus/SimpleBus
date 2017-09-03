@@ -6,14 +6,14 @@ use Bernard\Envelope;
 use Bernard\Message\PlainMessage;
 use SimpleBus\BernardBundleBridge\BernardRouter;
 
-class BernardRouterTest extends \PHPUnit_Framework_TestCase
+class BernardRouterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
      */
     public function it_should_retrieve_a_consumer_for_type()
     {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $container
             ->expects($this->exactly(2))
             ->method('get')

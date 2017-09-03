@@ -6,7 +6,7 @@ use Bernard\Message;
 use Bernard\Producer;
 use SimpleBus\BernardBundleBridge\BernardPublisher;
 
-class BernardPublisherTest extends \PHPUnit_Framework_TestCase
+class BernardPublisherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -15,7 +15,7 @@ class BernardPublisherTest extends \PHPUnit_Framework_TestCase
     {
         $message = new \stdClass();
 
-        $queueResolver = $this->getMock('SimpleBus\Asynchronous\Routing\RoutingKeyResolver');
+        $queueResolver = $this->createMock('SimpleBus\Asynchronous\Routing\RoutingKeyResolver');
         $queueResolver
             ->expects($this->once())
             ->method('resolveRoutingKeyFor')
@@ -23,7 +23,7 @@ class BernardPublisherTest extends \PHPUnit_Framework_TestCase
             ->willReturn('queue_name')
         ;
 
-        $serializer = $this->getMock('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer');
+        $serializer = $this->createMock('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer');
         $serializer
             ->expects($this->once())
             ->method('wrapAndSerialize')

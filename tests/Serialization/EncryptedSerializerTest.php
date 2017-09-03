@@ -5,7 +5,7 @@ namespace SimpleBus\BernardBundleBridge\Tests\Serialization;
 use SimpleBus\BernardBundleBridge\Serialization\EncryptedSerializer;
 use SimpleBus\Serialization\NativeObjectSerializer;
 
-class EncryptedSerializerTest extends \PHPUnit_Framework_TestCase
+class EncryptedSerializerTest extends \PHPUnit\Framework\TestCase
 {
     /** @var EncryptedSerializer */
     private $serializer;
@@ -15,7 +15,7 @@ class EncryptedSerializerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->encrypter = $this->getMock('SimpleBus\BernardBundleBridge\Encrypter\Encrypter');
+        $this->encrypter = $this->createMock('SimpleBus\BernardBundleBridge\Encrypter\Encrypter');
         $this->serializer = new EncryptedSerializer(new NativeObjectSerializer(), $this->encrypter);
     }
 
