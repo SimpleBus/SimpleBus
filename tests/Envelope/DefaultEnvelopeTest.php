@@ -5,7 +5,7 @@ namespace Message\Envelope;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
 
-class DefaultEnvelopeTest extends \PHPUnit_Framework_TestCase
+class DefaultEnvelopeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -64,7 +64,7 @@ class DefaultEnvelopeTest extends \PHPUnit_Framework_TestCase
         $message = new DummyMessage();
         $envelope = DefaultEnvelope::forMessage($message);
 
-        $this->setExpectedException('LogicException');
+        $this->expectException('LogicException');
 
         $envelope->serializedMessage();
     }
@@ -79,7 +79,7 @@ class DefaultEnvelopeTest extends \PHPUnit_Framework_TestCase
             'serialized message'
         );
 
-        $this->setExpectedException('LogicException');
+        $this->expectException('LogicException');
 
         $envelope->message();
     }

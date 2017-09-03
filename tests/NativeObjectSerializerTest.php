@@ -6,7 +6,7 @@ use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\NativeObjectSerializer;
 use SimpleBus\Serialization\Tests\Fixtures\AnotherDummyMessage;
 
-class NativeObjectSerializerTest extends \PHPUnit_Framework_TestCase
+class NativeObjectSerializerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -49,7 +49,7 @@ class NativeObjectSerializerTest extends \PHPUnit_Framework_TestCase
         $serializer = new NativeObjectSerializer();
         $serializedMessage = $serializer->serialize($message);
 
-        $this->setExpectedException('\LogicException', $expectedType);
+        $this->expectException('\LogicException', $expectedType);
         $serializer->deserialize($serializedMessage, $expectedType);
     }
 }
