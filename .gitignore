@@ -4,4 +4,3 @@ phpunit.xml
 composer.lock
 /tests/Functional/temp
 /build/
-.coveralls.yml
