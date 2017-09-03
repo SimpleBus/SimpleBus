@@ -5,7 +5,7 @@ namespace SimpleBus\Asynchronous\Tests\MessageBus;
 use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 
-class AlwaysPublishesMessagesTest extends \PHPUnit_Framework_TestCase
+class AlwaysPublishesMessagesTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -36,7 +36,7 @@ class AlwaysPublishesMessagesTest extends \PHPUnit_Framework_TestCase
      */
     private function mockPublisher()
     {
-        return $this->getMock('SimpleBus\Asynchronous\Publisher\Publisher');
+        return $this->createMock('SimpleBus\Asynchronous\Publisher\Publisher');
     }
 
     /**

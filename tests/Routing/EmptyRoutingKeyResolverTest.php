@@ -4,7 +4,7 @@ namespace SimpleBus\Asynchronous\Tests\Routing;
 
 use SimpleBus\Asynchronous\Routing\EmptyRoutingKeyResolver;
 
-class EmptyRoutingKeyResolverTest extends \PHPUnit_Framework_TestCase
+class EmptyRoutingKeyResolverTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

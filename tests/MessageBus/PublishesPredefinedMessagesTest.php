@@ -7,7 +7,7 @@ use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\CallableResolver\Exception\UndefinedCallable;
 use SimpleBus\Message\Name\MessageNameResolver;
 
-class PublishesPredefinedMessagesTest extends \PHPUnit_Framework_TestCase
+class PublishesPredefinedMessagesTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -73,14 +73,14 @@ class PublishesPredefinedMessagesTest extends \PHPUnit_Framework_TestCase
      */
     private function mockPublisher()
     {
-        return $this->getMock('SimpleBus\Asynchronous\Publisher\Publisher');
+        return $this->createMock('SimpleBus\Asynchronous\Publisher\Publisher');
     }
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|MessageNameResolver
      */
     private function mockNameResolver()
     {
-        return $this->getMock('SimpleBus\Message\Name\MessageNameResolver');
+        return $this->createMock('SimpleBus\Message\Name\MessageNameResolver');
     }
 
     /**
