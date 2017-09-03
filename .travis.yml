@@ -2,6 +2,9 @@ sudo: false
 
 language: php
 
+services:
+  - rabbitmq
+
 matrix:
   include:
     - php: 5.6
@@ -25,7 +28,7 @@ install:
   - composer install --prefer-dist
 
 script:
-  - vendor/bin/phpunit --exclude-group functional
+  - vendor/bin/phpunit
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
