@@ -38,6 +38,12 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
         $this->logger = static::$kernel->getContainer()->get('logger');
         $this->logger->clearFile();
+
+        $process = new Process(
+            'php console.php rabbitmq:setup-fabric',
+            __DIR__
+        );
+        $process->run();
     }
 
     /**
