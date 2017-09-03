@@ -7,7 +7,7 @@ use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\JMSSerializerBridge\JMSSerializerObjectSerializer;
 use SimpleBus\JMSSerializerBridge\SerializerMetadata;
 
-class JMSSerializerObjectSerializerTest extends \PHPUnit_Framework_TestCase
+class JMSSerializerObjectSerializerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
