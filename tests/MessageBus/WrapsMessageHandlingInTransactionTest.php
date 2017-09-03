@@ -12,7 +12,7 @@ use SimpleBus\Message\Message;
 /**
  * @author Jasper N. Brouwer <jasper@nerdsweide.nl>
  */
-class WrapsMessageHandlingInTransactionTest extends \PHPUnit_Framework_TestCase
+class WrapsMessageHandlingInTransactionTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -20,14 +20,14 @@ class WrapsMessageHandlingInTransactionTest extends \PHPUnit_Framework_TestCase
     public function it_wraps_the_next_middleware_in_a_transaction()
     {
         $nextIsCalled = false;
-        $message      = $this->getMockBuilder('SimpleBus\Message\Message')->getMock();
+        $message      = new \stdClass();
 
-        $nextMiddlewareCallable = function (Message $actualMessage) use ($message, &$nextIsCalled) {
+        $nextMiddlewareCallable = function (\stdClass $actualMessage) use ($message, &$nextIsCalled) {
             $this->assertSame($message, $actualMessage);
             $nextIsCalled = true;
         };
 
-        $connection = $this->getMockBuilder('Doctrine\DBAL\Driver\Connection')->getMock();
+        $connection = $this->createMock('Doctrine\DBAL\Driver\Connection');
         $connection
             ->expects($this->once())
             ->method('beginTransaction');
@@ -48,13 +48,13 @@ class WrapsMessageHandlingInTransactionTest extends \PHPUnit_Framework_TestCase
     public function it_rolls_the_transaction_back_when_an_exception_is_thrown()
     {
         $exception = new \Exception();
-        $message   = $this->getMockBuilder('SimpleBus\Message\Message')->getMock();
+        $message      = new \stdClass();
 
         $nextMiddlewareCallable = function () use ($exception) {
             throw $exception;
         };
 
-        $connection = $this->getMockBuilder('Doctrine\DBAL\Driver\Connection')->getMock();
+        $connection = $this->createMock('Doctrine\DBAL\Driver\Connection');
         $connection
             ->expects($this->once())
             ->method('beginTransaction');
