@@ -5,7 +5,7 @@ namespace SimpleBus\Asynchronous\Tests\Routing;
 use SimpleBus\Asynchronous\Routing\ClassBasedRoutingKeyResolver;
 use SimpleBus\Asynchronous\Tests\Routing\Fixtures\MessageDummy;
 
-class ClassBasedRoutingKeyResolverTest extends \PHPUnit_Framework_TestCase
+class ClassBasedRoutingKeyResolverTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

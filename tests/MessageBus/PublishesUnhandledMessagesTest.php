@@ -8,7 +8,7 @@ use SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\CallableResolver\Exception\UndefinedCallable;
 
-class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
+class PublishesUnhandledMessagesTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -79,7 +79,7 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
      */
     private function mockPublisher()
     {
-        return $this->getMock('SimpleBus\Asynchronous\Publisher\Publisher');
+        return $this->createMock('SimpleBus\Asynchronous\Publisher\Publisher');
     }
 
     /**
@@ -95,7 +95,7 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
      */
     private function dummyLogger()
     {
-        return $this->getMock('Psr\Log\LoggerInterface');
+        return $this->createMock('Psr\Log\LoggerInterface');
     }
 
     /**
@@ -103,7 +103,7 @@ class PublishesUnhandledMessagesTest extends \PHPUnit_Framework_TestCase
      */
     private function mockLogger()
     {
-        return $this->getMock('Psr\Log\LoggerInterface');
+        return $this->createMock('Psr\Log\LoggerInterface');
     }
 
     private function dummyLogLevel()
