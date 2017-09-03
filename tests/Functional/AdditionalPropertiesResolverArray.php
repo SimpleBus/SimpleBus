@@ -3,11 +3,9 @@
 namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
-use SimpleBus\Message\Message;
 
 class AdditionalPropertiesResolverArray implements AdditionalPropertiesResolver
 {
-
     /**
      * @var array
      */

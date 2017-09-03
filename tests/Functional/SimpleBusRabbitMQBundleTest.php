@@ -183,7 +183,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
             'php console.php rabbitmq:consumer ' . $queue,
             __DIR__
         );
-        
+
         $this->process->start();
     }
 
