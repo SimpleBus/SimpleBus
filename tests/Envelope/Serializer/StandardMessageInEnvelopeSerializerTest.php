@@ -9,7 +9,7 @@ use SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSeriali
 use SimpleBus\Serialization\ObjectSerializer;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
 
-class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCase
+class StandardMessageInEnvelopeSerializerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -78,7 +78,7 @@ class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCas
 
         $messageSerializer = new StandardMessageInEnvelopeSerializer($envelopeFactory, $objectSerializer);
 
-        $this->setExpectedException('\LogicException');
+        $this->expectException('\LogicException');
         $messageSerializer->unwrapAndDeserialize($serializedEnvelope);
     }
 
@@ -105,7 +105,7 @@ class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCas
 
         $messageSerializer = new StandardMessageInEnvelopeSerializer($envelopeFactory, $objectSerializer);
 
-        $this->setExpectedException('\LogicException', $messageClass);
+        $this->expectException('\LogicException', $messageClass);
         $messageSerializer->unwrapAndDeserialize($serializedEnvelope);
     }
 
@@ -116,7 +116,7 @@ class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCas
      */
     private function envelopeFactoryCreatesEnvelope($message, Envelope $expectedEnvelope)
     {
-        $envelopeFactory = $this->getMock('SimpleBus\Serialization\Envelope\EnvelopeFactory');
+        $envelopeFactory = $this->createMock('SimpleBus\Serialization\Envelope\EnvelopeFactory');
         $envelopeFactory
             ->expects($this->once())
             ->method('wrapMessageInEnvelope')
@@ -131,7 +131,7 @@ class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCas
      */
     private function mockObjectSerializer()
     {
-        return $this->getMock('SimpleBus\Serialization\ObjectSerializer');
+        return $this->createMock('SimpleBus\Serialization\ObjectSerializer');
     }
 
     private function objectSerializerSerializes(array $serializes)
@@ -156,7 +156,7 @@ class StandardMessageInEnvelopeSerializerTest extends \PHPUnit_Framework_TestCas
      */
     private function envelopeFactoryForEnvelopeClass($envelopeClass)
     {
-        $envelopeFactory = $this->getMock('SimpleBus\Serialization\Envelope\EnvelopeFactory');
+        $envelopeFactory = $this->createMock('SimpleBus\Serialization\Envelope\EnvelopeFactory');
         $envelopeFactory
             ->expects($this->any())
             ->method('envelopeClass')
