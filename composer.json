@@ -1,6 +1,6 @@
 {
     "name": "simple-bus/bernard-bundle-bridge",
-    "type": "library",
+    "type": "symfony-bundle",
     "description": "Use BernardBundle with SimpleBus/AsynchronousBundle.",
     "keywords": [ "bernard", "messages", "message bus", "event bus", "command bus" ],
     "homepage": "https://github.com/SimpleBus/SimpleBusBernardBundleBridge",
