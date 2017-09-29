@@ -1,6 +1,6 @@
 {
     "name": "simple-bus/asynchronous-bundle",
-    "type": "bundle",
+    "type": "symfony-bundle",
     "description": "Symfony bundle for using SimpleBus/Asynchronous",
     "keywords": ["asynchronous", "message", "message bus", "event bus", "command bus"],
     "homepage": "http://github.com/SimpleBus/AsynchronousBundle",
