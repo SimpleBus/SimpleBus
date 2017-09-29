@@ -1,6 +1,6 @@
 {
     "name": "simple-bus/jms-serializer-bridge",
-    "type": "bundle",
+    "type": "library",
     "description": "Bridge for using JMSSerializer as message serializer for SimpleBus/Asynchronous",
     "keywords": ["asynchronous", "message", "serialization"],
     "homepage": "http://github.com/SimpleBus/JMSSerializerBridge",
