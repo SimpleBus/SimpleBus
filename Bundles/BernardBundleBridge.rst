@@ -2,7 +2,7 @@ BernardBundleBridge
 ===================
 
 `Bernard <https://github.com/bernardphp/bernard>`__ integration with
-`SimpleBus <http://simplebus.github.io/MessageBus>`__ via
+`SimpleBus <http://github.com/SimpleBus/MessageBus>`__ via
 `BernardBundle <https://github.com/bernardphp/BernardBundle>`__ i.e.
 ability to deliver SimpleBus (encrypted) messages with Bernard.
 
@@ -17,7 +17,7 @@ Add the following to your composer.json:
     composer require simple-bus/jms-serializer-bundle-bridge
 
 The *jms-serializer* is recommended, but not required. Read
-`here <http://simplebus.github.io/AsynchronousBundle/doc/getting_started.html>`__
+`here <../Bundles/AsynchronousBundle.html#getting-started>`__
 how to register your own serializer.
 
 **Note**
@@ -426,7 +426,7 @@ Custom SimpleBus publisher
 *SimpleBus* always publishes events when asynchronous events are
 enabled. This is because ``AlwaysPublishesMessages`` publisher is used
 for events (more info
-`here <http://simplebus.github.io/Asynchronous/doc/publishing_messages.html>`__).
+`here <../Components/Asynchronous.html>`__).
 
 Sometimes this is not what you want as it is impossible to mix sync and
 async events. In other words synchronous events are published to the

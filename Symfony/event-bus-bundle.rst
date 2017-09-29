@@ -108,7 +108,7 @@ Adding event bus middlewares
 ----------------------------
 
 As described in the `MessageBus
-documentation <http://simplebus.github.io/MessageBus/doc/event_bus.html>`__
+documentation <../Guides/event_bus.html>`__
 you can extend the behavior of the event bus by adding middlewares to
 it. This bundle allows you to register your own middlewares by adding
 the ``event_bus_middleware`` tag to middleware service definitions:

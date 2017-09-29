@@ -6,7 +6,7 @@ From 3.x to 4.0
 
 Version ``4.0`` works with ``SimpleBus/MessageBus`` ``2.0`` so you have
 to make the changes descibred in its `upgrade
-guide <http://simplebus.github.io/MessageBus/doc/upgrade_guide.html>`__
+guide <../Symfony/upgrade-guide.html>`__
 as well.
 
 The biggest change for the ``SymfonyBridge`` package is that command
@@ -293,8 +293,8 @@ You should register command bus middleware like this:
 The same for event bus middleware, but then you should use the tag
 ``event_bus_middleware``. The priority value for middlewares works just
 like it did before. Read more in the
-`CommandBusBundle <command_bus_bundle.md>`__ and
-`EventBusBundle <event_bus_bundle.md>`__ documentation.
+`CommandBusBundle <../Guides/command_bus.html>`__ and
+`EventBusBundle <../Guides/event_bus.html>`__ documentation.
 
 Event providers have become event recorders
 -------------------------------------------
@@ -327,4 +327,4 @@ If you had registered event providers using the service tag
 ``event_provider``, you should change that to ``event_recorder``.
 
 Read more about event recorders in the
-`EventBusBundle <event_bus_bundle.md>`__ documentation.
+`EventBusBundle <../Guides/event_bus.html>`__ documentation.

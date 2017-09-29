@@ -27,7 +27,7 @@ Preparations
 ............
 
 To use the middleware provided by the library, set up a `command
-bus <http://simplebus.github.io/MessageBus/doc/command_bus.html>`__, if
+bus <../Guides/command_bus.html>`__, if
 you didn't already do this:
 
 .. code-block::  php

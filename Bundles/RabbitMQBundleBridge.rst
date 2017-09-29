@@ -331,13 +331,13 @@ time:
 Additional properties
 ---------------------
 
-Besides the raw message and a `routing key </doc/routing.md>`__ the
+Besides the raw message and a `routing key <#routing>`__ the
 RabbitMQ
 `producer <https://github.com/videlalvaro/RabbitMqBundle#producer>`__
 accepts several `additional
 properties <https://github.com/videlalvaro/php-amqplib#optimized-message-publishing>`__.
 You can determine them dynamically using `additional property
-resolvers <http://simplebus.github.io/Asynchronous/doc/additional_properties.md>`__.
+resolvers <../Components/Asynchronous.html#additional-properties>`__.
 Define your resolvers as a service and tag them as
 ``simple_bus.additional_properties_resolver``:
 

@@ -28,9 +28,11 @@ occurance
 ouf
 prefetch
 prepend
+resolvers
 retinging
 serializer
 simplebus
 symfony
 timestamp
 transfering
+unencrypted

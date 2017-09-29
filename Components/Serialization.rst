@@ -31,7 +31,7 @@ envelope, which can be used like this:
 
 Because the message itself is an object and needs to be transformed to
 plain text in order to travel over a network, you should serialize the
-message itself using an `object serializer <object_serializer.md>`__ and
+message itself using an `object serializer <#object-serializer>`__ and
 get a new envelope instance with the serialized message:
 
 .. code-block::  php
@@ -42,7 +42,7 @@ get a new envelope instance with the serialized message:
     $envelopeWithSerializedMessage = $envelope->withSerializedMessage($serializedMessage);
 
 The new ``Envelope`` only contains the serialized message. Using the
-`object serializer <object_serializer.md>`__ you can now safely
+`object serializer <#object-serializer>`__ you can now safely
 serialize the entire envelope.
 
 If an ``Envelope`` contains a serialized message and you have

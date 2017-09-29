@@ -45,7 +45,7 @@ This bundle defines a new command and event bus, to be used for
 processing asynchronous commands and events. It also adds middleware to
 existing the command and event buses which publishes messages to be
 processed asynchronously. See also the documentation of
-`SimpleBus/Asynchronous <http://simplebus.github.io/Asynchronous>`__.
+`SimpleBus/Asynchronous <../Components/Asynchronous.html>`__.
 
 First, enable the ``SimpleBusAsynchronousBundle`` in your ``AppKernel``
 class.

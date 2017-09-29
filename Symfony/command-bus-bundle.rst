@@ -111,7 +111,7 @@ Adding command bus middleware
 -----------------------------
 
 As described in the `MessageBus
-documentation <http://simplebus.github.io/MessageBus/doc/command_bus.html>`__
+documentation <../Guides/command_bus.html>`__
 you can extend the behavior of the command bus by adding middleware to
 it. This bundle allows you to register your own middleware by adding the
 ``command_bus_middleware`` tag to the middleware service definition:

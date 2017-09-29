@@ -288,4 +288,4 @@ first:
     $commandBus->appendMiddleware($loggingMiddleware);
 
 Continue to read about the perfect complement to the command bus: the
-`event bus <event_bus.md>`__.
+`event bus <../Guides/event_bus.html>`__.
