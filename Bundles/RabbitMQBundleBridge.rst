@@ -331,7 +331,7 @@ time:
 Additional properties
 ---------------------
 
-Besides the raw message and a `routing key </doc/routing.md>`__ the
+Besides the raw message and a `routing key <#routing>`__ the
 RabbitMQ
 `producer <https://github.com/videlalvaro/RabbitMqBundle#producer>`__
 accepts several `additional

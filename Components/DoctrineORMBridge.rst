@@ -52,7 +52,7 @@ Make sure to also properly set up an entity manager:
     $entityManager = ...;
 
 Now add the available middlewares for `transaction
-handling <transactions.md>`__ and `domain events <domain_events.md>`__.
+handling <#transactions>`__ and `domain events <#domain-events>`__.
 
 
 Transactions

@@ -282,4 +282,4 @@ first:
     $eventBus->appendMiddleware($loggingMiddleware);
 
 Continue to read about `recording events and handling
-them <message_recorder.md>`__.
+them <../Guides/message_recorder.html>`__.

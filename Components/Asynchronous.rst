@@ -132,7 +132,7 @@ This strategy is useful when you know what messages you want to publish.
 Consuming messages
 ------------------
 
-When a message has been `published <publish.md>`__, for instance to some
+When a message has been `published <#publishing-messages>`__, for instance to some
 kind of queue, another process should be able to *consume* it, i.e.
 receive and process it.
 
