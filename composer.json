@@ -1,6 +1,6 @@
 {
     "name": "simple-bus/rabbitmq-bundle-bridge",
-    "type": "library",
+    "type": "symfony-bundle",
     "description": "Use OldSoundRabbitMQBundle with SimpleBus/AsynchronousBundle",
     "keywords": ["RabbitMQ", "messages", "message bus", "event bus", "command bus"],
     "homepage": "http://github.com/SimpleBus/RabbitMQBundleBridge",
