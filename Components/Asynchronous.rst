@@ -137,7 +137,7 @@ kind of queue, another process should be able to *consume* it, i.e.
 receive and process it.
 
 A message consumer actually consumes `serialized
-envelopes <http://simplebus.github.io/Serialization/>`__, instead of the
+envelopes <../Components/Serialization.html>`__, instead of the
 messages themselves. A consumer then restores the ``Envelope`` by
 deserializing it and finally it can restore the ``Message`` itself by
 deserializing the serialized message carried by the ``Envelope``.
@@ -170,7 +170,7 @@ serialized ``Envelope``, then lets the message bus handle the
 
 For more information about envelopes and serializing messages, take a
 look at the documentation of
-`SimpleBus/Serialization <http://simplebus.github.io/Serialization/>`__.
+`SimpleBus/Serialization <../Components/Serialization.html>`__.
 
 Routing keys
 ------------

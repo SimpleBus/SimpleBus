@@ -6,7 +6,7 @@ From 3.x to 4.0
 
 Version ``4.0`` works with ``SimpleBus/MessageBus`` ``2.0`` so you have
 to make the changes descibred in its `upgrade
-guide <http://simplebus.github.io/MessageBus/doc/upgrade_guide.html>`__
+guide <../Symfony/upgrade-guide.html>`__
 as well.
 
 The biggest change for the ``SymfonyBridge`` package is that command

@@ -7,10 +7,10 @@ provides:
 
 -  A command bus middleware which `wraps the handling of commands inside
    a database
-   transaction <http://simplebus.github.io/DoctrineORMBridge/doc/transactions.md>`__
+   transaction <../Components/DoctrineORMBridge.html#transactions>`__
 -  A command bus middleware which `collects domain events recorded by
    entities and lets the event bus handle
-   them <http://simplebus.github.io/DoctrineORMBridge/doc/domain_events.md>`__
+   them <../Components/DoctrineORMBridge.html#domain-events>`__
 
     Install SimpleBus/DoctrineORMBridge
 
