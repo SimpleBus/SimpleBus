@@ -3,7 +3,7 @@ services:
         alias: simple_bus.asynchronous.event_bus
 
     simple_bus.asynchronous.event_bus:
-        class: SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware
+        class: SimpleBus\AsynchronousBundle\Bus\AsyncronousEventBus
         public: false
         tags:
             - { name: message_bus, type: event, middleware_tag: asynchronous_event_bus_middleware }
