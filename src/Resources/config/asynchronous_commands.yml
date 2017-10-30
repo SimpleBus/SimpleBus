@@ -6,7 +6,7 @@ services:
         alias: simple_bus.asynchronous.command_bus
 
     simple_bus.asynchronous.command_bus:
-        class: SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware
+        class: SimpleBus\AsynchronousBundle\Bus\AsyncronousCommandBus
         public: false
         tags:
             - { name: message_bus, type: command, middleware_tag: asynchronous_command_bus_middleware }
