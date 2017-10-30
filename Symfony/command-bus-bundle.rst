@@ -32,6 +32,34 @@ service as a dependency whenever you need it:
             arguments:
                 - "@command_bus"
 
+Using Autowiring
+.....................
+
+This bundle can be used with `Symfony's Autowiring <https://symfony.com/doc/master/service_container/autowiring.html>`__ out of the box.
+
+Simply inject ``SimpleBus\SymfonyBridge\Bus\CommandBus`` in your controller or service:
+
+.. code-block::  php
+
+    namespace App\Controller;
+
+    use SimpleBus\SymfonyBridge\Bus\CommandBus;
+
+    class UpdatePhoneNumberController
+    {
+        private $commandBus;
+
+        public function __construct(CommandBus $commandBus)
+        {
+            $this->commandBus = $commandBus;
+        }
+
+        public function __invoke(Request $request)
+        {
+            $this->commandBus->handle(new SavePhoneNumberCommand($request->get('phone')));
+        }
+    }
+
 Registering command handlers
 ----------------------------
 
