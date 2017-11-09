@@ -147,3 +147,9 @@ You can also use Your own strategy by defining custom
             strategy:
                 strategy_service_id: your_strategy_service
 
+Using Autowiring
+.....................
+
+This bundle can be used with `Symfony's Autowiring <https://symfony.com/doc/master/service_container/autowiring.html>`__ out of the box.
+
+Simply inject ``SimpleBus\AsynchronousBundle\Bus\AsyncronousCommandBus`` or `SimpleBus\AsynchronousBundle\Bus\AsyncronousEventBus` in your service.

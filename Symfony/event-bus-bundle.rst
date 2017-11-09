@@ -31,6 +31,34 @@ as a dependency whenever you need it:
             arguments:
                 - "@event_bus"
 
+Using Autowiring
+.....................
+
+This bundle can be used with `Symfony's Autowiring <https://symfony.com/doc/master/service_container/autowiring.html>`__ out of the box.
+
+Simply inject ``SimpleBus\SymfonyBridge\Bus\EventBus`` in your controller or service:
+
+.. code-block::  php
+
+    namespace App\Service;
+
+    use SimpleBus\SymfonyBridge\Bus\EventBus;
+
+    class SomeService
+    {
+        private $eventBus;
+
+        public function __construct(EventBus $eventBus)
+        {
+            $this->eventBus = $eventBus;
+        }
+
+        public function __invoke()
+        {
+            $this->eventBus->handle(new SomethingHappenedEvent());
+        }
+    }
+
 Registering event subscribers
 -----------------------------
 
