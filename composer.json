@@ -22,7 +22,7 @@
         "simple-bus/message-bus": "~3.0",
         "simple-bus/asynchronous": "~3.0",
         "simple-bus/symfony-bridge": "~5.0",
-        "symfony/framework-bundle": "~2.0 || ~3.0"
+        "symfony/framework-bundle": "~2.0 || ~3.0 || ~4.0"
     },
     "suggest": {
         "symfony/monolog-bundle": "For logging messages"
@@ -41,5 +41,7 @@
         "psr-4": {
             "SimpleBus\\AsynchronousBundle\\Tests\\": "tests"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

@@ -4,6 +4,7 @@ parameters:
 services:
     asynchronous_command_bus:
         alias: simple_bus.asynchronous.command_bus
+        public: true
 
     simple_bus.asynchronous.command_bus:
         class: SimpleBus\AsynchronousBundle\Bus\AsynchronousCommandBus
