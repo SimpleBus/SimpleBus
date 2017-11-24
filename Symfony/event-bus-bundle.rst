@@ -89,7 +89,7 @@ Event subscribers are callables
 Any service that is a `PHP
 callable <http://php.net/manual/en/language.types.callable.php>`__
 itself can be used as an event subscriber. If a service itself is
-not callable, SimpleBus looks for a ``notify`` method and calls it.
+not callable, SimpleBus looks for a ``__invoke`` or ``notify`` method and calls it.
 If you want to use a custom method, just add a ``method`` attribute
 to the ``event_subscriber`` tag:
 

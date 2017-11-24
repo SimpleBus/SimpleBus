@@ -92,7 +92,7 @@ Command handlers are callables
 Any service that is a `PHP
 callable <http://php.net/manual/en/language.types.callable.php>`__
 itself can be used as a command handler. If a service itself is not
-callable, SimpleBus looks for a ``handle`` method and calls it. If
+callable, SimpleBus looks for a ``__invoke`` or ``handle`` method and calls it. If
 you want to use a custom method, just add a ``method`` attribute to
 the ``command_handler`` tag:
 
