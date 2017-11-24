@@ -10,8 +10,8 @@ Using the event bus
 -------------------
 
 This bundle provides the ``event_bus`` service which is an instance of
-``MessageBus``. Wherever you like, you can let it handle events, e.g. by
-fetching it inside a container-aware controller:
+``SimpleBus\SymfonyBridge\Bus\MessageBus``. Wherever you like, you can let
+it handle events, e.g. by fetching it inside a container-aware controller:
 
 .. code-block::  php
 
@@ -30,9 +30,6 @@ as a dependency whenever you need it:
             class: Acme\Foobar
             arguments:
                 - "@event_bus"
-
-Using Autowiring
-.....................
 
 This bundle can be used with `Symfony's Autowiring <https://symfony.com/doc/master/service_container/autowiring.html>`__ out of the box.
 
@@ -84,12 +81,12 @@ definition:
     use ``public: false`` for them).
 
 Event subscribers are callables
-```````````````````````````````
+-------------------------------
 
 Any service that is a `PHP
 callable <http://php.net/manual/en/language.types.callable.php>`__
 itself can be used as an event subscriber. If a service itself is
-not callable, SimpleBus looks for a ``notify`` method and calls it.
+not callable, SimpleBus looks for a ``__invoke`` or ``notify`` method and calls it.
 If you want to use a custom method, just add a ``method`` attribute
 to the ``event_subscriber`` tag:
 
@@ -100,6 +97,66 @@ to the ``event_subscriber`` tag:
             ...
             tags:
                 - { name: event_subscriber, subscribes_to: ..., method: userRegistered }
+
+If you are using Autowiring you can use the following configuration:
+
+.. code-block::  yaml
+
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Subscriber\:
+            resource: '%kernel.project_dir%/src/Subscriber'
+            public: true
+            tags: [{ name: 'event_subscriber' }]
+
+This will search for all subscribers in the ``src/Subscriber`` directory and automatically
+detects the event that the subscriber is subscribing to.
+
+One subscriber listening to multiple events
+---------
+
+When you have 1 subscriber that is listening to multiple events you might want to
+set the ``register_public_methods`` attribute to ``true``:
+
+.. code-block::  yaml
+
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Subscriber\:
+            resource: '%kernel.project_dir%/src/Subscriber'
+            public: true
+            tags: [{ name: 'event_subscriber', register_public_methods: true }]
+
+With the following code for the subscriber:
+
+.. code-block::  php
+
+    namespace App\Subscriber;
+
+    use App\Event\EventAddedEvent;
+    use App\Event\VenueAddedEvent;
+
+    class ElasticSearchSubscriber
+    {
+        public function onEventAdded(EventAddedEvent $event)
+        {
+            // Add the event to ElasticSearch
+        }
+
+        public function onVenueAdded(VenueAddedEvent $event)
+        {
+            // Add the venue to ElasticSearch
+        }
+    }
+
+SimpleBus automatically detects that ``ElasticSearchSubscriber`` wants to subscribe to both
+``EventAddedEvent`` and ``VenueAddedEvent``.
 
 Setting the event name resolving strategy
 -----------------------------------------

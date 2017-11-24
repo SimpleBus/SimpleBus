@@ -11,7 +11,7 @@ Using the command bus
 ---------------------
 
 This bundle provides the ``command_bus`` service which is an instance of
-``SimpleBus\Message\Bus\MessageBus``. Wherever you like, you can let it
+``SimpleBus\SymfonyBridge\Bus\CommandBus``. Wherever you like, you can let it
 handle commands, e.g. inside a container-aware controller:
 
 .. code-block::  php
@@ -31,9 +31,6 @@ service as a dependency whenever you need it:
             class: Acme\Foobar
             arguments:
                 - "@command_bus"
-
-Using Autowiring
-.....................
 
 This bundle can be used with `Symfony's Autowiring <https://symfony.com/doc/master/service_container/autowiring.html>`__ out of the box.
 
@@ -92,7 +89,7 @@ Command handlers are callables
 Any service that is a `PHP
 callable <http://php.net/manual/en/language.types.callable.php>`__
 itself can be used as a command handler. If a service itself is not
-callable, SimpleBus looks for a ``handle`` method and calls it. If
+callable, SimpleBus looks for a ``__invoke`` or ``handle`` method and calls it. If
 you want to use a custom method, just add a ``method`` attribute to
 the ``command_handler`` tag:
 
