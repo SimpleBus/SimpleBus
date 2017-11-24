@@ -81,7 +81,7 @@ definition:
     use ``public: false`` for them).
 
 Event subscribers are callables
-```````````````````````````````
+-------------------------------
 
 Any service that is a `PHP
 callable <http://php.net/manual/en/language.types.callable.php>`__
@@ -97,6 +97,66 @@ to the ``event_subscriber`` tag:
             ...
             tags:
                 - { name: event_subscriber, subscribes_to: ..., method: userRegistered }
+
+If you are using Autowiring you can use the following configuration:
+
+.. code-block::  yaml
+
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Subscriber\:
+            resource: '%kernel.project_dir%/src/Subscriber'
+            public: true
+            tags: [{ name: 'event_subscriber' }]
+
+This will search for all subscribers in the ``src/Subscriber`` directory and automatically
+detects the event that the subscriber is subscribing to.
+
+One subscriber listening to multiple events
+---------
+
+When you have 1 subscriber that is listening to multiple events you might want to
+set the ``register_public_methods`` attribute to ``true``:
+
+.. code-block::  yaml
+
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Subscriber\:
+            resource: '%kernel.project_dir%/src/Subscriber'
+            public: true
+            tags: [{ name: 'event_subscriber', register_public_methods: true }]
+
+With the following code for the subscriber:
+
+.. code-block::  php
+
+    namespace App\Subscriber;
+
+    use App\Event\EventAddedEvent;
+    use App\Event\VenueAddedEvent;
+
+    class ElasticSearchSubscriber
+    {
+        public function onEventAdded(EventAddedEvent $event)
+        {
+            // Add the event to ElasticSearch
+        }
+
+        public function onVenueAdded(VenueAddedEvent $event)
+        {
+            // Add the venue to ElasticSearch
+        }
+    }
+
+SimpleBus automatically detects that ``ElasticSearchSubscriber`` wants to subscribe to both
+``EventAddedEvent`` and ``VenueAddedEvent``.
 
 Setting the event name resolving strategy
 -----------------------------------------
