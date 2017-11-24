@@ -32,9 +32,6 @@ service as a dependency whenever you need it:
             arguments:
                 - "@command_bus"
 
-Using Autowiring
-.....................
-
 This bundle can be used with `Symfony's Autowiring <https://symfony.com/doc/master/service_container/autowiring.html>`__ out of the box.
 
 Simply inject ``SimpleBus\SymfonyBridge\Bus\CommandBus`` in your controller or service:

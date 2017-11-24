@@ -31,9 +31,6 @@ as a dependency whenever you need it:
             arguments:
                 - "@event_bus"
 
-Using Autowiring
-.....................
-
 This bundle can be used with `Symfony's Autowiring <https://symfony.com/doc/master/service_container/autowiring.html>`__ out of the box.
 
 Simply inject ``SimpleBus\SymfonyBridge\Bus\EventBus`` in your controller or service:
