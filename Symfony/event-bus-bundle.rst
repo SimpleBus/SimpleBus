@@ -10,8 +10,8 @@ Using the event bus
 -------------------
 
 This bundle provides the ``event_bus`` service which is an instance of
-``MessageBus``. Wherever you like, you can let it handle events, e.g. by
-fetching it inside a container-aware controller:
+``SimpleBus\SymfonyBridge\Bus\MessageBus``. Wherever you like, you can let
+it handle events, e.g. by fetching it inside a container-aware controller:
 
 .. code-block::  php
 

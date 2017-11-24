@@ -11,7 +11,7 @@ Using the command bus
 ---------------------
 
 This bundle provides the ``command_bus`` service which is an instance of
-``SimpleBus\Message\Bus\MessageBus``. Wherever you like, you can let it
+``SimpleBus\SymfonyBridge\Bus\CommandBus``. Wherever you like, you can let it
 handle commands, e.g. inside a container-aware controller:
 
 .. code-block::  php
