@@ -2,6 +2,9 @@ parameters:
     simple_bus.asynchronous.command_bus.unhandled_messages_log_level: debug
 
 services:
+    SimpleBus\AsynchronousBundle\Bus\AsynchronousCommandBus:
+        alias: simple_bus.asynchronous.command_bus
+
     asynchronous_command_bus:
         alias: simple_bus.asynchronous.command_bus
 
