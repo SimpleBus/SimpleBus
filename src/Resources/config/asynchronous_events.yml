@@ -1,4 +1,7 @@
 services:
+    SimpleBus\AsynchronousBundle\Bus\AsynchronousEventBus:
+        alias: simple_bus.asynchronous.event_bus
+
     asynchronous_event_bus:
         alias: simple_bus.asynchronous.event_bus
 
