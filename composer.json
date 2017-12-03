@@ -28,9 +28,9 @@
         "symfony/monolog-bundle": "For logging messages"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0",
+        "phpunit/phpunit": "^5.7 || ^6.0",
         "symfony/monolog-bundle": "~2.3 || ~3.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^0.7"
+        "matthiasnoback/symfony-dependency-injection-test": "~1.2 || ~2.0"
     },
     "autoload": {
         "psr-4": {
