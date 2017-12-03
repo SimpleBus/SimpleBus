@@ -4,4 +4,4 @@
 
 By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
 
-[Read the full documentation here](http://simplebus.github.io/AsynchronousBundle/)
+[Read the full documentation here](http://docs.simplebus.io/en/latest/Bundles/AsynchronousBundle.html)
