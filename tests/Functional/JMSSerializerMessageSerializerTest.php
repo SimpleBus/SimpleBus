@@ -17,7 +17,9 @@ class JMSSerializerMessageSerializerTest extends KernelTestCase
      */
     public function it_serializes_and_deserializes_messages_in_envelopes()
     {
-        $kernel = $this->createKernel();
+        $kernel = $this->createKernel([
+            'debug' => false,
+        ]);
         $kernel->boot();
         $messageSerializer = $kernel->getContainer()->get('public_message_serializer');
         /** @var MessageInEnvelopeSerializer $messageSerializer */
