@@ -21,7 +21,7 @@ class DisableDoctrineLoggerListenerTest extends \PHPUnit\Framework\TestCase
     {
         $this->config = $this->getMockBuilder('Doctrine\DBAL\Configuration')
             ->disableOriginalConstructor()
-            ->createMock()
+            ->getMock()
         ;
 
         $registry = $this->createMock('Doctrine\Common\Persistence\ConnectionRegistry');
@@ -68,7 +68,7 @@ class DisableDoctrineLoggerListenerTest extends \PHPUnit\Framework\TestCase
 
         $command = $this->getMockBuilder('Symfony\Component\Console\Command\Command')
             ->disableOriginalConstructor()
-            ->createMock()
+            ->getMock()
         ;
 
         $event = new ConsoleEvent(
@@ -86,7 +86,7 @@ class DisableDoctrineLoggerListenerTest extends \PHPUnit\Framework\TestCase
     private function getConsumeCommand()
     {
         return new ConsumeCommand(
-            $this->getMockBuilder('Bernard\Consumer')->disableOriginalConstructor()->createMock(),
+            $this->getMockBuilder('Bernard\Consumer')->disableOriginalConstructor()->getMock(),
             $this->createMock('Bernard\QueueFactory')
         );
     }
