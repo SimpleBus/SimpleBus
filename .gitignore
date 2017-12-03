@@ -4,3 +4,4 @@ composer.lock
 .couscous/
 phpunit.xml
 /build/
+/coverage.xml
