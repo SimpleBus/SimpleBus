@@ -10,12 +10,7 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class TestKernel extends Kernel
 {
-    private $tempDir;
-
-    public function __construct()
-    {
-        $this->tempDir = __DIR__ . '/temp';
-    }
+    private $tempDir = __DIR__ . '/temp';
 
     public function registerBundles()
     {
