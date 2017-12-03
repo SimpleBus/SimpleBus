@@ -9,7 +9,7 @@ use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class DisableDoctrineLoggerListenerTest extends \PHPUnit_Framework_TestCase
+class DisableDoctrineLoggerListenerTest extends \PHPUnit\Framework\TestCase
 {
     /** @var \PHPUnit_Framework_MockObject_MockObject */
     private $config;
@@ -24,14 +24,14 @@ class DisableDoctrineLoggerListenerTest extends \PHPUnit_Framework_TestCase
             ->getMock()
         ;
 
-        $registry = $this->getMock('Doctrine\Common\Persistence\ConnectionRegistry');
+        $registry = $this->createMock('Doctrine\Common\Persistence\ConnectionRegistry');
         $registry
             ->expects($this->any())
             ->method('getConnections')
             ->willReturn([
-                new Connection([], $this->getMock('Doctrine\DBAL\Driver'), $this->config),
-                new Connection([], $this->getMock('Doctrine\DBAL\Driver'), $this->config),
-                new Connection([], $this->getMock('Doctrine\DBAL\Driver'), $this->config),
+                new Connection([], $this->createMock('Doctrine\DBAL\Driver'), $this->config),
+                new Connection([], $this->createMock('Doctrine\DBAL\Driver'), $this->config),
+                new Connection([], $this->createMock('Doctrine\DBAL\Driver'), $this->config),
             ])
         ;
 
@@ -52,8 +52,8 @@ class DisableDoctrineLoggerListenerTest extends \PHPUnit_Framework_TestCase
 
         $event = new ConsoleEvent(
             $this->getConsumeCommand(),
-            $this->getMock('Symfony\Component\Console\Input\InputInterface'),
-            $this->getMock('Symfony\Component\Console\Output\OutputInterface')
+            $this->createMock('Symfony\Component\Console\Input\InputInterface'),
+            $this->createMock('Symfony\Component\Console\Output\OutputInterface')
         );
 
         $this->dispatcher->dispatch(ConsoleEvents::COMMAND, $event);
@@ -73,8 +73,8 @@ class DisableDoctrineLoggerListenerTest extends \PHPUnit_Framework_TestCase
 
         $event = new ConsoleEvent(
             $command,
-            $this->getMock('Symfony\Component\Console\Input\InputInterface'),
-            $this->getMock('Symfony\Component\Console\Output\OutputInterface')
+            $this->createMock('Symfony\Component\Console\Input\InputInterface'),
+            $this->createMock('Symfony\Component\Console\Output\OutputInterface')
         );
 
         $this->dispatcher->dispatch(ConsoleEvents::COMMAND, $event);
@@ -87,7 +87,7 @@ class DisableDoctrineLoggerListenerTest extends \PHPUnit_Framework_TestCase
     {
         return new ConsumeCommand(
             $this->getMockBuilder('Bernard\Consumer')->disableOriginalConstructor()->getMock(),
-            $this->getMock('Bernard\QueueFactory')
+            $this->createMock('Bernard\QueueFactory')
         );
     }
 }

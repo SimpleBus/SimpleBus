@@ -11,7 +11,7 @@ use Psr\Log\LogLevel;
 use SimpleBus\BernardBundleBridge\EventListener\LoggerListener;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class LoggerListenerTest extends \PHPUnit_Framework_TestCase
+class LoggerListenerTest extends \PHPUnit\Framework\TestCase
 {
     /** @var DebugLogger */
     private $logger;
@@ -33,7 +33,7 @@ class LoggerListenerTest extends \PHPUnit_Framework_TestCase
     {
         $message  = new PlainMessage('test', ['type' => 'command']);
         $envelope = new Envelope($message);
-        $event    = new EnvelopeEvent($envelope, $this->getMock('Bernard\Queue'));
+        $event    = new EnvelopeEvent($envelope, $this->createMock('Bernard\Queue'));
 
         $this->dispatcher->dispatch('bernard.produce', $event);
 
@@ -54,7 +54,7 @@ class LoggerListenerTest extends \PHPUnit_Framework_TestCase
     {
         $message  = new PlainMessage('test', ['type' => 'event']);
         $envelope = new Envelope($message);
-        $event    = new EnvelopeEvent($envelope, $this->getMock('Bernard\Queue'));
+        $event    = new EnvelopeEvent($envelope, $this->createMock('Bernard\Queue'));
 
         $this->dispatcher->dispatch('bernard.invoke', $event);
 
@@ -76,7 +76,7 @@ class LoggerListenerTest extends \PHPUnit_Framework_TestCase
         $exception = new \RuntimeException();
         $message   = new PlainMessage('test', ['type' => 'event']);
         $envelope  = new Envelope($message);
-        $event     = new RejectEnvelopeEvent($envelope, $this->getMock('Bernard\Queue'), $exception);
+        $event     = new RejectEnvelopeEvent($envelope, $this->createMock('Bernard\Queue'), $exception);
 
         $this->dispatcher->dispatch('bernard.reject', $event);
 

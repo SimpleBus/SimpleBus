@@ -5,14 +5,14 @@ namespace SimpleBus\BernardBundleBridge\Tests;
 use Bernard\Message\PlainMessage;
 use SimpleBus\BernardBundleBridge\BernardConsumer;
 
-class BernardConsumerTest extends \PHPUnit_Framework_TestCase
+class BernardConsumerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
      */
     public function it_should_consume_a_message()
     {
-        $consumer = $this->getMock('SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer');
+        $consumer = $this->createMock('SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer');
         $consumer
             ->expects($this->once())
             ->method('consume')

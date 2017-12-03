@@ -4,7 +4,7 @@ namespace SimpleBus\BernardBundleBridge\Tests\Routing;
 
 use SimpleBus\BernardBundleBridge\Routing\MappedQueueNameResolver;
 
-class MappedQueueNameResolverTest extends \PHPUnit_Framework_TestCase
+class MappedQueueNameResolverTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

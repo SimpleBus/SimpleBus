@@ -7,7 +7,7 @@ use SimpleBus\BernardBundleBridge\Encrypter\NelmioEncrypter;
 /**
  * @requires extension mcrypt
  */
-class NelmioEncrypterTest extends \PHPUnit_Framework_TestCase
+class NelmioEncrypterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

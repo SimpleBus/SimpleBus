@@ -5,7 +5,7 @@ namespace SimpleBus\BernardBundleBridge\Tests\Routing;
 use SimpleBus\BernardBundleBridge\Routing\FixedQueueNameResolver;
 use stdClass;
 
-class FixedQueueNameResolverTest extends \PHPUnit_Framework_TestCase
+class FixedQueueNameResolverTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test

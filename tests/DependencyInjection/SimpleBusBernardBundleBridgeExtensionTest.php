@@ -12,6 +12,10 @@ class SimpleBusBernardBundleBridgeExtensionTest extends AbstractExtensionTestCas
         parent::setUp();
 
         $this->setParameter('kernel.debug', false);
+        $this->setParameter('kernel.bundles', [
+            'SimpleBusAsynchronousBundle' => 'SimpleBusAsynchronousBundle',
+            'BernardBundle' => 'BernardBundle',
+        ]);
     }
 
     /**
@@ -26,8 +30,13 @@ class SimpleBusBernardBundleBridgeExtensionTest extends AbstractExtensionTestCas
             $this->assertContainerBuilderHasService($serviceId);
         }
 
+        $services = $this->container->getDefinitions();
+
+        // Symfony 3.3 always inserts `service_container`, remove it.
+        unset($services['service_container']);
+
         // No other services are registered.
-        $this->assertCount(3, $this->container->getDefinitions());
+        $this->assertCount(3, $services);
     }
 
     /**
