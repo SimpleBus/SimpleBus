@@ -35,7 +35,5 @@
         "psr-4": {
             "SimpleBus\\JMSSerializerBundleBridge\\Tests\\": "tests"
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
