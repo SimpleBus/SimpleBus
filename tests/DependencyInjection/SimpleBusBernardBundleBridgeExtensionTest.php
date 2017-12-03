@@ -12,6 +12,10 @@ class SimpleBusBernardBundleBridgeExtensionTest extends AbstractExtensionTestCas
         parent::setUp();
 
         $this->setParameter('kernel.debug', false);
+        $this->setParameter('kernel.bundles', [
+            'SimpleBusAsynchronousBundle' => 'SimpleBusAsynchronousBundle',
+            'BernardBundle' => 'BernardBundle',
+        ]);
     }
 
     /**
