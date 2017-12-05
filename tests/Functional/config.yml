@@ -1,24 +1,33 @@
 parameters:
     kernel.secret: secret
-    log_file: %kernel.logs_dir%/test.log
+    log_file: '%kernel.logs_dir%/test.log'
 
 services:
     # needed to make JMSSerializerBundle work
     translator:
+        public: true
         class: Symfony\Component\Translation\Translator
         arguments:
             - 'nl'
 
     # needed to make JMSSerializerBundle work
     annotation_reader:
+        public: true
         class: Doctrine\Common\Annotations\AnnotationReader
+    
+    # needed to make JMSSerializerBundle work
+    debug.stopwatch:
+        public: true
+        class: Symfony\Component\Stopwatch\Stopwatch
 
     logger:
+        public: true
         class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\FileLogger
         arguments:
-            - %log_file%
+            - '%log_file%'
 
     asynchronous_command_handler:
+        public: true
         class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\LoggingCommandHandler
         arguments:
             - '@logger'
@@ -26,6 +35,7 @@ services:
             - { name: asynchronous_command_handler, handles: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AsynchronousCommand }
 
     asynchronous_event_subscriber:
+        public: true
         class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\LoggingEventSubscriber
         arguments:
             - '@logger'
@@ -33,11 +43,13 @@ services:
             - { name: asynchronous_event_subscriber, subscribes_to: SimpleBus\RabbitMQBundleBridge\Tests\Functional\Event }
 
     always_failing_command_handler:
+        public: true
         class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AlwaysFailingCommandHandler
         tags:
             - { name: asynchronous_command_handler, handles: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AlwaysFailingCommand }
 
     additional_properties_resolver:
+        public: true
         class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AdditionalPropertiesResolverArray
         arguments:
             - { debug: string }
@@ -45,9 +57,11 @@ services:
             - { name: simple_bus.additional_properties_resolver }
 
     simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.public:
+        public: true
         alias: simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver
 
     simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.producer_mock:
+        public: true
         class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AdditionalPropertiesResolverProducerMock
         arguments: ['@old_sound_rabbit_mq.connection.default']
 

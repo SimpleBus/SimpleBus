@@ -16,7 +16,7 @@ class AdditionalPropertiesResolverProducerMock extends Producer
         return $this->additionalProperties;
     }
 
-    public function publish($msgBody, $routingKey = '', $additionalProperties = array())
+    public function publish($msgBody, $routingKey = '', $additionalProperties = array(), array $headers = null)
     {
         $this->additionalProperties = $additionalProperties;
     }

@@ -166,11 +166,11 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Message
+     * @return \stdClass()
      */
     private function messageDummy()
     {
-        return $this->getMock('SimpleBus\Message\Message');
+        return new \stdClass();
     }
 
     /**
@@ -180,9 +180,10 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     private function consumeMessagesFromQueue($queue)
     {
         $this->process = new Process(
-            'php console.php rabbitmq:consume ' . $queue,
+            'php console.php rabbitmq:consumer ' . $queue,
             __DIR__
         );
+        
         $this->process->start();
     }
 

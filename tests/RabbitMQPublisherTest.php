@@ -4,7 +4,7 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests;
 
 use SimpleBus\RabbitMQBundleBridge\RabbitMQPublisher;
 
-class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
+class RabbitMQPublisherTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -38,7 +38,7 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
 
     private function mockSerializer()
     {
-        return $this->getMock('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer');
+        return $this->createMock('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer');
     }
 
     private function mockProducer()
@@ -56,7 +56,7 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
 
     private function routingKeyResolverStub($message, $routingKey)
     {
-        $resolver = $this->getMock('SimpleBus\Asynchronous\Routing\RoutingKeyResolver');
+        $resolver = $this->createMock('SimpleBus\Asynchronous\Routing\RoutingKeyResolver');
         $resolver
             ->expects($this->any())
             ->method('resolveRoutingKeyFor')
@@ -68,7 +68,7 @@ class RabbitMQPublisherTest extends \PHPUnit_Framework_TestCase
 
     private function additionalPropertiesResolverStub($message, $additionalProperties)
     {
-        $resolver = $this->getMock('SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver');
+        $resolver = $this->createMock('SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver');
         $resolver
             ->expects($this->any())
             ->method('resolveAdditionalPropertiesFor')
