@@ -22,17 +22,17 @@
         "simple-bus/message-bus": "~3.0",
         "simple-bus/asynchronous-bundle": "~3.0",
         "simple-bus/asynchronous": "~3.0",
-        "php-amqplib/rabbitmq-bundle": "~1.0",
+        "php-amqplib/rabbitmq-bundle": "~1.10",
         "symfony/monolog-bundle": "~2.3 || ~3.0"
     },
     "require-dev": {
         "matthiasnoback/phpunit-asynchronicity": "~1.0",
-        "phpunit/phpunit": "~4.0",
+        "phpunit/phpunit": "^5.7 || ^6.0",
         "simple-bus/jms-serializer-bundle-bridge": "~3.0",
-        "symfony/console": "~2.0 || ~3.0",
-        "symfony/finder": "~2.0 || ~3.0",
-        "symfony/process": "~2.0 || ~3.0",
-        "symfony/translation": "~2.0 || ~3.0"
+        "symfony/console": "~2.7 || ~3.3 || ~4.0",
+        "symfony/finder": "~2.7 || ~3.3 || ~4.0",
+        "symfony/process": "~2.7 || ~3.3 || ~4.0",
+        "symfony/translation": "~2.7 || ~3.3 || ~4.0"
     },
     "autoload": {
         "psr-4": {

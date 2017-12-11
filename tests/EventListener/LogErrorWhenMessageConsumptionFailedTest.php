@@ -8,7 +8,7 @@ use Psr\Log\LogLevel;
 use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use SimpleBus\RabbitMQBundleBridge\EventListener\LogErrorWhenMessageConsumptionFailed;
 
-class LogErrorWhenMessageConsumptionFailedTest extends \PHPUnit_Framework_TestCase
+class LogErrorWhenMessageConsumptionFailedTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -30,7 +30,7 @@ class LogErrorWhenMessageConsumptionFailedTest extends \PHPUnit_Framework_TestCa
 
     private function loggerShouldLog($logLevel, $logMessage, $context)
     {
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger
             ->expects($this->once())
             ->method('log')

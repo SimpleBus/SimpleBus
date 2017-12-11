@@ -5,6 +5,7 @@ parameters:
 services:
     simple_bus.rabbit_mq_bundle_bridge.error_logging_event_subscriber:
         class: SimpleBus\RabbitMQBundleBridge\EventListener\LogErrorWhenMessageConsumptionFailed
+        public: true
         arguments:
             - '@logger'
             - '%simple_bus.rabbit_mq_bundle_bridge.error_handling.log_level%'

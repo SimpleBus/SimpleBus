@@ -5,8 +5,9 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests\DependencyInjection\Compiler;
 use SimpleBus\RabbitMQBundleBridge\DependencyInjection\Compiler\AdditionalPropertiesResolverPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\HttpKernel\Kernel;
 
-class AdditionalPropertiesResolverPassTest extends \PHPUnit_Framework_TestCase
+class AdditionalPropertiesResolverPassTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ContainerBuilder
@@ -32,37 +33,58 @@ class AdditionalPropertiesResolverPassTest extends \PHPUnit_Framework_TestCase
      */
     public function it_configures_a_chain_of_buses_according_to_the_given_priorities()
     {
-        $this->createResolver('resolver100', 100);
-        $this->createResolver('resolver-100', -100);
-        $this->createResolver('resolver200', 200);
+        $classes = [
+            Resolver1::class => 100,
+            Resolver2::class => -100,
+            Resolver3::class => 200,
+        ];
+
+        foreach ($classes as $class => $priority) {
+            $this->createResolver($class, $priority);
+        }
 
         $this->container->compile();
 
-        $this->resolverContainsResolvers(array('resolver200', 'resolver100', 'resolver-100'));
+        $this->resolverContainsResolvers($classes);
     }
 
-    private function createResolver($id, $priority)
+    private function createResolver($class, $priority)
     {
-        $definition = new Definition('stdClass');
+        $definition = new Definition($class);
         $definition->addTag('simple_bus.additional_properties_resolver', array('priority' => $priority));
 
-        $this->container->setDefinition($id, $definition);
+        $this->container->setDefinition($class, $definition);
 
         return $definition;
     }
 
-    private function resolverContainsResolvers($expectedResolverIds)
+    private function resolverContainsResolvers($expectedResolverClasses)
     {
-        $actualResolverIds = [];
-
+        $actualResolverClasses = [];
+        
         foreach ($this->delegatingDefinition->getArgument(0) as $argument) {
-            $this->assertInstanceOf(
-                'Symfony\Component\DependencyInjection\Reference',
-                $argument
-            );
-            $actualResolverIds[] = (string) $argument;
+            if (Kernel::VERSION_ID >= 40000) {
+                $this->assertInstanceOf(
+                    'Symfony\Component\DependencyInjection\Definition',
+                    $argument
+                );
+            } else {
+                $this->assertInstanceOf(
+                    'Symfony\Component\DependencyInjection\Reference',
+                    $argument
+                );
+                $argument = $this->container->getDefinition((string) $argument);
+            }
+
+            $actualResolverClasses[$argument->getClass()] = $argument->getTag('simple_bus.additional_properties_resolver')[0]['priority'];
         }
 
-        $this->assertEquals($expectedResolverIds, $actualResolverIds);
+        $this->assertEquals($expectedResolverClasses, $actualResolverClasses);
     }
 }
+
+class Resolver1 {}
+
+class Resolver2 {}
+
+class Resolver3 {}

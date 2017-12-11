@@ -10,7 +10,7 @@ use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumed;
 use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use SimpleBus\RabbitMQBundleBridge\RabbitMQMessageConsumer;
 
-class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
+class RabbitMQMessageConsumerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @test
@@ -60,12 +60,12 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
 
     private function mockSerializedEnvelopeConsumer()
     {
-        return $this->getMock('SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer');
+        return $this->createMock('SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer');
     }
 
     private function eventDispatcherDispatchesConsumptionFailedEvent(AMQPMessage $message, Exception $exception)
     {
-        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
 
         $eventDispatcher
             ->expects($this->once())
@@ -81,7 +81,7 @@ class RabbitMQMessageConsumerTest extends \PHPUnit_Framework_TestCase
 
     private function eventDispatcherDispatchesMessageConsumedEvent($message)
     {
-        $eventDispatcher = $this->getMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
 
         $eventDispatcher
             ->expects($this->once())
