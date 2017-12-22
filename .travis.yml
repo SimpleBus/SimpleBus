@@ -38,7 +38,7 @@ script:
 
   # Bundles
   - if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Bundle/AsynchronousBundle && composer require --no-update symfony/framework-bundle:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
-  - if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Bundle/BernardBundleBridge && composer require --no-update symfony/console:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  #- if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Bundle/BernardBundleBridge && composer require --no-update symfony/console:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
   - if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Bundle/JMSSerializerBundleBridge && composer require --no-update symfony/framework-bundle:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
   - if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Bundle/RabbitMQBundleBridge && composer require --no-update symfony/console:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/translation:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
   #- if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Bundle/SymfonyBridge && composer require --no-update doctrine/orm:${DOCTRINE_VERSION} && composer install --prefer-dist && vendor/bin/phpunit; fi;
