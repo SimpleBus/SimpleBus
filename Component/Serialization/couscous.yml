@@ -1,0 +1,21 @@
+title: SimpleBus/Serialization
+subTitle: Generic classes and interfaces for serializing SimpleBus messages
+baseUrl: //simplebus.github.io/Serialization
+menu:
+    items:
+        home:
+            itemId: home
+            text: Home
+            relativeUrl: ""
+        message_envelope:
+            itemId: message_envelope
+            text: Message envelopes
+            relativeUrl: "doc/message_envelope.html"
+        object_serializer:
+            itemId: object_serializer
+            text: Object serializer
+            relativeUrl: "doc/object_serializer.html"
+        message_serializer:
+            itemId: message_serializer
+            text: Message serializer
+            relativeUrl: "doc/message_serializer.html"
