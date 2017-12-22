@@ -2,9 +2,10 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\Tests;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\RabbitMQBundleBridge\RabbitMQPublisher;
 
-class RabbitMQPublisherTest extends \PHPUnit\Framework\TestCase
+class RabbitMQPublisherTest extends TestCase
 {
     /**
      * @test

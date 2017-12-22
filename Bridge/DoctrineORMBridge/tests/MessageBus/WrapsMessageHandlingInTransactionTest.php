@@ -3,9 +3,10 @@
 namespace SimpleBus\DoctrineORMBridge\Tests\MessageBus;
 
 use Exception;
+use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
 
-class WrapsMessageHandlingInTransactionTest extends \PHPUnit\Framework\TestCase
+class WrapsMessageHandlingInTransactionTest extends TestCase
 {
     /**
      * @test

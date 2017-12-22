@@ -2,6 +2,7 @@
 
 namespace SimpleBus\Serialization\Tests\Envelope\Serializer;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Envelope\Envelope;
 use SimpleBus\Serialization\Envelope\EnvelopeFactory;
@@ -9,7 +10,7 @@ use SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSeriali
 use SimpleBus\Serialization\ObjectSerializer;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
 
-class StandardMessageInEnvelopeSerializerTest extends \PHPUnit\Framework\TestCase
+class StandardMessageInEnvelopeSerializerTest extends TestCase
 {
     /**
      * @test

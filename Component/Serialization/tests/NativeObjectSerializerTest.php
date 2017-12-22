@@ -2,11 +2,12 @@
 
 namespace SimpleBus\Serialization\Tests;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\NativeObjectSerializer;
 use SimpleBus\Serialization\Tests\Fixtures\AnotherDummyMessage;
 
-class NativeObjectSerializerTest extends \PHPUnit\Framework\TestCase
+class NativeObjectSerializerTest extends TestCase
 {
     /**
      * @test

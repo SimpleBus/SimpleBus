@@ -2,13 +2,14 @@
 
 namespace SimpleBus\BernardBundleBridge\Tests\Serialization;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\BernardBundleBridge\Serialization\EncryptedSerializer;
 use SimpleBus\Serialization\NativeObjectSerializer;
 
 /**
  * @group BernardBundleBridge
  */
-class EncryptedSerializerTest extends \PHPUnit\Framework\TestCase
+class EncryptedSerializerTest extends TestCase
 {
     /** @var EncryptedSerializer */
     private $serializer;

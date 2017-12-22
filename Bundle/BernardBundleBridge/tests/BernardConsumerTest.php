@@ -3,12 +3,13 @@
 namespace SimpleBus\BernardBundleBridge\Tests;
 
 use Bernard\Message\PlainMessage;
+use PHPUnit\Framework\TestCase;
 use SimpleBus\BernardBundleBridge\BernardConsumer;
 
 /**
  * @group BernardBundleBridge
  */
-class BernardConsumerTest extends \PHPUnit\Framework\TestCase
+class BernardConsumerTest extends TestCase
 {
     /**
      * @test

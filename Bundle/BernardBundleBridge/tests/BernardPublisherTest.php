@@ -4,12 +4,13 @@ namespace SimpleBus\BernardBundleBridge\Tests;
 
 use Bernard\Message;
 use Bernard\Producer;
+use PHPUnit\Framework\TestCase;
 use SimpleBus\BernardBundleBridge\BernardPublisher;
 
 /**
  * @group BernardBundleBridge
  */
-class BernardPublisherTest extends \PHPUnit\Framework\TestCase
+class BernardPublisherTest extends TestCase
 {
     /**
      * @test

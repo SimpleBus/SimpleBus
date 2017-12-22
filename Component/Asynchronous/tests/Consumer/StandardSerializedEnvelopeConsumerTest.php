@@ -2,12 +2,13 @@
 
 namespace SimpleBus\Asynchronous\Tests\Consumer;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 use SimpleBus\Message\Bus\MessageBus;
 
-class StandardSerializedEnvelopeConsumerTest extends \PHPUnit\Framework\TestCase
+class StandardSerializedEnvelopeConsumerTest extends TestCase
 {
     /**
      * @test

@@ -3,12 +3,13 @@
 namespace SimpleBus\BernardBundleBridge\Tests\DependencyInjection;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
 use SimpleBus\BernardBundleBridge\DependencyInjection\Configuration;
 
 /**
  * @group BernardBundleBridge
  */
-class ConfigurationTest extends \PHPUnit\Framework\TestCase
+class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
