@@ -1,0 +1,29 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+
+env:
+  - DOCTRINE_VERSION: 2.2.*
+  - DOCTRINE_VERSION: 2.3.*
+  - DOCTRINE_VERSION: 2.4.*
+  - DOCTRINE_VERSION: 2.5.*
+
+before_install:
+  - composer selfupdate
+  - composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
+
+install:
+  - composer update --prefer-dist
+
+script:
+  - vendor/bin/phpunit
+  - vendor/bin/phpcs --report=full --standard=PSR2 --encoding=utf-8 src
+
+after_script:
+  - vendor/bin/coveralls
+
+notifications:
+  email: jasper@nerdsweide.nl

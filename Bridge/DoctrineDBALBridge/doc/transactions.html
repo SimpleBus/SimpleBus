@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>SimpleBus/DoctrineDBALBridge</title>
+
+        <link rel="stylesheet" href="http://simplebus.github.io/DoctrineDBALBridge/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/DoctrineDBALBridge/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/DoctrineDBALBridge/css/highlight.dark.css">
+        <link rel="stylesheet" href="http://simplebus.github.io/DoctrineDBALBridge/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://simplebus.github.io/DoctrineDBALBridge/">
+                SimpleBus/DoctrineDBALBridge
+                <small class="hidden-xs hidden-sm">
+                    Integrate SimpleBus/MessageBus with Doctrine DBAL
+                </small>
+            </a>
+
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+
+                        <ul class="nav nav-pills nav-stacked">
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/DoctrineDBALBridge/">
+                                        Home
+                                    </a>
+                                </li>
+                                                            <li class="">
+                                    <a href="http://simplebus.github.io/DoctrineDBALBridge/doc/getting_started.html">
+                                        Getting started
+                                    </a>
+                                </li>
+                                                            <li class="active">
+                                    <a href="http://simplebus.github.io/DoctrineDBALBridge/doc/transactions.html">
+                                        Transactions
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </nav>
+
+                
+                <section id="content" class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1>Transactions</h1>
+<p>It is generally a good idea to wrap command handling in a database transaction. If you want to do this, add the
+<code>WrapsMessageHandlingInTransaction</code> middleware to the command bus. Provide an instance of the Doctrine <code>Connection</code>
+interface that you want to use.</p>
+<pre><code class="language-php">use SimpleBus\DoctrineDBALBridge\MessageBus\WrapsMessageHandlingInTransaction;
+
+// $connection is an instance of Doctrine\DBAL\Driver\Connection
+$connection = ...;
+
+$transactionalMiddleware = new WrapsMessageHandlingInTransaction($connection);
+
+$commandBus-&gt;addMiddleware($transactionalMiddleware);</code></pre>
+<p>When an exception is thrown, the transaction will be rolled back. If not, the transaction is committed.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container-fluid">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="http://yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>
