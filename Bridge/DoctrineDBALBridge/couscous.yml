@@ -1,0 +1,17 @@
+title: SimpleBus/DoctrineDBALBridge
+subTitle: Integrate SimpleBus/MessageBus with Doctrine DBAL
+baseUrl: http://simplebus.github.io/DoctrineDBALBridge
+menu:
+    items:
+        home:
+            itemId: home
+            text: Home
+            relativeUrl: ""
+        getting_started:
+            itemId: getting_started
+            text: Getting started
+            relativeUrl: doc/getting_started.html
+        transactions:
+            itemId: transactions
+            text: Transactions
+            relativeUrl: doc/transactions.html

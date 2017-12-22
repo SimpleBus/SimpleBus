@@ -1,0 +1,33 @@
+{
+    "name": "simple-bus/doctrine-dbal-bridge",
+    "type": "library",
+    "description": "Bridge for using SimpleBus with Doctrine DBAL",
+    "keywords": ["Doctrine", "DBAL", "message bus", "command bus"],
+    "homepage": "http://github.com/SimpleBus/DoctrineDBALBridge",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jasper N. Brouwer",
+            "email": "jasper@nerdsweide.nl"
+        }
+    ],
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "simple-bus/message-bus": "~3.0",
+        "doctrine/dbal": "~2.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7 || ^6.0",
+        "squizlabs/php_codesniffer": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleBus\\DoctrineDBALBridge\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SimpleBus\\DoctrineDBALBridge\\Tests\\": "tests"
+        }
+    }
+}

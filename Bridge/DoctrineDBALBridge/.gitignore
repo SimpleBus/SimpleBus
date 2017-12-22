@@ -1,0 +1,5 @@
+/.couscous/*
+/.idea/*
+/build/*
+/composer.lock
+/vendor/*
