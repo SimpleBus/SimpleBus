@@ -1,0 +1,8 @@
+vendor/
+phpunit.xml
+.couscous/
+composer.lock
+/tests/Functional/cache/
+/tests/Functional/temp/
+/build/
+coverage.xml

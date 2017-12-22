@@ -1,0 +1,68 @@
+parameters:
+    simple_bus.asynchronous.command_bus.unhandled_messages_log_level: debug
+
+services:
+    SimpleBus\AsynchronousBundle\Bus\AsynchronousCommandBus:
+        alias: simple_bus.asynchronous.command_bus
+
+    asynchronous_command_bus:
+        alias: simple_bus.asynchronous.command_bus
+        public: true
+
+    simple_bus.asynchronous.command_bus:
+        class: SimpleBus\AsynchronousBundle\Bus\AsynchronousCommandBus
+        public: false
+        tags:
+            - { name: message_bus, type: command, middleware_tag: asynchronous_command_bus_middleware }
+
+    simple_bus.asynchronous.command_bus.delegates_to_message_handler_middleware:
+        class: SimpleBus\Message\Handler\DelegatesToMessageHandlerMiddleware
+        public: false
+        arguments:
+            - '@simple_bus.asynchronous.command_bus.command_handler_resolver'
+        tags:
+            - { name: asynchronous_command_bus_middleware, priority: -1000 }
+
+    simple_bus.asynchronous.command_bus.callable_resolver:
+        class: SimpleBus\Message\CallableResolver\ServiceLocatorAwareCallableResolver
+        public: false
+        arguments:
+            - ['@service_container', 'get']
+
+    simple_bus.asynchronous.command_bus.command_handler_map:
+        class: SimpleBus\Message\CallableResolver\CallableMap
+        public: false
+        arguments:
+            # collection of command handler service ids, will be provided by the RegisterHandlers compiler pass
+            - []
+            - '@simple_bus.asynchronous.command_bus.callable_resolver'
+
+    simple_bus.asynchronous.command_bus.command_handler_resolver:
+        class: SimpleBus\Message\Handler\Resolver\NameBasedMessageHandlerResolver
+        public: false
+        arguments:
+            - '@simple_bus.asynchronous.command_bus.command_name_resolver'
+            - '@simple_bus.asynchronous.command_bus.command_handler_map'
+
+    simple_bus.asynchronous.command_bus.finishes_command_before_handling_next_middleware:
+        class: SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext
+        public: false
+        tags:
+            - { name: asynchronous_command_bus_middleware, priority: 1000 }
+
+    simple_bus.asynchronous.command_bus.publishes_unhandled_commands_middleware:
+        class: SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages
+        arguments:
+            - '@simple_bus.asynchronous.command_publisher'
+            - '@logger'
+            - '%simple_bus.asynchronous.command_bus.unhandled_messages_log_level%'
+        tags:
+            - { name: command_bus_middleware, priority: -999 }
+            - { name: monolog.logger, channel: command_bus }
+
+    simple_bus.asynchronous.standard_serialized_command_envelope_consumer:
+        class: SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer
+        public: false
+        arguments:
+            - '@simple_bus.asynchronous.message_serializer'
+            - '@simple_bus.asynchronous.command_bus'

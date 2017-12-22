@@ -1,0 +1,13 @@
+parameters:
+    simple_bus.asynchronous.event_bus.logging.level: debug
+
+services:
+    simple_bus.asynchronous.event_bus.logging_middleware:
+        class: SimpleBus\Message\Logging\LoggingMiddleware
+        public: false
+        arguments:
+            - '@logger'
+            - '%simple_bus.asynchronous.event_bus.logging.level%'
+        tags:
+            - { name: monolog.logger, channel: asynchronous_event_bus }
+            - { name: asynchronous_event_bus_middleware, priority: -999 }
