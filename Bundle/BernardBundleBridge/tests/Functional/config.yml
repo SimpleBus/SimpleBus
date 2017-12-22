@@ -1,12 +1,12 @@
 parameters:
     kernel.secret: secret
-    log_file: %kernel.logs_dir%/test.log
-    temp_dir: %kernel.root_dir%/temp
+    log_file: '%kernel.logs_dir%/test.log'
+    temp_dir: '%kernel.root_dir%/temp'
 
 services:
     logger:
         class: SimpleBus\BernardBundleBridge\Tests\Functional\FileLogger
-        arguments: [ %log_file% ]
+        arguments: [ '%log_file%' ]
 
     object_serializer:
         class: SimpleBus\Serialization\NativeObjectSerializer
@@ -38,7 +38,7 @@ simple_bus_asynchronous:
 bernard:
     driver: file
     options:
-        directory: %temp_dir%
+        directory: '%temp_dir%'
 
 simple_bus_bernard_bundle_bridge:
     commands: ~
