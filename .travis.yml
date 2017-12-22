@@ -26,13 +26,11 @@ matrix:
 
 before_script:
   - composer self-update
+
+script:
   - if ! [ -v "$DOCTRINE_VERSION" ]; then cd $TRAVIS_BUILD_DIR/Bridge/DoctrineDBALBridge && composer require --no-update doctrine/orm:${DOCTRINE_VERSION}; fi;
   - if ! [ -v "$DOCTRINE_VERSION" ]; then cd $TRAVIS_BUILD_DIR/Bridge/DoctrineORMBridge && composer require --no-update doctrine/orm:${DOCTRINE_VERSION}; fi;
 
-install:
-  - cd $TRAVIS_BUILD_DIR/Bridge/DoctrineDBALBridge && composer install --prefer-dist
-  - cd $TRAVIS_BUILD_DIR/Bridge/DoctrineORMBridge && composer install --prefer-dist
-
-script:
-  - cd $TRAVIS_BUILD_DIR/Bridge/DoctrineDBALBridge && vendor/bin/phpunit
-  - cd $TRAVIS_BUILD_DIR/Bridge/DoctrineORMBridge && vendor/bin/phpunit
+  - cd $TRAVIS_BUILD_DIR/Bridge/DoctrineDBALBridge && composer install --prefer-dist && vendor/bin/phpunit
+  - cd $TRAVIS_BUILD_DIR/Bridge/DoctrineORMBridge && composer install --prefer-dist && vendor/bin/phpunit
+  - cd $TRAVIS_BUILD_DIR/Bridge/JMSSerializerBridge && composer install --prefer-dist && vendor/bin/phpunit
