@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="./tests/autoload.php" colors="true">
+    <testsuites>
+        <testsuite>
+            <testsuite name="SimpleBusBernardBundleBridge Test Suite">
+                <directory>tests</directory>
+            </testsuite>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="coverage.xml"/>
+    </logging>
+</phpunit>

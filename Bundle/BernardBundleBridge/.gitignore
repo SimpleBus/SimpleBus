@@ -1,0 +1,8 @@
+/.idea
+/bin
+/build
+/vendor
+/composer.lock
+/phpunit.xml
+/tests/Functional/temp
+/coverage.xml
