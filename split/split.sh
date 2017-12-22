@@ -16,4 +16,4 @@ git subsplit publish "
     Component/Serialization:git@github.com:SimpleBus/Serialization.git
 
     docs:git@github.com:SimpleBus/docs.git
-" --heads=master
+" --update --heads="master gh-pages"
