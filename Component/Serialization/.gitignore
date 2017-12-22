@@ -1,0 +1,4 @@
+vendor/
+phpunit.xml
+.couscous/
+composer.lock
