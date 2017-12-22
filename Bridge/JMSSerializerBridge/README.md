@@ -1,6 +1,6 @@
 # SimpleBus/JMSSerializerBridge
 
-[![Build Status](https://travis-ci.org/SimpleBus/JMSSerializerBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/JMSSerializerBridge) [![codecov](https://codecov.io/gh/SimpleBus/JMSSerializerBridge/branch/master/graph/badge.svg)](https://codecov.io/gh/SimpleBus/JMSSerializerBridge)
+[![Build Status](https://travis-ci.org/SimpleBus/JMSSerializerBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/JMSSerializerBridge)
 
 By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
 
