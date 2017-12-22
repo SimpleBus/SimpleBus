@@ -8,3 +8,10 @@ This package contains generic classes and interfaces which can be used to proces
 a SimpleBus [MessageBus](https://github.com/SimpleBus/MessageBus) instance.
 
 [Read the full documentation here](http://simplebus.github.io/Asynchronous)
+
+Resources
+---------
+
+  * [Report issues](https://github.com/SimpleBus/SimpleBus/issues) and
+    [send Pull Requests](https://github.com/SimpleBus/SimpleBus/pulls)
+    in the [main SimpleBus repository](https://github.com/SimpleBus/SimpleBus)

@@ -13,3 +13,10 @@ Topics:
 - [Consuming messages](https://github.com/SimpleBus/SimpleBusBernardBundleBridge/blob/master/doc/consuming.md)
 - [Encryption and logging](https://github.com/SimpleBus/SimpleBusBernardBundleBridge/blob/master/doc/features.md)
 - [Cookbook](https://github.com/SimpleBus/SimpleBusBernardBundleBridge/blob/master/doc/cookbook.md)
+
+Resources
+---------
+
+  * [Report issues](https://github.com/SimpleBus/SimpleBus/issues) and
+    [send Pull Requests](https://github.com/SimpleBus/SimpleBus/pulls)
+    in the [main SimpleBus repository](https://github.com/SimpleBus/SimpleBus)

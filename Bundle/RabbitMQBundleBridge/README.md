@@ -8,3 +8,10 @@ The `SimpleBusRabbitMQBundleBridgeBundle` allows you to publish and consume Simp
 [RabbitMQBundle](https://github.com/php-amqplib/RabbitMqBundle).
 
 [Read the full documentation here](http://simplebus.github.io/RabbitMQBundleBridge)
+
+Resources
+---------
+
+  * [Report issues](https://github.com/SimpleBus/SimpleBus/issues) and
+    [send Pull Requests](https://github.com/SimpleBus/SimpleBus/pulls)
+    in the [main SimpleBus repository](https://github.com/SimpleBus/SimpleBus)
