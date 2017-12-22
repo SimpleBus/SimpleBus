@@ -1,0 +1,39 @@
+language: php
+
+jobs:
+  include:
+    - stage: Bridge/DoctrineDBALBridge
+      env:
+        - DOCTRINE_VERSION: 2.2.*
+        - DOCTRINE_VERSION: 2.3.*
+        - DOCTRINE_VERSION: 2.4.*
+        - DOCTRINE_VERSION: 2.5.*
+      php:
+        - 7.1
+        - 7.2
+      before_script:
+        - cd Bridge/DoctrineDBALBridge
+        - composer self-update
+        - composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
+      install:
+        - composer install --prefer-dist
+      script:
+        - vendor/bin/phpunit
+
+    - stage: Bridge/DoctrineORMBridge
+      env:
+        - DOCTRINE_VERSION: 2.2.*
+        - DOCTRINE_VERSION: 2.3.*
+        - DOCTRINE_VERSION: 2.4.*
+        - DOCTRINE_VERSION: 2.5.*
+      php:
+        - 7.1
+        - 7.2
+      before_script:
+        - cd Bridge/DoctrineORMBridge
+        - composer self-update
+        - composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
+      install:
+        - composer install --prefer-dist
+      script:
+        - vendor/bin/phpunit
