@@ -1,7 +1,6 @@
 # SimpleBusBernardBundleBridge
 
-[![Build Status](https://travis-ci.org/SimpleBus/SimpleBusBernardBundleBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/SimpleBusBernardBundleBridge) [![codecov](https://codecov.io/gh/SimpleBus/SimpleBusBernardBundleBridge/branch/master/graph/badge.svg)](https://codecov.io/gh/SimpleBus/SimpleBusBernardBundleBridge)
-
+[![Build Status](https://travis-ci.org/SimpleBus/SimpleBusBernardBundleBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/SimpleBusBernardBundleBridge)
 
 [Bernard](https://github.com/bernardphp/bernard) integration with [SimpleBus](http://simplebus.github.io/MessageBus) via [BernardBundle](https://github.com/bernardphp/BernardBundle) i.e. ability to deliver SimpleBus (encrypted) messages with Bernard.
 

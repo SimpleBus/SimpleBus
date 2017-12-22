@@ -1,6 +1,6 @@
 # SimpleBus/DoctrineORMBridge
 
-[![Build Status](https://travis-ci.org/SimpleBus/DoctrineORMBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/DoctrineORMBridge) [![codecov](https://codecov.io/gh/SimpleBus/DoctrineORMBridge/branch/master/graph/badge.svg)](https://codecov.io/gh/SimpleBus/DoctrineORMBridge)
+[![Build Status](https://travis-ci.org/SimpleBus/DoctrineORMBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/DoctrineORMBridge)
 
 By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
 
