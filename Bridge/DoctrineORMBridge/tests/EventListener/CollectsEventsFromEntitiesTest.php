@@ -2,7 +2,8 @@
 
 namespace SimpleBus\DoctrineORMBridge\Tests\EventListener;
 
-use Noback\PHPUnitTestServiceContainer\PHPUnit\AbstractTestCaseWithEntityManager;
+use Noback\PHPUnitTestServiceContainer\PHPUnit\TestCaseWithEntityManager;
+use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineORMBridge\EventListener\CollectsEventsFromEntities;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Entity\EventRecordingEntity;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityAboutToBeRemoved;
@@ -13,8 +14,10 @@ use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityCreated
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityNotDirty;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
-class CollectsEventsFromEntitiesTest extends AbstractTestCaseWithEntityManager
+class CollectsEventsFromEntitiesTest extends TestCase
 {
+    use TestCaseWithEntityManager;
+
     /**
      * @var CollectsEventsFromEntities
      */
