@@ -3,33 +3,35 @@ language: php
 matrix:
   include:
     - php: 7.1
-    - php: 7.2
-      env: SYMFONY_VERSION=2.7.*
-    - php: 7.2
-      env: SYMFONY_VERSION=2.8.*
-    - php: 7.2
-      env: SYMFONY_VERSION=3.3.*
-    - php: 7.2
-      env: SYMFONY_VERSION=3.4.*
-    - php: 7.2
-      env: SYMFONY_VERSION=4.0.*
-    - php: 7.2
-      env: DOCTRINE_VERSION=2.2.*
-    - php: 7.2
-      env: DOCTRINE_VERSION=2.3.*
-    - php: 7.2
-      env: DOCTRINE_VERSION=2.4.*
-    - php: 7.2
-      env: DOCTRINE_VERSION=2.5.*
-    - php: 7.2
-      env: DOCTRINE_VERSION=2.6.*
+    #- php: 7.2
+    #  env: SYMFONY_VERSION=2.7.*
+    #- php: 7.2
+    #  env: SYMFONY_VERSION=2.8.*
+    #- php: 7.2
+    #  env: SYMFONY_VERSION=3.3.*
+    #- php: 7.2
+    #  env: SYMFONY_VERSION=3.4.*
+    #- php: 7.2
+    #  env: SYMFONY_VERSION=4.0.*
+    #- php: 7.2
+    #  env: DOCTRINE_VERSION=2.2.*
+    #- php: 7.2
+    #  env: DOCTRINE_VERSION=2.3.*
+    #- php: 7.2
+    #  env: DOCTRINE_VERSION=2.4.*
+    #- php: 7.2
+    #  env: DOCTRINE_VERSION=2.5.*
+    #- php: 7.2
+    #  env: DOCTRINE_VERSION=2.6.*
 
 before_script:
   - composer self-update
-  - composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
+  #- composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
 
 install:
-  - composer install --prefer-dist
+  - cd $TRAVIS_BUILD_DIR/Bridge/DoctrineDBALBridge && composer install --prefer-dist
+  - cd $TRAVIS_BUILD_DIR/Bridge/DoctrineORMBridge && composer install --prefer-dist
 
 script:
-  - vendor/bin/phpunit
+  - cd $TRAVIS_BUILD_DIR/Bridge/DoctrineDBALBridge && vendor/bin/phpunit
+  - cd $TRAVIS_BUILD_DIR/Bridge/DoctrineORMBridge && vendor/bin/phpunit
