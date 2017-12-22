@@ -1,17 +1,10 @@
 <?php
 
-/**
- * @license https://github.com/SimpleBus/DoctrineDBALBridge/blob/master/LICENSE MIT
- */
-
 namespace SimpleBus\DoctrineDBALBridge\Tests\MessageBus;
 
 use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineDBALBridge\MessageBus\WrapsMessageHandlingInTransaction;
 
-/**
- * @author Jasper N. Brouwer <jasper@nerdsweide.nl>
- */
 class WrapsMessageHandlingInTransactionTest extends TestCase
 {
     /**

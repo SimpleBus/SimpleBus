@@ -1,17 +1,10 @@
 <?php
 
-/**
- * @license https://github.com/SimpleBus/DoctrineDBALBridge/blob/master/LICENSE MIT
- */
-
 namespace SimpleBus\DoctrineDBALBridge\MessageBus;
 
 use Doctrine\DBAL\Driver\Connection;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
-/**
- * @author Jasper N. Brouwer <jasper@nerdsweide.nl>
- */
 class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
     /**
