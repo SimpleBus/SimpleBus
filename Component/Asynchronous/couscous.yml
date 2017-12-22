@@ -1,0 +1,25 @@
+title: SimpleBus/Asynchronous
+subTitle: Generic classes and interfaces for asynchronous messaging using SimpleBus
+baseUrl: //simplebus.github.io/Asynchronous
+menu:
+    items:
+        home:
+            itemId: home
+            text: Home
+            relativeUrl: ""
+        publishing_messages:
+            itemId: publishing_messages
+            text: Publishing messages
+            relativeUrl: "doc/publishing_messages.html"
+        consuming_messages:
+            itemId: consuming_messages
+            text: Consuming messages
+            relativeUrl: "doc/consuming_messages.html"
+        routing_keys:
+            itemId: routing_keys
+            text: Routing keys
+            relativeUrl: "doc/routing_keys.html"
+        additional_properties:
+            itemId: additional_properties
+            text: Additional properties
+            relativeUrl: "doc/additional_properties.html"
