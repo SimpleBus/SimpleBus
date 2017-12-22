@@ -31,6 +31,19 @@ before_script:
   - composer self-update
 
 script:
+  # Bridges
   - if [[ "$MODE" == "doctrine" ]]; then cd $TRAVIS_BUILD_DIR/Bridge/DoctrineDBALBridge && composer require --no-update doctrine/orm:${DOCTRINE_VERSION} && composer install --prefer-dist && vendor/bin/phpunit; fi;
   - if [[ "$MODE" == "doctrine" ]]; then cd $TRAVIS_BUILD_DIR/Bridge/DoctrineORMBridge && composer require --no-update doctrine/orm:${DOCTRINE_VERSION} && composer install --prefer-dist && vendor/bin/phpunit; fi;
   - if [[ "$MODE" == "default" ]]; then cd $TRAVIS_BUILD_DIR/Bridge/JMSSerializerBridge && composer install --prefer-dist && vendor/bin/phpunit; fi;
+
+  # Bundles
+  - if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Component/AsynchronousBundle && composer require --no-update symfony/framework-bundle:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  - if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Component/BernardBundleBridge && composer require --no-update symfony/console:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  - if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Component/JMSSerializerBundleBridge && composer require --no-update symfony/framework-bundle:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  - if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Component/RabbitMQBundleBridge && composer require --no-update symfony/console:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/translation:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  #- if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Component/SymfonyBridge && composer require --no-update doctrine/orm:${DOCTRINE_VERSION} && composer install --prefer-dist && vendor/bin/phpunit; fi;
+
+  # Components
+  - if [[ "$MODE" == "default" ]]; then cd $TRAVIS_BUILD_DIR/Component/Asynchronous && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  - if [[ "$MODE" == "default" ]]; then cd $TRAVIS_BUILD_DIR/Component/MessageBus && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  - if [[ "$MODE" == "default" ]]; then cd $TRAVIS_BUILD_DIR/Component/Serialization && composer install --prefer-dist && vendor/bin/phpunit; fi;
