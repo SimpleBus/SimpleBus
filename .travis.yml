@@ -34,3 +34,12 @@ jobs:
         - composer install --prefer-dist
       script:
         - vendor/bin/phpunit
+
+    - stage: Bridge/Doctrine-DBAL-Bridge2
+      install:
+        - cd Bridge/DoctrineDBALBridge
+        - composer self-update
+        - composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
+        - composer install --prefer-dist
+      script:
+        - vendor/bin/phpunit
