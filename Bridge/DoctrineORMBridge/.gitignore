@@ -1,0 +1,7 @@
+vendor/
+phpunit.xml
+composer.lock
+.couscous/
+phpunit.xml
+/build/
+/coverage.xml

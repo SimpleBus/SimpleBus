@@ -1,0 +1,26 @@
+language: php
+
+php:
+  - 5.6
+  - 7.0
+  - 7.1
+  - 7.2
+
+env:
+  - DOCTRINE_VERSION: 2.2.*
+  - DOCTRINE_VERSION: 2.3.*
+  - DOCTRINE_VERSION: 2.4.*
+  - DOCTRINE_VERSION: 2.5.*
+
+before_script:
+  - composer self-update
+  - composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
+
+install:
+  - composer install --prefer-dist
+
+script:
+  - vendor/bin/phpunit
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

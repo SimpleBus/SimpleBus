@@ -1,0 +1,24 @@
+title: SimpleBus/DoctrineORMBridge
+subTitle: Integrate SimpleBus/MessageBus with Doctrine ORM
+baseUrl: //simplebus.github.io/DoctrineORMBridge
+menu:
+    items:
+        home:
+            itemId: home
+            text: Home
+            relativeUrl: ""
+        getting_started:
+            itemId: getting_started
+            text: Getting started
+            relativeUrl: doc/getting_started.html
+        transactions:
+            itemId: transactions
+            text: Transactions
+            relativeUrl: doc/transactions.html
+        domain_events:
+            itemId: domain_events
+            text: Domain events
+            relativeUrl: doc/domain_events.html
+        symfony_integration:
+            text: Symfony integration
+            absoluteUrl: http://simplebus.github.io/SymfonyBridge/
