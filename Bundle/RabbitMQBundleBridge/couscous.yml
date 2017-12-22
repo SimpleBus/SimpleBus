@@ -1,0 +1,25 @@
+title: SimpleBus/RabbitMQBundleBridge
+subTitle: Use RabbitMQBundle with SimpleBus/AsynchronousBundle
+baseUrl: //simplebus.github.io/RabbitMQBundleBridge
+menu:
+    items:
+        home:
+            itemId: home
+            text: Home
+            relativeUrl: ""
+        getting_started:
+            itemId: getting_started
+            text: Getting started
+            relativeUrl: "doc/getting_started.html"
+        events:
+            itemId: events
+            text: Events
+            relativeUrl: "doc/events.html"
+        routing:
+            itemId: routing
+            text: Routing
+            relativeUrl: "doc/routing.html"
+        additional_properties:
+            itemId: additional_properties
+            text: Additional properties
+            relativeUrl: "doc/additional_properties.html"

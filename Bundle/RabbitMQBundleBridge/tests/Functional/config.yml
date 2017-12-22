@@ -1,0 +1,100 @@
+parameters:
+    kernel.secret: secret
+    log_file: '%kernel.logs_dir%/test.log'
+
+services:
+    # needed to make JMSSerializerBundle work
+    translator:
+        public: true
+        class: Symfony\Component\Translation\Translator
+        arguments:
+            - 'nl'
+
+    # needed to make JMSSerializerBundle work
+    annotation_reader:
+        public: true
+        class: Doctrine\Common\Annotations\AnnotationReader
+    
+    # needed to make JMSSerializerBundle work
+    debug.stopwatch:
+        public: true
+        class: Symfony\Component\Stopwatch\Stopwatch
+
+    logger:
+        public: true
+        class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\FileLogger
+        arguments:
+            - '%log_file%'
+
+    asynchronous_command_handler:
+        public: true
+        class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\LoggingCommandHandler
+        arguments:
+            - '@logger'
+        tags:
+            - { name: asynchronous_command_handler, handles: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AsynchronousCommand }
+
+    asynchronous_event_subscriber:
+        public: true
+        class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\LoggingEventSubscriber
+        arguments:
+            - '@logger'
+        tags:
+            - { name: asynchronous_event_subscriber, subscribes_to: SimpleBus\RabbitMQBundleBridge\Tests\Functional\Event }
+
+    always_failing_command_handler:
+        public: true
+        class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AlwaysFailingCommandHandler
+        tags:
+            - { name: asynchronous_command_handler, handles: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AlwaysFailingCommand }
+
+    additional_properties_resolver:
+        public: true
+        class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AdditionalPropertiesResolverArray
+        arguments:
+            - { debug: string }
+        tags:
+            - { name: simple_bus.additional_properties_resolver }
+
+    simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.public:
+        public: true
+        alias: simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver
+
+    simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.producer_mock:
+        public: true
+        class: SimpleBus\RabbitMQBundleBridge\Tests\Functional\AdditionalPropertiesResolverProducerMock
+        arguments: ['@old_sound_rabbit_mq.connection.default']
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     'localhost'
+            port:     5672
+            user:     'guest'
+            password: 'guest'
+            vhost:    '/'
+            lazy:     true
+    producers:
+        asynchronous_events:
+            connection:       default
+            exchange_options: { name: 'asynchronous_events', type: direct }
+        asynchronous_commands:
+            connection:       default
+            exchange_options: { name: 'asynchronous_commands', type: direct }
+    consumers:
+        asynchronous_events:
+            connection:       default
+            exchange_options: { name: 'asynchronous_events', type: direct }
+            queue_options:    { name: 'asynchronous_events' }
+            callback:         simple_bus.rabbit_mq_bundle_bridge.events_consumer
+        asynchronous_commands:
+            connection:       default
+            exchange_options: { name: 'asynchronous_commands', type: direct }
+            queue_options:    { name: 'asynchronous_commands' }
+            callback:         simple_bus.rabbit_mq_bundle_bridge.commands_consumer
+
+simple_bus_rabbit_mq_bundle_bridge:
+    commands:
+        producer_service_id: old_sound_rabbit_mq.asynchronous_commands_producer
+    events:
+        producer_service_id: old_sound_rabbit_mq.asynchronous_events_producer
