@@ -24,22 +24,12 @@ matrix:
     - php: 7.2
       env: DOCTRINE_VERSION=2.6.*
 
-jobs:
-  include:
-    - stage: Bridge/Doctrine-DBAL-Bridge
-      install:
-        - cd Bridge/DoctrineDBALBridge
-        - composer self-update
-        - composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
-        - composer install --prefer-dist
-      script:
-        - vendor/bin/phpunit
+before_script:
+  - composer self-update
+  - composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
 
-    - stage: Bridge/Doctrine-DBAL-Bridge2
-      install:
-        - cd Bridge/DoctrineDBALBridge
-        - composer self-update
-        - composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
-        - composer install --prefer-dist
-      script:
-        - vendor/bin/phpunit
+install:
+  - composer install --prefer-dist
+
+script:
+  - vendor/bin/phpunit
