@@ -1,0 +1,8 @@
+SimpleBus\Serialization\Envelope\DefaultEnvelope:
+    properties:
+        messageType:
+            type: string
+        serializedMessage:
+            type: string
+        message:
+            exclude: true
