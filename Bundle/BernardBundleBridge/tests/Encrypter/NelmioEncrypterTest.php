@@ -5,6 +5,7 @@ namespace SimpleBus\BernardBundleBridge\Tests\Encrypter;
 use SimpleBus\BernardBundleBridge\Encrypter\NelmioEncrypter;
 
 /**
+ * @group BernardBundleBridge
  * @requires extension mcrypt
  */
 class NelmioEncrypterTest extends \PHPUnit\Framework\TestCase

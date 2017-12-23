@@ -9,6 +9,9 @@ use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
+/**
+ * @group BernardBundleBridge
+ */
 class DisableDoctrineLoggerListenerTest extends \PHPUnit\Framework\TestCase
 {
     /** @var \PHPUnit_Framework_MockObject_MockObject */

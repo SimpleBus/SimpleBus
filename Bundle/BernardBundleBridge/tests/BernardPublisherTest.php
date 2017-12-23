@@ -6,6 +6,9 @@ use Bernard\Message;
 use Bernard\Producer;
 use SimpleBus\BernardBundleBridge\BernardPublisher;
 
+/**
+ * @group BernardBundleBridge
+ */
 class BernardPublisherTest extends \PHPUnit\Framework\TestCase
 {
     /**

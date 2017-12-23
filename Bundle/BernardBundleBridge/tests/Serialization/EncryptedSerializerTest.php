@@ -5,6 +5,9 @@ namespace SimpleBus\BernardBundleBridge\Tests\Serialization;
 use SimpleBus\BernardBundleBridge\Serialization\EncryptedSerializer;
 use SimpleBus\Serialization\NativeObjectSerializer;
 
+/**
+ * @group BernardBundleBridge
+ */
 class EncryptedSerializerTest extends \PHPUnit\Framework\TestCase
 {
     /** @var EncryptedSerializer */

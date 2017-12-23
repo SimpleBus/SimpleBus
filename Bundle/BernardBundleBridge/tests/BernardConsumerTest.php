@@ -5,6 +5,9 @@ namespace SimpleBus\BernardBundleBridge\Tests;
 use Bernard\Message\PlainMessage;
 use SimpleBus\BernardBundleBridge\BernardConsumer;
 
+/**
+ * @group BernardBundleBridge
+ */
 class BernardConsumerTest extends \PHPUnit\Framework\TestCase
 {
     /**

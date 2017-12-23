@@ -6,6 +6,9 @@ use Bernard\Envelope;
 use Bernard\Message\PlainMessage;
 use SimpleBus\BernardBundleBridge\BernardRouter;
 
+/**
+ * @group BernardBundleBridge
+ */
 class BernardRouterTest extends \PHPUnit\Framework\TestCase
 {
     /**
