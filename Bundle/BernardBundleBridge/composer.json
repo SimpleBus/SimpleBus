@@ -24,9 +24,9 @@
         "matthiasnoback/symfony-config-test": "~1.0 || ^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "~1.2 || ~2.0",
         "matthiasnoback/phpunit-asynchronicity": "~1.0",
-        "symfony/console": "~2.7",
-        "symfony/process": "~2.7",
-        "symfony/finder": "~2.7",
+        "symfony/console": "~2.7 || ~3.3 || ~4.0",
+        "symfony/process": "~2.7 || ~3.3 || ~4.0",
+        "symfony/finder": "~2.7 || ~3.3 || ~4.0",
         "doctrine/dbal": "~2.4"
     },
     "suggest": {
