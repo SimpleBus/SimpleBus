@@ -16,7 +16,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="SimpleBus Test Suite">
+        <testsuite>
             <directory>./Bridge/*/tests/</directory>
             <directory>./Bundle/*/tests/</directory>
             <directory>./Component/*/tests/</directory>
