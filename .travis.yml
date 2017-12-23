@@ -1,0 +1,49 @@
+language: php
+
+matrix:
+  include:
+    - php: 7.1
+      env: MODE=default
+    - php: 7.2
+      env: MODE=default
+    - php: 7.2
+      env: MODE=symfony SYMFONY_VERSION=2.7.*
+    - php: 7.2
+      env: MODE=symfony SYMFONY_VERSION=2.8.*
+    - php: 7.2
+      env: MODE=symfony SYMFONY_VERSION=3.3.*
+    - php: 7.2
+      env: MODE=symfony SYMFONY_VERSION=3.4.*
+    - php: 7.2
+      env: MODE=symfony SYMFONY_VERSION=4.0.*
+    - php: 7.2
+      env: MODE=doctrine DOCTRINE_VERSION=2.2.*
+    - php: 7.2
+      env: MODE=doctrine DOCTRINE_VERSION=2.3.*
+    - php: 7.2
+      env: MODE=doctrine DOCTRINE_VERSION=2.4.*
+    - php: 7.2
+      env: MODE=doctrine DOCTRINE_VERSION=2.5.*
+    - php: 7.2
+      env: MODE=doctrine DOCTRINE_VERSION=2.6.*
+
+before_script:
+  - composer self-update
+
+script:
+  # Bridges
+  - if [[ "$MODE" == "doctrine" ]]; then cd $TRAVIS_BUILD_DIR/Bridge/DoctrineDBALBridge && composer require --no-update doctrine/orm:${DOCTRINE_VERSION} && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  - if [[ "$MODE" == "doctrine" ]]; then cd $TRAVIS_BUILD_DIR/Bridge/DoctrineORMBridge && composer require --no-update doctrine/orm:${DOCTRINE_VERSION} && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  - if [[ "$MODE" == "default" ]]; then cd $TRAVIS_BUILD_DIR/Bridge/JMSSerializerBridge && composer install --prefer-dist && vendor/bin/phpunit; fi;
+
+  # Bundles
+  - if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Bundle/AsynchronousBundle && composer require --no-update symfony/framework-bundle:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  #- if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Bundle/BernardBundleBridge && composer require --no-update symfony/console:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  - if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Bundle/JMSSerializerBundleBridge && composer require --no-update symfony/framework-bundle:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  - if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Bundle/RabbitMQBundleBridge && composer require --no-update symfony/console:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/translation:$SYMFONY_VERSION && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  #- if [[ "$MODE" == "symfony" ]]; then cd $TRAVIS_BUILD_DIR/Bundle/SymfonyBridge && composer require --no-update doctrine/orm:${DOCTRINE_VERSION} && composer install --prefer-dist && vendor/bin/phpunit; fi;
+
+  # Components
+  - if [[ "$MODE" == "default" ]]; then cd $TRAVIS_BUILD_DIR/Component/Asynchronous && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  - if [[ "$MODE" == "default" ]]; then cd $TRAVIS_BUILD_DIR/Component/MessageBus && composer install --prefer-dist && vendor/bin/phpunit; fi;
+  - if [[ "$MODE" == "default" ]]; then cd $TRAVIS_BUILD_DIR/Component/Serialization && composer install --prefer-dist && vendor/bin/phpunit; fi;
