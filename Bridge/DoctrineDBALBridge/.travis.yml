@@ -19,11 +19,12 @@ matrix:
 
 env:
   global:
+    - DOCTRINE_VERSION=""
     - COMPOSER_FLAGS="--prefer-dist"
 
 before_script:
   - composer self-update
-  - composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
+  - if [ "$DOCTRINE_VERSION" != "" ]; then composer require --no-update doctrine/dbal:$DOCTRINE_VERSION ; fi
 
 install:
   - composer update $COMPOSER_FLAGS

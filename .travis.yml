@@ -1,0 +1,69 @@
+sudo: false
+
+language: php
+
+services:
+  - rabbitmq
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.1
+    - php: 7.2
+    - php: 7.1
+      env: COMPOSER_FLAGS="--prefer-lowest"
+
+    # Test Symfony versions
+    - php: 7.2
+      env: SYMFONY_VERSION=2.7.*
+    - php: 7.2
+      env: SYMFONY_VERSION=2.8.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.3.*
+    - php: 7.2
+      env: SYMFONY_VERSION=3.4.*
+    - php: 7.2
+      env: SYMFONY_VERSION=4.0.*
+    - php: 7.2
+      env: SYMFONY_VERSION=4.0.* REMOVE_PROXY_BRIDGE="yes" EXTRA_PHPUNIT_PARAMS="--group SymfonyBridgeProxyManagerDependency"
+
+    # Test Doctrine versions
+    - php: 7.2
+      env: DOCTRINE_VERSION="2.2.*"
+    - php: 7.2
+      env: DOCTRINE_VERSION="2.3.*"
+    - php: 7.2
+      env: DOCTRINE_VERSION="2.4.*"
+    - php: 7.2
+      env: DOCTRINE_VERSION="2.5.*"
+    - php: 7.2
+      env: DOCTRINE_VERSION="2.6.*"
+  allow_failures:
+    - env: COMPOSER_FLAGS="--prefer-lowest"
+    - env: DOCTRINE_VERSION="2.2.*"
+    - env: DOCTRINE_VERSION="2.3.*"
+    - env: DOCTRINE_VERSION="2.4.*"
+
+env:
+  global:
+    - COMPOSER_FLAGS=""
+    - DOCTRINE_VERSION=""
+    - EXTRA_PHPUNIT_PARAMS=""
+    - REMOVE_PROXY_BRIDGE="no"
+    - SYMFONY_VERSION=""
+
+before_install:
+  - composer self-update
+  - if [ "$DOCTRINE_VERSION" != "" ]; then composer require --no-update doctrine/dbal:$DOCTRINE_VERSION doctrine/orm:$DOCTRINE_VERSION ; fi
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/config:$SYMFONY_VERSION symfony/console:$SYMFONY_VERSION symfony/dependency-injection:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION symfony/framework-bundle:$SYMFONY_VERSION symfony/http-kernel:$SYMFONY_VERSION symfony/monolog-bridge:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/proxy-manager-bridge:$SYMFONY_VERSION symfony/yaml:$SYMFONY_VERSION ; fi
+
+install:
+  - composer update --prefer-dist $COMPOSER_FLAGS
+  - if [ "$REMOVE_PROXY_BRIDGE" == "yes" ]; then composer remove symfony/proxy-manager-bridge; fi
+
+script:
+  - ./vendor/bin/phpunit $EXTRA_PHPUNIT_PARAMS
