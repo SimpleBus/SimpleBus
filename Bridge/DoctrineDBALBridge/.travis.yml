@@ -1,22 +1,32 @@
 language: php
 
-php:
-  - 7.1
-  - 7.2
+matrix:
+  include:
+    - php: 7.1
+    - php: 7.2
+    - php: 7.2
+      env: COMPOSER_FLAGS="--prefer-lowest"
+    - php: 7.2
+      env: DOCTRINE_VERSION="2.2.*"
+    - php: 7.2
+      env: DOCTRINE_VERSION="2.3.*"
+    - php: 7.2
+      env: DOCTRINE_VERSION="2.4.*"
+    - php: 7.2
+      env: DOCTRINE_VERSION="2.5.*"
+    - php: 7.2
+      env: DOCTRINE_VERSION="2.6.*"
 
 env:
-  - DOCTRINE_VERSION: 2.2.*
-  - DOCTRINE_VERSION: 2.3.*
-  - DOCTRINE_VERSION: 2.4.*
-  - DOCTRINE_VERSION: 2.5.*
+  global:
+    - COMPOSER_FLAGS="--prefer-dist"
 
 before_script:
   - composer self-update
   - composer require --no-update doctrine/orm:${DOCTRINE_VERSION}
 
 install:
-  - composer install --prefer-dist
+  - composer update $COMPOSER_FLAGS
 
 script:
   - vendor/bin/phpunit
-
