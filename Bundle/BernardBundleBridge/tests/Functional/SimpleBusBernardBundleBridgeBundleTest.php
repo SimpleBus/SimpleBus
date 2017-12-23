@@ -85,6 +85,9 @@ class SimpleBusBernardBundleBridgeBundleTest extends KernelTestCase
     {
         parent::tearDown();
 
+        static::$class = null;
+        static::$kernel = null;
+
         if ($this->process instanceof Process) {
             $this->process->stop(2, SIGKILL);
         }

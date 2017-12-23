@@ -55,6 +55,8 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
          * There's no need to do anything here. This alone will prove that the bundle behaves well,
          * i.e. its services and configuration can be loaded.
          */
+
+        $this->assertTrue(true);
     }
 
     /**
@@ -190,6 +192,9 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     protected function tearDown()
     {
         parent::tearDown();
+
+        static::$class = null;
+        static::$kernel = null;
 
         if ($this->process instanceof Process) {
             $this->process->stop(2, SIGKILL);

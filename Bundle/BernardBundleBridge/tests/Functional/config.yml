@@ -5,6 +5,7 @@ parameters:
 
 services:
     logger:
+        public: true
         class: SimpleBus\BernardBundleBridge\Tests\Functional\FileLogger
         arguments: [ '%log_file%' ]
 
