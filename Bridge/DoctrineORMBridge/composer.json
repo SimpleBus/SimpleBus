@@ -37,7 +37,5 @@
     "require-dev": {
         "matthiasnoback/doctrine-orm-test-service-provider": "~2.0",
         "phpunit/phpunit": "^5.7 || ^6.0"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
