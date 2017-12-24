@@ -37,6 +37,9 @@
                 <directory>./Bridge/*/tests/</directory>
                 <directory>./Bundle/*/tests/</directory>
                 <directory>./Component/*/tests/</directory>
+                <directory>./docs/</directory>
+                <directory>./tests/</directory>
+                <directory>./vendor/</directory>
             </exclude>
         </whitelist>
     </filter>
