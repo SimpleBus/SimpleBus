@@ -6,9 +6,6 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\BernardBundleBridge\Serialization\EncryptedSerializer;
 use SimpleBus\Serialization\NativeObjectSerializer;
 
-/**
- * @group BernardBundleBridge
- */
 class EncryptedSerializerTest extends TestCase
 {
     /** @var EncryptedSerializer */

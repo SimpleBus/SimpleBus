@@ -21,6 +21,12 @@
         </testsuite>
     </testsuites>
 
+    <groups>
+        <exclude>
+            <group>BernardBundleBridge-functional</group>
+        </exclude>
+    </groups>
+
     <filter>
         <whitelist>
             <directory>./src</directory>

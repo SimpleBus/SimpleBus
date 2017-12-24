@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Process\Process;
 
 /**
- * @group BernardBundleBridge
+ * @group BernardBundleBridge-functional
  * @group functional
  */
 class SimpleBusBernardBundleBridgeBundleTest extends KernelTestCase

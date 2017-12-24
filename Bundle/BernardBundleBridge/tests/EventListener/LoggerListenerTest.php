@@ -12,9 +12,6 @@ use Psr\Log\LogLevel;
 use SimpleBus\BernardBundleBridge\EventListener\LoggerListener;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-/**
- * @group BernardBundleBridge
- */
 class LoggerListenerTest extends TestCase
 {
     /** @var DebugLogger */

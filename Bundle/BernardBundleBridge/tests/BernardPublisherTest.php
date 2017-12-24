@@ -7,9 +7,6 @@ use Bernard\Producer;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\BernardBundleBridge\BernardPublisher;
 
-/**
- * @group BernardBundleBridge
- */
 class BernardPublisherTest extends TestCase
 {
     /**

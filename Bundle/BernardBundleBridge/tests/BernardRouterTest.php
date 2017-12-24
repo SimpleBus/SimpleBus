@@ -7,9 +7,6 @@ use Bernard\Message\PlainMessage;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\BernardBundleBridge\BernardRouter;
 
-/**
- * @group BernardBundleBridge
- */
 class BernardRouterTest extends TestCase
 {
     /**

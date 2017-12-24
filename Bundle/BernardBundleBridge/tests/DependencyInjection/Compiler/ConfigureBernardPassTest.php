@@ -6,9 +6,6 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase
 use SimpleBus\BernardBundleBridge\DependencyInjection\Compiler\ConfigureBernardPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @group BernardBundleBridge
- */
 class ConfigureBernardPassTest extends AbstractCompilerPassTestCase
 {
     /**

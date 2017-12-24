@@ -43,6 +43,7 @@
         "symfony/monolog-bundle": "~2.3 || ~3.0",
         "symfony/process": "~2.7 || ~3.3 || ~4.0",
         "symfony/proxy-manager-bridge": "~2.7 || ~3.3 || ~4.0",
+        "symfony/var-dumper": "~2.7 || ~3.3 || ~4.0",
         "symfony/yaml": "~2.7 || ~3.3 || ~4.0"
     },
     "autoload": {
