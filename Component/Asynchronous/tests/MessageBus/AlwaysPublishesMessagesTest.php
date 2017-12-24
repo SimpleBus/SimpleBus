@@ -2,10 +2,11 @@
 
 namespace SimpleBus\Asynchronous\Tests\MessageBus;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 
-class AlwaysPublishesMessagesTest extends \PHPUnit\Framework\TestCase
+class AlwaysPublishesMessagesTest extends TestCase
 {
     /**
      * @test

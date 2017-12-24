@@ -2,10 +2,11 @@
 
 namespace SimpleBus\Asynchronous\Tests\Routing;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Routing\ClassBasedRoutingKeyResolver;
 use SimpleBus\Asynchronous\Tests\Routing\Fixtures\MessageDummy;
 
-class ClassBasedRoutingKeyResolverTest extends \PHPUnit\Framework\TestCase
+class ClassBasedRoutingKeyResolverTest extends TestCase
 {
     /**
      * @test

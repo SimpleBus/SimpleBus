@@ -5,6 +5,9 @@ namespace SimpleBus\BernardBundleBridge\tests\DependencyInjection;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use SimpleBus\BernardBundleBridge\DependencyInjection\SimpleBusBernardBundleBridgeExtension;
 
+/**
+ * @group BernardBundleBridge
+ */
 class SimpleBusBernardBundleBridgeExtensionTest extends AbstractExtensionTestCase
 {
     public function setUp()

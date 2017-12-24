@@ -3,11 +3,12 @@
 namespace SimpleBus\JMSSerializerBridge\Tests\Integration;
 
 use JMS\Serializer\SerializerBuilder;
+use PHPUnit\Framework\TestCase;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\JMSSerializerBridge\JMSSerializerObjectSerializer;
 use SimpleBus\JMSSerializerBridge\SerializerMetadata;
 
-class JMSSerializerObjectSerializerTest extends \PHPUnit\Framework\TestCase
+class JMSSerializerObjectSerializerTest extends TestCase
 {
     /**
      * @test

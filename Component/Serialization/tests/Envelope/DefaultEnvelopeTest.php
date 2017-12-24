@@ -2,10 +2,11 @@
 
 namespace Message\Envelope;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
 
-class DefaultEnvelopeTest extends \PHPUnit\Framework\TestCase
+class DefaultEnvelopeTest extends TestCase
 {
     /**
      * @test

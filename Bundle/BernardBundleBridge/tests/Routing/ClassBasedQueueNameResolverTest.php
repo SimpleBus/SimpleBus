@@ -2,9 +2,13 @@
 
 namespace SimpleBus\BernardBundleBridge\Tests\Routing;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\BernardBundleBridge\Routing\ClassBasedQueueNameResolver;
 
-class ClassBasedQueueNameResolverTest extends \PHPUnit\Framework\TestCase
+/**
+ * @group BernardBundleBridge
+ */
+class ClassBasedQueueNameResolverTest extends TestCase
 {
     /**
      * @test

@@ -2,10 +2,11 @@
 
 namespace SimpleBus\Asynchronous\Tests\Properties;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
 use SimpleBus\Asynchronous\Properties\DelegatingAdditionalPropertiesResolver;
 
-class DelegatingAdditionalPropertiesResolverTest extends \PHPUnit\Framework\TestCase
+class DelegatingAdditionalPropertiesResolverTest extends TestCase
 {
     /**
      * @test

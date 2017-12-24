@@ -2,12 +2,12 @@
 
 namespace SimpleBus\Asynchronous\Tests\MessageBus;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\MessageBus\PublishesPredefinedMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
-use SimpleBus\Message\CallableResolver\Exception\UndefinedCallable;
 use SimpleBus\Message\Name\MessageNameResolver;
 
-class PublishesPredefinedMessagesTest extends \PHPUnit\Framework\TestCase
+class PublishesPredefinedMessagesTest extends TestCase
 {
     /**
      * @test

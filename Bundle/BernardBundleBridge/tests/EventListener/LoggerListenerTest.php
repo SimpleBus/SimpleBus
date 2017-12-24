@@ -6,12 +6,16 @@ use Bernard\Envelope;
 use Bernard\Event\EnvelopeEvent;
 use Bernard\Event\RejectEnvelopeEvent;
 use Bernard\Message\PlainMessage;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
 use SimpleBus\BernardBundleBridge\EventListener\LoggerListener;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class LoggerListenerTest extends \PHPUnit\Framework\TestCase
+/**
+ * @group BernardBundleBridge
+ */
+class LoggerListenerTest extends TestCase
 {
     /** @var DebugLogger */
     private $logger;

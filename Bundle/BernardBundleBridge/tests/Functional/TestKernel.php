@@ -50,4 +50,9 @@ class TestKernel extends Kernel
             new SimpleBusBernardBundleBridgeBundle(),
         ];
     }
+
+    protected function getContainerClass()
+    {
+        return parent::getContainerClass() . sha1(__NAMESPACE__);
+    }
 }

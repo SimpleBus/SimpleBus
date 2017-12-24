@@ -2,12 +2,13 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\Tests\DependencyInjection\Compiler;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\RabbitMQBundleBridge\DependencyInjection\Compiler\AdditionalPropertiesResolverPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\Kernel;
 
-class AdditionalPropertiesResolverPassTest extends \PHPUnit\Framework\TestCase
+class AdditionalPropertiesResolverPassTest extends TestCase
 {
     /**
      * @var ContainerBuilder

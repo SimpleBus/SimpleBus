@@ -2,9 +2,10 @@
 
 namespace SimpleBus\Asynchronous\Tests\Routing;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Routing\EmptyRoutingKeyResolver;
 
-class EmptyRoutingKeyResolverTest extends \PHPUnit\Framework\TestCase
+class EmptyRoutingKeyResolverTest extends TestCase
 {
     /**
      * @test

@@ -21,6 +21,14 @@ class SmokeTest extends KernelTestCase
         return TestKernel::class;
     }
 
+    protected function tearDown()
+    {
+        parent::tearDown();
+
+        static::$class = null;
+        static::$kernel = null;
+    }
+
     /**
      * @test
      */
@@ -129,7 +137,7 @@ class SmokeTest extends KernelTestCase
     /**
      * @test
      * 
-     * @group depTest
+     * @group SymfonyBridgeProxyManagerDependency
      *
      * @expectedException        \LogicException
      * @expectedExceptionMessage In order to use bundle "DoctrineOrmBridgeBundle" you need to require "symfony/proxy-manager-bridge" package.

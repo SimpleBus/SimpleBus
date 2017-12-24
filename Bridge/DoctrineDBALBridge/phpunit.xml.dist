@@ -8,7 +8,7 @@
         colors="true"
         >
     <testsuites>
-        <testsuite name="doctrine-dbal-bridge">
+        <testsuite>
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>

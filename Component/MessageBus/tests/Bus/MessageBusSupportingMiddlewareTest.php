@@ -2,9 +2,10 @@
 
 namespace SimpleBus\Message\Tests\Bus;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
 
-class MessageBusSupportingMiddlewareTest extends \PHPUnit\Framework\TestCase
+class MessageBusSupportingMiddlewareTest extends TestCase
 {
     /**
      * @test
@@ -34,6 +35,8 @@ class MessageBusSupportingMiddlewareTest extends \PHPUnit\Framework\TestCase
         $message = $this->dummyMessage();
         $messageBusStack = new MessageBusSupportingMiddleware([]);
         $messageBusStack->handle($message);
+
+        $this->assertTrue(true);
     }
 
     /**

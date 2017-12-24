@@ -4,12 +4,16 @@ namespace SimpleBus\BernardBundleBridge\Tests\EventListener;
 
 use Bernard\Command\ConsumeCommand;
 use Doctrine\DBAL\Connection;
+use PHPUnit\Framework\TestCase;
 use SimpleBus\BernardBundleBridge\EventListener\DisableDoctrineLoggerListener;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class DisableDoctrineLoggerListenerTest extends \PHPUnit\Framework\TestCase
+/**
+ * @group BernardBundleBridge
+ */
+class DisableDoctrineLoggerListenerTest extends TestCase
 {
     /** @var \PHPUnit_Framework_MockObject_MockObject */
     private $config;

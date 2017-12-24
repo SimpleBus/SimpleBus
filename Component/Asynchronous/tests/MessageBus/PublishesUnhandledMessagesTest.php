@@ -2,13 +2,14 @@
 
 namespace SimpleBus\Asynchronous\Tests\MessageBus;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\CallableResolver\Exception\UndefinedCallable;
 
-class PublishesUnhandledMessagesTest extends \PHPUnit\Framework\TestCase
+class PublishesUnhandledMessagesTest extends TestCase
 {
     /**
      * @test

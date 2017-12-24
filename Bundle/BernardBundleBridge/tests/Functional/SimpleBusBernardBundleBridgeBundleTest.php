@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Process\Process;
 
 /**
+ * @group BernardBundleBridge
  * @group functional
  */
 class SimpleBusBernardBundleBridgeBundleTest extends KernelTestCase
@@ -83,6 +84,9 @@ class SimpleBusBernardBundleBridgeBundleTest extends KernelTestCase
     protected function tearDown()
     {
         parent::tearDown();
+
+        static::$class = null;
+        static::$kernel = null;
 
         if ($this->process instanceof Process) {
             $this->process->stop(2, SIGKILL);

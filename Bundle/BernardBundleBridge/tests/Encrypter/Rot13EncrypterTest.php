@@ -2,9 +2,13 @@
 
 namespace SimpleBus\BernardBundleBridge\Tests\Encrypter;
 
+use PHPUnit\Framework\TestCase;
 use SimpleBus\BernardBundleBridge\Encrypter\Rot13Encrypter;
 
-class Rot13EncrypterTest extends \PHPUnit\Framework\TestCase
+/**
+ * @group BernardBundleBridge
+ */
+class Rot13EncrypterTest extends TestCase
 {
     /**
      * @test

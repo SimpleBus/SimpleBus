@@ -5,12 +5,13 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests;
 use Exception;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
+use PHPUnit\Framework\TestCase;
 use SimpleBus\RabbitMQBundleBridge\Event\Events;
 use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumed;
 use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use SimpleBus\RabbitMQBundleBridge\RabbitMQMessageConsumer;
 
-class RabbitMQMessageConsumerTest extends \PHPUnit\Framework\TestCase
+class RabbitMQMessageConsumerTest extends TestCase
 {
     /**
      * @test
