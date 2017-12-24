@@ -38,7 +38,7 @@ env:
 
 before_install:
   - composer self-update
-  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/console:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION; fi
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/console:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION symfony/var-dumper:$SYMFONY_VERSION ; fi
 
 install:
   - composer update --prefer-dist $COMPOSER_FLAGS
