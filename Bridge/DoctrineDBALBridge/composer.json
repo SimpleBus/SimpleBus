@@ -2,7 +2,12 @@
     "name": "simple-bus/doctrine-dbal-bridge",
     "type": "library",
     "description": "Bridge for using SimpleBus with Doctrine DBAL",
-    "keywords": ["Doctrine", "DBAL", "message bus", "command bus"],
+    "keywords": [
+        "Doctrine",
+        "DBAL",
+        "message bus",
+        "command bus"
+    ],
     "homepage": "http://github.com/SimpleBus/DoctrineDBALBridge",
     "license": "MIT",
     "authors": [
@@ -13,8 +18,8 @@
     ],
     "require": {
         "php": "^7.1",
-        "simple-bus/message-bus": "~3.0",
-        "doctrine/dbal": "~2.2"
+        "doctrine/dbal": "~2.2",
+        "simple-bus/message-bus": "~3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7 || ^6.0"
@@ -28,5 +33,8 @@
         "psr-4": {
             "SimpleBus\\DoctrineDBALBridge\\Tests\\": "tests"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }

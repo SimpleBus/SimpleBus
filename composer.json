@@ -78,5 +78,8 @@
             "SimpleBus\\Message\\Tests\\": "Component/MessageBus/tests",
             "SimpleBus\\Serialization\\Tests\\": "Component/Serialization/tests"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }

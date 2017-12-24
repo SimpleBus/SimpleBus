@@ -2,7 +2,13 @@
     "name": "simple-bus/bernard-bundle-bridge",
     "type": "symfony-bundle",
     "description": "Use BernardBundle with SimpleBus/AsynchronousBundle.",
-    "keywords": [ "bernard", "messages", "message bus", "event bus", "command bus" ],
+    "keywords": [
+        "bernard",
+        "messages",
+        "message bus",
+        "event bus",
+        "command bus"
+    ],
     "homepage": "https://github.com/SimpleBus/SimpleBusBernardBundleBridge",
     "license": "MIT",
     "authors": [
@@ -13,21 +19,21 @@
     ],
     "require": {
         "php": "^7.1",
-        "simple-bus/message-bus": "~3.0",
-        "simple-bus/asynchronous-bundle": "~3.0",
-        "simple-bus/asynchronous": "~3.0",
+        "bernard/bernard": "1.0.*@dev",
         "bernard/bernard-bundle": "2.0.*@dev",
-        "bernard/bernard": "1.0.*@dev"
+        "simple-bus/asynchronous": "~3.0",
+        "simple-bus/asynchronous-bundle": "~3.0",
+        "simple-bus/message-bus": "~3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.7 || ^6.0",
+        "doctrine/dbal": "~2.4",
+        "matthiasnoback/phpunit-asynchronicity": "~1.0",
         "matthiasnoback/symfony-config-test": "~1.0 || ^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "~1.2 || ~2.0",
-        "matthiasnoback/phpunit-asynchronicity": "~1.0",
+        "phpunit/phpunit": "^5.7 || ^6.0",
         "symfony/console": "~2.7 || ~3.3 || ~4.0",
-        "symfony/process": "~2.7 || ~3.3 || ~4.0",
         "symfony/finder": "~2.7 || ~3.3 || ~4.0",
-        "doctrine/dbal": "~2.4"
+        "symfony/process": "~2.7 || ~3.3 || ~4.0"
     },
     "suggest": {
         "ext-mcrypt": "Allows encryption of messages.",
@@ -42,5 +48,8 @@
         "psr-4": {
             "SimpleBus\\BernardBundleBridge\\Tests\\": "tests"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }

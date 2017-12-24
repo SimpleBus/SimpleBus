@@ -2,7 +2,12 @@
     "name": "simple-bus/asynchronous",
     "type": "library",
     "description": "Generic classes and interfaces for asynchronous messaging using SimpleBus",
-    "keywords": ["asynchronous", "messaging", "command bus", "event bus"],
+    "keywords": [
+        "asynchronous",
+        "messaging",
+        "command bus",
+        "event bus"
+    ],
     "homepage": "http://github.com/SimpleBus/Asynchronous",
     "license": "MIT",
     "authors": [
@@ -18,10 +23,10 @@
     ],
     "require": {
         "php": "^7.1",
-        "simple-bus/message-bus": "~3.0",
-        "simple-bus/serialization": "~3.0",
         "beberlei/assert": "~2.0",
-        "psr/log": "~1.0"
+        "psr/log": "~1.0",
+        "simple-bus/message-bus": "~3.0",
+        "simple-bus/serialization": "~3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7 || ^6.0"
@@ -35,5 +40,8 @@
         "psr-4": {
             "SimpleBus\\Asynchronous\\Tests\\": "tests"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
