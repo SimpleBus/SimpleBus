@@ -6,7 +6,6 @@ git subsplit publish "
     Bridge/JMSSerializerBridge:git@github.com:SimpleBus/JMSSerializerBridge.git
 
     Bundle/AsynchronousBundle:git@github.com:SimpleBus/AsynchronousBundle.git
-    Bundle/BernardBundleBridge:git@github.com:SimpleBus/BernardBundleBridge.git
     Bundle/JMSSerializerBundleBridge:git@github.com:SimpleBus/JMSSerializerBundleBridge.git
     Bundle/RabbitMQBundleBridge:git@github.com:SimpleBus/RabbitMQBundleBridge.git
     Bundle/SymfonyBridge:git@github.com:SimpleBus/SymfonyBridge.git

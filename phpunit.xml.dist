@@ -25,7 +25,6 @@
 
     <groups>
         <exclude>
-            <group>BernardBundleBridge-functional</group>
             <group>SymfonyBridgeProxyManagerDependency</group>
         </exclude>
     </groups>

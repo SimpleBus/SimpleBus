@@ -21,15 +21,12 @@
     ],
     "require-dev": {
         "beberlei/assert": "~2.0",
-        "bernard/bernard": "1.0.*@dev",
-        "bernard/bernard-bundle": "2.0.*@dev",
         "doctrine/dbal": "~2.2",
         "doctrine/doctrine-bundle": "~1.0",
         "doctrine/orm": "~2.2",
         "jms/serializer-bundle": "~0.11 || ~1.0 || ~2.0",
         "matthiasnoback/doctrine-orm-test-service-provider": "~3.0",
         "matthiasnoback/phpunit-asynchronicity": "~1.0",
-        "matthiasnoback/symfony-config-test": "~1.0 || ^3.0",
         "matthiasnoback/symfony-dependency-injection-test": "~1.2 || ~2.0",
         "php-amqplib/rabbitmq-bundle": "~1.10",
         "phpunit/phpunit": "^5.7 || ^6.0",
@@ -43,7 +40,6 @@
         "symfony/monolog-bundle": "~2.3 || ~3.0",
         "symfony/process": "~2.7 || ~3.3 || ~4.0",
         "symfony/proxy-manager-bridge": "~2.7 || ~3.3 || ~4.0",
-        "symfony/var-dumper": "~2.7 || ~3.3 || ~4.0",
         "symfony/yaml": "~2.7 || ~3.3 || ~4.0"
     },
     "autoload": {
@@ -53,7 +49,6 @@
             "SimpleBus\\JMSSerializerBridge\\": "Bridge/JMSSerializerBridge/src",
 
             "SimpleBus\\AsynchronousBundle\\": "Bundle/AsynchronousBundle/src",
-            "SimpleBus\\BernardBundleBridge\\": "Bundle/BernardBundleBridge/src",
             "SimpleBus\\JMSSerializerBundleBridge\\": "Bundle/JMSSerializerBundleBridge/src",
             "SimpleBus\\RabbitMQBundleBridge\\": "Bundle/RabbitMQBundleBridge/src",
             "SimpleBus\\SymfonyBridge\\": "Bundle/SymfonyBridge/src",
@@ -70,7 +65,6 @@
             "SimpleBus\\JMSSerializerBridge\\Tests\\": "Bridge/JMSSerializerBridge/tests",
 
             "SimpleBus\\AsynchronousBundle\\Tests\\": "Bundle/AsynchronousBundle/tests",
-            "SimpleBus\\BernardBundleBridge\\Tests\\": "Bundle/BernardBundleBridge/tests",
             "SimpleBus\\JMSSerializerBundleBridge\\Tests\\": "Bundle/JMSSerializerBundleBridge/tests",
             "SimpleBus\\RabbitMQBundleBridge\\Tests\\": "Bundle/RabbitMQBundleBridge/tests",
             "SimpleBus\\SymfonyBridge\\Tests\\": "Bundle/SymfonyBridge/tests",
