@@ -16,20 +16,11 @@ matrix:
 
     # Test Doctrine versions
     - php: 7.2
-      env: DOCTRINE_VERSION="2.2.*"
-    - php: 7.2
-      env: DOCTRINE_VERSION="2.3.*"
-    - php: 7.2
-      env: DOCTRINE_VERSION="2.4.*"
-    - php: 7.2
       env: DOCTRINE_VERSION="2.5.*"
     - php: 7.2
       env: DOCTRINE_VERSION="2.6.*"
   allow_failures:
     - env: COMPOSER_FLAGS="--prefer-lowest"
-    - env: DOCTRINE_VERSION="2.2.*"
-    - env: DOCTRINE_VERSION="2.3.*"
-    - env: DOCTRINE_VERSION="2.4.*"
 
 env:
   global:
