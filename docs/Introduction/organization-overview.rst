@@ -114,17 +114,6 @@ JMSSerializerBundleBridge
 
 A small bundle to use the JMSSerializerBridge with Symfony.
 
-SimpleBusBernardBundleBridge
-----------------------------
-.. image:: https://poser.pugx.org/simple-bus/bernard-bundle-bridge/v/stable
-   :target: https://packagist.org/packages/simple-bus/bernard-bundle-bridge
-
-.. image:: https://poser.pugx.org/simple-bus/bernard-bundle-bridge/downloads
-   :target: https://packagist.org/packages/simple-bus/bernard-bundle-bridge
-   :alt: Total Downloads
-
-BernardBundle integration with SimpleBus/AsynchronousBundle.
-
 RabbitMQBundleBridge
 --------------------
 .. image:: https://poser.pugx.org/simple-bus/rabbitmq-bundle-bridge/v/stable
