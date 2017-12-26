@@ -29,6 +29,9 @@ class EventBusConfiguration implements ConfigurationInterface
                 ->arrayNode('logging')
                     ->canBeEnabled()
                 ->end()
+                ->arrayNode('profiler')
+                    ->canBeEnabled()
+                ->end()
             ->end();
 
         return $treeBuilder;

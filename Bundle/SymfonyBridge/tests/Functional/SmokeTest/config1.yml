@@ -40,10 +40,12 @@ services:
 command_bus:
     command_name_resolver_strategy: class_based
     logging: ~
+    profiler: ~
 
 event_bus:
     event_name_resolver_strategy: named_message
     logging: ~
+    profiler: ~
 
 monolog:
     handlers:

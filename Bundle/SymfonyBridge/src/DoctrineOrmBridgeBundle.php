@@ -30,12 +30,14 @@ class DoctrineOrmBridgeBundle extends Bundle
 
         $this->checkProxyManagerBridgeIsPresent();
 
-        $compilerPass = new AddMiddlewareTags(
-            'simple_bus.doctrine_orm_bridge.wraps_next_command_in_transaction',
-            ['command'],
-            100
+        CompilerPassUtil::prependBeforeOptimizationPass(
+            $container,
+            new AddMiddlewareTags(
+                'simple_bus.doctrine_orm_bridge.wraps_next_command_in_transaction',
+                ['command'],
+                100
+            )
         );
-        CompilerPassUtil::prependBeforeOptimizationPass($container, $compilerPass);
     }
 
     private function checkProxyManagerBridgeIsPresent()

@@ -15,13 +15,11 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class TestKernel extends Kernel
 {
-    private $tempDir;
+    private $tempDir = __DIR__ . '/temp';
 
     public function __construct()
     {
         parent::__construct('test', true);
-
-        $this->tempDir = __DIR__ . '/temp';
     }
 
     public function registerBundles()

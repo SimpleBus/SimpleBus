@@ -1,3 +1,6 @@
+parameters:
+    kernel.secret: 'not-so-random-secret'
+
 services:
     annotation_reader:
         class: Doctrine\Common\Annotations\AnnotationReader
@@ -18,3 +21,7 @@ doctrine:
                         prefix: SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest\Entity
                         alias: Test
                         is_bundle: false
+
+framework:
+    profiler:
+        enabled: true

@@ -1,0 +1,9 @@
+services:
+    simple_bus.data_collector:
+        public: false
+        class: SimpleBus\SymfonyBridge\DataCollector\MessageBusDataCollector
+        arguments:
+            - '@?simple_bus.command_bus.profiler.middleware'
+            - '@?simple_bus.event_bus.profiler.middleware'
+        tags:
+            - { name: data_collector, template: 'SimpleBusCommandBusBundle::collector.html.twig', id: 'simple_bus'}

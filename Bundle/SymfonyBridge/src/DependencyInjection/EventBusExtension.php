@@ -30,7 +30,6 @@ class EventBusExtension extends ConfigurableExtension
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-
         $loader->load('event_bus.yml');
 
         $container->setAlias(
@@ -46,6 +45,11 @@ class EventBusExtension extends ConfigurableExtension
                 ->replaceArgument(2, '%simple_bus.event_bus.logging.level%')
                 ->addTag('monolog.logger', ['channel' => 'event_bus'])
             ;
+        }
+
+        if ($mergedConfig['profiler']['enabled']) {
+            $loader->load('profiler.yml');
+            $loader->load('event_bus_profiler.yml');
         }
     }
 }

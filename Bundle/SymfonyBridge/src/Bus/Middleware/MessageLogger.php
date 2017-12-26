@@ -3,21 +3,18 @@
 namespace SimpleBus\SymfonyBridge\Bus\Middleware;
 
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
-use SimpleBus\SymfonyBridge\Logger\MessageLogger as Logger;
+use SimpleBus\SymfonyBridge\DataCollector\LogEntry;
 
 class MessageLogger implements MessageBusMiddleware
 {
     /**
-     * @var array
+     * @var LogEntry[]
      */
-    private $logger;
+    private $messages = [];
 
-    private $busName;
-
-    public function __construct(Logger $messageLogger, $busName)
+    public function getLogs(): array
     {
-        $this->logger = $messageLogger;
-        $this->busName = $busName;
+        return $this->messages;
     }
 
     /**
@@ -25,7 +22,7 @@ class MessageLogger implements MessageBusMiddleware
      */
     public function handle($message, callable $next)
     {
-        $this->logger->logMessage($message, $this->busName);
+        $this->messages[] = new LogEntry($message);
 
         $next($message);
     }

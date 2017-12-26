@@ -6,29 +6,25 @@ use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
 use SimpleBus\SymfonyBridge\DoctrineOrmBridgeBundle;
 use SimpleBus\SymfonyBridge\SimpleBusEventBusBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
+use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
 class TestKernel extends Kernel
 {
-    private $tempDir;
-
-    public function __construct($environment, $debug)
-    {
-        parent::__construct($environment, $debug);
-
-        $this->tempDir = sys_get_temp_dir() . '/simplebus-symfony-bridge';
-    }
+    private $tempDir = __DIR__ . '/temp';
 
     public function registerBundles()
     {
         return array(
             new DoctrineBundle(),
+            new DoctrineOrmBridgeBundle(),
+            new FrameworkBundle(),
+            new MonologBundle(),
             new SimpleBusCommandBusBundle(),
             new SimpleBusEventBusBundle(),
-            new DoctrineOrmBridgeBundle(),
-            new MonologBundle()
         );
     }
 

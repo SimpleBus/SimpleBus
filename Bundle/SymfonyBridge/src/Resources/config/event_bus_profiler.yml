@@ -1,0 +1,6 @@
+services:
+    simple_bus.event_bus.profiler.middleware:
+        class: SimpleBus\SymfonyBridge\Bus\Middleware\MessageLogger
+        public: false
+        tags:
+            - { name: event_bus_middleware, priority: -888 }

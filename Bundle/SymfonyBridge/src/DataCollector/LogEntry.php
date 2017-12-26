@@ -1,28 +1,28 @@
 <?php
 
-namespace SimpleBus\SymfonyBridge\Logger;
+namespace SimpleBus\SymfonyBridge\DataCollector;
 
 class LogEntry
 {
+    /**
+     * @var object
+     */
     private $message;
-    private $busName;
+
+    /**
+     * @var \DateTimeImmutable
+     */
     private $timestamp;
 
-    public function __construct($message, $busName)
+    public function __construct($message)
     {
         $this->message = $message;
-        $this->busName = $busName;
-        $this->timestamp = microtime(true);
+        $this->timestamp = new \DateTimeImmutable('now');
     }
 
     public function getMessage()
     {
         return $this->message;
-    }
-
-    public function getBusName()
-    {
-        return $this->busName;
     }
 
     public function getTimestamp()

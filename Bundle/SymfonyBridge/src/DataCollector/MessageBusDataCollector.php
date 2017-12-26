@@ -3,72 +3,87 @@
 namespace SimpleBus\SymfonyBridge\DataCollector;
 
 use SimpleBus\Message\Name\NamedMessage;
-use SimpleBus\SymfonyBridge\Logger\MessageLogger;
-use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
-use SimpleBus\SymfonyBridge\Bus\BusRegistry;
-use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use SimpleBus\SymfonyBridge\Bus\Middleware\MessageLogger;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 class MessageBusDataCollector extends DataCollector
 {
-    private $logger;
-    private $busRegistry;
+    /**
+     * @var MessageLogger
+     */
+    private $commandLogger;
 
-    public function __construct(MessageLogger $logger, BusRegistry $busRegistry)
+    /**
+     * @var MessageLogger
+     */
+    private $eventLogger;
+
+    public function __construct(MessageLogger $commandLogger = null, MessageLogger $eventLogger = null)
     {
-        $this->logger = $logger;
-        $this->busRegistry = $busRegistry;
+        $this->commandLogger = $commandLogger;
+        $this->eventLogger = $eventLogger;
     }
 
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $messages = array_map(function($logEntry) {
-            $message = $logEntry->getMessage();
-
-            return [
-                'bus' => $logEntry->getBusName(),
-                'messageClass' => $message instanceOf NamedMessage ? $message->messageName() : get_class($message),
-                'timestamp' => $logEntry->getTimestamp()
-            ];
-        }, $this->logger->getLogs());
-
-        $buses = [];
-        foreach ($this->busRegistry->all() as $name => $bus) {
-            $busData = [
-                'name' => $name
-            ];
-
-            if ($bus instanceof MessageBusSupportingMiddleware) {
-                $busData['middlewares'] = array_map('get_class', $bus->getMiddlewares());
-            }
-
-            $buses[] = $busData;
-        }
-
-        $this->data = array(
-            'messages' => $messages,
-            'buses' => $buses,
-        );
-    }
-
-    public function getMessages()
-    {
-        return $this->data['messages'];
-    }
-
-    public function getBuses()
-    {
-        return $this->data['buses'];
-    }
-
-    public function getTotalNumMessages()
-    {
-        return count($this->data['messages']);
+        $this->data = [
+            'commands' => $this->getMessageInfo($this->commandLogger ? $this->commandLogger->getLogs() : []),
+            'events' => $this->getMessageInfo($this->eventLogger ? $this->eventLogger->getLogs() : []),
+        ];
     }
 
     public function getName()
     {
         return 'simple_bus';
+    }
+
+    public function reset()
+    {
+        $this->data = [
+            'commands' => [],
+            'events' => [],
+        ];
+    }
+
+    public function hasItems(): bool
+    {
+        if (count($this->getCommands()) > 0) {
+            return true;
+        }
+
+        if (count($this->getEvents()) > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getCommands(): array
+    {
+        return $this->data['commands'];
+    }
+
+    public function getEvents(): array
+    {
+        return $this->data['events'];
+    }
+
+    /**
+     * @param LogEntry[] $logEntries
+     *
+     * @return array
+     */
+    private function getMessageInfo(array $logEntries): array
+    {
+        return array_map(function(LogEntry $logEntry) {
+            $message = $logEntry->getMessage();
+
+            return [
+                'messageClass' => $message instanceOf NamedMessage ? $message->messageName() : get_class($message),
+                'timestamp' => $logEntry->getTimestamp(),
+            ];
+        }, $logEntries);
     }
 }

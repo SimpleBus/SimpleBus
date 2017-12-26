@@ -1,5 +1,5 @@
-vendor/
-phpunit.xml
-.couscous/
-composer.lock
 /build/
+/composer.lock
+/coverage.xml
+/phpunit.xml
+/vendor/
