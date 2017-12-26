@@ -2,7 +2,11 @@
     "name": "simple-bus/doctrine-orm-bridge",
     "type": "library",
     "description": "Doctrine ORM bridge for using command and event buses",
-    "keywords": ["Doctrine", "event bus", "command bus"],
+    "keywords": [
+        "Doctrine",
+        "event bus",
+        "command bus"
+    ],
     "homepage": "http://github.com/SimpleBus/DoctrineORMBridge",
     "license": "MIT",
     "authors": [
@@ -18,8 +22,12 @@
     ],
     "require": {
         "php": "^7.1",
-        "simple-bus/message-bus": "~3.0",
-        "doctrine/orm": "~2.2"
+        "doctrine/orm": "~2.2",
+        "simple-bus/message-bus": "~3.0"
+    },
+    "require-dev": {
+        "matthiasnoback/doctrine-orm-test-service-provider": "~3.0",
+        "phpunit/phpunit": "^5.7 || ^6.0"
     },
     "suggest": {
         "simple-bus/symfony-bridge": "Bridge for using command buses and event buses with Symfony"
@@ -34,8 +42,7 @@
             "SimpleBus\\DoctrineORMBridge\\Tests\\": "tests"
         }
     },
-    "require-dev": {
-        "matthiasnoback/doctrine-orm-test-service-provider": "~2.0",
-        "phpunit/phpunit": "^5.7 || ^6.0"
+    "config": {
+        "sort-packages": true
     }
 }

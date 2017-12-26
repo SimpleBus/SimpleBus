@@ -1,11 +1,20 @@
+sudo: false
+
 language: php
 
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
 matrix:
+  fast_finish: true
   include:
     - php: 7.1
     - php: 7.2
     - php: 7.2
       env: COMPOSER_FLAGS="--prefer-lowest"
+
+    # Test Doctrine versions
     - php: 7.2
       env: DOCTRINE_VERSION="2.2.*"
     - php: 7.2
@@ -16,18 +25,24 @@ matrix:
       env: DOCTRINE_VERSION="2.5.*"
     - php: 7.2
       env: DOCTRINE_VERSION="2.6.*"
+  allow_failures:
+    - env: COMPOSER_FLAGS="--prefer-lowest"
+    - env: DOCTRINE_VERSION="2.2.*"
+    - env: DOCTRINE_VERSION="2.3.*"
+    - env: DOCTRINE_VERSION="2.4.*"
 
 env:
   global:
+    - COMPOSER_FLAGS=""
     - DOCTRINE_VERSION=""
-    - COMPOSER_FLAGS="--prefer-dist"
+    - EXTRA_PHPUNIT_PARAMS=""
 
-before_script:
+before_install:
   - composer self-update
   - if [ "$DOCTRINE_VERSION" != "" ]; then composer require --no-update doctrine/dbal:$DOCTRINE_VERSION ; fi
 
 install:
-  - composer update $COMPOSER_FLAGS
+  - composer update --prefer-dist $COMPOSER_FLAGS
 
 script:
-  - vendor/bin/phpunit
+  - ./vendor/bin/phpunit $EXTRA_PHPUNIT_PARAMS

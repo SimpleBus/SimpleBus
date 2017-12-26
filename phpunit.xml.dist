@@ -25,7 +25,7 @@
 
     <groups>
         <exclude>
-            <group>BernardBundleBridge</group>
+            <group>BernardBundleBridge-functional</group>
             <group>SymfonyBridgeProxyManagerDependency</group>
         </exclude>
     </groups>
@@ -37,6 +37,9 @@
                 <directory>./Bridge/*/tests/</directory>
                 <directory>./Bundle/*/tests/</directory>
                 <directory>./Component/*/tests/</directory>
+                <directory>./docs/</directory>
+                <directory>./tests/</directory>
+                <directory>./vendor/</directory>
             </exclude>
         </whitelist>
     </filter>

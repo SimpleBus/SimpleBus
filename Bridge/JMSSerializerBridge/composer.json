@@ -2,7 +2,11 @@
     "name": "simple-bus/jms-serializer-bridge",
     "type": "library",
     "description": "Bridge for using JMSSerializer as message serializer for SimpleBus/Asynchronous",
-    "keywords": ["asynchronous", "message", "serialization"],
+    "keywords": [
+        "asynchronous",
+        "message",
+        "serialization"
+    ],
     "homepage": "http://github.com/SimpleBus/JMSSerializerBridge",
     "license": "MIT",
     "authors": [
@@ -18,8 +22,8 @@
     ],
     "require": {
         "php": "^7.1",
-        "simple-bus/serialization": "~3.0",
-        "jms/serializer": "~0.12 || ~1.0"
+        "jms/serializer": "~0.12 || ~1.0",
+        "simple-bus/serialization": "~3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7 || ^6.0",
@@ -34,5 +38,8 @@
         "psr-4": {
             "SimpleBus\\JMSSerializerBridge\\Tests\\": "tests"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }

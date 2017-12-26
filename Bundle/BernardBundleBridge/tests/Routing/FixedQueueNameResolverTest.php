@@ -6,9 +6,6 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\BernardBundleBridge\Routing\FixedQueueNameResolver;
 use stdClass;
 
-/**
- * @group BernardBundleBridge
- */
 class FixedQueueNameResolverTest extends TestCase
 {
     /**

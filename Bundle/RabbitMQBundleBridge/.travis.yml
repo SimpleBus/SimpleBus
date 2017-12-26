@@ -5,11 +5,19 @@ language: php
 services:
   - rabbitmq
 
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
 matrix:
+  fast_finish: true
   include:
     - php: 7.1
     - php: 7.2
+    - php: 7.2
       env: COMPOSER_FLAGS="--prefer-lowest"
+
+    # Test Symfony versions
     - php: 7.2
       env: SYMFONY_VERSION=2.7.*
     - php: 7.2
@@ -20,19 +28,21 @@ matrix:
       env: SYMFONY_VERSION=3.4.*
     - php: 7.2
       env: SYMFONY_VERSION=4.0.*
+  allow_failures:
+    - env: COMPOSER_FLAGS="--prefer-lowest"
 
 env:
   global:
+    - COMPOSER_FLAGS=""
+    - EXTRA_PHPUNIT_PARAMS=""
     - SYMFONY_VERSION=""
-    - COMPOSER_FLAGS="--prefer-dist"
 
 before_install:
   - composer self-update
   - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/console:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/translation:$SYMFONY_VERSION; fi
 
 install:
-  - composer update $COMPOSER_FLAGS
+  - composer update --prefer-dist $COMPOSER_FLAGS
 
 script:
-  - vendor/bin/phpunit
-
+  - ./vendor/bin/phpunit $EXTRA_PHPUNIT_PARAMS

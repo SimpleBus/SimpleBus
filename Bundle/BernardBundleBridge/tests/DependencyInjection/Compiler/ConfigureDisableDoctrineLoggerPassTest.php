@@ -6,9 +6,6 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase
 use SimpleBus\BernardBundleBridge\DependencyInjection\Compiler\ConfigureDisableDoctrineLoggerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-/**
- * @group BernardBundleBridge
- */
 class ConfigureDisableDoctrineLoggerPassTest extends AbstractCompilerPassTestCase
 {
     protected function registerCompilerPass(ContainerBuilder $container)

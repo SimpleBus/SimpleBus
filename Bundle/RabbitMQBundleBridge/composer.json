@@ -2,7 +2,13 @@
     "name": "simple-bus/rabbitmq-bundle-bridge",
     "type": "symfony-bundle",
     "description": "Use OldSoundRabbitMQBundle with SimpleBus/AsynchronousBundle",
-    "keywords": ["RabbitMQ", "messages", "message bus", "event bus", "command bus"],
+    "keywords": [
+        "RabbitMQ",
+        "messages",
+        "message bus",
+        "event bus",
+        "command bus"
+    ],
     "homepage": "http://github.com/SimpleBus/RabbitMQBundleBridge",
     "license": "MIT",
     "authors": [
@@ -19,10 +25,10 @@
     "require": {
         "php": "^7.1",
         "beberlei/assert": "~2.0",
-        "simple-bus/message-bus": "~3.0",
-        "simple-bus/asynchronous-bundle": "~3.0",
-        "simple-bus/asynchronous": "~3.0",
         "php-amqplib/rabbitmq-bundle": "~1.10",
+        "simple-bus/asynchronous": "~3.0",
+        "simple-bus/asynchronous-bundle": "~3.0",
+        "simple-bus/message-bus": "~3.0",
         "symfony/monolog-bundle": "~2.3 || ~3.0"
     },
     "require-dev": {
@@ -43,5 +49,8 @@
         "psr-4": {
             "SimpleBus\\RabbitMQBundleBridge\\Tests\\": "tests"
         }
+    },
+    "config": {
+        "sort-packages": true
     }
 }
