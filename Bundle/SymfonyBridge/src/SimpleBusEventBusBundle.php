@@ -4,7 +4,6 @@ namespace SimpleBus\SymfonyBridge;
 
 use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\AddMiddlewareTags;
 use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\AutoRegister;
-use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\CompilerPassUtil;
 use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\ConfigureMiddlewares;
 use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\RegisterMessageRecorders;
 use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\RegisterSubscribers;
@@ -56,13 +55,14 @@ class SimpleBusEventBusBundle extends Bundle
             )
         );
 
-        CompilerPassUtil::prependBeforeOptimizationPass(
-            $container,
+        $container->addCompilerPass(
             new AddMiddlewareTags(
                 'simple_bus.event_bus.handles_recorded_messages_middleware',
                 ['command'],
                 200
-            )
+            ),
+            PassConfig::TYPE_BEFORE_OPTIMIZATION,
+            150
         );
 
         // @TODO Fix unit tests
