@@ -129,6 +129,98 @@ This strategy is useful when you know what messages you want to publish.
 
     $eventBus->handle($event);
 
+Strategy 4: Publish messages by a given condition
+............................................
+
+This strategy is useful when you want to publish messages with different conditions.
+It can be:
+    - Publish `OrderCreatedMessage` only if order amount more than 100 $.
+    - Publish all messages with interface `AsyncMessage`
+    - Publish messages with interface `CanBeAsync` (which has method `isAsync`) and if `isAsync` returns `true`
+
+Let's try to make this scenarios:
+
+1.
+.. code-block::  php
+
+    use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
+    use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
+    use SimpleBus\Asynchronous\Publisher\Publisher;
+    use SimpleBus\Message\Message;
+    use SimpleBus\Message\Name\MessageNameResolver;
+
+    // $eventBus is an instance of MessageBusSupportingMiddleware
+    $eventBus = ...;
+
+    // $publisher is an instance of Publisher
+    $publisher = ...;
+
+    // condition to check order amount
+    $condition = function ($message) {
+        return $message instanceof OrderCreatedMessage && $message->order->amountInDollars() > 100;
+    };
+
+    $eventBus->appendMiddleware(new PublishesConditionalMessages($publisher, $condition));
+
+    // $event is an object
+    $event = ...;
+
+    $eventBus->handle($event);
+
+2.
+.. code-block::  php
+
+    use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
+    use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
+    use SimpleBus\Asynchronous\Publisher\Publisher;
+    use SimpleBus\Message\Message;
+    use SimpleBus\Message\Name\MessageNameResolver;
+
+    // $eventBus is an instance of MessageBusSupportingMiddleware
+    $eventBus = ...;
+
+    // $publisher is an instance of Publisher
+    $publisher = ...;
+
+    // condition to check `AsyncMessage` interface
+    $condition = function ($message) {
+        return $message instanceof AsyncMessage;
+    };
+
+    $eventBus->appendMiddleware(new PublishesConditionalMessages($publisher, $condition));
+
+    // $event is an object
+    $event = ...;
+
+    $eventBus->handle($event);
+
+3.
+.. code-block::  php
+
+    use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
+    use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
+    use SimpleBus\Asynchronous\Publisher\Publisher;
+    use SimpleBus\Message\Message;
+    use SimpleBus\Message\Name\MessageNameResolver;
+
+    // $eventBus is an instance of MessageBusSupportingMiddleware
+    $eventBus = ...;
+
+    // $publisher is an instance of Publisher
+    $publisher = ...;
+
+    // condition to check `isAsync` message
+    $condition = function ($message) {
+        return $message instanceof CanBeAsync && $message->isAsync();
+    };
+
+    $eventBus->appendMiddleware(new PublishesConditionalMessages($publisher, $condition));
+
+    // $event is an object
+    $event = ...;
+
+    $eventBus->handle($event);
+
 Consuming messages
 ------------------
 
