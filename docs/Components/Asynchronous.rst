@@ -134,9 +134,10 @@ Strategy 4: Publish messages by a given condition
 
 This strategy is useful when you want to publish messages with different conditions.
 It can be:
-    - Publish `OrderCreatedMessage` only if order amount more than 100 $.
+    - Publish `CompressMessage` only if attachment more than 10 MB.
     - Publish all messages with interface `AsyncMessage`
     - Publish messages with interface `CanBeAsync` (which has method `isAsync`) and if `isAsync` returns `true`
+    - etc.
 
 Let's try to make this scenarios:
 
@@ -155,9 +156,10 @@ Let's try to make this scenarios:
     // $publisher is an instance of Publisher
     $publisher = ...;
 
-    // condition to check order amount
-    $condition = function ($message) {
-        return $message instanceof OrderCreatedMessage && $message->order->amountInDollars() > 100;
+    // condition to check message attachment size
+    $limit = 10;
+    $condition = function ($message) use ($limit) {
+        return $message instanceof CompressMessage && $message->attachment->sizeInMegabytes() >= $limit;
     };
 
     $eventBus->appendMiddleware(new PublishesConditionalMessages($publisher, $condition));
