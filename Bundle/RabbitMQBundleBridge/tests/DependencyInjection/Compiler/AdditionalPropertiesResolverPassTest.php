@@ -24,13 +24,13 @@ class AdditionalPropertiesResolverPassTest extends TestCase
     {
         $this->container = new ContainerBuilder();
         $this->delegatingDefinition = new Definition('stdClass', array(array()));
+        $this->delegatingDefinition->setPublic(true);
         $this->container->setDefinition('simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver', $this->delegatingDefinition);
         $this->container->addCompilerPass(new AdditionalPropertiesResolverPass());
     }
 
     /**
      * @test
-     * @group test
      */
     public function it_configures_a_chain_of_buses_according_to_the_given_priorities()
     {

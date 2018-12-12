@@ -29,7 +29,11 @@ matrix:
     - php: 7.2
       env: SYMFONY_VERSION=4.0.*
     - php: 7.2
-      env: SYMFONY_VERSION=4.0.* REMOVE_PROXY_BRIDGE="yes" EXTRA_PHPUNIT_PARAMS="--group SymfonyBridgeProxyManagerDependency"
+      env: SYMFONY_VERSION=4.1.*
+    - php: 7.2
+      env: SYMFONY_VERSION=4.2.*
+    - php: 7.2
+      env: SYMFONY_VERSION=4.2.* REMOVE_PROXY_BRIDGE="yes" EXTRA_PHPUNIT_PARAMS="--group SymfonyBridgeProxyManagerDependency"
 
     # Test Doctrine versions
     - php: 7.2
@@ -50,7 +54,7 @@ env:
 before_install:
   - composer self-update
   - if [ "$DOCTRINE_VERSION" != "" ]; then composer require --no-update doctrine/dbal:$DOCTRINE_VERSION doctrine/orm:$DOCTRINE_VERSION ; fi
-  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/config:$SYMFONY_VERSION symfony/console:$SYMFONY_VERSION symfony/dependency-injection:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION symfony/framework-bundle:$SYMFONY_VERSION symfony/http-kernel:$SYMFONY_VERSION symfony/monolog-bridge:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/proxy-manager-bridge:$SYMFONY_VERSION symfony/yaml:$SYMFONY_VERSION ; fi
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/config:$SYMFONY_VERSION symfony/console:$SYMFONY_VERSION symfony/dependency-injection:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION symfony/framework-bundle:$SYMFONY_VERSION symfony/http-kernel:$SYMFONY_VERSION symfony/monolog-bridge:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/proxy-manager-bridge:$SYMFONY_VERSION symfony/yaml:$SYMFONY_VERSION symfony/routing:$SYMFONY_VERSION ; fi
 
 install:
   - composer update --prefer-dist $COMPOSER_FLAGS
