@@ -11,13 +11,14 @@ matrix:
   include:
     - php: 7.1
     - php: 7.2
-    - php: 7.2
+    - php: 7.3
+    - php: 7.3
       env: COMPOSER_FLAGS="--prefer-lowest"
 
     # Test Doctrine versions
-    - php: 7.2
+    - php: 7.3
       env: DOCTRINE_VERSION="2.5.*"
-    - php: 7.2
+    - php: 7.3
       env: DOCTRINE_VERSION="2.6.*"
   allow_failures:
     - env: COMPOSER_FLAGS="--prefer-lowest"
