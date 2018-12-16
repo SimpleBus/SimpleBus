@@ -26,7 +26,7 @@
         "doctrine/orm": "~2.5",
         "jms/serializer-bundle": "~0.11 || ~1.0 || ~2.0 || ~3.0",
         "matthiasnoback/doctrine-orm-test-service-provider": "~3.0",
-        "matthiasnoback/phpunit-asynchronicity": "~1.0",
+        "matthiasnoback/phpunit-asynchronicity": "~1.0 || ~2.0",
         "matthiasnoback/symfony-dependency-injection-test": "~1.2 || ~2.0",
         "php-amqplib/rabbitmq-bundle": "~1.10",
         "phpunit/phpunit": "^5.7 || ^6.0",
