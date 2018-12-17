@@ -7,6 +7,10 @@ use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Process\Process;
 
+if (!class_exists(\PHPUnit_Framework_Constraint::class)) {
+    class_alias(\PHPUnit\Framework\Constraint\Constraint::class, 'PHPUnit_Framework_Constraint');
+}
+
 class SimpleBusRabbitMQBundleTest extends KernelTestCase
 {
     /**
