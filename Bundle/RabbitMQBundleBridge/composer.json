@@ -24,7 +24,7 @@
     ],
     "require": {
         "php": "^7.1",
-        "beberlei/assert": "~2.0",
+        "beberlei/assert": "~2.0 || ~3.0",
         "php-amqplib/rabbitmq-bundle": "~1.10",
         "simple-bus/asynchronous": "~3.0",
         "simple-bus/asynchronous-bundle": "~3.0",
