@@ -172,21 +172,25 @@ in ``config.yml``:
 
     # app/config/config.yml
     command_bus:
-        logging: ~
+        middlewares:
+            logger: true
 
-Messages will be logged to the ``command_bus`` channel.
+Messages will be logged to the ``command_bus`` channel with ``%simple_bus.command_bus.logging.level%`` (defaults to ``debug``) level.
 
 Nested commands execution
 -------------------------
 
-By default while calling ``$commandBus->handle($command)`` nested in other ``handle`` invokation
-your command would be delayed and pushed to the in-memory command queue in ``SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext`` middleware.
-If you wan't to utilize explicit command nesting you can set the ``unnest_commands`` option to ``false``
+By default while calling ``$commandBus->handle($command)`` nested
+in other ``handle`` invocation your command would be delayed and
+pushed to the in-memory command queue in
+``SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext``
+middleware. If you wan't to utilize explicit command nesting you
+can disable it in ``config.yml``:
 
 .. code-block::  yaml
 
     # app/config/config.yml
     command_bus:
-        unnest_commands: false
+        middlewares:
+            finishes_command_before_handling_next: false
 
-This will prevent this middleware from registration and make your commands handling synchronously nested
