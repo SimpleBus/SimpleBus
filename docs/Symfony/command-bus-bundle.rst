@@ -180,12 +180,11 @@ Messages will be logged to the ``command_bus`` channel with ``%simple_bus.comman
 Nested commands execution
 -------------------------
 
-By default while calling ``$commandBus->handle($command)`` nested
-in other ``handle`` invocation your command would be delayed and
-pushed to the in-memory command queue in
+By default, calls to ``$commandBus->handle($command)`` will not be executed sequentially. Instead, the ``$command`` will be pushed to a in-memory queue in the
 ``SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext``
-middleware. If you wan't to utilize explicit command nesting you
-can disable it in ``config.yml``:
+middleware. Once the handler that triggered the command is finished, the in-memory queue will be processed.
+
+If you don't like this behaviour you can disable it in ``config.yml``:
 
 .. code-block::  yaml
 
