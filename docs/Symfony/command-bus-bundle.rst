@@ -172,6 +172,24 @@ in ``config.yml``:
 
     # app/config/config.yml
     command_bus:
-        logging: ~
+        middlewares:
+            logger: true
 
-Messages will be logged to the ``command_bus`` channel.
+Messages will be logged to the ``command_bus`` channel with ``%simple_bus.command_bus.logging.level%`` (defaults to ``debug``) level.
+
+Nested commands execution
+-------------------------
+
+By default, calls to ``$commandBus->handle($command)`` will not be executed sequentially. Instead, the ``$command`` will be pushed to a in-memory queue in the
+``SimpleBus\Message\Bus\Middleware\FinishesHandlingMessageBeforeHandlingNext``
+middleware. Once the handler that triggered the command is finished, the in-memory queue will be processed.
+
+If you don't like this behaviour you can disable it in ``config.yml``:
+
+.. code-block::  yaml
+
+    # app/config/config.yml
+    command_bus:
+        middlewares:
+            finishes_command_before_handling_next: false
+

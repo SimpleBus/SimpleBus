@@ -2,10 +2,10 @@
 
 namespace SimpleBus\SymfonyBridge\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class CommandBusExtension extends ConfigurableExtension
 {
@@ -31,6 +31,7 @@ class CommandBusExtension extends ConfigurableExtension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('command_bus.yml');
+        $loader->load('command_bus_logging.yml');
 
         $container->setAlias(
             'simple_bus.command_bus.command_name_resolver',
@@ -38,7 +39,23 @@ class CommandBusExtension extends ConfigurableExtension
         );
 
         if ($mergedConfig['logging']['enabled']) {
-            $loader->load('command_bus_logging.yml');
+            trigger_error(
+                'Option "command_bus.logging" is deprecated. Configure "command_bus.middlewares.logger" instead.',
+                E_USER_DEPRECATED
+            );
+
+            $mergedConfig['middlewares']['logger'] = true;
+        }
+
+        if ($mergedConfig['middlewares']['logger']) {
+            $container->getDefinition('simple_bus.command_bus.logging_middleware')
+                ->addTag('command_bus_middleware', ['priority' => -999])
+                ->addTag('monolog.logger', ['channel' => 'command_bus']);
+        }
+
+        if ($mergedConfig['middlewares']['finishes_command_before_handling_next']) {
+            $container->getDefinition('simple_bus.command_bus.finishes_command_before_handling_next_middleware')
+                ->addTag('command_bus_middleware', ['priority' => 1000]);
         }
     }
 }
