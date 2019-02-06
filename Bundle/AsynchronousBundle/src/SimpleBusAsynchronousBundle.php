@@ -32,6 +32,7 @@ class SimpleBusAsynchronousBundle extends Bundle
         $container->addCompilerPass(
             new RegisterHandlers(
                 'simple_bus.asynchronous.command_bus.command_handler_map',
+                'simple_bus.asynchronous.command_bus.command_handler_service_locator',
                 'asynchronous_command_handler',
                 'handles'
             )
@@ -48,6 +49,7 @@ class SimpleBusAsynchronousBundle extends Bundle
         $container->addCompilerPass(
             new RegisterSubscribers(
                 'simple_bus.asynchronous.event_bus.event_subscribers_collection',
+                'simple_bus.asynchronous.event_bus.event_subscribers_service_locator',
                 'asynchronous_event_subscriber',
                 'subscribes_to'
             )
