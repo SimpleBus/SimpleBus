@@ -19,8 +19,6 @@ matrix:
       env: COMPOSER_FLAGS="--prefer-lowest"
 
     # Test Symfony versions
-    - php: 7.2
-      env: SYMFONY_VERSION=2.8.*
     - php: 7.3
       env: SYMFONY_VERSION=3.4.*
     - php: 7.3

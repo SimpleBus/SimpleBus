@@ -28,7 +28,7 @@
         "simple-bus/asynchronous": "~3.0",
         "simple-bus/message-bus": "~3.0",
         "simple-bus/symfony-bridge": "~5.0",
-        "symfony/framework-bundle": "~2.7 || ~3.3 || ~4.0"
+        "symfony/framework-bundle": "~3.3 || ~4.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "~1.2 || ~2.0",
