@@ -29,26 +29,18 @@ matrix:
       env: SYMFONY_VERSION=4.2.*
     - php: 7.3
       env: SYMFONY_VERSION=4.2.* REMOVE_PROXY_BRIDGE="yes" EXTRA_PHPUNIT_PARAMS="--group SymfonyBridgeProxyManagerDependency"
-
-    # Test Doctrine versions
-    - php: 7.2
-      env: DOCTRINE_VERSION="2.5.*"
-    - php: 7.3
-      env: DOCTRINE_VERSION="2.6.*"
   allow_failures:
     - env: COMPOSER_FLAGS="--prefer-lowest"
 
 env:
   global:
     - COMPOSER_FLAGS=""
-    - DOCTRINE_VERSION=""
     - EXTRA_PHPUNIT_PARAMS=""
     - REMOVE_PROXY_BRIDGE="no"
     - SYMFONY_VERSION=""
 
 before_install:
   - composer self-update
-  - if [ "$DOCTRINE_VERSION" != "" ]; then composer require --no-update doctrine/dbal:$DOCTRINE_VERSION doctrine/orm:$DOCTRINE_VERSION ; fi
   - if [ "$SYMFONY_VERSION" != "" ]; then composer require --no-update symfony/config:$SYMFONY_VERSION symfony/console:$SYMFONY_VERSION symfony/dependency-injection:$SYMFONY_VERSION symfony/finder:$SYMFONY_VERSION symfony/framework-bundle:$SYMFONY_VERSION symfony/http-kernel:$SYMFONY_VERSION symfony/monolog-bridge:$SYMFONY_VERSION symfony/process:$SYMFONY_VERSION symfony/proxy-manager-bridge:$SYMFONY_VERSION symfony/yaml:$SYMFONY_VERSION symfony/routing:$SYMFONY_VERSION ; fi
 
 install:
