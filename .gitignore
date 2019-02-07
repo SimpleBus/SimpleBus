@@ -1,3 +1,4 @@
 /vendor
 /composer.lock
 /phpunit.xml
+/split/git-subsplit
