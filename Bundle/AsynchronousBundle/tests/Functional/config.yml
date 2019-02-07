@@ -13,21 +13,31 @@ services:
         public: true
         class: SimpleBus\AsynchronousBundle\Tests\Functional\PublisherSpy
 
-    synchronous_event_subscriber_spy:
+    spy:
         public: true
-        class: SimpleBus\AsynchronousBundle\Tests\Functional\EventSubscriberSpy
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\Spy
+
+    synchronous_event_subscriber:
+        public: false
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\EventSubscriber
+        arguments:
+            - '@spy'
         tags:
             - { name: event_subscriber, subscribes_to: SimpleBus\AsynchronousBundle\Tests\Functional\DummyEvent }
 
-    asynchronous_event_subscriber_spy:
-        public: true
-        class: SimpleBus\AsynchronousBundle\Tests\Functional\EventSubscriberSpy
+    asynchronous_event_subscriber:
+        public: false
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\EventSubscriber
+        arguments:
+            - '@spy'
         tags:
             - { name: asynchronous_event_subscriber, subscribes_to: SimpleBus\AsynchronousBundle\Tests\Functional\DummyEvent }
 
-    asynchronous_command_handler_spy:
-        public: true
-        class: SimpleBus\AsynchronousBundle\Tests\Functional\CommandHandlerSpy
+    asynchronous_command_handler:
+        public: false
+        class: SimpleBus\AsynchronousBundle\Tests\Functional\CommandHandler
+        arguments:
+            - '@spy'
         tags:
             - { name: asynchronous_command_handler, handles: SimpleBus\AsynchronousBundle\Tests\Functional\DummyCommand }
 
