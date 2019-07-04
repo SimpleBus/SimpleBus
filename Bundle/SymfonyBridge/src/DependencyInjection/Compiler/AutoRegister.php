@@ -54,7 +54,7 @@ final class AutoRegister implements CompilerPassInterface
                     $parameters = $method->getParameters();
 
                     // if no param, optional param or non-class param, skip
-                    if (count($parameters) !== 1 || $parameters[0]->isOptional() || is_null($parameters[0]->getClass())) {
+                    if (count($parameters) !== 1 || $parameters[0]->isOptional() || $parameters[0]->getClass() === null) {
                         continue;
                     }
 
