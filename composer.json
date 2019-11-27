@@ -35,16 +35,16 @@
         "php-amqplib/rabbitmq-bundle": "~1.10",
         "phpunit/phpunit": "^5.7 || ^6.0",
         "psr/log": "~1.0",
-        "symfony/config": "~3.3 || ~4.0",
-        "symfony/console": "~3.3 || ~4.0",
-        "symfony/dependency-injection": "~3.3 || ~4.0",
-        "symfony/finder": "~3.3 || ~4.0",
-        "symfony/framework-bundle": "~3.3 || ~4.0",
-        "symfony/http-kernel": "~3.3 || ~4.0",
+        "symfony/config": "~3.3 || ~4.0 || ~5.0",
+        "symfony/console": "~3.3 || ~4.0 || ~5.0",
+        "symfony/dependency-injection": "~3.3 || ~4.0 || ~5.0",
+        "symfony/finder": "~3.3 || ~4.0 || ~5.0",
+        "symfony/framework-bundle": "~3.3 || ~4.0 || ~5.0",
+        "symfony/http-kernel": "~3.3 || ~4.0 || ~5.0",
         "symfony/monolog-bundle": "~2.3 || ~3.0",
-        "symfony/process": "~3.3 || ~4.0",
-        "symfony/proxy-manager-bridge": "~3.3 || ~4.0",
-        "symfony/yaml": "~3.3 || ~4.0"
+        "symfony/process": "~3.3 || ~4.0 || ~5.0",
+        "symfony/proxy-manager-bridge": "~3.3 || ~4.0 || ~5.0",
+        "symfony/yaml": "~3.3 || ~4.0 || ~5.0"
     },
     "autoload": {
         "psr-4": {
