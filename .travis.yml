@@ -22,19 +22,19 @@ matrix:
     - php: 7.3
       env: SYMFONY_VERSION=3.4.*
     - php: 7.3
-      env: SYMFONY_VERSION=4.0.*
+      env: SYMFONY_VERSION=4.3.*
     - php: 7.3
-      env: SYMFONY_VERSION=4.1.*
+      env: SYMFONY_VERSION=4.4.*
     - php: 7.3
-      env: SYMFONY_VERSION=4.2.*
-    - php: 7.3
-      env: SYMFONY_VERSION=4.2.* REMOVE_PROXY_BRIDGE="yes" EXTRA_PHPUNIT_PARAMS="--group SymfonyBridgeProxyManagerDependency"
+      env: SYMFONY_VERSION=5.0.* REMOVE_PROXY_BRIDGE="yes" EXTRA_PHPUNIT_PARAMS="--group SymfonyBridgeProxyManagerDependency"
 
     # Test Doctrine versions
     - php: 7.2
       env: DOCTRINE_VERSION="2.5.*"
     - php: 7.3
       env: DOCTRINE_VERSION="2.6.*"
+    - php: 7.3
+      env: DOCTRINE_VERSION="2.7.*"
   allow_failures:
     - env: COMPOSER_FLAGS="--prefer-lowest"
 
