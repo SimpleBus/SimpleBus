@@ -25,7 +25,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.3",
         "doctrine/orm": "~2.5",
         "simple-bus/message-bus": "~3.0"
     },

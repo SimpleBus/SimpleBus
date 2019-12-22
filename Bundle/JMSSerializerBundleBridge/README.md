@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/SimpleBus/JMSSerializerBundleBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/JMSSerializerBundleBridge)
 
-By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
+By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/), Cliff Odijk, Ruud Kamphuis
 
 This library contains a Symfony bundle which configures the `ObjectSerializer` from
 [SimpleBus/JMSSerializerBridge](https://github.com/SimpleBus/JMSSerializerBridge) as the default object serializer for

@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/SimpleBus/RabbitMQBundleBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/RabbitMQBundleBridge)
 
-By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
+By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/), Cliff Odijk, Ruud Kamphuis
 
 The `SimpleBusRabbitMQBundleBridgeBundle` allows you to publish and consume SimpleBus messages using the
 [RabbitMQBundle](https://github.com/php-amqplib/RabbitMqBundle).
