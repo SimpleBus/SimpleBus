@@ -32,7 +32,6 @@ matrix:
 env:
   global:
     - COMPOSER_FLAGS=""
-    - DOCTRINE_VERSION=""
     - EXTRA_PHPUNIT_PARAMS=""
     - REMOVE_PROXY_BRIDGE="no"
     - SYMFONY_VERSION=""
