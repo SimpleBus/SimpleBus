@@ -25,7 +25,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.3",
         "jms/serializer": "~0.12 || ~1.0 || ~2.0 || ~3.0",
         "simple-bus/serialization": "~3.0"
     },
