@@ -13,7 +13,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         return 'SimpleBus\AsynchronousBundle\Tests\Functional\TestKernel';
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 

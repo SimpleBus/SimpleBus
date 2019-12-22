@@ -28,7 +28,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
         return array(__DIR__.'/Fixtures/Entity');
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -44,7 +44,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
         $entity = new EventRecordingEntity();
 
         $this->persistAndFlush($entity);
-        $this->assertContains( new EntityCreated(), $this->eventSubscriber->recordedMessages(), '', false, false );
+        $this->assertContainsEquals(new EntityCreated(), $this->eventSubscriber->recordedMessages());
 
         $this->assertEntityHasNoRecordedEvents($entity);
     }
@@ -61,7 +61,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
         $entity->changeSomething();
         $this->persistAndFlush($entity);
 
-        $this->assertContains( new EntityChanged(), $this->eventSubscriber->recordedMessages(), '', false, false );
+        $this->assertContainsEquals(new EntityChanged(), $this->eventSubscriber->recordedMessages());
 
         $this->assertEntityHasNoRecordedEvents($entity);
     }
@@ -108,7 +108,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
         $entity = new EventRecordingEntity();
         $this->persistAndFlush($entity);
 
-        $this->assertContains( new EntityCreatedPrePersist(), $this->eventSubscriber->recordedMessages(), '', false, false );
+        $this->assertContainsEquals(new EntityCreatedPrePersist(), $this->eventSubscriber->recordedMessages());
 
         $this->assertEntityHasNoRecordedEvents($entity);
     }

@@ -71,11 +71,13 @@ class RabbitMQMessageConsumerTest extends TestCase
         $eventDispatcher
             ->expects($this->once())
             ->method('dispatch')
-            ->will($this->returnCallback(function ($name, MessageConsumptionFailed $event) use ($message, $exception) {
+            ->willReturnCallback(function (MessageConsumptionFailed $event, string $name) use ($message, $exception) {
                 $this->assertSame(Events::MESSAGE_CONSUMPTION_FAILED, $name);
                 $this->assertSame($message, $event->message());
                 $this->assertSame($exception, $event->exception());
-            }));
+
+                return $event;
+            });
 
         return $eventDispatcher;
     }
@@ -87,10 +89,12 @@ class RabbitMQMessageConsumerTest extends TestCase
         $eventDispatcher
             ->expects($this->once())
             ->method('dispatch')
-            ->will($this->returnCallback(function ($name, MessageConsumed $event) use ($message) {
+            ->willReturnCallback(function (MessageConsumed $event, string $name) use ($message) {
                 $this->assertSame(Events::MESSAGE_CONSUMED, $name);
                 $this->assertSame($message, $event->message());
-            }));
+
+                return $event;
+            });
 
         return $eventDispatcher;
     }

@@ -3,3 +3,4 @@
 /phpunit.xml
 /split/git-subsplit
 /split/.subsplit
+/.phpunit.result.cache

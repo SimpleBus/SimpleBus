@@ -2,6 +2,7 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
+use Asynchronicity\PHPUnit\Eventually;
 use SimpleBus\Asynchronous\Properties\DelegatingAdditionalPropertiesResolver;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -35,7 +36,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
         return 'SimpleBus\RabbitMQBundleBridge\Tests\Functional\TestKernel';
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
 
@@ -43,7 +44,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
         $this->logger->clearFile();
 
         $process = new Process(
-            'php console.php rabbitmq:setup-fabric',
+            ['php', 'console.php', 'rabbitmq:setup-fabric'],
             __DIR__
         );
         $process->run();
@@ -134,22 +135,6 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
      */
     private function waitUntilLogFileContains($message)
     {
-        // Namespace was changed in matthiasnoback/phpunit-asynchronicity 2.0
-        if (class_exists(\Asynchronicity\PHPUnit\Eventually::class)) {
-            self::assertThat(
-                function () use ($message) {
-
-                    return $this->logger->fileContains(
-                        $message
-                    );
-                },
-                new \Asynchronicity\PHPUnit\Eventually($this->timeoutMs, 100),
-                sprintf('The log file does not contain "%s"', $message)
-            );
-
-            return;
-        }
-
         self::assertThat(
             function () use ($message) {
 
@@ -157,7 +142,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
                     $message
                 );
             },
-            new \Matthias\PhpUnitAsynchronicity\Eventually($this->timeoutMs, 100),
+            new Eventually($this->timeoutMs, 100),
             sprintf('The log file does not contain "%s"', $message)
         );
     }
@@ -201,14 +186,14 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     private function consumeMessagesFromQueue($queue)
     {
         $this->process = new Process(
-            'php console.php rabbitmq:consumer ' . $queue,
+            ['php', 'console.php', 'rabbitmq:consumer', $queue],
             __DIR__
         );
 
         $this->process->start();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 

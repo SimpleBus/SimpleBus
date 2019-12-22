@@ -12,7 +12,7 @@ class JMSSerializerMessageSerializerTest extends KernelTestCase
         return 'SimpleBus\JMSSerializerBundleBridge\Tests\Functional\TestKernel';
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 

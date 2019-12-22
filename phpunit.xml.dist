@@ -16,7 +16,7 @@
     </php>
 
     <testsuites>
-        <testsuite>
+        <testsuite name="Everything">
             <directory>./Bridge/*/tests/</directory>
             <directory>./Bundle/*/tests/</directory>
             <directory>./Component/*/tests/</directory>
