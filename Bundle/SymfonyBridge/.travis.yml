@@ -18,9 +18,9 @@ matrix:
     - php: 7.3
       env: SYMFONY_VERSION=3.4.*
     - php: 7.3
-      env: SYMFONY_VERSION=4.2.*
+      env: SYMFONY_VERSION=4.4.*
     - php: 7.3
-      env: SYMFONY_VERSION=4.2.* REMOVE_PROXY_BRIDGE="yes" EXTRA_PHPUNIT_PARAMS="--group SymfonyBridgeProxyManagerDependency"
+      env: SYMFONY_VERSION=4.4.* REMOVE_PROXY_BRIDGE="yes" EXTRA_PHPUNIT_PARAMS="--group SymfonyBridgeProxyManagerDependency"
   allow_failures:
     - env: COMPOSER_FLAGS="--prefer-lowest"
 
