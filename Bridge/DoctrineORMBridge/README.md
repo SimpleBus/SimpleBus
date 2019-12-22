@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/SimpleBus/DoctrineORMBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/DoctrineORMBridge)
 
-By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
+By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/), Cliff Odijk, Ruud Kamphuis
 
 This package provides command bus middlewares that can be used to integrate
 [SimpleBus/MessageBus](https://github.com/SimpleBus/MessageBus) with [Doctrine

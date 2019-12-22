@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/SimpleBus/Serialization.svg?branch=master)](https://travis-ci.org/SimpleBus/Serialization)
 
-By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/)
+By [Matthias Noback](http://php-and-symfony.matthiasnoback.nl/), Cliff Odijk, Ruud Kamphuis
 
 This package contains generic classes and interfaces which can be used to serialize [SimpleBus](https://github.com/SimpleBus/MessageBus) messages.
 
