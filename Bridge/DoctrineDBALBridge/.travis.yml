@@ -9,29 +9,20 @@ cache:
 matrix:
   fast_finish: true
   include:
-    - php: 7.1
     - php: 7.2
     - php: 7.3
     - php: 7.3
       env: COMPOSER_FLAGS="--prefer-lowest"
-
-    # Test Doctrine versions
-    - php: 7.3
-      env: DOCTRINE_VERSION="2.5.*"
-    - php: 7.3
-      env: DOCTRINE_VERSION="2.6.*"
   allow_failures:
     - env: COMPOSER_FLAGS="--prefer-lowest"
 
 env:
   global:
     - COMPOSER_FLAGS=""
-    - DOCTRINE_VERSION=""
     - EXTRA_PHPUNIT_PARAMS=""
 
 before_install:
   - composer self-update
-  - if [ "$DOCTRINE_VERSION" != "" ]; then composer require --no-update doctrine/dbal:$DOCTRINE_VERSION ; fi
 
 install:
   - composer update --prefer-dist $COMPOSER_FLAGS
