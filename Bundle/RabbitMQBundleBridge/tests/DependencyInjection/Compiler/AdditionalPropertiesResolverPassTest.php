@@ -20,7 +20,7 @@ class AdditionalPropertiesResolverPassTest extends TestCase
      */
     private $delegatingDefinition;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->container = new ContainerBuilder();
         $this->delegatingDefinition = new Definition('stdClass', array(array()));

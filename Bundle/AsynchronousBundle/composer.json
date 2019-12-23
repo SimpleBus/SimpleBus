@@ -28,16 +28,16 @@
     ],
     "require": {
         "php": "^7.3",
-        "beberlei/assert": "~2.0 || ~3.0",
-        "simple-bus/asynchronous": "~3.0",
-        "simple-bus/message-bus": "~3.0",
-        "simple-bus/symfony-bridge": "~5.0",
-        "symfony/framework-bundle": "~3.3 || ~4.0"
+        "beberlei/assert": "^3.0",
+        "simple-bus/asynchronous": "^3.0",
+        "simple-bus/message-bus": "^3.0",
+        "simple-bus/symfony-bridge": "^5.0",
+        "symfony/framework-bundle": "^4.4 || ^5.0"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "~1.2 || ~2.0",
-        "phpunit/phpunit": "^5.7 || ^6.0",
-        "symfony/monolog-bundle": "~2.3 || ~3.0"
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "phpunit/phpunit": "^8.5",
+        "symfony/monolog-bundle": "^3.4"
     },
     "suggest": {
         "symfony/monolog-bundle": "For logging messages"

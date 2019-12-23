@@ -21,7 +21,7 @@ class NativeObjectSerializerTest extends TestCase
         $serializer = new NativeObjectSerializer();
 
         $serializedEnvelope = $serializedEnvelope = $serializer->serialize($envelope);
-        $this->assertInternalType('string', $serializedEnvelope);
+        $this->assertIsString($serializedEnvelope);
     }
 
     /**
