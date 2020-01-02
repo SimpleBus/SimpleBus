@@ -4,6 +4,7 @@ namespace SimpleBus\DoctrineDBALBridge\MessageBus;
 
 use Doctrine\DBAL\Driver\Connection;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
+use Throwable;
 
 class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
@@ -31,10 +32,10 @@ class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
             $next($message);
 
             $this->connection->commit();
-        } catch (\Exception $e) {
+        } catch (Throwable $error) {
             $this->connection->rollback();
 
-            throw $e;
+            throw $error;
         }
     }
 }

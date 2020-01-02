@@ -2,9 +2,11 @@
 
 namespace SimpleBus\DoctrineORMBridge\Tests\MessageBus;
 
+use Error;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
+use Throwable;
 
 class WrapsMessageHandlingInTransactionTest extends TestCase
 {
@@ -49,13 +51,21 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
         $this->assertTrue($nextIsCalled);
     }
 
+    public function errorProvider() : array
+    {
+        return [
+            [new Exception()],
+            [new Error()]
+        ];
+    }
+
     /**
      * @test
+     * @dataProvider errorProvider
      */
-    public function it_resets_the_entity_manager_if_the_transaction_fails()
+    public function it_resets_the_entity_manager_if_the_transaction_fails(Throwable $error)
     {
         $message = $this->dummyMessage();
-        $throwException = new Exception();
         $managerRegistry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
         $entityManagerName = 'default';
         $alwaysFailingEntityManager = $this->getMockBuilder('Doctrine\ORM\EntityManager')
@@ -67,8 +77,8 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
             ->method('transactional')
             ->will(
                 $this->returnCallback(
-                    function () use ($throwException) {
-                        throw $throwException;
+                    function () use ($error) {
+                        throw $error;
                     }
                 )
             );
@@ -93,8 +103,8 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
                 }
             );
             $this->fail('An exception should have been thrown');
-        } catch (Exception $actualException) {
-            $this->assertSame($throwException, $actualException);
+        } catch (Throwable $actualError) {
+            $this->assertSame($error, $actualError);
         }
     }
 
