@@ -2,8 +2,11 @@
 
 namespace SimpleBus\DoctrineDBALBridge\Tests\MessageBus;
 
+use Error;
+use Exception;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineDBALBridge\MessageBus\WrapsMessageHandlingInTransaction;
+use Throwable;
 
 class WrapsMessageHandlingInTransactionTest extends TestCase
 {
@@ -35,16 +38,24 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
         $this->assertTrue($nextIsCalled);
     }
 
+    public function errorProvider() : array
+    {
+        return [
+            [new Exception()],
+            [new Error()]
+        ];
+    }
+
     /**
      * @test
+     * @dataProvider errorProvider
      */
-    public function it_rolls_the_transaction_back_when_an_exception_is_thrown()
+    public function it_rolls_the_transaction_back_when_an_throwable_is_thrown(Throwable $error)
     {
-        $exception = new \Exception();
         $message      = new \stdClass();
 
-        $nextMiddlewareCallable = function () use ($exception) {
-            throw $exception;
+        $nextMiddlewareCallable = function () use ($error) {
+            throw $error;
         };
 
         $connection = $this->createMock('Doctrine\DBAL\Driver\Connection');
@@ -61,8 +72,8 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
             $middleware->handle($message, $nextMiddlewareCallable);
 
             $this->fail('An exception should have been thrown');
-        } catch (\Exception $actualException) {
-            $this->assertSame($exception, $actualException);
+        } catch (Throwable $actualError) {
+            $this->assertSame($error, $actualError);
         }
     }
 }

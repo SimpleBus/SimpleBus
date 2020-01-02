@@ -4,8 +4,8 @@ namespace SimpleBus\DoctrineORMBridge\MessageBus;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
-use Exception;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
+use Throwable;
 
 class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
@@ -40,10 +40,10 @@ class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
                     $next($message);
                 }
             );
-        } catch (Exception $exception) {
+        } catch (Throwable $error) {
             $this->managerRegistry->resetManager($this->entityManagerName);
 
-            throw $exception;
+            throw $error;
         }
     }
 }
