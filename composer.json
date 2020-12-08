@@ -3,7 +3,7 @@
     "description": "Simple CommandBus and EventBus implementation",
     "license": "MIT",
     "require-dev": {
-        "php": "^7.3",
+        "php": "^7.3 || ^8.0",
         "symplify/monorepo-builder": "9.0.0-rc1"
     },
     "config": {

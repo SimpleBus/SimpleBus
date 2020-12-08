@@ -32,10 +32,14 @@ jobs:
                 php-version:
                     - '7.3'
                     - '7.4'
+                    - '8.0'
                 symfony-version:
                     - '4.4.*'
                     - '5.2.*'
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
+                include:
+                    - php-version: '8.0'
+                      composer-arguments: ' --ignore-platform-req php'
                 exclude:
                     # Only test once it has no Symfony packages
                     - package: 'asynchronous'
@@ -60,10 +64,10 @@ jobs:
                     rabbitmq user: 'guest'
                     rabbitmq password: 'guest'
                     rabbitmq vhost: '/'
-            -   run: composer install --no-progress --ansi
+            -   run: composer install --no-progress --ansi${{ matrix.composer-arguments }}
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
-            -   run: composer install --no-progress --ansi --working-dir packages/${{ matrix.package }}
-            -   run: composer require --no-progress --ansi --working-dir packages/${{ matrix.package }} --no-update symfony/config:${{ matrix.symfony-version }} symfony/console:${{ matrix.symfony-version }} symfony/dependency-injection:${{ matrix.symfony-version }} symfony/finder:${{ matrix.symfony-version }} symfony/framework-bundle:${{ matrix.symfony-version }} symfony/http-kernel:${{ matrix.symfony-version }} symfony/monolog-bridge:${{ matrix.symfony-version }} symfony/process:${{ matrix.symfony-version }} symfony/proxy-manager-bridge:${{ matrix.symfony-version }} symfony/yaml:${{ matrix.symfony-version }} symfony/routing:${{ matrix.symfony-version }}
+            -   run: composer install --no-progress --ansi${{ matrix.composer-arguments }} --working-dir packages/${{ matrix.package }}
+            -   run: composer require --no-progress --ansi${{ matrix.composer-arguments }} --working-dir packages/${{ matrix.package }} --no-update symfony/config:${{ matrix.symfony-version }} symfony/console:${{ matrix.symfony-version }} symfony/dependency-injection:${{ matrix.symfony-version }} symfony/finder:${{ matrix.symfony-version }} symfony/framework-bundle:${{ matrix.symfony-version }} symfony/http-kernel:${{ matrix.symfony-version }} symfony/monolog-bridge:${{ matrix.symfony-version }} symfony/process:${{ matrix.symfony-version }} symfony/proxy-manager-bridge:${{ matrix.symfony-version }} symfony/yaml:${{ matrix.symfony-version }} symfony/routing:${{ matrix.symfony-version }}
             -   name: Split Tests of ${{ matrix.package }}
                 working-directory: packages/${{ matrix.package }}
                 run: vendor/bin/phpunit
