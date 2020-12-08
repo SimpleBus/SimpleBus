@@ -137,10 +137,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     {
         self::assertThat(
             function () use ($message) {
-
-                return $this->logger->fileContains(
-                    $message
-                );
+                $this->logger->fileContains($message);
             },
             new Eventually($this->timeoutMs, 100),
             sprintf('The log file does not contain "%s"', $message)
