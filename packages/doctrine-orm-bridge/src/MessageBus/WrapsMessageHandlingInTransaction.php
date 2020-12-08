@@ -2,7 +2,7 @@
 
 namespace SimpleBus\DoctrineORMBridge\MessageBus;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use Throwable;
