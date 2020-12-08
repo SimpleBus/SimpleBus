@@ -69,7 +69,7 @@ the name of the entity manager that you want to use.
     use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
 
     /*
-     * $managerRegistry is an instance of Doctrine\Common\Persistence\ManagerRegistry
+     * $managerRegistry is an instance of Doctrine\Persistence\ManagerRegistry
      *
      * For example: if you use Symfony, use the "doctrine" service
      */
