@@ -23,7 +23,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
      */
     private $eventSubscriber;
 
-    protected function getEntityDirectories()
+    protected function getEntityDirectories(): array
     {
         return array(__DIR__.'/Fixtures/Entity');
     }
