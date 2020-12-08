@@ -1,95 +1,14 @@
 {
     "name": "simple-bus/simple-bus",
-    "type": "library",
     "description": "Simple CommandBus and EventBus implementation",
-    "keywords": [
-        "message bus",
-        "command bus"
-    ],
-    "homepage": "http://docs.simplebus.io/",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Cliff Odijk",
-            "email": "cliff@jcid.nl"
-        },
-        {
-            "name": "Ruud Kamphuis",
-            "homepage": "https://github.com/ruudk"
-        },
-        {
-            "name": "Matthias Noback",
-            "email": "matthiasnoback@gmail.com",
-            "homepage": "http://php-and-symfony.matthiasnoback.nl"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/mihaileu/RabbitMqBundle.git"
-        }
-    ],
     "require-dev": {
         "php": "^7.3",
-        "beberlei/assert": "^3.0",
-        "doctrine/dbal": "^2.5",
-        "doctrine/doctrine-bundle": "^2.0",
-        "doctrine/orm": "^2.7",
-        "jms/serializer-bundle": "^3.0",
-        "matthiasnoback/doctrine-orm-test-service-provider": "^3.0",
-        "matthiasnoback/phpunit-asynchronicity": "^2.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "php-amqplib/rabbitmq-bundle": "dev-allow_symfony_5#2101dada07bd8424dc628bc9f8b173064205198a",
-        "phpunit/phpunit": "^8.5",
-        "psr/log": "^1.0",
-        "symfony/config": "^4.4 || ^5.0",
-        "symfony/console": "^4.4 || ^5.0",
-        "symfony/dependency-injection": "^4.4 || ^5.0",
-        "symfony/finder": "^4.4 || ^5.0",
-        "symfony/framework-bundle": "^4.4 || ^5.0",
-        "symfony/http-kernel": "^4.4 || ^5.0",
-        "symfony/monolog-bundle": "^3.4",
-        "symfony/process": "^4.4 || ^5.0",
-        "symfony/proxy-manager-bridge": "^4.4 || ^5.0",
-        "symfony/yaml": "^4.4 || ^5.0"
-    },
-    "conflict": {
-        "jms/serializer": "<3.2.0",
-        "zendframework/zend-code": "<3.3.1"
-    },
-    "autoload": {
-        "psr-4": {
-            "SimpleBus\\DoctrineDBALBridge\\": "Bridge/DoctrineDBALBridge/src",
-            "SimpleBus\\DoctrineORMBridge\\": "Bridge/DoctrineORMBridge/src",
-            "SimpleBus\\JMSSerializerBridge\\": "Bridge/JMSSerializerBridge/src",
-
-            "SimpleBus\\AsynchronousBundle\\": "Bundle/AsynchronousBundle/src",
-            "SimpleBus\\JMSSerializerBundleBridge\\": "Bundle/JMSSerializerBundleBridge/src",
-            "SimpleBus\\RabbitMQBundleBridge\\": "Bundle/RabbitMQBundleBridge/src",
-            "SimpleBus\\SymfonyBridge\\": "Bundle/SymfonyBridge/src",
-
-            "SimpleBus\\Asynchronous\\": "Component/Asynchronous/src",
-            "SimpleBus\\Message\\": "Component/MessageBus/src",
-            "SimpleBus\\Serialization\\": "Component/Serialization/src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "SimpleBus\\DoctrineDBALBridge\\Tests\\": "Bridge/DoctrineDBALBridge/tests",
-            "SimpleBus\\DoctrineORMBridge\\Tests\\": "Bridge/DoctrineORMBridge/tests",
-            "SimpleBus\\JMSSerializerBridge\\Tests\\": "Bridge/JMSSerializerBridge/tests",
-
-            "SimpleBus\\AsynchronousBundle\\Tests\\": "Bundle/AsynchronousBundle/tests",
-            "SimpleBus\\JMSSerializerBundleBridge\\Tests\\": "Bundle/JMSSerializerBundleBridge/tests",
-            "SimpleBus\\RabbitMQBundleBridge\\Tests\\": "Bundle/RabbitMQBundleBridge/tests",
-            "SimpleBus\\SymfonyBridge\\Tests\\": "Bundle/SymfonyBridge/tests",
-
-            "SimpleBus\\Asynchronous\\Tests\\": "Component/Asynchronous/tests",
-            "SimpleBus\\Message\\Tests\\": "Component/MessageBus/tests",
-            "SimpleBus\\Serialization\\Tests\\": "Component/Serialization/tests"
-        }
+        "symplify/monorepo-builder": "9.0.0-rc1"
     },
     "config": {
         "sort-packages": true
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
