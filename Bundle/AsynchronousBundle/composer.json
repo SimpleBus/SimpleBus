@@ -27,7 +27,7 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.3 || ^8.0",
         "beberlei/assert": "^3.0",
         "simple-bus/asynchronous": "^3.0",
         "simple-bus/message-bus": "^3.0",
