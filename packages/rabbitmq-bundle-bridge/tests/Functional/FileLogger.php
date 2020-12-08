@@ -3,6 +3,7 @@
 namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use Psr\Log\AbstractLogger;
+use RuntimeException;
 
 class FileLogger extends AbstractLogger
 {
@@ -31,7 +32,19 @@ class FileLogger extends AbstractLogger
     public function fileContains($text)
     {
         $fileContents = $this->fileContents();
-        return strpos($fileContents, $text) !== false;
+
+        if (strpos($fileContents, $text) !== false) {
+            return;
+        }
+
+        throw new RuntimeException(
+            sprintf(
+                'The `%s` file does not contains text `%s` it has `%s`',
+                $this->path,
+                $text,
+                $fileContents
+            )
+        );
     }
 
     public function fileContents()
