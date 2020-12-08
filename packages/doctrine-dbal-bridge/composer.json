@@ -23,7 +23,7 @@
     "require": {
         "php": "^7.3",
         "doctrine/dbal": "^2.5",
-        "simple-bus/message-bus": "^3.0"
+        "simple-bus/message-bus": "^3.0.3"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5"
