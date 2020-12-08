@@ -30,7 +30,7 @@
         "php": "^7.3",
         "beberlei/assert": "^3.0",
         "simple-bus/asynchronous": "^3.0",
-        "simple-bus/message-bus": "^3.0",
+        "simple-bus/message-bus": "^3.0.3",
         "simple-bus/symfony-bridge": "^5.4.0",
         "symfony/framework-bundle": "^4.4 || ^5.0"
     },

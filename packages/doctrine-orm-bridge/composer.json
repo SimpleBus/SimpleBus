@@ -27,11 +27,11 @@
     "require": {
         "php": "^7.3",
         "doctrine/orm": "^2.7",
-        "simple-bus/message-bus": "^3.0"
+        "simple-bus/message-bus": "^3.0.3"
     },
     "require-dev": {
         "matthiasnoback/doctrine-orm-test-service-provider": "^3.0",
-        "phpunit/phpunit": "^8.2.3"
+        "phpunit/phpunit": "^8.5"
     },
     "suggest": {
         "simple-bus/symfony-bridge": "Bridge for using command buses and event buses with Symfony"
