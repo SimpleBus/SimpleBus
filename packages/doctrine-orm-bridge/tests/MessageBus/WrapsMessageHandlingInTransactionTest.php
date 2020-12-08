@@ -21,7 +21,7 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
             $this->assertSame($message, $actualMessage);
             $nextIsCalled = true;
         };
-        $managerRegistry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $managerRegistry = $this->createMock('Doctrine\Persistence\ManagerRegistry');
         $entityManagerName = 'default';
         $entityManager = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
@@ -66,7 +66,7 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
     public function it_resets_the_entity_manager_if_the_transaction_fails(Throwable $error)
     {
         $message = $this->dummyMessage();
-        $managerRegistry = $this->createMock('Doctrine\Common\Persistence\ManagerRegistry');
+        $managerRegistry = $this->createMock('Doctrine\Persistence\ManagerRegistry');
         $entityManagerName = 'default';
         $alwaysFailingEntityManager = $this->getMockBuilder('Doctrine\ORM\EntityManager')
             ->disableOriginalConstructor()
