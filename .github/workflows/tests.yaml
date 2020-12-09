@@ -48,6 +48,10 @@ jobs:
                       symfony-version: '4.4.*'
                     - package: 'serialization'
                       symfony-version: '4.4.*'
+                    # Exclude it is not support on PHP 8
+                    # https://github.com/php-amqplib/php-amqplib/issues/846
+                    - package: 'rabbitmq-bundle-bridge'
+                      php-version: '8.0'
         steps:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2
