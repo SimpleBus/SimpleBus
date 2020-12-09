@@ -2,13 +2,22 @@
     "name": "simple-bus/simple-bus",
     "description": "Simple CommandBus and EventBus implementation",
     "license": "MIT",
+    "autoload-dev": {
+        "psr-4": {
+            "SimpleBus\\CI\\": "src"
+        }
+    },
     "require-dev": {
         "php": "^7.3 || ^8.0",
+        "ext-json": "*",
         "symplify/monorepo-builder": "9.0.0-rc1"
     },
     "config": {
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require": {
+        "symfony/console": "^4.4 || ^5.0"
+    }
 }
