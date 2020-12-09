@@ -106,3 +106,23 @@ jobs:
             -   name: Split Tests of ${{ matrix.package }}
                 working-directory: packages/${{ matrix.package }}
                 run: vendor/bin/phpunit
+
+    test-proxy-bridge:
+        needs: build-matrix
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            -   run: composer install --no-progress --ansi
+            -   run: vendor/bin/monorepo-builder localize-composer-paths packages/symfony-bridge/composer.json --ansi
+            -   run: bin/console rebuild-symfony-requirements symfony-bridge "5.2.*"
+            -   run: composer remove --no-progress --ansi --working-dir packages/symfony-bridge --no-update --dev symfony/proxy-manager-bridge
+            -   run: composer update --no-progress --ansi --working-dir packages/symfony-bridge
+            -   name: Test
+                working-directory: packages/symfony-bridge
+                run: vendor/bin/phpunit --group SymfonyBridgeProxyManagerDependency
