@@ -29,7 +29,7 @@
     "require": {
         "php": "^7.3 || ^8.0",
         "beberlei/assert": "^3.0",
-        "php-amqplib/rabbitmq-bundle": "^1.10",
+        "emag-tech-labs/rabbitmq-bundle": "^2.3",
         "simple-bus/asynchronous": "^3.0",
         "simple-bus/asynchronous-bundle": "^3.0",
         "simple-bus/message-bus": "^3.0.3",
