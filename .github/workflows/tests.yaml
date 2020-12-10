@@ -37,6 +37,9 @@ jobs:
                 symfony-version:
                     - '4.4.*'
                     - '5.2.*'
+                dependencies:
+                    - 'lowest'
+                    - 'highest'
                 composer-remove-arguments: ['']
                 include:
                     - php-version: '8.0'
@@ -85,40 +88,12 @@ jobs:
             -   if: "matrix.composer-remove-arguments != ''"
                 run: composer remove --no-progress --ansi --working-dir packages/${{ matrix.package }} --no-update ${{ matrix.composer-remove-arguments }}
 
-            -   run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }} ${{ matrix.composer-update-arguments }}
+            -   if: "matrix.dependencies == 'highest'"
+                run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }} ${{ matrix.composer-update-arguments }}
+
+            -   if: "matrix.dependencies == 'lowest'"
+                run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }} --prefer-lowest ${{ matrix.composer-update-arguments }}
 
             -   name: Split Tests of ${{ matrix.package }}
                 working-directory: packages/${{ matrix.package }}
                 run: vendor/bin/phpunit
-
-    tests-lowest:
-        needs: build-matrix
-        runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
-        steps:
-            -   uses: actions/checkout@v2
-            -   uses: shivammathur/setup-php@v2
-                with:
-                    php-version: 7.4
-                    coverage: none
-                env:
-                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            -   if: "matrix.package == 'rabbitmq-bundle-bridge'"
-                uses: getong/rabbitmq-action@v1.2
-                with:
-                    rabbitmq version: '3.8.9-management-alpine'
-                    host port: 5672
-                    rabbitmq user: 'guest'
-                    rabbitmq password: 'guest'
-                    rabbitmq vhost: '/'
-            -   run: composer install --no-progress --ansi
-            -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
-            -   run: bin/console rebuild-symfony-requirements ${{ matrix.package }} "4.4.*"
-            -   run: composer update --no-progress --ansi --prefer-lowest --working-dir packages/${{ matrix.package }}
-            -   name: Split Tests of ${{ matrix.package }}
-                working-directory: packages/${{ matrix.package }}
-                run: vendor/bin/phpunit
-
