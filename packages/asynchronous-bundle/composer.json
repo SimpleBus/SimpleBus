@@ -36,7 +36,7 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.3",
         "symfony/monolog-bundle": "^3.4"
     },
     "suggest": {
