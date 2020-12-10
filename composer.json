@@ -7,8 +7,10 @@
             "SimpleBus\\CI\\": "src"
         }
     },
+    "require": {
+        "php": "^7.3 || ^8.0"
+    },
     "require-dev": {
-        "php": "^7.3 || ^8.0",
         "ext-json": "*",
         "symfony/console": "^4.4 || ^5.0",
         "symplify/monorepo-builder": "^9.0",
