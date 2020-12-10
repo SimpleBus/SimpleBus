@@ -42,8 +42,6 @@ jobs:
                     - 'highest'
                 composer-remove-arguments: ['']
                 include:
-                    - php-version: '8.0'
-                      composer-update-arguments: '--ignore-platform-req php'
                     - php-version: '7.4'
                       package: 'symfony-bridge'
                       symfony-version: '5.1.*'
