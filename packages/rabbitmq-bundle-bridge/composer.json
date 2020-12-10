@@ -37,7 +37,7 @@
     },
     "require-dev": {
         "matthiasnoback/phpunit-asynchronicity": "^2.0",
-        "phpunit/phpunit": "^8.5",
+        "phpunit/phpunit": "^9.3",
         "simple-bus/jms-serializer-bundle-bridge": "~3.0",
         "symfony/console": "^4.4 || ^5.0",
         "symfony/finder": "^4.4 || ^5.0",
