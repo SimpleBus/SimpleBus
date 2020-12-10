@@ -45,8 +45,9 @@ jobs:
                     - php-version: '8.0'
                       composer-update-arguments: '--ignore-platform-req php'
                     - php-version: '7.4'
-                      symfony-version: '5.2.*'
                       package: 'symfony-bridge'
+                      symfony-version: '5.2.*'
+                      dependencies: 'lowest'
                       composer-remove-arguments: '--dev symfony/proxy-manager-bridge'
                 exclude:
                     # Only test once it has no Symfony packages
