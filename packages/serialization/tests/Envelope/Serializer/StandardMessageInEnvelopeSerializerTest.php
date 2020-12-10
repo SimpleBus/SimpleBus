@@ -113,7 +113,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     /**
      * @param object $message
      * @param Envelope $expectedEnvelope
-     * @return \PHPUnit_Framework_MockObject_MockObject|EnvelopeFactory
+     * @return \PHPUnit\Framework\MockObject\MockObject|EnvelopeFactory
      */
     private function envelopeFactoryCreatesEnvelope($message, Envelope $expectedEnvelope)
     {
@@ -128,7 +128,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|ObjectSerializer
+     * @return \PHPUnit\Framework\MockObject\MockObject|ObjectSerializer
      */
     private function mockObjectSerializer()
     {
@@ -153,7 +153,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
 
     /**
      * @param $envelopeClass
-     * @return \PHPUnit_Framework_MockObject_MockObject|EnvelopeFactory
+     * @return \PHPUnit\Framework\MockObject\MockObject|EnvelopeFactory
      */
     private function envelopeFactoryForEnvelopeClass($envelopeClass)
     {

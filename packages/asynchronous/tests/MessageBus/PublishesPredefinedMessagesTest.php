@@ -69,14 +69,14 @@ class PublishesPredefinedMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Publisher
+     * @return \PHPUnit\Framework\MockObject\MockObject|Publisher
      */
     private function mockPublisher()
     {
         return $this->createMock('SimpleBus\Asynchronous\Publisher\Publisher');
     }
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|MessageNameResolver
+     * @return \PHPUnit\Framework\MockObject\MockObject|MessageNameResolver
      */
     private function mockNameResolver()
     {
@@ -84,7 +84,7 @@ class PublishesPredefinedMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|object
+     * @return \PHPUnit\Framework\MockObject\MockObject|object
      */
     private function dummyMessage()
     {

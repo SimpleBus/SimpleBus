@@ -38,7 +38,7 @@ class StandardSerializedEnvelopeConsumerTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|object
+     * @return \PHPUnit\Framework\MockObject\MockObject|object
      */
     private function dummyMessage()
     {
@@ -46,7 +46,7 @@ class StandardSerializedEnvelopeConsumerTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|MessageBus
+     * @return \PHPUnit\Framework\MockObject\MockObject|MessageBus
      */
     private function mockMessageBus()
     {
@@ -54,7 +54,7 @@ class StandardSerializedEnvelopeConsumerTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|MessageInEnvelopeSerializer
+     * @return \PHPUnit\Framework\MockObject\MockObject|MessageInEnvelopeSerializer
      */
     private function mockMessageInEnvelopeSerializer()
     {
