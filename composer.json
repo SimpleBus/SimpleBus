@@ -12,6 +12,7 @@
     },
     "require-dev": {
         "ext-json": "*",
+        "composer/semver": "^3.2",
         "symfony/console": "^4.4 || ^5.1",
         "symplify/monorepo-builder": "^9.0",
         "symplify/easy-ci": "^9.0"
