@@ -10,14 +10,13 @@
     "require-dev": {
         "php": "^7.3 || ^8.0",
         "ext-json": "*",
-        "symplify/monorepo-builder": "9.0.0-rc1"
+        "symfony/console": "^4.4 || ^5.0",
+        "symplify/monorepo-builder": "^9.0",
+        "symplify/easy-ci": "^9.0"
     },
     "config": {
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "require": {
-        "symfony/console": "^4.4 || ^5.0"
-    }
+    "prefer-stable": true
 }
