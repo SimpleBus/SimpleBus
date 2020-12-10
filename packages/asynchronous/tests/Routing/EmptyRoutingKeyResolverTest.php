@@ -17,7 +17,7 @@ class EmptyRoutingKeyResolverTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|object
+     * @return \PHPUnit\Framework\MockObject\MockObject|object
      */
     private function messageDummy()
     {

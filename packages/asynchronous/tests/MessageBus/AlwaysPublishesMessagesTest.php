@@ -33,7 +33,7 @@ class AlwaysPublishesMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Publisher
+     * @return \PHPUnit\Framework\MockObject\MockObject|Publisher
      */
     private function mockPublisher()
     {
@@ -41,7 +41,7 @@ class AlwaysPublishesMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|object
+     * @return \PHPUnit\Framework\MockObject\MockObject|object
      */
     private function dummyMessage()
     {

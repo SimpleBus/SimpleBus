@@ -76,7 +76,7 @@ class PublishesUnhandledMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Publisher
+     * @return \PHPUnit\Framework\MockObject\MockObject|Publisher
      */
     private function mockPublisher()
     {
@@ -84,7 +84,7 @@ class PublishesUnhandledMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|object
+     * @return \PHPUnit\Framework\MockObject\MockObject|object
      */
     private function dummyMessage()
     {
@@ -92,7 +92,7 @@ class PublishesUnhandledMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|LoggerInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|LoggerInterface
      */
     private function dummyLogger()
     {
@@ -100,7 +100,7 @@ class PublishesUnhandledMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|LoggerInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject|LoggerInterface
      */
     private function mockLogger()
     {

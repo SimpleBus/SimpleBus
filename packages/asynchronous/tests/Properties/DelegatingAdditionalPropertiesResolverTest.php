@@ -27,7 +27,7 @@ class DelegatingAdditionalPropertiesResolverTest extends TestCase
      * @param object $message
      * @param array   $data
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|AdditionalPropertiesResolver
+     * @return \PHPUnit\Framework\MockObject\MockObject|AdditionalPropertiesResolver
      */
     private function getResolver($message, array $data)
     {
@@ -41,7 +41,7 @@ class DelegatingAdditionalPropertiesResolverTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|object
+     * @return \PHPUnit\Framework\MockObject\MockObject|object
      */
     private function messageDummy()
     {
