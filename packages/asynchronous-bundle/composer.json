@@ -32,6 +32,8 @@
         "simple-bus/asynchronous": "^3.0",
         "simple-bus/message-bus": "^3.0.3",
         "simple-bus/symfony-bridge": "^5.4.0",
+        "symfony/config": "^4.4.17 || ^5.1.9",
+        "symfony/dependency-injection": "^4.4.17 || ^5.1.9",
         "symfony/framework-bundle": "^4.4 || ^5.0"
     },
     "require-dev": {
