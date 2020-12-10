@@ -37,9 +37,14 @@ jobs:
                     - '4.4.*'
                     - '5.2.*'
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
+                composer-remove-arguments: ['']
                 include:
                     - php-version: '8.0'
-                      composer-arguments: ' --ignore-platform-req php'
+                      composer-update-arguments: '--ignore-platform-req php'
+                    - php-version: '7.4'
+                      symfony-version: '5.2.*'
+                      package: 'symfony-bridge'
+                      composer-remove-arguments: '--dev symfony/proxy-manager-bridge'
                 exclude:
                     # Only test once it has no Symfony packages
                     - package: 'asynchronous'
@@ -54,12 +59,14 @@ jobs:
                       php-version: '8.0'
         steps:
             -   uses: actions/checkout@v2
+
             -   uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php-version }}
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
             -   if: "matrix.package == 'rabbitmq-bundle-bridge'"
                 uses: getong/rabbitmq-action@v1.2
                 with:
@@ -68,10 +75,18 @@ jobs:
                     rabbitmq user: 'guest'
                     rabbitmq password: 'guest'
                     rabbitmq vhost: '/'
+
             -   run: composer install --no-progress --ansi
+
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
+
             -   run: bin/console rebuild-symfony-requirements ${{ matrix.package }} "${{ matrix.symfony-version }}"
-            -   run: composer update --no-progress --ansi${{ matrix.composer-arguments }} --working-dir packages/${{ matrix.package }}
+
+            -   if: "matrix.composer-remove-arguments != ''"
+                run: composer remove --no-progress --ansi --working-dir packages/${{ matrix.package }} --no-update ${{ matrix.composer-remove-arguments }}
+
+            -   run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }} ${{ matrix.composer-update-arguments }}
+
             -   name: Split Tests of ${{ matrix.package }}
                 working-directory: packages/${{ matrix.package }}
                 run: vendor/bin/phpunit
@@ -107,22 +122,3 @@ jobs:
                 working-directory: packages/${{ matrix.package }}
                 run: vendor/bin/phpunit
 
-    test-proxy-bridge:
-        needs: build-matrix
-        runs-on: ubuntu-latest
-        steps:
-            -   uses: actions/checkout@v2
-            -   uses: shivammathur/setup-php@v2
-                with:
-                    php-version: 7.4
-                    coverage: none
-                env:
-                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            -   run: composer install --no-progress --ansi
-            -   run: vendor/bin/monorepo-builder localize-composer-paths packages/symfony-bridge/composer.json --ansi
-            -   run: bin/console rebuild-symfony-requirements symfony-bridge "5.2.*"
-            -   run: composer remove --no-progress --ansi --working-dir packages/symfony-bridge --no-update --dev symfony/proxy-manager-bridge
-            -   run: composer update --no-progress --ansi --working-dir packages/symfony-bridge
-            -   name: Test
-                working-directory: packages/symfony-bridge
-                run: vendor/bin/phpunit --group SymfonyBridgeProxyManagerDependency
