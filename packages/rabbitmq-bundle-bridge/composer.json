@@ -27,7 +27,7 @@
         }
     ],
     "require": {
-        "php": "^7.3 || ^8.0",
+        "php": "^7.4 || ^8.0",
         "beberlei/assert": "^3.0",
         "emag-tech-labs/rabbitmq-bundle": "^2.3",
         "simple-bus/asynchronous": "^3.0",
