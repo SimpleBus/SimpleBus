@@ -28,7 +28,7 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
             ->setMethods(['transactional'])
             ->getMock();
         $entityManager
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('transactional')
             ->will(
                 $this->returnCallback(
@@ -73,7 +73,7 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
             ->setMethods(['transactional'])
             ->getMock();
         $alwaysFailingEntityManager
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('transactional')
             ->will(
                 $this->returnCallback(
@@ -90,7 +90,7 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
             ->will($this->returnValue($alwaysFailingEntityManager));
 
         $managerRegistry
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('resetManager')
             ->with($entityManagerName);
 
