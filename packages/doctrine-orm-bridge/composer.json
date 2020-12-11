@@ -24,20 +24,6 @@
             "homepage": "http://php-and-symfony.matthiasnoback.nl"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/ruudk/doctrine-orm-test-service-provider.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/ruudk/doctrine-dbal-test-service-provider.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/ruudk/phpunit-test-service-container.git"
-        }
-    ],
     "require": {
         "php": "^7.4 || ^8.0",
         "doctrine/dbal": "^2.12",
@@ -45,9 +31,7 @@
         "simple-bus/message-bus": "^3.0.3"
     },
     "require-dev": {
-        "matthiasnoback/phpunit-test-service-container": "dev-patch-1 as 3.1.99",
-        "matthiasnoback/doctrine-dbal-test-service-provider": "dev-patch-1 as 3.0.99",
-        "matthiasnoback/doctrine-orm-test-service-provider": "dev-patch-1 as 3.0.99",
+        "matthiasnoback/doctrine-orm-test-service-provider": "^3.0",
         "phpunit/phpunit": "^9.3"
     },
     "suggest": {
