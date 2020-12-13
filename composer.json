@@ -2,10 +2,6 @@
     "name": "simple-bus/simple-bus",
     "type": "library",
     "description": "Simple CommandBus and EventBus implementation",
-    "keywords": [
-        "message bus",
-        "command bus"
-    ],
     "license": "MIT",
     "authors": [
         {
@@ -20,28 +16,99 @@
             "name": "Matthias Noback",
             "email": "matthiasnoback@gmail.com",
             "homepage": "http://php-and-symfony.matthiasnoback.nl"
+        },
+        {
+            "name": "Jasper N. Brouwer",
+            "email": "jasper@nerdsweide.nl"
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0"
+        "php": "^7.4 || ^8.0",
+        "beberlei/assert": "^3.0",
+        "doctrine/dbal": "^2.12",
+        "doctrine/orm": "^2.8",
+        "emag-tech-labs/rabbitmq-bundle": "^2.3",
+        "jms/serializer": "^3.2.0",
+        "jms/serializer-bundle": "^3.0",
+        "psr/log": "^1.0",
+        "symfony/config": "^4.4.17 || ^5.1.9",
+        "symfony/dependency-injection": "^4.4.17 || ^5.1.9",
+        "symfony/framework-bundle": "^4.4 || ^5.1",
+        "symfony/http-kernel": "^4.4 || ^5.1",
+        "symfony/monolog-bundle": "^3.4",
+        "symfony/yaml": "^4.4 || ^5.1"
+    },
+    "replace": {
+        "simple-bus/asynchronous": "self.version",
+        "simple-bus/asynchronous-bundle": "self.version",
+        "simple-bus/doctrine-dbal-bridge": "self.version",
+        "simple-bus/doctrine-orm-bridge": "self.version",
+        "simple-bus/jms-serializer-bridge": "self.version",
+        "simple-bus/jms-serializer-bundle-bridge": "self.version",
+        "simple-bus/message-bus": "self.version",
+        "simple-bus/rabbitmq-bundle-bridge": "self.version",
+        "simple-bus/serialization": "self.version",
+        "simple-bus/symfony-bridge": "self.version"
     },
     "require-dev": {
         "ext-json": "*",
         "composer/semver": "^3.2",
+        "doctrine/doctrine-bundle": "^2.2",
         "ergebnis/composer-normalize": "^2.11",
         "friendsofphp/php-cs-fixer": "^2.17",
+        "matthiasnoback/doctrine-orm-test-service-provider": "^3.0",
+        "matthiasnoback/phpunit-asynchronicity": "^2.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "ocramius/proxy-manager": "dev-allow-php-8 as 2.10.99",
+        "phpunit/phpunit": "^9.3",
         "symfony/console": "^4.4 || ^5.1",
+        "symfony/finder": "^4.4 || ^5.1",
+        "symfony/monolog-bridge": "^4.4 || ^5.1",
+        "symfony/process": "^4.4 || ^5.1",
+        "symfony/proxy-manager-bridge": "^4.4 || ^5.1",
+        "symfony/translation": "^4.4 || ^5.1",
         "symplify/easy-ci": "^9.0",
         "symplify/monorepo-builder": "^9.0"
     },
     "config": {
         "sort-packages": true
     },
-    "autoload-dev": {
+    "autoload": {
         "psr-4": {
-            "SimpleBus\\CI\\": "src"
+            "SimpleBus\\AsynchronousBundle\\": "packages/asynchronous-bundle/src",
+            "SimpleBus\\Asynchronous\\": "packages/asynchronous/src",
+            "SimpleBus\\DoctrineDBALBridge\\": "packages/doctrine-dbal-bridge/src",
+            "SimpleBus\\DoctrineORMBridge\\": "packages/doctrine-orm-bridge/src",
+            "SimpleBus\\JMSSerializerBridge\\": "packages/jms-serializer-bridge/src",
+            "SimpleBus\\JMSSerializerBundleBridge\\": "packages/jms-serializer-bundle-bridge/src",
+            "SimpleBus\\Message\\": "packages/message-bus/src",
+            "SimpleBus\\RabbitMQBundleBridge\\": "packages/rabbitmq-bundle-bridge/src",
+            "SimpleBus\\Serialization\\": "packages/serialization/src",
+            "SimpleBus\\SymfonyBridge\\": "packages/symfony-bridge/src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "SimpleBus\\AsynchronousBundle\\Tests\\": "packages/asynchronous-bundle/tests",
+            "SimpleBus\\Asynchronous\\Tests\\": "packages/asynchronous/tests",
+            "SimpleBus\\CI\\": "src",
+            "SimpleBus\\DoctrineDBALBridge\\Tests\\": "packages/doctrine-dbal-bridge/tests",
+            "SimpleBus\\DoctrineORMBridge\\Tests\\": "packages/doctrine-orm-bridge/tests",
+            "SimpleBus\\JMSSerializerBridge\\Tests\\": "packages/jms-serializer-bridge/tests",
+            "SimpleBus\\JMSSerializerBundleBridge\\Tests\\": "packages/jms-serializer-bundle-bridge/tests",
+            "SimpleBus\\Message\\Tests\\": "packages/message-bus/tests",
+            "SimpleBus\\RabbitMQBundleBridge\\Tests\\": "packages/rabbitmq-bundle-bridge/tests",
+            "SimpleBus\\Serialization\\Tests\\": "packages/serialization/tests",
+            "SimpleBus\\SymfonyBridge\\Tests\\": "packages/symfony-bridge/tests"
+        }
+    },
+    "repositories": [
+        {
+            "description": "Use fork until PHP 8 is supported https://github.com/Ocramius/ProxyManager/pull/628",
+            "type": "vcs",
+            "url": "https://github.com/greg0ire/ProxyManager.git"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
