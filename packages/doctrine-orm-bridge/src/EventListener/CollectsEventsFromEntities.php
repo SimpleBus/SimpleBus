@@ -11,9 +11,12 @@ use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
 class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMessages
 {
-    private $collectedEvents = [];
+    /**
+     * @var object[]
+     */
+    private array $collectedEvents = [];
 
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::preFlush,
@@ -21,7 +24,7 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
         ];
     }
 
-    public function preFlush(PreFlushEventArgs $eventArgs)
+    public function preFlush(PreFlushEventArgs $eventArgs): void
     {
         $em = $eventArgs->getEntityManager();
         $uow = $em->getUnitOfWork();
@@ -39,7 +42,7 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
      * We need to listen on postFlush for Lifecycle Events
      * All Lifecycle callback events are triggered after the onFlush event.
      */
-    public function postFlush(PostFlushEventArgs $eventArgs)
+    public function postFlush(PostFlushEventArgs $eventArgs): void
     {
         $em = $eventArgs->getEntityManager();
         $uow = $em->getUnitOfWork();
@@ -50,17 +53,20 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
         }
     }
 
-    public function recordedMessages()
+    /**
+     * @return object[]
+     */
+    public function recordedMessages(): array
     {
         return $this->collectedEvents;
     }
 
-    public function eraseMessages()
+    public function eraseMessages(): void
     {
         $this->collectedEvents = [];
     }
 
-    private function collectEventsFromEntity($entity)
+    private function collectEventsFromEntity(object $entity): void
     {
         if ($entity instanceof ContainsRecordedMessages
             && (

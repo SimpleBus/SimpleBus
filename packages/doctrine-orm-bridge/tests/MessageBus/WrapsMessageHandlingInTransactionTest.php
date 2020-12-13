@@ -2,8 +2,11 @@
 
 namespace SimpleBus\DoctrineORMBridge\Tests\MessageBus;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ManagerRegistry;
 use Error;
 use Exception;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
 use Throwable;
@@ -17,7 +20,7 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
     /**
      * @test
      */
-    public function itWrapsTheNextMiddlewareInATransaction()
+    public function itWrapsTheNextMiddlewareInATransaction(): void
     {
         $nextIsCalled = false;
         $message = $this->dummyMessage();
@@ -25,9 +28,9 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
             $this->assertSame($message, $actualMessage);
             $nextIsCalled = true;
         };
-        $managerRegistry = $this->createMock('Doctrine\Persistence\ManagerRegistry');
+        $managerRegistry = $this->createMock(ManagerRegistry::class);
         $entityManagerName = 'default';
-        $entityManager = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $entityManager = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->setMethods(['transactional'])
             ->getMock();
@@ -55,11 +58,18 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
         $this->assertTrue($nextIsCalled);
     }
 
+    /**
+     * @return array<Throwable[]>
+     */
     public function errorProvider(): array
     {
         return [
-            [new Exception()],
-            [new Error()],
+            [
+                new Exception(),
+            ],
+            [
+                new Error(),
+            ],
         ];
     }
 
@@ -67,12 +77,12 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
      * @test
      * @dataProvider errorProvider
      */
-    public function itResetsTheEntityManagerIfTheTransactionFails(Throwable $error)
+    public function itResetsTheEntityManagerIfTheTransactionFails(Throwable $error): void
     {
         $message = $this->dummyMessage();
-        $managerRegistry = $this->createMock('Doctrine\Persistence\ManagerRegistry');
+        $managerRegistry = $this->createMock(ManagerRegistry::class);
         $entityManagerName = 'default';
-        $alwaysFailingEntityManager = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+        $alwaysFailingEntityManager = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->setMethods(['transactional'])
             ->getMock();
@@ -112,9 +122,12 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
         }
     }
 
+    /**
+     * @return DummyMessage|MockObject
+     */
     private function dummyMessage()
     {
-        return $this->createMock('SimpleBus\DoctrineORMBridge\Tests\MessageBus\DummyMessage');
+        return $this->createMock(DummyMessage::class);
     }
 }
 
