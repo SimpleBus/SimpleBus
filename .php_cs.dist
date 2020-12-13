@@ -8,6 +8,7 @@ $config = (new PhpCsFixer\Config())
     ->setRules([
         '@PHP56Migration' => true,
         '@PHP70Migration' => true,
+        '@PHP71Migration' => true,
         '@Symfony' => true,
         'array_syntax' => [
             'syntax' => 'short'
