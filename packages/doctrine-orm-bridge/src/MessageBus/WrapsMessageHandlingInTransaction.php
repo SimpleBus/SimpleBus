@@ -9,26 +9,17 @@ use Throwable;
 
 class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
-    /**
-     * @var ManagerRegistry
-     */
-    private $managerRegistry;
+    private ManagerRegistry $managerRegistry;
 
-    /**
-     * @var string
-     */
-    private $entityManagerName;
+    private string $entityManagerName;
 
-    /**
-     * @param string $entityManagerName
-     */
-    public function __construct(ManagerRegistry $managerRegistry, $entityManagerName)
+    public function __construct(ManagerRegistry $managerRegistry, string $entityManagerName)
     {
         $this->managerRegistry = $managerRegistry;
         $this->entityManagerName = $entityManagerName;
     }
 
-    public function handle($message, callable $next)
+    public function handle(object $message, callable $next): void
     {
         /** @var EntityManager $entityManager */
         $entityManager = $this->managerRegistry->getManager($this->entityManagerName);
