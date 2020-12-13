@@ -1,6 +1,7 @@
-/vendor
+.phpunit.result.cache
+/.php_cs.cache
 /composer.lock
 /phpunit.xml
-/split/git-subsplit
 /split/.subsplit
-.phpunit.result.cache
+/split/git-subsplit
+/vendor

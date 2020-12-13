@@ -25,7 +25,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
 
     protected function getEntityDirectories(): array
     {
-        return array(__DIR__.'/Fixtures/Entity');
+        return [__DIR__.'/Fixtures/Entity'];
     }
 
     protected function setUp(): void

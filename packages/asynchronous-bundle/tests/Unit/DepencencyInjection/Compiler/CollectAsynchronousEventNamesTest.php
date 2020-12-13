@@ -2,7 +2,6 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Unit\DependencyInjection\Compiler;
 
-
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use SimpleBus\AsynchronousBundle\DependencyInjection\Compiler\CollectAsynchronousEventNames;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

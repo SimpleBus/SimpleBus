@@ -15,10 +15,10 @@ class DelegatingAdditionalPropertiesResolverTest extends TestCase
     {
         $message = $this->messageDummy();
 
-        $resolver = new DelegatingAdditionalPropertiesResolver(array(
-            $this->getResolver($message, array('test' => 'a')),
-            $this->getResolver($message, array('test' => 'b', 'priority' => 123)),
-        ));
+        $resolver = new DelegatingAdditionalPropertiesResolver([
+            $this->getResolver($message, ['test' => 'a']),
+            $this->getResolver($message, ['test' => 'b', 'priority' => 123]),
+        ]);
 
         $this->assertSame(['test' => 'b', 'priority' => 123], $resolver->resolveAdditionalPropertiesFor($message));
     }
