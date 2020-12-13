@@ -2,11 +2,13 @@
 
 namespace SimpleBus\Asynchronous\Tests\Consumer;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
+use stdClass;
 
 /**
  * @internal
@@ -17,7 +19,7 @@ class StandardSerializedEnvelopeConsumerTest extends TestCase
     /**
      * @test
      */
-    public function itDeserializesTheEnvelopAndLetsTheMessageBusHandleTheMessage()
+    public function itDeserializesTheEnvelopAndLetsTheMessageBusHandleTheMessage(): void
     {
         $serializedEnvelope = 'serialized envelop';
 
@@ -41,27 +43,24 @@ class StandardSerializedEnvelopeConsumerTest extends TestCase
         $consumer->consume($serializedEnvelope);
     }
 
-    /**
-     * @return object|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function dummyMessage()
+    private function dummyMessage(): stdClass
     {
-        return new \stdClass();
+        return new stdClass();
     }
 
     /**
-     * @return MessageBus|\PHPUnit\Framework\MockObject\MockObject
+     * @return MessageBus|MockObject
      */
     private function mockMessageBus()
     {
-        return $this->createMock('SimpleBus\Message\Bus\MessageBus');
+        return $this->createMock(MessageBus::class);
     }
 
     /**
-     * @return MessageInEnvelopeSerializer|\PHPUnit\Framework\MockObject\MockObject
+     * @return MessageInEnvelopeSerializer|MockObject
      */
     private function mockMessageInEnvelopeSerializer()
     {
-        return $this->createMock('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer');
+        return $this->createMock(MessageInEnvelopeSerializer::class);
     }
 }

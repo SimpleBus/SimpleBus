@@ -10,15 +10,9 @@ use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
  */
 class StandardSerializedEnvelopeConsumer implements SerializedEnvelopeConsumer
 {
-    /**
-     * @var MessageInEnvelopeSerializer
-     */
-    private $messageInEnvelopeSerializer;
+    private MessageInEnvelopeSerializer $messageInEnvelopeSerializer;
 
-    /**
-     * @var MessageBus
-     */
-    private $messageBus;
+    private MessageBus $messageBus;
 
     public function __construct(MessageInEnvelopeSerializer $messageInEnvelopeSerializer, MessageBus $messageBus)
     {
@@ -26,7 +20,7 @@ class StandardSerializedEnvelopeConsumer implements SerializedEnvelopeConsumer
         $this->messageBus = $messageBus;
     }
 
-    public function consume($serializedEnvelope)
+    public function consume(string $serializedEnvelope): void
     {
         $envelope = $this->messageInEnvelopeSerializer->unwrapAndDeserialize($serializedEnvelope);
 

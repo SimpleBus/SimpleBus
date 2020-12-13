@@ -2,9 +2,11 @@
 
 namespace SimpleBus\Asynchronous\Tests\Properties;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
 use SimpleBus\Asynchronous\Properties\DelegatingAdditionalPropertiesResolver;
+use stdClass;
 
 /**
  * @internal
@@ -15,7 +17,7 @@ class DelegatingAdditionalPropertiesResolverTest extends TestCase
     /**
      * @test
      */
-    public function itShouldMergeMultipleResolvers()
+    public function itShouldMergeMultipleResolvers(): void
     {
         $message = $this->messageDummy();
 
@@ -28,13 +30,13 @@ class DelegatingAdditionalPropertiesResolverTest extends TestCase
     }
 
     /**
-     * @param object $message
+     * @param mixed[] $data
      *
-     * @return AdditionalPropertiesResolver|\PHPUnit\Framework\MockObject\MockObject
+     * @return AdditionalPropertiesResolver|MockObject
      */
-    private function getResolver($message, array $data)
+    private function getResolver(object $message, array $data)
     {
-        $resolver = $this->createMock('SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver');
+        $resolver = $this->createMock(AdditionalPropertiesResolver::class);
         $resolver->expects($this->once())
             ->method('resolveAdditionalPropertiesFor')
             ->with($this->identicalTo($message))
@@ -43,11 +45,8 @@ class DelegatingAdditionalPropertiesResolverTest extends TestCase
         return $resolver;
     }
 
-    /**
-     * @return object|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function messageDummy()
+    private function messageDummy(): stdClass
     {
-        return new \stdClass();
+        return new stdClass();
     }
 }

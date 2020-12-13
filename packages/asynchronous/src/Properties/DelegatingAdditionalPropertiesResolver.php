@@ -7,9 +7,12 @@ class DelegatingAdditionalPropertiesResolver implements AdditionalPropertiesReso
     /**
      * @var AdditionalPropertiesResolver[]
      */
-    private $resolvers;
+    private array $resolvers;
 
-    public function __construct($resolvers)
+    /**
+     * @param AdditionalPropertiesResolver[] $resolvers
+     */
+    public function __construct(array $resolvers)
     {
         $this->resolvers = $resolvers;
     }
@@ -17,9 +20,9 @@ class DelegatingAdditionalPropertiesResolver implements AdditionalPropertiesReso
     /**
      * Combine properties.
      *
-     * {@inheritdoc}
+     * @return mixed[]
      */
-    public function resolveAdditionalPropertiesFor($message)
+    public function resolveAdditionalPropertiesFor(object $message): array
     {
         $properties = [];
 

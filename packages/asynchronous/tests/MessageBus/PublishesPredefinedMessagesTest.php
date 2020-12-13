@@ -2,10 +2,12 @@
 
 namespace SimpleBus\Asynchronous\Tests\MessageBus;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\MessageBus\PublishesPredefinedMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Name\MessageNameResolver;
+use stdClass;
 
 /**
  * @internal
@@ -16,7 +18,7 @@ class PublishesPredefinedMessagesTest extends TestCase
     /**
      * @test
      */
-    public function itCallsTheNextMiddlewareAndWhenTheMessageIsHandledItDoesNotPublishIt()
+    public function itCallsTheNextMiddlewareAndWhenTheMessageIsHandledItDoesNotPublishIt(): void
     {
         $message = $this->dummyMessage();
 
@@ -45,7 +47,7 @@ class PublishesPredefinedMessagesTest extends TestCase
     /**
      * @test
      */
-    public function itCallsTheNextMiddlewareAndWhenTheMessageHasNoHandlerItPublishesIt()
+    public function itCallsTheNextMiddlewareAndWhenTheMessageHasNoHandlerItPublishesIt(): void
     {
         $message = $this->dummyMessage();
 
@@ -73,26 +75,23 @@ class PublishesPredefinedMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|Publisher
+     * @return MockObject|Publisher
      */
     private function mockPublisher()
     {
-        return $this->createMock('SimpleBus\Asynchronous\Publisher\Publisher');
+        return $this->createMock(Publisher::class);
     }
 
     /**
-     * @return MessageNameResolver|\PHPUnit\Framework\MockObject\MockObject
+     * @return MessageNameResolver|MockObject
      */
     private function mockNameResolver()
     {
-        return $this->createMock('SimpleBus\Message\Name\MessageNameResolver');
+        return $this->createMock(MessageNameResolver::class);
     }
 
-    /**
-     * @return object|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function dummyMessage()
+    private function dummyMessage(): stdClass
     {
-        return new \stdClass();
+        return new stdClass();
     }
 }

@@ -6,10 +6,8 @@ class EmptyRoutingKeyResolver implements RoutingKeyResolver
 {
     /**
      * Always use an empty routing key.
-     *
-     * {@inheritdoc}
      */
-    public function resolveRoutingKeyFor($message)
+    public function resolveRoutingKeyFor(object $message): string
     {
         return '';
     }
