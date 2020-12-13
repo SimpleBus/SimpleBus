@@ -34,7 +34,6 @@
         "symfony/framework-bundle": "^4.4 || ^5.1"
     },
     "conflict": {
-        "beberlei/assert": "<2.1",
         "jms/serializer": "<3.2.0"
     },
     "require-dev": {
