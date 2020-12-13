@@ -108,7 +108,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     {
         $data = $this->additionalPropertiesResolver()->resolveAdditionalPropertiesFor($this->messageDummy());
 
-        $this->assertSame(array('debug' => 'string'), $data);
+        $this->assertSame(['debug' => 'string'], $data);
     }
 
     /**
@@ -123,7 +123,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
         $this->commandBus()->handle(new AsynchronousCommand());
 
         $data = $container->get('simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.producer_mock')->getAdditionalProperties();
-        $this->assertSame(array('debug' => 'string'), $data);
+        $this->assertSame(['debug' => 'string'], $data);
     }
 
     /**

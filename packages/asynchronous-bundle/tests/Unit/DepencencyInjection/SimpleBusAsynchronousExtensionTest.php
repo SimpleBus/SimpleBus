@@ -2,7 +2,6 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Unit\DependencyInjection;
 
-
 use LogicException;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use SimpleBus\AsynchronousBundle\DependencyInjection\SimpleBusAsynchronousExtension;
@@ -12,9 +11,9 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
 {
     protected function getContainerExtensions() : array
     {
-        return array(
+        return [
             new SimpleBusAsynchronousExtension('simple_bus_asynchronous')
-        );
+        ];
     }
 
     protected function getMinimalConfiguration() : array

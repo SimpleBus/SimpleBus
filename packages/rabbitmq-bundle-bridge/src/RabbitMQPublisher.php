@@ -38,8 +38,7 @@ class RabbitMQPublisher implements Publisher
         RoutingKeyResolver $routingKeyResolver,
         AdditionalPropertiesResolver $additionalPropertiesResolver
     ) {
-        if(!$producer instanceof Producer && !$producer instanceof Fallback && !$producer instanceof ProducerInterface)
-        {
+        if (!$producer instanceof Producer && !$producer instanceof Fallback && !$producer instanceof ProducerInterface) {
             throw new \LogicException('Producer must implement OldSound\RabbitMqBundle\RabbitMq\ProducerInterface or be an instance of OldSound\RabbitMqBundle\RabbitMq\Producer or OldSound\RabbitMqBundle\RabbitMq\Fallback');
         }
 

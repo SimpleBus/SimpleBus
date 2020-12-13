@@ -22,7 +22,7 @@ class CollectAsynchronousEventNames implements CompilerPassInterface
             return;
         }
 
-        $names = array();
+        $names = [];
         $this->collectServiceIds(
             $container,
             'asynchronous_event_subscriber',

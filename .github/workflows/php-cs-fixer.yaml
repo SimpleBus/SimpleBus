@@ -1,0 +1,20 @@
+name: PHP-CS-Fixer
+
+on: [ push ]
+
+env:
+    COMPOSER_ROOT_VERSION: "dev-master"
+
+jobs:
+    php-cs-fixer:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: 7.4
+                  coverage: none
+              env:
+                  COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - run: composer install --no-progress --ansi
+            - run: ./vendor/bin/php-cs-fixer fix --dry-run --diff

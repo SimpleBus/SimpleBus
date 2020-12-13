@@ -22,7 +22,7 @@ class FileLogger extends AbstractLogger
         file_put_contents($this->path, '');
     }
 
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $line = sprintf("%s %s %s\n", $level, $message, json_encode($context));
 

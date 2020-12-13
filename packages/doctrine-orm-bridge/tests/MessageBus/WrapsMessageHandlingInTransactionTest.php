@@ -17,7 +17,7 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
     {
         $nextIsCalled = false;
         $message = $this->dummyMessage();
-        $nextMiddlewareCallable = function($actualMessage) use ($message, &$nextIsCalled) {
+        $nextMiddlewareCallable = function ($actualMessage) use ($message, &$nextIsCalled) {
             $this->assertSame($message, $actualMessage);
             $nextIsCalled = true;
         };
@@ -116,5 +116,4 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
 
 class DummyMessage
 {
-
 }
