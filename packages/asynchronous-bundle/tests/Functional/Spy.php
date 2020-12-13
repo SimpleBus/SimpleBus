@@ -6,5 +6,8 @@ namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
 class Spy
 {
-    public $handled = [];
+    /**
+     * @var object[]
+     */
+    public array $handled = [];
 }
