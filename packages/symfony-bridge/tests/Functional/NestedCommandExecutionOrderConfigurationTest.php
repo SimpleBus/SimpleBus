@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 final class NestedCommandExecutionOrderConfigurationTest extends KernelTestCase
 {
-    /** {@inheritdoc} */
     protected function tearDown(): void
     {
         parent::tearDown();
