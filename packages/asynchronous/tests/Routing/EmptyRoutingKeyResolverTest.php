@@ -5,6 +5,10 @@ namespace SimpleBus\Asynchronous\Tests\Routing;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Routing\EmptyRoutingKeyResolver;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class EmptyRoutingKeyResolverTest extends TestCase
 {
     /**
@@ -17,7 +21,7 @@ class EmptyRoutingKeyResolverTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|object
+     * @return object|\PHPUnit\Framework\MockObject\MockObject
      */
     private function messageDummy()
     {

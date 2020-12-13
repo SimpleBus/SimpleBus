@@ -8,6 +8,10 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineDBALBridge\MessageBus\WrapsMessageHandlingInTransaction;
 use Throwable;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class WrapsMessageHandlingInTransactionTest extends TestCase
 {
     /**

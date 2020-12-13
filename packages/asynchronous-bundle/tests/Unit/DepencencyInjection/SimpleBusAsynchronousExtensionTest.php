@@ -7,20 +7,12 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use SimpleBus\AsynchronousBundle\DependencyInjection\SimpleBusAsynchronousExtension;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
 {
-    protected function getContainerExtensions(): array
-    {
-        return [
-            new SimpleBusAsynchronousExtension('simple_bus_asynchronous'),
-        ];
-    }
-
-    protected function getMinimalConfiguration(): array
-    {
-        return ['object_serializer_service_id' => 'my_serializer', 'commands' => ['publisher_service_id' => 'pusher'], 'events' => ['publisher_service_id' => 'pusher']];
-    }
-
     /**
      * @test
      */
@@ -77,5 +69,17 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
 
         $this->container->setParameter('kernel.bundles', ['SimpleBusCommandBusBundle' => true]);
         $this->load(['events' => ['strategy' => 'predefined']]);
+    }
+
+    protected function getContainerExtensions(): array
+    {
+        return [
+            new SimpleBusAsynchronousExtension('simple_bus_asynchronous'),
+        ];
+    }
+
+    protected function getMinimalConfiguration(): array
+    {
+        return ['object_serializer_service_id' => 'my_serializer', 'commands' => ['publisher_service_id' => 'pusher'], 'events' => ['publisher_service_id' => 'pusher']];
     }
 }

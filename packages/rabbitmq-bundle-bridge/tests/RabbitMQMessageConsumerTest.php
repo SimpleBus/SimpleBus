@@ -11,6 +11,10 @@ use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumed;
 use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use SimpleBus\RabbitMQBundleBridge\RabbitMQMessageConsumer;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class RabbitMQMessageConsumerTest extends TestCase
 {
     /**

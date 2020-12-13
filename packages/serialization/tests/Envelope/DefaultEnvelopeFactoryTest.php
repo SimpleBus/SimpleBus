@@ -6,6 +6,10 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\Serialization\Envelope\DefaultEnvelopeFactory;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class DefaultEnvelopeFactoryTest extends TestCase
 {
     /**

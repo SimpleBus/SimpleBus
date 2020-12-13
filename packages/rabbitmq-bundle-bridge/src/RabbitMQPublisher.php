@@ -18,7 +18,7 @@ class RabbitMQPublisher implements Publisher
     private $serializer;
 
     /**
-     * @var Producer|Fallback|ProducerInterface
+     * @var Fallback|Producer|ProducerInterface
      */
     private $producer;
 

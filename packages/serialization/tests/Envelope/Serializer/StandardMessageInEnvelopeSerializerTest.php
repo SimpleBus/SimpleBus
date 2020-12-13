@@ -10,6 +10,10 @@ use SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSeriali
 use SimpleBus\Serialization\ObjectSerializer;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class StandardMessageInEnvelopeSerializerTest extends TestCase
 {
     /**
@@ -142,7 +146,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     /**
      * @param object $message
      *
-     * @return \PHPUnit\Framework\MockObject\MockObject|EnvelopeFactory
+     * @return EnvelopeFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     private function envelopeFactoryCreatesEnvelope($message, Envelope $expectedEnvelope)
     {
@@ -157,7 +161,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|ObjectSerializer
+     * @return ObjectSerializer|\PHPUnit\Framework\MockObject\MockObject
      */
     private function mockObjectSerializer()
     {
@@ -167,7 +171,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     /**
      * @param $envelopeClass
      *
-     * @return \PHPUnit\Framework\MockObject\MockObject|EnvelopeFactory
+     * @return EnvelopeFactory|\PHPUnit\Framework\MockObject\MockObject
      */
     private function envelopeFactoryForEnvelopeClass($envelopeClass)
     {

@@ -12,12 +12,12 @@ class DefaultEnvelope implements Envelope
     private $messageType;
 
     /**
-     * @var object|null
+     * @var null|object
      */
     private $message;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private $serializedMessage;
 

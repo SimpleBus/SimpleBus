@@ -8,6 +8,10 @@ use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Process\Process;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class SimpleBusRabbitMQBundleTest extends KernelTestCase
 {
     /**
@@ -27,11 +31,6 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
      */
     private $timeoutMs = 10000;
 
-    protected static function getKernelClass()
-    {
-        return 'SimpleBus\RabbitMQBundleBridge\Tests\Functional\TestKernel';
-    }
-
     protected function setUp(): void
     {
         static::bootKernel();
@@ -44,6 +43,18 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
             __DIR__
         );
         $process->run();
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        static::$class = null;
+        static::$kernel = null;
+
+        if ($this->process instanceof Process) {
+            $this->process->stop(2, SIGKILL);
+        }
     }
 
     /**
@@ -126,6 +137,11 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
         $this->assertSame(['debug' => 'string'], $data);
     }
 
+    protected static function getKernelClass()
+    {
+        return 'SimpleBus\RabbitMQBundleBridge\Tests\Functional\TestKernel';
+    }
+
     /**
      * @param $message
      */
@@ -185,17 +201,5 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
         );
 
         $this->process->start();
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        static::$class = null;
-        static::$kernel = null;
-
-        if ($this->process instanceof Process) {
-            $this->process->stop(2, SIGKILL);
-        }
     }
 }
