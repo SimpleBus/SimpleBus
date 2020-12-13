@@ -1,12 +1,27 @@
 {
     "name": "simple-bus/simple-bus",
+    "type": "library",
     "description": "Simple CommandBus and EventBus implementation",
+    "keywords": [
+        "message bus",
+        "command bus"
+    ],
     "license": "MIT",
-    "autoload-dev": {
-        "psr-4": {
-            "SimpleBus\\CI\\": "src"
+    "authors": [
+        {
+            "name": "Cliff Odijk",
+            "email": "cliff@jcid.nl"
+        },
+        {
+            "name": "Ruud Kamphuis",
+            "homepage": "https://github.com/ruudk"
+        },
+        {
+            "name": "Matthias Noback",
+            "email": "matthiasnoback@gmail.com",
+            "homepage": "http://php-and-symfony.matthiasnoback.nl"
         }
-    },
+    ],
     "require": {
         "php": "^7.4 || ^8.0"
     },
@@ -14,11 +29,16 @@
         "ext-json": "*",
         "composer/semver": "^3.2",
         "symfony/console": "^4.4 || ^5.1",
-        "symplify/monorepo-builder": "^9.0",
-        "symplify/easy-ci": "^9.0"
+        "symplify/easy-ci": "^9.0",
+        "symplify/monorepo-builder": "^9.0"
     },
     "config": {
         "sort-packages": true
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SimpleBus\\CI\\": "src"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
