@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class TestKernel extends Kernel
 {
-    private $tempDir;
+    private string $tempDir;
 
     public function __construct(string $environment, bool $debug)
     {

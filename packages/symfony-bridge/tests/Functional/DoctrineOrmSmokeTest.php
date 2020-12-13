@@ -27,7 +27,7 @@ class DoctrineOrmSmokeTest extends KernelTestCase
     /**
      * @test
      */
-    public function itHandlesACommandThenDispatchesEventsForAllModifiedEntities()
+    public function itHandlesACommandThenDispatchesEventsForAllModifiedEntities(): void
     {
         if (!class_exists('Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator')) {
             $this->markTestSkipped('This test requires "symfony/proxy-manager-bridge" to be installed.');
@@ -52,7 +52,7 @@ class DoctrineOrmSmokeTest extends KernelTestCase
         $this->assertTrue($container->get('some_other_event_subscriber')->eventHandled);
 
         // it has logged some things
-        $loggedMessages = file_get_contents($container->getParameter('log_file'));
+        $loggedMessages = file_get_contents($container->getParameter('log_file')) ?: '';
         $this->assertStringContainsString('command_bus.DEBUG: Started handling a message', $loggedMessages);
         $this->assertStringContainsString('command_bus.DEBUG: Finished handling a message', $loggedMessages);
         $this->assertStringContainsString('event_bus.DEBUG: Started handling a message', $loggedMessages);
@@ -64,7 +64,7 @@ class DoctrineOrmSmokeTest extends KernelTestCase
     /**
      * @test
      */
-    public function failsBecauseOfMisingDependency()
+    public function failsBecauseOfMisingDependency(): void
     {
         if (class_exists('Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator')) {
             $this->markTestSkipped('This test requires "symfony/proxy-manager-bridge" to NOT be installed.');
@@ -78,15 +78,15 @@ class DoctrineOrmSmokeTest extends KernelTestCase
         self::bootKernel(['environment' => 'config2']);
     }
 
-    protected static function getKernelClass()
+    protected static function getKernelClass(): string
     {
         return DoctrineTestKernel::class;
     }
 
-    private function createSchema(ContainerInterface $container)
+    private function createSchema(ContainerInterface $container): void
     {
-        $entityManager = $container->get('doctrine.orm.entity_manager');
         /** @var EntityManager $entityManager */
+        $entityManager = $container->get('doctrine.orm.entity_manager');
         $schemaTool = new SchemaTool($entityManager);
         $schemaTool->createSchema($entityManager->getMetadataFactory()->getAllMetadata());
     }
