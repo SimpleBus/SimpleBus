@@ -1,6 +1,6 @@
 # SimpleBus/DoctrineDBALBridge
 
-[![Build Status](https://travis-ci.org/SimpleBus/DoctrineDBALBridge.svg?branch=master)](https://travis-ci.org/SimpleBus/DoctrineDBALBridge)
+[![Tests Actions Status](https://github.com/SimpleBus/SimpleBus/workflows/Tests/badge.svg)](https://github.com/SimpleBus/SimpleBus/actions)
 
 By [Jasper N. Brouwer](https://github.com/jaspernbrouwer)
 
