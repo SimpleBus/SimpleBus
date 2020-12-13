@@ -2,10 +2,12 @@
 
 namespace SimpleBus\DoctrineDBALBridge\Tests\MessageBus;
 
+use Doctrine\DBAL\Driver\Connection;
 use Error;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineDBALBridge\MessageBus\WrapsMessageHandlingInTransaction;
+use stdClass;
 use Throwable;
 
 /**
@@ -17,17 +19,17 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
     /**
      * @test
      */
-    public function itWrapsTheNextMiddlewareInATransaction()
+    public function itWrapsTheNextMiddlewareInATransaction(): void
     {
         $nextIsCalled = false;
-        $message = new \stdClass();
+        $message = new stdClass();
 
-        $nextMiddlewareCallable = function (\stdClass $actualMessage) use ($message, &$nextIsCalled) {
+        $nextMiddlewareCallable = function (stdClass $actualMessage) use ($message, &$nextIsCalled) {
             $this->assertSame($message, $actualMessage);
             $nextIsCalled = true;
         };
 
-        $connection = $this->createMock('Doctrine\DBAL\Driver\Connection');
+        $connection = $this->createMock(Connection::class);
         $connection
             ->expects($this->once())
             ->method('beginTransaction');
@@ -42,11 +44,18 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
         $this->assertTrue($nextIsCalled);
     }
 
+    /**
+     * @return array<Throwable[]>
+     */
     public function errorProvider(): array
     {
         return [
-            [new Exception()],
-            [new Error()],
+            [
+                new Exception(),
+            ],
+            [
+                new Error(),
+            ],
         ];
     }
 
@@ -54,15 +63,15 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
      * @test
      * @dataProvider errorProvider
      */
-    public function itRollsTheTransactionBackWhenAnThrowableIsThrown(Throwable $error)
+    public function itRollsTheTransactionBackWhenAnThrowableIsThrown(Throwable $error): void
     {
-        $message = new \stdClass();
+        $message = new stdClass();
 
         $nextMiddlewareCallable = function () use ($error) {
             throw $error;
         };
 
-        $connection = $this->createMock('Doctrine\DBAL\Driver\Connection');
+        $connection = $this->createMock(Connection::class);
         $connection
             ->expects($this->once())
             ->method('beginTransaction');
