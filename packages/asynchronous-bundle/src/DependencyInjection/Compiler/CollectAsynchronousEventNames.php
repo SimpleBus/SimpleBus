@@ -12,8 +12,6 @@ class CollectAsynchronousEventNames implements CompilerPassInterface
 
     /**
      * Get all asynchronous event subscribers and save the name of the event they are listening to.
-     *
-     * @param ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)
     {

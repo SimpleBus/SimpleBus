@@ -14,7 +14,7 @@ class LogErrorWhenMessageConsumptionFailedTest extends TestCase
     /**
      * @test
      */
-    public function it_logs_the_error()
+    public function itLogsTheError()
     {
         $exception = new Exception();
         $message = new AMQPMessage();

@@ -33,10 +33,9 @@ class PublishesUnhandledMessages implements MessageBusMiddleware
 
     /**
      * Handle the message by letting the next middleware handle it. If no handler is defined for this message, then
-     * it is published to be processed asynchronously
+     * it is published to be processed asynchronously.
      *
      * @param object $message
-     * @param callable $next
      */
     public function handle($message, callable $next)
     {
@@ -47,7 +46,7 @@ class PublishesUnhandledMessages implements MessageBusMiddleware
                 $this->logLevel,
                 'No message handler found, trying to handle it asynchronously',
                 [
-                    'type' => get_class($message)
+                    'type' => get_class($message),
                 ]
             );
 

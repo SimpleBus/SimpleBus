@@ -13,10 +13,10 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
     /**
      * @test
      */
-    public function it_wraps_the_next_middleware_in_a_transaction()
+    public function itWrapsTheNextMiddlewareInATransaction()
     {
         $nextIsCalled = false;
-        $message      = new \stdClass();
+        $message = new \stdClass();
 
         $nextMiddlewareCallable = function (\stdClass $actualMessage) use ($message, &$nextIsCalled) {
             $this->assertSame($message, $actualMessage);
@@ -38,11 +38,11 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
         $this->assertTrue($nextIsCalled);
     }
 
-    public function errorProvider() : array
+    public function errorProvider(): array
     {
         return [
             [new Exception()],
-            [new Error()]
+            [new Error()],
         ];
     }
 
@@ -50,9 +50,9 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
      * @test
      * @dataProvider errorProvider
      */
-    public function it_rolls_the_transaction_back_when_an_throwable_is_thrown(Throwable $error)
+    public function itRollsTheTransactionBackWhenAnThrowableIsThrown(Throwable $error)
     {
-        $message      = new \stdClass();
+        $message = new \stdClass();
 
         $nextMiddlewareCallable = function () use ($error) {
             throw $error;

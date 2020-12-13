@@ -22,7 +22,7 @@ class AbstractMessageEvent extends Event
         return $this->message;
     }
 
-    public function stopPropagation() : void
+    public function stopPropagation(): void
     {
         throw new \BadMethodCallException('Propagation should not be stopped');
     }

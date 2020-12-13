@@ -23,7 +23,7 @@ class JMSSerializerMessageSerializerTest extends KernelTestCase
     /**
      * @test
      */
-    public function it_serializes_and_deserializes_messages_in_envelopes()
+    public function itSerializesAndDeserializesMessagesInEnvelopes()
     {
         $kernel = $this->createKernel([
             'debug' => false,
@@ -31,7 +31,6 @@ class JMSSerializerMessageSerializerTest extends KernelTestCase
         $kernel->boot();
         $messageSerializer = $kernel->getContainer()->get('public_message_serializer');
         /** @var MessageInEnvelopeSerializer $messageSerializer */
-
         $originalMessage = new SampleMessage('test', 123);
 
         $serializedMessageEnvelope = $messageSerializer->wrapAndSerialize($originalMessage);

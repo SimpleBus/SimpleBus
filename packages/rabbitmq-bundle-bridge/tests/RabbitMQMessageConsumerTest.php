@@ -16,7 +16,7 @@ class RabbitMQMessageConsumerTest extends TestCase
     /**
      * @test
      */
-    public function it_consumes_the_message_body_as_a_serialized_envelope()
+    public function itConsumesTheMessageBodyAsASerializedEnvelope()
     {
         $serializedEnvelope = 'a serialized envelope';
         $message = $this->newAMQPMessage($serializedEnvelope);
@@ -36,7 +36,7 @@ class RabbitMQMessageConsumerTest extends TestCase
     /**
      * @test
      */
-    public function it_handles_an_error_but_throws_no_exception_if_consuming_the_message_fails()
+    public function itHandlesAnErrorButThrowsNoExceptionIfConsumingTheMessageFails()
     {
         $exception = new Exception('I always fail');
         $serializedEnvelopeConsumer = $this->mockSerializedEnvelopeConsumer();

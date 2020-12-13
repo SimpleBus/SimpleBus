@@ -3,10 +3,10 @@
 namespace SimpleBus\DoctrineORMBridge\EventListener;
 
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\PostFlushEventArgs;
+use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Proxy\Proxy;
-use Doctrine\ORM\Event\PreFlushEventArgs;
-use Doctrine\ORM\Event\PostFlushEventArgs;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
 class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMessages
@@ -17,7 +17,7 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
     {
         return [
             Events::preFlush,
-            Events::postFlush
+            Events::postFlush,
         ];
     }
 
@@ -37,9 +37,7 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
 
     /**
      * We need to listen on postFlush for Lifecycle Events
-     * All Lifecycle callback events are triggered after the onFlush event
-     *
-     * @param PostFlushEventArgs $eventArgs
+     * All Lifecycle callback events are triggered after the onFlush event.
      */
     public function postFlush(PostFlushEventArgs $eventArgs)
     {

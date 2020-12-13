@@ -10,7 +10,7 @@ class RabbitMQPublisherTest extends TestCase
     /**
      * @test
      */
-    public function it_serializes_the_message_and_publishes_it_using_the_resolved_router_key()
+    public function itSerializesTheMessageAndPublishesItUsingTheResolvedRouterKey()
     {
         $message = $this->dummyMessage();
         $routingKey = 'the-routing-key';

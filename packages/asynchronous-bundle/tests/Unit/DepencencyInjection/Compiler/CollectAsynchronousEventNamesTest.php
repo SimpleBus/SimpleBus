@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class CollectAsynchronousEventNamesTest extends AbstractCompilerPassTestCase
 {
-    protected function registerCompilerPass(ContainerBuilder $container) : void
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new CollectAsynchronousEventNames());
     }
@@ -17,7 +17,7 @@ class CollectAsynchronousEventNamesTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function if_compiler_pass_collects_event_names()
+    public function ifCompilerPassCollectsEventNames()
     {
         $serviceId = 'simple_bus.asynchronous.publishes_predefined_messages_middleware';
         $middleware = new Definition();
@@ -27,7 +27,7 @@ class CollectAsynchronousEventNamesTest extends AbstractCompilerPassTestCase
         $this->setDefinition($serviceId, $middleware);
 
         $subscriber = new Definition();
-        $subscriber->addTag('asynchronous_event_subscriber', ['subscribes_to'=>'foo']);
+        $subscriber->addTag('asynchronous_event_subscriber', ['subscribes_to' => 'foo']);
         $this->setDefinition('event_subscriber', $subscriber);
 
         $this->compile();

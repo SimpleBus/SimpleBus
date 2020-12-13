@@ -37,7 +37,7 @@ class LogErrorWhenMessageConsumptionFailed implements EventSubscriberInterface
     }
 
     /**
-     * Log the failed message and the related exception
+     * Log the failed message and the related exception.
      */
     public function messageConsumptionFailed(MessageConsumptionFailed $event)
     {
@@ -46,7 +46,7 @@ class LogErrorWhenMessageConsumptionFailed implements EventSubscriberInterface
             $this->logMessage,
             [
                 'exception' => $event->exception(),
-                'message' => $event->message()
+                'message' => $event->message(),
             ]
         );
     }

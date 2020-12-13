@@ -24,9 +24,7 @@ class PublishesPredefinedMessages implements MessageBusMiddleware
     private $names;
 
     /**
-     * @param Publisher $publisher
-     * @param MessageNameResolver $messageNameResolver
-     * @param array $names an array with names on messages to be published.
+     * @param array $names an array with names on messages to be published
      */
     public function __construct(Publisher $publisher, MessageNameResolver $messageNameResolver, array $names)
     {
@@ -36,7 +34,7 @@ class PublishesPredefinedMessages implements MessageBusMiddleware
     }
 
     /**
-     * Handle a message by publishing it to a queue (always), then calling the next middleware
+     * Handle a message by publishing it to a queue (always), then calling the next middleware.
      *
      * {@inheritdoc}
      */

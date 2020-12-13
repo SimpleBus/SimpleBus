@@ -18,7 +18,7 @@ class AlwaysPublishesMessages implements MessageBusMiddleware
     }
 
     /**
-     * Handle a message by publishing it to a queue (always), then calling the next middleware
+     * Handle a message by publishing it to a queue (always), then calling the next middleware.
      *
      * {@inheritdoc}
      */

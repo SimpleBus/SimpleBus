@@ -11,7 +11,7 @@ class AlwaysPublishesMessagesTest extends TestCase
     /**
      * @test
      */
-    public function it_publishes_a_message_and_calls_the_next_middleware()
+    public function itPublishesAMessageAndCallsTheNextMiddleware()
     {
         $message = $this->dummyMessage();
         $publisher = $this->mockPublisher();

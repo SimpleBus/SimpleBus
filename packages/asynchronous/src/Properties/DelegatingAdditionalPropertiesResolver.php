@@ -15,7 +15,7 @@ class DelegatingAdditionalPropertiesResolver implements AdditionalPropertiesReso
     }
 
     /**
-     * Combine properties
+     * Combine properties.
      *
      * {@inheritdoc}
      */

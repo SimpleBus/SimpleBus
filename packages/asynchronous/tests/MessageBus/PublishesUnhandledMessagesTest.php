@@ -14,7 +14,7 @@ class PublishesUnhandledMessagesTest extends TestCase
     /**
      * @test
      */
-    public function it_calls_the_next_middleware_and_when_the_message_is_handled_it_does_not_publish_it()
+    public function itCallsTheNextMiddlewareAndWhenTheMessageIsHandledItDoesNotPublishIt()
     {
         $message = $this->dummyMessage();
 
@@ -39,7 +39,7 @@ class PublishesUnhandledMessagesTest extends TestCase
     /**
      * @test
      */
-    public function it_calls_the_next_middleware_and_when_the_message_has_no_handler_it_publishes_it()
+    public function itCallsTheNextMiddlewareAndWhenTheMessageHasNoHandlerItPublishesIt()
     {
         $message = $this->dummyMessage();
 

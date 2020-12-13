@@ -11,7 +11,7 @@ class DefaultEnvelopeFactoryTest extends TestCase
     /**
      * @test
      */
-    public function it_creates_a_default_message_envelope()
+    public function itCreatesADefaultMessageEnvelope()
     {
         $factory = new DefaultEnvelopeFactory();
 
@@ -25,7 +25,7 @@ class DefaultEnvelopeFactoryTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_the_class_of_the_default_message_envelope()
+    public function itReturnsTheClassOfTheDefaultMessageEnvelope()
     {
         $factory = new DefaultEnvelopeFactory();
 

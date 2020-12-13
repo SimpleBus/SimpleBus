@@ -39,7 +39,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
     /**
      * @test
      */
-    public function it_collects_events_from_persisted_entities_and_erases_them_afterwards()
+    public function itCollectsEventsFromPersistedEntitiesAndErasesThemAfterwards()
     {
         $entity = new EventRecordingEntity();
 
@@ -52,7 +52,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
     /**
      * @test
      */
-    public function it_collects_events_from_modified_entities_and_erases_them_afterwards()
+    public function itCollectsEventsFromModifiedEntitiesAndErasesThemAfterwards()
     {
         $entity = new EventRecordingEntity();
         $this->persistAndFlush($entity);
@@ -69,7 +69,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
     /**
      * @test
      */
-    public function it_collects_events_from_removed_entities_and_erases_them_afterwards()
+    public function itCollectsEventsFromRemovedEntitiesAndErasesThemAfterwards()
     {
         $entity = new EventRecordingEntity();
         $this->persistAndFlush($entity);
@@ -86,7 +86,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
     /**
      * @test
      */
-    public function it_collects_events_from_not_dirty_entities_and_erases_them_afterwards()
+    public function itCollectsEventsFromNotDirtyEntitiesAndErasesThemAfterwards()
     {
         $entity = new EventRecordingEntity();
         $this->persistAndFlush($entity);
@@ -103,7 +103,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
     /**
      * @test
      */
-    public function it_collects_events_from_pre_persist_lifecycle_callbacks_of_entities_and_erases_them_afterwards()
+    public function itCollectsEventsFromPrePersistLifecycleCallbacksOfEntitiesAndErasesThemAfterwards()
     {
         $entity = new EventRecordingEntity();
         $this->persistAndFlush($entity);
@@ -116,7 +116,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
     /**
      * @test
      */
-    public function it_collects_events_from_pre_update_lifecycle_callbacks_of_dirty_entities_and_erases_them_afterwards()
+    public function itCollectsEventsFromPreUpdateLifecycleCallbacksOfDirtyEntitiesAndErasesThemAfterwards()
     {
         $entity = new EventRecordingEntity();
         $this->persistAndFlush($entity);

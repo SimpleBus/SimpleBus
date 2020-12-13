@@ -3,17 +3,17 @@
 namespace SimpleBus\JMSSerializerBundleBridge\DependencyInjection;
 
 use SimpleBus\JMSSerializerBridge\SerializerMetadata;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class SimpleBusJMSSerializerBundleBridgeExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $config, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
 
@@ -29,17 +29,17 @@ class SimpleBusJMSSerializerBundleBridgeExtension extends Extension implements P
                     'directories' => [
                         'AsynchronousEvents' => [
                             'path' => SerializerMetadata::directory(),
-                            'namespace_prefix' => SerializerMetadata::namespacePrefix()
-                        ]
-                    ]
-                ]
+                            'namespace_prefix' => SerializerMetadata::namespacePrefix(),
+                        ],
+                    ],
+                ],
             ]
         );
 
         $container->prependExtensionConfig(
             'simple_bus_asynchronous',
             [
-                'object_serializer_service_id' => 'simple_bus.jms_serializer.object_serializer'
+                'object_serializer_service_id' => 'simple_bus.jms_serializer.object_serializer',
             ]
         );
     }
@@ -48,12 +48,7 @@ class SimpleBusJMSSerializerBundleBridgeExtension extends Extension implements P
     {
         $enabledBundles = $container->getParameter('kernel.bundles');
         if (!isset($enabledBundles[$bundleName])) {
-            throw new \LogicException(
-                sprintf(
-                    'You need to enable "%s" as well',
-                    $bundleName
-                )
-            );
+            throw new \LogicException(sprintf('You need to enable "%s" as well', $bundleName));
         }
     }
 }
