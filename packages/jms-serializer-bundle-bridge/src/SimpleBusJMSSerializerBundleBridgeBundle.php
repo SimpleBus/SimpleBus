@@ -7,7 +7,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SimpleBusJMSSerializerBundleBridgeBundle extends Bundle
 {
-    public function getContainerExtension()
+    public function getContainerExtension(): SimpleBusJMSSerializerBundleBridgeExtension
     {
         return new SimpleBusJMSSerializerBundleBridgeExtension();
     }

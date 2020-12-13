@@ -9,14 +9,14 @@ class SampleMessage
     /**
      * @Serializer\Type("string")
      */
-    private $foo;
+    private string $foo;
 
     /**
      * @Serializer\Type("integer")
      */
-    private $bar;
+    private int $bar;
 
-    public function __construct($foo, $bar)
+    public function __construct(string $foo, int $bar)
     {
         $this->foo = $foo;
         $this->bar = $bar;
