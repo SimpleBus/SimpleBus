@@ -30,8 +30,8 @@ class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 
     public function handle($message, callable $next)
     {
+        /** @var $entityManager EntityManager */
         $entityManager = $this->managerRegistry->getManager($this->entityManagerName);
-        /* @var $entityManager EntityManager */
 
         try {
             $entityManager->transactional(

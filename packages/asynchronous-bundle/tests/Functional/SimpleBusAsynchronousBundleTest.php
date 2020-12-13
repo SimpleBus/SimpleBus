@@ -30,16 +30,16 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $kernel->boot();
 
         $event = new DummyEvent();
+        /** @var MessageBus $eventBus */
         $eventBus = $kernel->getContainer()->get('event_bus');
-        /* @var MessageBus $eventBus */
         $eventBus->handle($event);
 
+        /** @var Spy $spy */
         $spy = $kernel->getContainer()->get('spy');
-        /* @var Spy $spy */
         $this->assertSame([$event], $spy->handled);
 
+        /** @var PublisherSpy $eventPublisher */
         $eventPublisher = $kernel->getContainer()->get('event_publisher_spy');
-        /* @var PublisherSpy $eventPublisher */
         $this->assertSame([$event], $eventPublisher->publishedMessages());
     }
 
@@ -52,16 +52,16 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $kernel->boot();
 
         $event = new DummyEvent();
+        /** @var MessageBus $asynchronousEventBus */
         $asynchronousEventBus = $kernel->getContainer()->get('asynchronous_event_bus');
-        /* @var MessageBus $asynchronousEventBus */
         $asynchronousEventBus->handle($event);
 
+        /** @var Spy $spy */
         $spy = $kernel->getContainer()->get('spy');
-        /* @var Spy $spy */
         $this->assertSame([$event], $spy->handled);
 
+        /** @var PublisherSpy $eventPublisher */
         $eventPublisher = $kernel->getContainer()->get('event_publisher_spy');
-        /* @var PublisherSpy $eventPublisher */
         $this->assertSame([], $eventPublisher->publishedMessages());
     }
 
@@ -74,12 +74,12 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $kernel->boot();
 
         $command = new DummyCommand();
+        /** @var MessageBus $commandBus */
         $commandBus = $kernel->getContainer()->get('command_bus');
-        /* @var MessageBus $commandBus */
         $commandBus->handle($command);
 
+        /** @var PublisherSpy $commandPublisher */
         $commandPublisher = $kernel->getContainer()->get('command_publisher_spy');
-        /* @var PublisherSpy $commandPublisher */
         $this->assertSame([$command], $commandPublisher->publishedMessages());
     }
 
@@ -92,16 +92,16 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $kernel->boot();
 
         $command = new DummyCommand();
+        /** @var MessageBus $asynchronousCommandBus */
         $asynchronousCommandBus = $kernel->getContainer()->get('asynchronous_command_bus');
-        /* @var MessageBus $asynchronousCommandBus */
         $asynchronousCommandBus->handle($command);
 
+        /** @var PublisherSpy $commandPublisher */
         $commandPublisher = $kernel->getContainer()->get('command_publisher_spy');
-        /* @var PublisherSpy $commandPublisher */
         $this->assertSame([], $commandPublisher->publishedMessages());
 
+        /** @var Spy $spy */
         $spy = $kernel->getContainer()->get('spy');
-        /* @var Spy $spy */
         $this->assertSame([$command], $spy->handled);
     }
 
@@ -119,8 +119,8 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $commandConsumer = $kernel->getContainer()->get('asynchronous_command_consumer');
         $commandConsumer->consume(serialize($envelope));
 
+        /** @var Spy $spy */
         $spy = $kernel->getContainer()->get('spy');
-        /* @var Spy $spy */
         $this->assertEquals([new DummyCommand()], $spy->handled);
     }
 
@@ -138,8 +138,8 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $commandConsumer = $kernel->getContainer()->get('asynchronous_event_consumer');
         $commandConsumer->consume(serialize($envelope));
 
+        /** @var Spy $spy */
         $spy = $kernel->getContainer()->get('spy');
-        /* @var Spy $spy */
         $this->assertEquals([$event], $spy->handled);
     }
 }
