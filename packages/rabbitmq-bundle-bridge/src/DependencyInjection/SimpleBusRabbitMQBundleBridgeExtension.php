@@ -2,6 +2,7 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\DependencyInjection;
 
+use LogicException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -10,14 +11,14 @@ use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
-    private $alias;
+    private string $alias;
 
-    public function __construct($alias)
+    public function __construct(string $alias)
     {
         $this->alias = $alias;
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $this->requireBundle('SimpleBusAsynchronousBundle', $container);
         $this->requireBundle('OldSoundRabbitMqBundle', $container);
@@ -49,12 +50,18 @@ class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension imple
         }
     }
 
-    public function getConfiguration(array $config, ContainerBuilder $container)
+    /**
+     * @param mixed[] $config
+     */
+    public function getConfiguration(array $config, ContainerBuilder $container): Configuration
     {
         return new Configuration($this->alias);
     }
 
-    protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
+    /**
+     * @param mixed[] $mergedConfig
+     */
+    protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
@@ -103,11 +110,11 @@ class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension imple
         $loader->load('properties.yml');
     }
 
-    private function requireBundle($bundleName, ContainerBuilder $container)
+    private function requireBundle(string $bundleName, ContainerBuilder $container): void
     {
         $enabledBundles = $container->getParameter('kernel.bundles');
         if (!isset($enabledBundles[$bundleName])) {
-            throw new \LogicException(sprintf('You need to enable "%s" as well', $bundleName));
+            throw new LogicException(sprintf('You need to enable "%s" as well', $bundleName));
         }
     }
 }

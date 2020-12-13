@@ -7,10 +7,7 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class MessageConsumptionFailed extends AbstractMessageEvent
 {
-    /**
-     * @var Exception
-     */
-    private $exception;
+    private Exception $exception;
 
     public function __construct(AMQPMessage $message, Exception $exception)
     {
@@ -19,7 +16,7 @@ class MessageConsumptionFailed extends AbstractMessageEvent
         $this->exception = $exception;
     }
 
-    public function exception()
+    public function exception(): Exception
     {
         return $this->exception;
     }

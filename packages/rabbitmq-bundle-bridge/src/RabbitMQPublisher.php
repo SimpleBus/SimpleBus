@@ -12,36 +12,23 @@ use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 
 class RabbitMQPublisher implements Publisher
 {
-    /**
-     * @var MessageInEnvelopeSerializer
-     */
-    private $serializer;
+    private MessageInEnvelopeSerializer $serializer;
+
+    private ProducerInterface $producer;
+
+    private RoutingKeyResolver $routingKeyResolver;
+
+    private AdditionalPropertiesResolver $additionalPropertiesResolver;
 
     /**
-     * @var Fallback|Producer|ProducerInterface
+     * @param Fallback|Producer|ProducerInterface $producer
      */
-    private $producer;
-
-    /**
-     * @var RoutingKeyResolver
-     */
-    private $routingKeyResolver;
-
-    /**
-     * @var AdditionalPropertiesResolver
-     */
-    private $additionalPropertiesResolver;
-
     public function __construct(
         MessageInEnvelopeSerializer $messageSerializer,
         $producer,
         RoutingKeyResolver $routingKeyResolver,
         AdditionalPropertiesResolver $additionalPropertiesResolver
     ) {
-        if (!$producer instanceof Producer && !$producer instanceof Fallback && !$producer instanceof ProducerInterface) {
-            throw new \LogicException('Producer must implement OldSound\RabbitMqBundle\RabbitMq\ProducerInterface or be an instance of OldSound\RabbitMqBundle\RabbitMq\Producer or OldSound\RabbitMqBundle\RabbitMq\Fallback');
-        }
-
         $this->serializer = $messageSerializer;
         $this->producer = $producer;
         $this->routingKeyResolver = $routingKeyResolver;
@@ -50,10 +37,8 @@ class RabbitMQPublisher implements Publisher
 
     /**
      * Publish the given Message by serializing it and handing it over to a RabbitMQ producer.
-     *
-     * {@inheritdoc}
      */
-    public function publish($message)
+    public function publish(object $message): void
     {
         $serializedMessage = $this->serializer->wrapAndSerialize($message);
         $routingKey = $this->routingKeyResolver->resolveRoutingKeyFor($message);

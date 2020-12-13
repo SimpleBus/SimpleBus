@@ -6,17 +6,14 @@ use Psr\Log\LoggerInterface;
 
 class LoggingEventSubscriber
 {
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
-    public function notify($message)
+    public function notify(object $message): void
     {
         $this->logger->debug('Notified of message', ['type' => get_class($message)]);
     }

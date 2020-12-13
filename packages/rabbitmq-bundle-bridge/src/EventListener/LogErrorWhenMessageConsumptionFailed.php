@@ -9,37 +9,33 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class LogErrorWhenMessageConsumptionFailed implements EventSubscriberInterface
 {
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /**
-     * @var string
-     */
-    private $logLevel;
+    private string $logLevel;
 
-    /**
-     * @var string
-     */
-    private $logMessage;
+    private string $logMessage;
 
-    public function __construct(LoggerInterface $logger, $logLevel, $logMessage)
+    public function __construct(LoggerInterface $logger, string $logLevel, string $logMessage)
     {
         $this->logger = $logger;
         $this->logLevel = $logLevel;
         $this->logMessage = $logMessage;
     }
 
-    public static function getSubscribedEvents()
+    /**
+     * @return array<string, string>
+     */
+    public static function getSubscribedEvents(): array
     {
-        return [Events::MESSAGE_CONSUMPTION_FAILED => 'messageConsumptionFailed'];
+        return [
+            Events::MESSAGE_CONSUMPTION_FAILED => 'messageConsumptionFailed',
+        ];
     }
 
     /**
      * Log the failed message and the related exception.
      */
-    public function messageConsumptionFailed(MessageConsumptionFailed $event)
+    public function messageConsumptionFailed(MessageConsumptionFailed $event): void
     {
         $this->logger->log(
             $this->logLevel,

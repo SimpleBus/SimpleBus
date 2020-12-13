@@ -25,6 +25,7 @@ parameters:
 
     ignoreErrors:
         - "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"
+        - "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:addDefaultsIfNotSet\\(\\)\\.$#"
 
         # See https://github.com/SimpleBus/SimpleBus/issues/107
         - message: "#^Access to an undefined property Doctrine\\\\ORM\\\\Proxy\\\\Proxy&SimpleBus\\\\Message\\\\Recorder\\\\ContainsRecordedMessages\\:\\:\\$__isInitialized__\\.$#"

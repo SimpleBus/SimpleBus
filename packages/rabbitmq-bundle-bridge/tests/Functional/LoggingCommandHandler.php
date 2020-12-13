@@ -6,17 +6,14 @@ use Psr\Log\LoggerInterface;
 
 class LoggingCommandHandler
 {
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
+    private LoggerInterface $logger;
 
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
-    public function handle($message)
+    public function handle(object $message): void
     {
         $this->logger->debug('Handling message', ['type' => get_class($message)]);
     }

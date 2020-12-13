@@ -7,16 +7,22 @@ use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
 class AdditionalPropertiesResolverArray implements AdditionalPropertiesResolver
 {
     /**
-     * @var array
+     * @var array<string, string>
      */
-    private $data;
+    private array $data;
 
+    /**
+     * @param array<string, string> $data
+     */
     public function __construct(array $data)
     {
         $this->data = $data;
     }
 
-    public function resolveAdditionalPropertiesFor($message)
+    /**
+     * @return array<string, string>
+     */
+    public function resolveAdditionalPropertiesFor(object $message): array
     {
         return $this->data;
     }
