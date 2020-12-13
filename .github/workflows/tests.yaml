@@ -16,7 +16,10 @@ jobs:
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            -   run: composer install --no-progress --ansi
+            # Remove `ignore-platform-req` when these issues are fixed
+            # https://github.com/php-amqplib/php-amqplib/issues/846
+            # https://github.com/schmittjoh/JMSSerializerBundle/pull/819
+            -   run: composer install --no-progress --ansi --ignore-platform-req php
             -   run: vendor/bin/monorepo-builder validate
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
@@ -81,7 +84,10 @@ jobs:
                     rabbitmq password: 'guest'
                     rabbitmq vhost: '/'
 
-            -   run: composer install --no-progress --ansi
+            # Remove `ignore-platform-req` when these issues are fixed
+            # https://github.com/php-amqplib/php-amqplib/issues/846
+            # https://github.com/schmittjoh/JMSSerializerBundle/pull/819
+            -   run: composer install --no-progress --ansi --ignore-platform-req php
 
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
 
