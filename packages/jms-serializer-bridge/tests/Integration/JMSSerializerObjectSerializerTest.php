@@ -32,6 +32,6 @@ class JMSSerializerObjectSerializerTest extends TestCase
         $objectSerializer = new JMSSerializerObjectSerializer($jmsSerializer, $format);
         $serializedEnvelope = $objectSerializer->serialize($originalEnvelope);
         $deserializedMessage = $objectSerializer->deserialize($serializedEnvelope, get_class($originalEnvelope));
-        $this->assertEquals($deserializedMessage, $originalEnvelope);
+        $this->assertEquals($originalEnvelope, $deserializedMessage);
     }
 }
