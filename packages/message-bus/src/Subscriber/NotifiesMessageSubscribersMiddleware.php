@@ -19,7 +19,7 @@ class NotifiesMessageSubscribersMiddleware implements MessageBusMiddleware
     public function __construct(
         MessageSubscribersResolver $messageSubscribersResolver,
         LoggerInterface $logger = null,
-        string $level = LogLevel::DEBUG
+        string $level = null
     ) {
         $this->messageSubscribersResolver = $messageSubscribersResolver;
 
@@ -29,7 +29,7 @@ class NotifiesMessageSubscribersMiddleware implements MessageBusMiddleware
             $this->logger = $logger;
         }
 
-        $this->level = $level;
+        $this->level = $level ?? LogLevel::DEBUG;
     }
 
     public function handle(object $message, callable $next): void
