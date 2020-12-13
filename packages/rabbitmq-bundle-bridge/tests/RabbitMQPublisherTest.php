@@ -5,6 +5,10 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\RabbitMQBundleBridge\RabbitMQPublisher;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class RabbitMQPublisherTest extends TestCase
 {
     /**

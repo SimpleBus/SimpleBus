@@ -6,6 +6,10 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
 use SimpleBus\Asynchronous\Properties\DelegatingAdditionalPropertiesResolver;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class DelegatingAdditionalPropertiesResolverTest extends TestCase
 {
     /**
@@ -26,7 +30,7 @@ class DelegatingAdditionalPropertiesResolverTest extends TestCase
     /**
      * @param object $message
      *
-     * @return \PHPUnit\Framework\MockObject\MockObject|AdditionalPropertiesResolver
+     * @return AdditionalPropertiesResolver|\PHPUnit\Framework\MockObject\MockObject
      */
     private function getResolver($message, array $data)
     {
@@ -40,7 +44,7 @@ class DelegatingAdditionalPropertiesResolverTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|object
+     * @return object|\PHPUnit\Framework\MockObject\MockObject
      */
     private function messageDummy()
     {

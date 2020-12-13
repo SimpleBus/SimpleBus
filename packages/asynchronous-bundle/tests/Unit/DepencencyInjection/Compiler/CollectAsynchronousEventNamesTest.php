@@ -7,13 +7,12 @@ use SimpleBus\AsynchronousBundle\DependencyInjection\Compiler\CollectAsynchronou
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class CollectAsynchronousEventNamesTest extends AbstractCompilerPassTestCase
 {
-    protected function registerCompilerPass(ContainerBuilder $container): void
-    {
-        $container->addCompilerPass(new CollectAsynchronousEventNames());
-    }
-
     /**
      * @test
      */
@@ -33,5 +32,10 @@ class CollectAsynchronousEventNamesTest extends AbstractCompilerPassTestCase
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithArgument($serviceId, 2, ['foo']);
+    }
+
+    protected function registerCompilerPass(ContainerBuilder $container): void
+    {
+        $container->addCompilerPass(new CollectAsynchronousEventNames());
     }
 }

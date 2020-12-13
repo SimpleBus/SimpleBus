@@ -5,13 +5,12 @@ namespace SimpleBus\JMSSerializerBundleBridge\Tests\Functional;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class JMSSerializerMessageSerializerTest extends KernelTestCase
 {
-    protected static function getKernelClass()
-    {
-        return 'SimpleBus\JMSSerializerBundleBridge\Tests\Functional\TestKernel';
-    }
-
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -36,5 +35,10 @@ class JMSSerializerMessageSerializerTest extends KernelTestCase
         $serializedMessageEnvelope = $messageSerializer->wrapAndSerialize($originalMessage);
         $deserializedEnvelope = $messageSerializer->unwrapAndDeserialize($serializedMessageEnvelope);
         $this->assertEquals($deserializedEnvelope->message(), $originalMessage);
+    }
+
+    protected static function getKernelClass()
+    {
+        return 'SimpleBus\JMSSerializerBundleBridge\Tests\Functional\TestKernel';
     }
 }

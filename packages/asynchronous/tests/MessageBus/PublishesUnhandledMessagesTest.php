@@ -9,6 +9,10 @@ use SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\CallableResolver\Exception\UndefinedCallable;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class PublishesUnhandledMessagesTest extends TestCase
 {
     /**
@@ -84,7 +88,7 @@ class PublishesUnhandledMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|object
+     * @return object|\PHPUnit\Framework\MockObject\MockObject
      */
     private function dummyMessage()
     {
@@ -92,7 +96,7 @@ class PublishesUnhandledMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|LoggerInterface
+     * @return LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function dummyLogger()
     {
@@ -100,7 +104,7 @@ class PublishesUnhandledMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|LoggerInterface
+     * @return LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function mockLogger()
     {

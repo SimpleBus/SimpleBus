@@ -7,6 +7,10 @@ use SimpleBus\Asynchronous\MessageBus\PublishesPredefinedMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Name\MessageNameResolver;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class PublishesPredefinedMessagesTest extends TestCase
 {
     /**
@@ -77,7 +81,7 @@ class PublishesPredefinedMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|MessageNameResolver
+     * @return MessageNameResolver|\PHPUnit\Framework\MockObject\MockObject
      */
     private function mockNameResolver()
     {
@@ -85,7 +89,7 @@ class PublishesPredefinedMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|object
+     * @return object|\PHPUnit\Framework\MockObject\MockObject
      */
     private function dummyMessage()
     {

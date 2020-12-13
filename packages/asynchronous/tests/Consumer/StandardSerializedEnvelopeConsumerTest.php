@@ -8,6 +8,10 @@ use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class StandardSerializedEnvelopeConsumerTest extends TestCase
 {
     /**
@@ -38,7 +42,7 @@ class StandardSerializedEnvelopeConsumerTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|object
+     * @return object|\PHPUnit\Framework\MockObject\MockObject
      */
     private function dummyMessage()
     {
@@ -46,7 +50,7 @@ class StandardSerializedEnvelopeConsumerTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|MessageBus
+     * @return MessageBus|\PHPUnit\Framework\MockObject\MockObject
      */
     private function mockMessageBus()
     {
@@ -54,7 +58,7 @@ class StandardSerializedEnvelopeConsumerTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|MessageInEnvelopeSerializer
+     * @return MessageInEnvelopeSerializer|\PHPUnit\Framework\MockObject\MockObject
      */
     private function mockMessageInEnvelopeSerializer()
     {

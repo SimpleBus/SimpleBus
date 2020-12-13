@@ -6,13 +6,12 @@ use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class SimpleBusAsynchronousBundleTest extends KernelTestCase
 {
-    protected static function getKernelClass()
-    {
-        return 'SimpleBus\AsynchronousBundle\Tests\Functional\TestKernel';
-    }
-
     protected function tearDown(): void
     {
         parent::tearDown();
@@ -141,5 +140,10 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         /** @var Spy $spy */
         $spy = $kernel->getContainer()->get('spy');
         $this->assertEquals([$event], $spy->handled);
+    }
+
+    protected static function getKernelClass()
+    {
+        return 'SimpleBus\AsynchronousBundle\Tests\Functional\TestKernel';
     }
 }

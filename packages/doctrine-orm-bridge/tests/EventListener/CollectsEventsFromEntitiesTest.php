@@ -14,6 +14,10 @@ use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityCreated
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityNotDirty;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class CollectsEventsFromEntitiesTest extends TestCase
 {
     use TestCaseWithEntityManager;
@@ -22,11 +26,6 @@ class CollectsEventsFromEntitiesTest extends TestCase
      * @var CollectsEventsFromEntities
      */
     private $eventSubscriber;
-
-    protected function getEntityDirectories(): array
-    {
-        return [__DIR__.'/Fixtures/Entity'];
-    }
 
     protected function setUp(): void
     {
@@ -128,6 +127,11 @@ class CollectsEventsFromEntitiesTest extends TestCase
         $this->assertEquals([new EntityChangedPreUpdate()], $this->eventSubscriber->recordedMessages());
 
         $this->assertEntityHasNoRecordedEvents($entity);
+    }
+
+    protected function getEntityDirectories(): array
+    {
+        return [__DIR__.'/Fixtures/Entity'];
     }
 
     private function persistAndFlush($entity)

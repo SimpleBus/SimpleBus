@@ -6,6 +6,10 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class AlwaysPublishesMessagesTest extends TestCase
 {
     /**
@@ -41,7 +45,7 @@ class AlwaysPublishesMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|object
+     * @return object|\PHPUnit\Framework\MockObject\MockObject
      */
     private function dummyMessage()
     {
