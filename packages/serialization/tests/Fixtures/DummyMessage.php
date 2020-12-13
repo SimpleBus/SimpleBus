@@ -4,5 +4,5 @@ namespace SimpleBus\Serialization\Tests\Fixtures;
 
 class DummyMessage
 {
-    public $foo;
+    public string $foo;
 }

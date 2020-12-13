@@ -4,13 +4,16 @@ namespace SimpleBus\Serialization\Envelope;
 
 class DefaultEnvelopeFactory implements EnvelopeFactory
 {
-    public function wrapMessageInEnvelope($message)
+    public function wrapMessageInEnvelope(object $message): Envelope
     {
         return DefaultEnvelope::forMessage($message);
     }
 
-    public function envelopeClass()
+    /**
+     * @return class-string
+     */
+    public function envelopeClass(): string
     {
-        return 'SimpleBus\Serialization\Envelope\DefaultEnvelope';
+        return DefaultEnvelope::class;
     }
 }

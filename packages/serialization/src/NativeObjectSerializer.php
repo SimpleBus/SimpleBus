@@ -2,14 +2,14 @@
 
 namespace SimpleBus\Serialization;
 
+use LogicException;
+
 class NativeObjectSerializer implements ObjectSerializer
 {
     /**
      * Serialize the given object using the native `serialize()` function.
-     *
-     * {@inheritdoc}
      */
-    public function serialize($object)
+    public function serialize(object $object): string
     {
         return serialize($object);
     }
@@ -17,14 +17,14 @@ class NativeObjectSerializer implements ObjectSerializer
     /**
      * Deserialize the given object using the native `unserialize()` function.
      *
-     * {@inheritdoc}
+     * @param class-string $type
      */
-    public function deserialize($serializedObject, $type)
+    public function deserialize(string $serializedObject, string $type): object
     {
         $deserializedObject = unserialize($serializedObject);
 
         if (!($deserializedObject instanceof $type)) {
-            throw new \LogicException(sprintf('Unserialized object was expected to be of type "%s"', $type));
+            throw new LogicException(sprintf('Unserialized object was expected to be of type "%s"', $type));
         }
 
         return $deserializedObject;

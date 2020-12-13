@@ -2,21 +2,16 @@
 
 namespace SimpleBus\Serialization\Envelope\Serializer;
 
+use LogicException;
 use SimpleBus\Serialization\Envelope\Envelope;
 use SimpleBus\Serialization\Envelope\EnvelopeFactory;
 use SimpleBus\Serialization\ObjectSerializer;
 
 class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
 {
-    /**
-     * @var EnvelopeFactory
-     */
-    private $envelopeFactory;
+    private EnvelopeFactory $envelopeFactory;
 
-    /**
-     * @var \SimpleBus\Serialization\ObjectSerializer
-     */
-    private $objectSerializer;
+    private ObjectSerializer $objectSerializer;
 
     public function __construct(
         EnvelopeFactory $envelopeFactory,
@@ -28,10 +23,8 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
 
     /**
      * Serialize a Message by wrapping it in an Envelope and serializing the envelope.
-     *
-     * {@inheritdoc}
      */
-    public function wrapAndSerialize($message)
+    public function wrapAndSerialize(object $message): string
     {
         $envelope = $this->envelopeFactory->wrapMessageInEnvelope($message);
 
@@ -42,10 +35,8 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
 
     /**
      * Deserialize a Message that was wrapped in an Envelope.
-     *
-     * {@inheritdoc}
      */
-    public function unwrapAndDeserialize($serializedEnvelope)
+    public function unwrapAndDeserialize(string $serializedEnvelope): Envelope
     {
         $envelope = $this->deserializeEnvelope($serializedEnvelope);
 
@@ -56,12 +47,8 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
 
     /**
      * Deserialize the message Envelope.
-     *
-     * @param string $serializedEnvelope
-     *
-     * @return Envelope
      */
-    private function deserializeEnvelope($serializedEnvelope)
+    private function deserializeEnvelope(string $serializedEnvelope): Envelope
     {
         $envelopeClass = $this->envelopeFactory->envelopeClass();
         $envelope = $this->objectSerializer->deserialize(
@@ -70,7 +57,11 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
         );
 
         if (!($envelope instanceof $envelopeClass)) {
-            throw new \LogicException(sprintf('Expected deserialized object to be an instance of "%s"', $envelopeClass));
+            throw new LogicException(sprintf('Expected deserialized object to be an instance of "%s"', $envelopeClass));
+        }
+
+        if (!$envelope instanceof Envelope) {
+            throw new LogicException(sprintf('Expected deserialized object to be an instance of "%s"', Envelope::class));
         }
 
         return $envelope;
@@ -79,17 +70,14 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
     /**
      * Deserialize the Message.
      *
-     * @param string $serializedMessage
-     * @param string $messageClass
-     *
-     * @return object Of type $messageClass
+     * @param class-string $messageClass
      */
-    private function deserializeMessage($serializedMessage, $messageClass)
+    private function deserializeMessage(string $serializedMessage, string $messageClass): object
     {
         $message = $this->objectSerializer->deserialize($serializedMessage, $messageClass);
 
         if (!($message instanceof $messageClass)) {
-            throw new \LogicException(sprintf('Expected deserialized message to be an instance of "%s"', $messageClass));
+            throw new LogicException(sprintf('Expected deserialized message to be an instance of "%s"', $messageClass));
         }
 
         return $message;
