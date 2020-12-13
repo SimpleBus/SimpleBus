@@ -37,12 +37,16 @@
         "symfony/framework-bundle": "^4.4 || ^5.1"
     },
     "require-dev": {
+        "ergebnis/composer-normalize": "^2.11",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "phpunit/phpunit": "^9.3",
         "symfony/monolog-bundle": "^3.4"
     },
     "suggest": {
         "symfony/monolog-bundle": "For logging messages"
+    },
+    "config": {
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
@@ -55,8 +59,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true
-    }
+    "prefer-stable": true
 }

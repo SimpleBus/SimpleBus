@@ -33,7 +33,11 @@
         "simple-bus/serialization": "^3.0"
     },
     "require-dev": {
+        "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.3"
+    },
+    "config": {
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
@@ -46,8 +50,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true
-    }
+    "prefer-stable": true
 }

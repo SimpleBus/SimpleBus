@@ -96,6 +96,5 @@ jobs:
             -   if: "matrix.dependencies == 'lowest'"
                 run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }} --prefer-lowest ${{ matrix.composer-update-arguments }}
 
-            -   name: Split Tests of ${{ matrix.package }}
+            -   run: vendor/bin/phpunit
                 working-directory: packages/${{ matrix.package }}
-                run: vendor/bin/phpunit
