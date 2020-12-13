@@ -7,16 +7,25 @@ use OldSound\RabbitMqBundle\RabbitMq\Producer;
 class AdditionalPropertiesResolverProducerMock extends Producer
 {
     /**
-     * @var array
+     * @var mixed[]
      */
-    private $additionalProperties;
+    private array $additionalProperties;
 
-    public function getAdditionalProperties()
+    /**
+     * @return mixed[]
+     */
+    public function getAdditionalProperties(): array
     {
         return $this->additionalProperties;
     }
 
-    public function publish($msgBody, $routingKey = '', $additionalProperties = [], array $headers = null)
+    /**
+     * @param string       $msgBody
+     * @param string       $routingKey
+     * @param mixed[]      $additionalProperties
+     * @param null|mixed[] $headers
+     */
+    public function publish($msgBody, $routingKey = '', $additionalProperties = [], array $headers = null): void
     {
         $this->additionalProperties = $additionalProperties;
     }

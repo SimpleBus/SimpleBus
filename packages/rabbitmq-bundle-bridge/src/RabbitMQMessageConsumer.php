@@ -13,15 +13,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RabbitMQMessageConsumer implements ConsumerInterface
 {
-    /**
-     * @var SerializedEnvelopeConsumer
-     */
-    private $consumer;
+    private SerializedEnvelopeConsumer $consumer;
 
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(SerializedEnvelopeConsumer $consumer, EventDispatcherInterface $eventDispatcher)
     {
@@ -29,7 +23,7 @@ class RabbitMQMessageConsumer implements ConsumerInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function execute(AMQPMessage $msg)
+    public function execute(AMQPMessage $msg): int
     {
         try {
             $this->consumer->consume($msg->body);

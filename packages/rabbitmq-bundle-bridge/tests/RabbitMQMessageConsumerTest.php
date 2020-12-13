@@ -5,11 +5,14 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests;
 use Exception;
 use OldSound\RabbitMqBundle\RabbitMq\ConsumerInterface;
 use PhpAmqpLib\Message\AMQPMessage;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer;
 use SimpleBus\RabbitMQBundleBridge\Event\Events;
 use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumed;
 use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use SimpleBus\RabbitMQBundleBridge\RabbitMQMessageConsumer;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @internal
@@ -20,7 +23,7 @@ class RabbitMQMessageConsumerTest extends TestCase
     /**
      * @test
      */
-    public function itConsumesTheMessageBodyAsASerializedEnvelope()
+    public function itConsumesTheMessageBodyAsASerializedEnvelope(): void
     {
         $serializedEnvelope = 'a serialized envelope';
         $message = $this->newAMQPMessage($serializedEnvelope);
@@ -40,7 +43,7 @@ class RabbitMQMessageConsumerTest extends TestCase
     /**
      * @test
      */
-    public function itHandlesAnErrorButThrowsNoExceptionIfConsumingTheMessageFails()
+    public function itHandlesAnErrorButThrowsNoExceptionIfConsumingTheMessageFails(): void
     {
         $exception = new Exception('I always fail');
         $serializedEnvelopeConsumer = $this->mockSerializedEnvelopeConsumer();
@@ -58,19 +61,25 @@ class RabbitMQMessageConsumerTest extends TestCase
         $this->assertSame(ConsumerInterface::MSG_REJECT, $result);
     }
 
-    private function newAMQPMessage($messageBody = '')
+    private function newAMQPMessage(string $messageBody = ''): AMQPMessage
     {
         return new AMQPMessage($messageBody);
     }
 
+    /**
+     * @return MockObject|SerializedEnvelopeConsumer
+     */
     private function mockSerializedEnvelopeConsumer()
     {
-        return $this->createMock('SimpleBus\Asynchronous\Consumer\SerializedEnvelopeConsumer');
+        return $this->createMock(SerializedEnvelopeConsumer::class);
     }
 
+    /**
+     * @return EventDispatcherInterface|MockObject
+     */
     private function eventDispatcherDispatchesConsumptionFailedEvent(AMQPMessage $message, Exception $exception)
     {
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $eventDispatcher
             ->expects($this->once())
@@ -86,9 +95,12 @@ class RabbitMQMessageConsumerTest extends TestCase
         return $eventDispatcher;
     }
 
-    private function eventDispatcherDispatchesMessageConsumedEvent($message)
+    /**
+     * @return EventDispatcherInterface|MockObject
+     */
+    private function eventDispatcherDispatchesMessageConsumedEvent(object $message)
     {
-        $eventDispatcher = $this->createMock('Symfony\Component\EventDispatcher\EventDispatcherInterface');
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
 
         $eventDispatcher
             ->expects($this->once())

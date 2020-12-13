@@ -11,6 +11,6 @@ $input = new ArgvInput();
 
 Debug::enable();
 
-$kernel = new TestKernel('test', true);
+$kernel = new TestKernel();
 $application = new Application($kernel);
 $application->run($input);

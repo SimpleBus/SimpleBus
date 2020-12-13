@@ -4,7 +4,9 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests\ErrorHandling;
 
 use Exception;
 use PhpAmqpLib\Message\AMQPMessage;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use SimpleBus\RabbitMQBundleBridge\EventListener\LogErrorWhenMessageConsumptionFailed;
@@ -18,7 +20,7 @@ class LogErrorWhenMessageConsumptionFailedTest extends TestCase
     /**
      * @test
      */
-    public function itLogsTheError()
+    public function itLogsTheError(): void
     {
         $exception = new Exception();
         $message = new AMQPMessage();
@@ -33,9 +35,14 @@ class LogErrorWhenMessageConsumptionFailedTest extends TestCase
         $errorHandler->messageConsumptionFailed(new MessageConsumptionFailed($message, $exception));
     }
 
-    private function loggerShouldLog($logLevel, $logMessage, $context)
+    /**
+     * @param mixed[] $context
+     *
+     * @return LoggerInterface|MockObject
+     */
+    private function loggerShouldLog(string $logLevel, string $logMessage, array $context)
     {
-        $logger = $this->createMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock(LoggerInterface::class);
         $logger
             ->expects($this->once())
             ->method('log')

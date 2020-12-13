@@ -2,8 +2,14 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\Tests;
 
+use OldSound\RabbitMqBundle\RabbitMq\Producer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
+use SimpleBus\Asynchronous\Routing\RoutingKeyResolver;
 use SimpleBus\RabbitMQBundleBridge\RabbitMQPublisher;
+use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
+use stdClass;
 
 /**
  * @internal
@@ -14,7 +20,7 @@ class RabbitMQPublisherTest extends TestCase
     /**
      * @test
      */
-    public function itSerializesTheMessageAndPublishesItUsingTheResolvedRouterKey()
+    public function itSerializesTheMessageAndPublishesItUsingTheResolvedRouterKey(): void
     {
         $message = $this->dummyMessage();
         $routingKey = 'the-routing-key';
@@ -41,27 +47,36 @@ class RabbitMQPublisherTest extends TestCase
         $publisher->publish($message);
     }
 
+    /**
+     * @return MessageInEnvelopeSerializer|MockObject
+     */
     private function mockSerializer()
     {
-        return $this->createMock('SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer');
+        return $this->createMock(MessageInEnvelopeSerializer::class);
     }
 
+    /**
+     * @return MockObject|Producer
+     */
     private function mockProducer()
     {
         return $this
-            ->getMockBuilder('OldSound\RabbitMqBundle\RabbitMq\Producer')
+            ->getMockBuilder(Producer::class)
             ->disableOriginalConstructor()
             ->getMock();
     }
 
-    private function dummyMessage()
+    private function dummyMessage(): stdClass
     {
-        return new \stdClass();
+        return new stdClass();
     }
 
-    private function routingKeyResolverStub($message, $routingKey)
+    /**
+     * @return MockObject|RoutingKeyResolver
+     */
+    private function routingKeyResolverStub(object $message, string $routingKey)
     {
-        $resolver = $this->createMock('SimpleBus\Asynchronous\Routing\RoutingKeyResolver');
+        $resolver = $this->createMock(RoutingKeyResolver::class);
         $resolver
             ->expects($this->any())
             ->method('resolveRoutingKeyFor')
@@ -71,9 +86,14 @@ class RabbitMQPublisherTest extends TestCase
         return $resolver;
     }
 
-    private function additionalPropertiesResolverStub($message, $additionalProperties)
+    /**
+     * @param mixed[] $additionalProperties
+     *
+     * @return AdditionalPropertiesResolver|MockObject
+     */
+    private function additionalPropertiesResolverStub(object $message, array $additionalProperties)
     {
-        $resolver = $this->createMock('SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver');
+        $resolver = $this->createMock(AdditionalPropertiesResolver::class);
         $resolver
             ->expects($this->any())
             ->method('resolveAdditionalPropertiesFor')

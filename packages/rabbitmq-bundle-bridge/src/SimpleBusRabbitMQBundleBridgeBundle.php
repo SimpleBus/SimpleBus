@@ -9,12 +9,12 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SimpleBusRabbitMQBundleBridgeBundle extends Bundle
 {
-    public function getContainerExtension()
+    public function getContainerExtension(): SimpleBusRabbitMQBundleBridgeExtension
     {
         return new SimpleBusRabbitMQBundleBridgeExtension('simple_bus_rabbit_mq_bundle_bridge');
     }
 
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new AdditionalPropertiesResolverPass());
     }

@@ -2,10 +2,12 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
+use Exception;
+
 class AlwaysFailingCommandHandler
 {
-    public function handle()
+    public function handle(): void
     {
-        throw new \Exception('I always fail');
+        throw new Exception('I always fail');
     }
 }
