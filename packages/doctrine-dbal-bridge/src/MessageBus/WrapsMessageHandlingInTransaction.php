@@ -8,20 +8,14 @@ use Throwable;
 
 class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
-    /**
-     * @var Connection
-     */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function handle($message, callable $next)
+    public function handle(object $message, callable $next): void
     {
         $this->connection->beginTransaction();
 
