@@ -1,6 +1,7 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
+    ->in('src')
     ->in('packages')
 ;
 

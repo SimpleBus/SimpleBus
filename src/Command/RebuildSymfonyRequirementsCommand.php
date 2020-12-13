@@ -5,6 +5,7 @@ namespace SimpleBus\CI\Command;
 use Composer\Semver\Constraint\ConstraintInterface;
 use Composer\Semver\Constraint\MultiConstraint;
 use Composer\Semver\VersionParser;
+use LogicException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -16,19 +17,16 @@ final class RebuildSymfonyRequirementsCommand extends Command
     private const VERSION = 'version';
     private const IGNORED_PACKAGES = ['symfony/monolog-bundle'];
 
-    /**
-     * @var VersionParser
-     */
-    private $versionParser;
+    private VersionParser $versionParser;
 
-    public function __construct(string $name = null)
+    public function __construct()
     {
-        parent::__construct($name);
+        parent::__construct();
 
         $this->versionParser = new VersionParser();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('rebuild-symfony-requirements');
         $this->addArgument(
@@ -45,10 +43,23 @@ final class RebuildSymfonyRequirementsCommand extends Command
     {
         $package = $input->getArgument(self::PACKAGE);
         $newVersion = $input->getArgument(self::VERSION);
-        $path = __DIR__ . '/../../packages/' . $package . '/composer.json';
+
+        if (!is_string($package)) {
+            throw new LogicException('Package argument should be a string');
+        }
+
+        if (!is_string($newVersion)) {
+            throw new LogicException('Version argument should be a string');
+        }
+
+        $path = __DIR__.'/../../packages/'.$package.'/composer.json';
+
+        if (false === $content = file_get_contents($path)) {
+            throw new LogicException('composer.json content could not be read');
+        }
 
         $content = json_decode(
-            file_get_contents($path),
+            $content,
             true,
             512,
             JSON_THROW_ON_ERROR
@@ -59,18 +70,23 @@ final class RebuildSymfonyRequirementsCommand extends Command
 
         file_put_contents(
             $path,
-            json_encode($content, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . PHP_EOL
+            json_encode($content, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL
         );
 
         return self::SUCCESS;
     }
 
+    /**
+     * @param array<string, string> $require
+     *
+     * @return array<string, string>
+     */
     private function replace(array $require, string $newVersion): array
     {
         $newVersionConstraint = $this->versionParser->parseConstraints($newVersion);
 
         foreach ($require as $package => $version) {
-            if (strpos($package, 'symfony/') !== 0) {
+            if (0 !== strpos($package, 'symfony/')) {
                 continue;
             }
 
@@ -79,12 +95,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
             }
 
             $constraints = $this->versionParser->parseConstraints($version);
-            $newConstraint = $this->matches($constraints, $newVersionConstraint);
-
-            if ($newConstraint === false) {
-                throw new \LogicException(sprintf('Cannot match %s with %s', $version, $newVersion));
-            }
-
+            $newConstraint = $this->matches($constraints, $newVersionConstraint, $version, $newVersion);
             $newVersion = sprintf('^%s', $newConstraint->getLowerBound()->getVersion());
 
             echo sprintf("Change %s \"%s\" to \"%s\"\n", $package, $version, $newVersion);
@@ -95,14 +106,16 @@ final class RebuildSymfonyRequirementsCommand extends Command
         return $require;
     }
 
-    /**
-     * @param MultiConstraint     $multi
-     * @param ConstraintInterface $provider
-     *
-     * @return ConstraintInterface|false
-     */
-    public function matches(MultiConstraint $multi, ConstraintInterface $provider)
-    {
+    private function matches(
+        ConstraintInterface $multi,
+        ConstraintInterface $provider,
+        string $version,
+        string $newVersion
+    ): ConstraintInterface {
+        if (!$multi instanceof MultiConstraint) {
+            throw new LogicException(sprintf('The constraint is not a %s', MultiConstraint::class));
+        }
+
         if (false === $multi->isConjunctive()) {
             foreach ($multi->getConstraints() as $constraint) {
                 if ($provider->matches($constraint)) {
@@ -110,12 +123,12 @@ final class RebuildSymfonyRequirementsCommand extends Command
                 }
             }
 
-            return false;
+            throw new LogicException(sprintf('Cannot match %s with %s', $version, $newVersion));
         }
 
         foreach ($multi->getConstraints() as $constraint) {
             if (!$provider->matches($constraint)) {
-                return false;
+                throw new LogicException(sprintf('Cannot match %s with %s', $version, $newVersion));
             }
         }
 
