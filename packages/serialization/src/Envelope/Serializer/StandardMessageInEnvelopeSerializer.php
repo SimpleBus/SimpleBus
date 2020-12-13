@@ -27,9 +27,9 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
     }
 
     /**
-     * Serialize a Message by wrapping it in an Envelope and serializing the envelope
+     * Serialize a Message by wrapping it in an Envelope and serializing the envelope.
      *
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function wrapAndSerialize($message)
     {
@@ -41,9 +41,9 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
     }
 
     /**
-     * Deserialize a Message that was wrapped in an Envelope
+     * Deserialize a Message that was wrapped in an Envelope.
      *
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function unwrapAndDeserialize($serializedEnvelope)
     {
@@ -55,9 +55,10 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
     }
 
     /**
-     * Deserialize the message Envelope
+     * Deserialize the message Envelope.
      *
      * @param string $serializedEnvelope
+     *
      * @return Envelope
      */
     private function deserializeEnvelope($serializedEnvelope)
@@ -69,22 +70,18 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
         );
 
         if (!($envelope instanceof $envelopeClass)) {
-            throw new \LogicException(
-                sprintf(
-                    'Expected deserialized object to be an instance of "%s"',
-                    $envelopeClass
-                )
-            );
+            throw new \LogicException(sprintf('Expected deserialized object to be an instance of "%s"', $envelopeClass));
         }
 
         return $envelope;
     }
 
     /**
-     * Deserialize the Message
+     * Deserialize the Message.
      *
      * @param string $serializedMessage
      * @param string $messageClass
+     *
      * @return object Of type $messageClass
      */
     private function deserializeMessage($serializedMessage, $messageClass)
@@ -92,12 +89,7 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
         $message = $this->objectSerializer->deserialize($serializedMessage, $messageClass);
 
         if (!($message instanceof $messageClass)) {
-            throw new \LogicException(
-                sprintf(
-                    'Expected deserialized message to be an instance of "%s"',
-                    $messageClass
-                )
-            );
+            throw new \LogicException(sprintf('Expected deserialized message to be an instance of "%s"', $messageClass));
         }
 
         return $message;

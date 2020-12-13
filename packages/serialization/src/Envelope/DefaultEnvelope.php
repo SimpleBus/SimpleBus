@@ -29,7 +29,7 @@ class DefaultEnvelope implements Envelope
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public static function forMessage($message)
     {
@@ -39,7 +39,7 @@ class DefaultEnvelope implements Envelope
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public static function forSerializedMessage($type, $serializedMessage)
     {
@@ -50,7 +50,7 @@ class DefaultEnvelope implements Envelope
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function messageType()
     {
@@ -58,11 +58,11 @@ class DefaultEnvelope implements Envelope
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function message()
     {
-        if ($this->message === null) {
+        if (null === $this->message) {
             throw new \LogicException('Message is unavailable');
         }
 
@@ -70,11 +70,11 @@ class DefaultEnvelope implements Envelope
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function serializedMessage()
     {
-        if ($this->serializedMessage === null) {
+        if (null === $this->serializedMessage) {
             throw new \LogicException('Serialized message is unavailable');
         }
 
@@ -82,7 +82,7 @@ class DefaultEnvelope implements Envelope
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function withMessage($message)
     {
@@ -92,7 +92,7 @@ class DefaultEnvelope implements Envelope
     }
 
     /**
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function withSerializedMessage($serializedMessage)
     {

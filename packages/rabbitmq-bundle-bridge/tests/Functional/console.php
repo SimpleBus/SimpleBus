@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../bootstrap.php';
+require __DIR__.'/../bootstrap.php';
 
 use SimpleBus\RabbitMQBundleBridge\Tests\Functional\TestKernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;

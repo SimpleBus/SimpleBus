@@ -12,7 +12,7 @@ class NativeObjectSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_can_serialize_a_default_message_envelope_with_a_serialized_message()
+    public function itCanSerializeADefaultMessageEnvelopeWithASerializedMessage()
     {
         $envelope = DefaultEnvelope::forSerializedMessage(
             'SimpleBus\Serialization\Tests\Fixtures\DummyMessage',
@@ -27,7 +27,7 @@ class NativeObjectSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_can_serialize_and_deserialize_a_default_message_envelope_with_a_serialized_message()
+    public function itCanSerializeAndDeserializeADefaultMessageEnvelopeWithASerializedMessage()
     {
         $originalEnvelope = DefaultEnvelope::forSerializedMessage(
             'SimpleBus\Serialization\Tests\Fixtures\DummyMessage',
@@ -43,7 +43,7 @@ class NativeObjectSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_fails_when_the_deserialized_object_is_of_the_wrong_type()
+    public function itFailsWhenTheDeserializedObjectIsOfTheWrongType()
     {
         $expectedType = 'SimpleBus\Serialization\Tests\Fixtures\DummyMessage';
         $message = new AnotherDummyMessage();

@@ -21,7 +21,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     private $process;
 
     /**
-     * Timeout for asynchronous tests
+     * Timeout for asynchronous tests.
      *
      * @var int
      */
@@ -49,7 +49,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     /**
      * @test
      */
-    public function it_is_able_to_load_the_bundle()
+    public function itIsAbleToLoadTheBundle()
     {
         /*
          * There's no need to do anything here. This alone will prove that the bundle behaves well,
@@ -63,7 +63,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
      * @test
      * @group functional
      */
-    public function it_handles_commands_asynchronously()
+    public function itHandlesCommandsAsynchronously()
     {
         $this->consumeMessagesFromQueue('asynchronous_commands');
 
@@ -78,7 +78,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
      * @test
      * @group functional
      */
-    public function it_handles_events_asynchronously()
+    public function itHandlesEventsAsynchronously()
     {
         $this->consumeMessagesFromQueue('asynchronous_events');
 
@@ -91,7 +91,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
      * @test
      * @group functional
      */
-    public function it_logs_errors()
+    public function itLogsErrors()
     {
         $this->consumeMessagesFromQueue('asynchronous_commands');
 
@@ -104,7 +104,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
      * @test
      * @group functional
      */
-    public function it_resolve_properties()
+    public function itResolveProperties()
     {
         $data = $this->additionalPropertiesResolver()->resolveAdditionalPropertiesFor($this->messageDummy());
 
@@ -115,7 +115,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
      * @test
      * @group functional
      */
-    public function it_sends_properties_to_producer()
+    public function itSendsPropertiesToProducer()
     {
         $container = static::$kernel->getContainer();
         $container->set('old_sound_rabbit_mq.asynchronous_commands_producer', $container->get('simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.producer_mock'));
@@ -174,6 +174,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     /**
      * @param $queue
+     *
      * @return Process
      */
     private function consumeMessagesFromQueue($queue)

@@ -10,7 +10,7 @@ class EmptyRoutingKeyResolverTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_an_empty_routing_key()
+    public function itReturnsAnEmptyRoutingKey()
     {
         $resolver = new EmptyRoutingKeyResolver();
         $this->assertSame('', $resolver->resolveRoutingKeyFor($this->messageDummy()));

@@ -2,11 +2,11 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
@@ -31,8 +31,8 @@ class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension imple
                 'simple_bus_asynchronous',
                 [
                     'commands' => [
-                        'publisher_service_id' => 'simple_bus.rabbit_mq_bundle_bridge.command_publisher'
-                    ]
+                        'publisher_service_id' => 'simple_bus.rabbit_mq_bundle_bridge.command_publisher',
+                    ],
                 ]
             );
         }
@@ -42,8 +42,8 @@ class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension imple
                 'simple_bus_asynchronous',
                 [
                     'events' => [
-                        'publisher_service_id' => 'simple_bus.rabbit_mq_bundle_bridge.event_publisher'
-                    ]
+                        'publisher_service_id' => 'simple_bus.rabbit_mq_bundle_bridge.event_publisher',
+                    ],
                 ]
             );
         }
@@ -56,16 +56,16 @@ class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension imple
 
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         foreach (['command' => 'commands', 'event' => 'events'] as $messageType => $configurationKey) {
             if (!$mergedConfig[$configurationKey]['enabled']) {
                 continue;
             }
 
-            $loader->load($configurationKey . '.yml');
+            $loader->load($configurationKey.'.yml');
             $container->setAlias(
-                'simple_bus.rabbit_mq_bundle_bridge.' . $messageType . '_producer',
+                'simple_bus.rabbit_mq_bundle_bridge.'.$messageType.'_producer',
                 $mergedConfig[$configurationKey]['producer_service_id']
             );
         }
@@ -107,12 +107,7 @@ class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension imple
     {
         $enabledBundles = $container->getParameter('kernel.bundles');
         if (!isset($enabledBundles[$bundleName])) {
-            throw new \LogicException(
-                sprintf(
-                    'You need to enable "%s" as well',
-                    $bundleName
-                )
-            );
+            throw new \LogicException(sprintf('You need to enable "%s" as well', $bundleName));
         }
     }
 }

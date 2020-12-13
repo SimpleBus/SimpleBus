@@ -2,8 +2,8 @@
 
 namespace SimpleBus\DoctrineORMBridge\MessageBus;
 
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ManagerRegistry;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use Throwable;
 
@@ -20,7 +20,6 @@ class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
     private $entityManagerName;
 
     /**
-     * @param ManagerRegistry $managerRegistry
      * @param string $entityManagerName
      */
     public function __construct(ManagerRegistry $managerRegistry, $entityManagerName)
@@ -32,7 +31,7 @@ class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
     public function handle($message, callable $next)
     {
         $entityManager = $this->managerRegistry->getManager($this->entityManagerName);
-        /** @var $entityManager EntityManager */
+        /* @var $entityManager EntityManager */
 
         try {
             $entityManager->transactional(

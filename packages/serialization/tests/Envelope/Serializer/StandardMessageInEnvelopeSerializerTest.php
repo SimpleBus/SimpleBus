@@ -15,7 +15,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_serializes_a_message_and_wraps_it_in_a_serialized_envelope()
+    public function itSerializesAMessageAndWrapsItInASerializedEnvelope()
     {
         $message = new DummyMessage();
         $serializedMessage = 'the serialized message';
@@ -48,7 +48,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_deserializes_a_message_after_unwrapping_it_from_its_serialized_envelope()
+    public function itDeserializesAMessageAfterUnwrappingItFromItsSerializedEnvelope()
     {
         $message = new DummyMessage();
 
@@ -83,7 +83,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_fails_if_the_deserialized_envelope_is_not_of_the_expected_type()
+    public function itFailsIfTheDeserializedEnvelopeIsNotOfTheExpectedType()
     {
         $envelopeClass = 'The\Envelope\Class';
         $serializedEnvelope = 'the serialized envelope';
@@ -106,7 +106,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_fails_if_the_deserialized_message_is_not_of_the_expected_type()
+    public function itFailsIfTheDeserializedMessageIsNotOfTheExpectedType()
     {
         $message = new DummyMessage();
 
@@ -141,7 +141,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
 
     /**
      * @param object $message
-     * @param Envelope $expectedEnvelope
+     *
      * @return \PHPUnit\Framework\MockObject\MockObject|EnvelopeFactory
      */
     private function envelopeFactoryCreatesEnvelope($message, Envelope $expectedEnvelope)
@@ -166,6 +166,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
 
     /**
      * @param $envelopeClass
+     *
      * @return \PHPUnit\Framework\MockObject\MockObject|EnvelopeFactory
      */
     private function envelopeFactoryForEnvelopeClass($envelopeClass)

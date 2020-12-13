@@ -49,12 +49,12 @@ class Configuration implements ConfigurationInterface
                                 ->ifInArray(['always', 'predefined'])
                                 ->then(function ($v) {
                                     $map = [
-                                        'always'     => 'simple_bus.asynchronous.always_publishes_messages_middleware',
+                                        'always' => 'simple_bus.asynchronous.always_publishes_messages_middleware',
                                         'predefined' => 'simple_bus.asynchronous.publishes_predefined_messages_middleware',
                                     ];
 
                                     return [
-                                        'strategy_service_id' => $map[$v]
+                                        'strategy_service_id' => $map[$v],
                                     ];
                                 })
                             ->end()

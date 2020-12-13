@@ -33,18 +33,11 @@ class FileLogger extends AbstractLogger
     {
         $fileContents = $this->fileContents();
 
-        if (strpos($fileContents, $text) !== false) {
+        if (false !== strpos($fileContents, $text)) {
             return;
         }
 
-        throw new RuntimeException(
-            sprintf(
-                'The `%s` file does not contains text `%s` it has `%s`',
-                $this->path,
-                $text,
-                $fileContents
-            )
-        );
+        throw new RuntimeException(sprintf('The `%s` file does not contains text `%s` it has `%s`', $this->path, $text, $fileContents));
     }
 
     public function fileContents()

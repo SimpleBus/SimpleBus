@@ -21,7 +21,7 @@ class TestKernel extends Kernel
     {
         parent::__construct('test', true);
 
-        $this->tempDir = __DIR__ . '/temp';
+        $this->tempDir = __DIR__.'/temp';
     }
 
     public function registerBundles()
@@ -40,21 +40,21 @@ class TestKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__ . '/config.yml');
+        $loader->load(__DIR__.'/config.yml');
     }
 
     public function getCacheDir()
     {
-        return $this->tempDir . '/cache';
+        return $this->tempDir.'/cache';
     }
 
     public function getLogDir()
     {
-        return $this->tempDir . '/logs';
+        return $this->tempDir.'/logs';
     }
 
     protected function getContainerClass()
     {
-        return parent::getContainerClass() . sha1(__NAMESPACE__);
+        return parent::getContainerClass().sha1(__NAMESPACE__);
     }
 }

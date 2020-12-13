@@ -13,7 +13,7 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
     /**
      * @test
      */
-    public function it_wraps_the_next_middleware_in_a_transaction()
+    public function itWrapsTheNextMiddlewareInATransaction()
     {
         $nextIsCalled = false;
         $message = $this->dummyMessage();
@@ -51,11 +51,11 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
         $this->assertTrue($nextIsCalled);
     }
 
-    public function errorProvider() : array
+    public function errorProvider(): array
     {
         return [
             [new Exception()],
-            [new Error()]
+            [new Error()],
         ];
     }
 
@@ -63,7 +63,7 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
      * @test
      * @dataProvider errorProvider
      */
-    public function it_resets_the_entity_manager_if_the_transaction_fails(Throwable $error)
+    public function itResetsTheEntityManagerIfTheTransactionFails(Throwable $error)
     {
         $message = $this->dummyMessage();
         $managerRegistry = $this->createMock('Doctrine\Persistence\ManagerRegistry');

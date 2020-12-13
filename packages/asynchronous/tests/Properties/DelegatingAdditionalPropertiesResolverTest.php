@@ -11,7 +11,7 @@ class DelegatingAdditionalPropertiesResolverTest extends TestCase
     /**
      * @test
      */
-    public function it_should_merge_multiple_resolvers()
+    public function itShouldMergeMultipleResolvers()
     {
         $message = $this->messageDummy();
 
@@ -25,7 +25,6 @@ class DelegatingAdditionalPropertiesResolverTest extends TestCase
 
     /**
      * @param object $message
-     * @param array   $data
      *
      * @return \PHPUnit\Framework\MockObject\MockObject|AdditionalPropertiesResolver
      */

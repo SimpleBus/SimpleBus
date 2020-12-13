@@ -6,7 +6,7 @@ final class SerializerMetadata
 {
     public static function directory()
     {
-        return __DIR__ . '/metadata';
+        return __DIR__.'/metadata';
     }
 
     public static function namespacePrefix()

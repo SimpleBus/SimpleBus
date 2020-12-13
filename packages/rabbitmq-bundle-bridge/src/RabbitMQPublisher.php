@@ -2,8 +2,8 @@
 
 namespace SimpleBus\RabbitMQBundleBridge;
 
-use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use OldSound\RabbitMqBundle\RabbitMq\Fallback;
+use OldSound\RabbitMqBundle\RabbitMq\Producer;
 use OldSound\RabbitMqBundle\RabbitMq\ProducerInterface;
 use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
 use SimpleBus\Asynchronous\Publisher\Publisher;
@@ -49,9 +49,9 @@ class RabbitMQPublisher implements Publisher
     }
 
     /**
-     * Publish the given Message by serializing it and handing it over to a RabbitMQ producer
+     * Publish the given Message by serializing it and handing it over to a RabbitMQ producer.
      *
-     * @{inheritdoc}
+     * {@inheritdoc}
      */
     public function publish($message)
     {

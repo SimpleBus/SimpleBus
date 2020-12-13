@@ -32,7 +32,7 @@ class AdditionalPropertiesResolverPassTest extends TestCase
     /**
      * @test
      */
-    public function it_configures_a_chain_of_buses_according_to_the_given_priorities()
+    public function itConfiguresAChainOfBusesAccordingToTheGivenPriorities()
     {
         $classes = [
             Resolver1::class => 100,
@@ -62,7 +62,7 @@ class AdditionalPropertiesResolverPassTest extends TestCase
     private function resolverContainsResolvers($expectedResolverClasses)
     {
         $actualResolverClasses = [];
-        
+
         foreach ($this->delegatingDefinition->getArgument(0) as $argument) {
             if (Kernel::VERSION_ID >= 40000) {
                 $this->assertInstanceOf(

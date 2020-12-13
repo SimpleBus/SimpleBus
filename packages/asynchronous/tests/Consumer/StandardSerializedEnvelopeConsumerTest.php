@@ -4,16 +4,16 @@ namespace SimpleBus\Asynchronous\Tests\Consumer;
 
 use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer;
+use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
-use SimpleBus\Message\Bus\MessageBus;
 
 class StandardSerializedEnvelopeConsumerTest extends TestCase
 {
     /**
      * @test
      */
-    public function it_deserializes_the_envelop_and_lets_the_message_bus_handle_the_message()
+    public function itDeserializesTheEnvelopAndLetsTheMessageBusHandleTheMessage()
     {
         $serializedEnvelope = 'serialized envelop';
 

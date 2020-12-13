@@ -11,7 +11,7 @@ class ClassBasedRoutingKeyResolverTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_the_fqcn_with_dots_instead_of_backslashes()
+    public function itReturnsTheFqcnWithDotsInsteadOfBackslashes()
     {
         $message = new MessageDummy();
         $resolver = new ClassBasedRoutingKeyResolver();
