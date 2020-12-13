@@ -7,15 +7,15 @@ use Assert\Assertion;
 class CallableCollection
 {
     /**
-     * @var array
+     * @var array<string, callable[]>
      */
-    private $callablesByName;
+    private array $callablesByName;
+
+    private CallableResolver $callableResolver;
 
     /**
-     * @var CallableResolver
+     * @param array<string, callable[]> $callablesByName
      */
-    private $callableResolver;
-
     public function __construct(
         array $callablesByName,
         CallableResolver $callableResolver
@@ -27,11 +27,9 @@ class CallableCollection
     }
 
     /**
-     * @param string $name
-     *
      * @return callable[]
      */
-    public function filter($name)
+    public function filter(string $name): array
     {
         if (!array_key_exists($name, $this->callablesByName)) {
             return [];
