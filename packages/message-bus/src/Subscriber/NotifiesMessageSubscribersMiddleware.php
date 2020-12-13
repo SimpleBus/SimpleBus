@@ -22,13 +22,7 @@ class NotifiesMessageSubscribersMiddleware implements MessageBusMiddleware
         string $level = null
     ) {
         $this->messageSubscribersResolver = $messageSubscribersResolver;
-
-        if (null === $logger) {
-            $this->logger = new NullLogger();
-        } else {
-            $this->logger = $logger;
-        }
-
+        $this->logger = $logger ?? new NullLogger();
         $this->level = $level ?? LogLevel::DEBUG;
     }
 
