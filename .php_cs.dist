@@ -6,6 +6,7 @@ $finder = PhpCsFixer\Finder::create()
 
 $config = (new PhpCsFixer\Config())
     ->setRules([
+        '@PHP56Migration' => true,
         '@Symfony' => true,
         'array_syntax' => [
             'syntax' => 'short'
