@@ -2,6 +2,7 @@
 
 namespace SimpleBus\AsynchronousBundle\DependencyInjection;
 
+use LogicException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -10,27 +11,30 @@ use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class SimpleBusAsynchronousExtension extends ConfigurableExtension
 {
-    /**
-     * @var string
-     */
-    private $alias;
+    private string $alias;
 
-    public function __construct($alias)
+    public function __construct(string $alias)
     {
         $this->alias = $alias;
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return $this->alias;
     }
 
-    public function getConfiguration(array $config, ContainerBuilder $container)
+    /**
+     * @param mixed[] $config
+     */
+    public function getConfiguration(array $config, ContainerBuilder $container): Configuration
     {
         return new Configuration($this->alias);
     }
 
-    protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
+    /**
+     * @param mixed[] $mergedConfig
+     */
+    protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
@@ -49,15 +53,18 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
         }
     }
 
-    private function requireBundle($bundleName, ContainerBuilder $container)
+    private function requireBundle(string $bundleName, ContainerBuilder $container): void
     {
         $enabledBundles = $container->getParameter('kernel.bundles');
         if (!isset($enabledBundles[$bundleName])) {
-            throw new \LogicException(sprintf('You need to enable "%s" as well', $bundleName));
+            throw new LogicException(sprintf('You need to enable "%s" as well', $bundleName));
         }
     }
 
-    private function loadAsynchronousCommandBus(array $config, ContainerBuilder $container, LoaderInterface $loader)
+    /**
+     * @param mixed[] $config
+     */
+    private function loadAsynchronousCommandBus(array $config, ContainerBuilder $container, LoaderInterface $loader): void
     {
         $this->requireBundle('SimpleBusCommandBusBundle', $container);
         $loader->load('asynchronous_commands.yml');
@@ -77,7 +84,10 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
         }
     }
 
-    private function loadAsynchronousEventBus(array $config, ContainerBuilder $container, LoaderInterface $loader)
+    /**
+     * @param mixed[] $config
+     */
+    private function loadAsynchronousEventBus(array $config, ContainerBuilder $container, LoaderInterface $loader): void
     {
         $this->requireBundle('SimpleBusEventBusBundle', $container);
         $loader->load('asynchronous_events.yml');

@@ -16,7 +16,7 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function itUsesStrategyAlwaysByDefault()
+    public function itUsesStrategyAlwaysByDefault(): void
     {
         $this->container->setParameter('kernel.bundles', ['SimpleBusCommandBusBundle' => true, 'SimpleBusEventBusBundle' => true]);
         $this->load();
@@ -27,7 +27,7 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function itUsesStrategyPredefinedWhenConfigured()
+    public function itUsesStrategyPredefinedWhenConfigured(): void
     {
         $this->container->setParameter('kernel.bundles', ['SimpleBusCommandBusBundle' => true, 'SimpleBusEventBusBundle' => true]);
         $this->load(['events' => ['strategy' => 'predefined']]);
@@ -38,7 +38,7 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function itUsesCustomStrategyWhenConfigured()
+    public function itUsesCustomStrategyWhenConfigured(): void
     {
         $this->expectException(ServiceNotFoundException::class);
         $this->expectExceptionMessageMatches('/.*custom_strategy.*/');
@@ -50,7 +50,7 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function itThrowsExceptionIfCommandBusBundleIsMissing()
+    public function itThrowsExceptionIfCommandBusBundleIsMissing(): void
     {
         $this->expectException(LogicException::class);
         $this->expectExceptionMessageMatches('/.*SimpleBusCommandBusBundle.*/');
@@ -62,7 +62,7 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
     /**
      * @test
      */
-    public function itThrowsExceptionIfEventBusBundleIsMissing()
+    public function itThrowsExceptionIfEventBusBundleIsMissing(): void
     {
         $this->expectException(LogicException::class);
         $this->expectExceptionMessageMatches('/.*SimpleBusEventBusBundle.*/');
@@ -71,6 +71,9 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
         $this->load(['events' => ['strategy' => 'predefined']]);
     }
 
+    /**
+     * @return SimpleBusAsynchronousExtension[]
+     */
     protected function getContainerExtensions(): array
     {
         return [
@@ -78,8 +81,19 @@ class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
         ];
     }
 
+    /**
+     * @return mixed[]
+     */
     protected function getMinimalConfiguration(): array
     {
-        return ['object_serializer_service_id' => 'my_serializer', 'commands' => ['publisher_service_id' => 'pusher'], 'events' => ['publisher_service_id' => 'pusher']];
+        return [
+            'object_serializer_service_id' => 'my_serializer',
+            'commands' => [
+                'publisher_service_id' => 'pusher',
+            ],
+            'events' => [
+                'publisher_service_id' => 'pusher',
+            ],
+        ];
     }
 }

@@ -14,12 +14,12 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SimpleBusAsynchronousBundle extends Bundle
 {
-    public function getContainerExtension()
+    public function getContainerExtension(): SimpleBusAsynchronousExtension
     {
         return new SimpleBusAsynchronousExtension('simple_bus_asynchronous');
     }
 
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(
             new ConfigureMiddlewares('simple_bus.asynchronous.command_bus', 'asynchronous_command_bus_middleware')

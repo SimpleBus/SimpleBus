@@ -16,7 +16,7 @@ class CollectAsynchronousEventNamesTest extends AbstractCompilerPassTestCase
     /**
      * @test
      */
-    public function ifCompilerPassCollectsEventNames()
+    public function ifCompilerPassCollectsEventNames(): void
     {
         $serviceId = 'simple_bus.asynchronous.publishes_predefined_messages_middleware';
         $middleware = new Definition();

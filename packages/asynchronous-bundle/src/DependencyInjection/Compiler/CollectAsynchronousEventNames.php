@@ -13,7 +13,7 @@ class CollectAsynchronousEventNames implements CompilerPassInterface
     /**
      * Get all asynchronous event subscribers and save the name of the event they are listening to.
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $serviceId = 'simple_bus.asynchronous.publishes_predefined_messages_middleware';
         if (!$container->hasDefinition($serviceId)) {

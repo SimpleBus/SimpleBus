@@ -7,11 +7,12 @@ use SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle;
 use SimpleBus\SymfonyBridge\SimpleBusEventBusBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Kernel;
 
 class TestKernel extends Kernel
 {
-    private $tempDir;
+    private string $tempDir;
 
     public function __construct()
     {
@@ -20,7 +21,10 @@ class TestKernel extends Kernel
         $this->tempDir = __DIR__.'/temp';
     }
 
-    public function registerBundles()
+    /**
+     * @return Bundle[]
+     */
+    public function registerBundles(): array
     {
         return [
             new SimpleBusCommandBusBundle(),
@@ -30,22 +34,22 @@ class TestKernel extends Kernel
         ];
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__.'/config.yml');
     }
 
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return $this->tempDir.'/cache';
     }
 
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return $this->tempDir.'/logs';
     }
 
-    protected function getContainerClass()
+    protected function getContainerClass(): string
     {
         return parent::getContainerClass().sha1(__NAMESPACE__);
     }

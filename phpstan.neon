@@ -22,3 +22,6 @@ parameters:
         - packages/symfony-bridge/src/
         - packages/symfony-bridge/tests/
         - src/
+
+    ignoreErrors:
+        - "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"

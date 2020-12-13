@@ -6,14 +6,20 @@ use SimpleBus\Asynchronous\Publisher\Publisher;
 
 class PublisherSpy implements Publisher
 {
-    private $publishedMessages = [];
+    /**
+     * @var object[]
+     */
+    private array $publishedMessages = [];
 
-    public function publish($message)
+    public function publish(object $message): void
     {
         $this->publishedMessages[] = $message;
     }
 
-    public function publishedMessages()
+    /**
+     * @return object[]
+     */
+    public function publishedMessages(): array
     {
         return $this->publishedMessages;
     }

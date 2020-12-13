@@ -6,17 +6,14 @@ use SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer;
 
 class MessageConsumer
 {
-    /**
-     * @var StandardSerializedEnvelopeConsumer
-     */
-    private $consumer;
+    private StandardSerializedEnvelopeConsumer $consumer;
 
     public function __construct(StandardSerializedEnvelopeConsumer $consumer)
     {
         $this->consumer = $consumer;
     }
 
-    public function consume($serializedEnvelope)
+    public function consume(string $serializedEnvelope): void
     {
         $this->consumer->consume($serializedEnvelope);
     }
