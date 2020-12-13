@@ -9,22 +9,13 @@ use SimpleBus\Message\CallableResolver\Exception\UndefinedCallable;
 
 class PublishesUnhandledMessages implements MessageBusMiddleware
 {
-    /**
-     * @var Publisher
-     */
-    private $publisher;
+    private Publisher $publisher;
 
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
+    private LoggerInterface $logger;
 
-    /**
-     * @var string
-     */
-    private $logLevel;
+    private string $logLevel;
 
-    public function __construct(Publisher $publisher, LoggerInterface $logger, $logLevel)
+    public function __construct(Publisher $publisher, LoggerInterface $logger, string $logLevel)
     {
         $this->publisher = $publisher;
         $this->logger = $logger;
@@ -34,10 +25,8 @@ class PublishesUnhandledMessages implements MessageBusMiddleware
     /**
      * Handle the message by letting the next middleware handle it. If no handler is defined for this message, then
      * it is published to be processed asynchronously.
-     *
-     * @param object $message
      */
-    public function handle($message, callable $next)
+    public function handle(object $message, callable $next): void
     {
         try {
             $next($message);

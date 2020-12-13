@@ -2,9 +2,11 @@
 
 namespace SimpleBus\Asynchronous\Tests\MessageBus;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
+use stdClass;
 
 /**
  * @internal
@@ -15,7 +17,7 @@ class AlwaysPublishesMessagesTest extends TestCase
     /**
      * @test
      */
-    public function itPublishesAMessageAndCallsTheNextMiddleware()
+    public function itPublishesAMessageAndCallsTheNextMiddleware(): void
     {
         $message = $this->dummyMessage();
         $publisher = $this->mockPublisher();
@@ -37,18 +39,15 @@ class AlwaysPublishesMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|Publisher
+     * @return MockObject|Publisher
      */
     private function mockPublisher()
     {
-        return $this->createMock('SimpleBus\Asynchronous\Publisher\Publisher');
+        return $this->createMock(Publisher::class);
     }
 
-    /**
-     * @return object|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function dummyMessage()
+    private function dummyMessage(): stdClass
     {
-        return new \stdClass();
+        return new stdClass();
     }
 }

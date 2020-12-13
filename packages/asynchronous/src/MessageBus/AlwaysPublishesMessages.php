@@ -7,10 +7,7 @@ use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
 class AlwaysPublishesMessages implements MessageBusMiddleware
 {
-    /**
-     * @var \SimpleBus\Asynchronous\Publisher\Publisher
-     */
-    private $publisher;
+    private Publisher $publisher;
 
     public function __construct(Publisher $publisher)
     {
@@ -19,10 +16,8 @@ class AlwaysPublishesMessages implements MessageBusMiddleware
 
     /**
      * Handle a message by publishing it to a queue (always), then calling the next middleware.
-     *
-     * {@inheritdoc}
      */
-    public function handle($message, callable $next)
+    public function handle(object $message, callable $next): void
     {
         $this->publisher->publish($message);
 

@@ -2,12 +2,14 @@
 
 namespace SimpleBus\Asynchronous\Tests\MessageBus;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use SimpleBus\Asynchronous\MessageBus\PublishesUnhandledMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\CallableResolver\Exception\UndefinedCallable;
+use stdClass;
 
 /**
  * @internal
@@ -18,7 +20,7 @@ class PublishesUnhandledMessagesTest extends TestCase
     /**
      * @test
      */
-    public function itCallsTheNextMiddlewareAndWhenTheMessageIsHandledItDoesNotPublishIt()
+    public function itCallsTheNextMiddlewareAndWhenTheMessageIsHandledItDoesNotPublishIt(): void
     {
         $message = $this->dummyMessage();
 
@@ -43,7 +45,7 @@ class PublishesUnhandledMessagesTest extends TestCase
     /**
      * @test
      */
-    public function itCallsTheNextMiddlewareAndWhenTheMessageHasNoHandlerItPublishesIt()
+    public function itCallsTheNextMiddlewareAndWhenTheMessageHasNoHandlerItPublishesIt(): void
     {
         $message = $this->dummyMessage();
 
@@ -80,38 +82,35 @@ class PublishesUnhandledMessagesTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|Publisher
+     * @return MockObject|Publisher
      */
     private function mockPublisher()
     {
-        return $this->createMock('SimpleBus\Asynchronous\Publisher\Publisher');
+        return $this->createMock(Publisher::class);
     }
 
-    /**
-     * @return object|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function dummyMessage()
+    private function dummyMessage(): stdClass
     {
-        return new \stdClass();
+        return new stdClass();
     }
 
     /**
-     * @return LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return LoggerInterface|MockObject
      */
     private function dummyLogger()
     {
-        return $this->createMock('Psr\Log\LoggerInterface');
+        return $this->createMock(LoggerInterface::class);
     }
 
     /**
-     * @return LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return LoggerInterface|MockObject
      */
     private function mockLogger()
     {
-        return $this->createMock('Psr\Log\LoggerInterface');
+        return $this->createMock(LoggerInterface::class);
     }
 
-    private function dummyLogLevel()
+    private function dummyLogLevel(): string
     {
         return LogLevel::DEBUG;
     }

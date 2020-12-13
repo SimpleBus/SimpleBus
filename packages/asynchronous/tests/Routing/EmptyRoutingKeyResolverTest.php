@@ -4,6 +4,7 @@ namespace SimpleBus\Asynchronous\Tests\Routing;
 
 use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Routing\EmptyRoutingKeyResolver;
+use stdClass;
 
 /**
  * @internal
@@ -14,17 +15,14 @@ class EmptyRoutingKeyResolverTest extends TestCase
     /**
      * @test
      */
-    public function itReturnsAnEmptyRoutingKey()
+    public function itReturnsAnEmptyRoutingKey(): void
     {
         $resolver = new EmptyRoutingKeyResolver();
         $this->assertSame('', $resolver->resolveRoutingKeyFor($this->messageDummy()));
     }
 
-    /**
-     * @return object|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function messageDummy()
+    private function messageDummy(): stdClass
     {
-        return new \stdClass();
+        return new stdClass();
     }
 }
