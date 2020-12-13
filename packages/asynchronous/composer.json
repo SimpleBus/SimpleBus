@@ -27,7 +27,6 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "beberlei/assert": "^3.0",
         "psr/log": "^1.0",
         "simple-bus/message-bus": "^3.0.3",
         "simple-bus/serialization": "^3.0"

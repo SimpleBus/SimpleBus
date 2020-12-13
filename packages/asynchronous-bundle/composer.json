@@ -28,7 +28,6 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "beberlei/assert": "^3.0",
         "simple-bus/asynchronous": "^3.0",
         "simple-bus/message-bus": "^3.0.3",
         "simple-bus/symfony-bridge": "^5.4.0",
