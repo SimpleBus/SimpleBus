@@ -6,20 +6,13 @@ interface ObjectSerializer
 {
     /**
      * Serialize the given object as a deserializable string.
-     *
-     * @param object $object
-     *
-     * @return string
      */
-    public function serialize($object);
+    public function serialize(object $object): string;
 
     /**
      * Deserialize the given serialized object into an actual object of the given type.
      *
-     * @param string $serializedObject
-     * @param string $type
-     *
-     * @return object
+     * @param class-string $type
      */
-    public function deserialize($serializedObject, $type);
+    public function deserialize(string $serializedObject, string $type): object;
 }

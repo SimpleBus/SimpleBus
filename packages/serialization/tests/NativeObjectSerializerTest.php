@@ -2,10 +2,12 @@
 
 namespace SimpleBus\Serialization\Tests;
 
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\NativeObjectSerializer;
 use SimpleBus\Serialization\Tests\Fixtures\AnotherDummyMessage;
+use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
 
 /**
  * @internal
@@ -16,10 +18,10 @@ class NativeObjectSerializerTest extends TestCase
     /**
      * @test
      */
-    public function itCanSerializeADefaultMessageEnvelopeWithASerializedMessage()
+    public function itCanSerializeADefaultMessageEnvelopeWithASerializedMessage(): void
     {
         $envelope = DefaultEnvelope::forSerializedMessage(
-            'SimpleBus\Serialization\Tests\Fixtures\DummyMessage',
+            DummyMessage::class,
             'serialized message'
         );
         $serializer = new NativeObjectSerializer();
@@ -31,10 +33,10 @@ class NativeObjectSerializerTest extends TestCase
     /**
      * @test
      */
-    public function itCanSerializeAndDeserializeADefaultMessageEnvelopeWithASerializedMessage()
+    public function itCanSerializeAndDeserializeADefaultMessageEnvelopeWithASerializedMessage(): void
     {
         $originalEnvelope = DefaultEnvelope::forSerializedMessage(
-            'SimpleBus\Serialization\Tests\Fixtures\DummyMessage',
+            DummyMessage::class,
             'serialized message'
         );
         $serializer = new NativeObjectSerializer();
@@ -47,14 +49,14 @@ class NativeObjectSerializerTest extends TestCase
     /**
      * @test
      */
-    public function itFailsWhenTheDeserializedObjectIsOfTheWrongType()
+    public function itFailsWhenTheDeserializedObjectIsOfTheWrongType(): void
     {
-        $expectedType = 'SimpleBus\Serialization\Tests\Fixtures\DummyMessage';
+        $expectedType = DummyMessage::class;
         $message = new AnotherDummyMessage();
         $serializer = new NativeObjectSerializer();
         $serializedMessage = $serializer->serialize($message);
 
-        $this->expectException('\LogicException', $expectedType);
+        $this->expectException(LogicException::class);
         $serializer->deserialize($serializedMessage, $expectedType);
     }
 }

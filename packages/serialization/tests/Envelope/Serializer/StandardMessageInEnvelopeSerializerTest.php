@@ -2,6 +2,8 @@
 
 namespace SimpleBus\Serialization\Tests\Envelope\Serializer;
 
+use LogicException;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Envelope\Envelope;
@@ -9,6 +11,7 @@ use SimpleBus\Serialization\Envelope\EnvelopeFactory;
 use SimpleBus\Serialization\Envelope\Serializer\StandardMessageInEnvelopeSerializer;
 use SimpleBus\Serialization\ObjectSerializer;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
+use stdClass;
 
 /**
  * @internal
@@ -19,7 +22,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     /**
      * @test
      */
-    public function itSerializesAMessageAndWrapsItInASerializedEnvelope()
+    public function itSerializesAMessageAndWrapsItInASerializedEnvelope(): void
     {
         $message = new DummyMessage();
         $serializedMessage = 'the serialized message';
@@ -52,7 +55,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     /**
      * @test
      */
-    public function itDeserializesAMessageAfterUnwrappingItFromItsSerializedEnvelope()
+    public function itDeserializesAMessageAfterUnwrappingItFromItsSerializedEnvelope(): void
     {
         $message = new DummyMessage();
 
@@ -87,11 +90,11 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     /**
      * @test
      */
-    public function itFailsIfTheDeserializedEnvelopeIsNotOfTheExpectedType()
+    public function itFailsIfTheDeserializedEnvelopeIsNotOfTheExpectedType(): void
     {
         $envelopeClass = 'The\Envelope\Class';
         $serializedEnvelope = 'the serialized envelope';
-        $notAnEnvelope = new \stdClass();
+        $notAnEnvelope = new stdClass();
         $envelopeFactory = $this->envelopeFactoryForEnvelopeClass($envelopeClass);
 
         $objectSerializer = $this->mockObjectSerializer();
@@ -103,14 +106,14 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
 
         $messageSerializer = new StandardMessageInEnvelopeSerializer($envelopeFactory, $objectSerializer);
 
-        $this->expectException('\LogicException');
+        $this->expectException(LogicException::class);
         $messageSerializer->unwrapAndDeserialize($serializedEnvelope);
     }
 
     /**
      * @test
      */
-    public function itFailsIfTheDeserializedMessageIsNotOfTheExpectedType()
+    public function itFailsIfTheDeserializedMessageIsNotOfTheExpectedType(): void
     {
         $message = new DummyMessage();
 
@@ -122,7 +125,7 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
         $envelopeFactory = $this->envelopeFactoryForEnvelopeClass($envelopeClass);
         $serializedEnvelope = 'the serialized envelope';
 
-        $notAMessage = new \stdClass();
+        $notAMessage = new stdClass();
 
         $objectSerializer = $this->mockObjectSerializer();
         $objectSerializer
@@ -139,18 +142,18 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
 
         $messageSerializer = new StandardMessageInEnvelopeSerializer($envelopeFactory, $objectSerializer);
 
-        $this->expectException('\LogicException', $messageClass);
+        $this->expectException(LogicException::class);
         $messageSerializer->unwrapAndDeserialize($serializedEnvelope);
     }
 
     /**
      * @param object $message
      *
-     * @return EnvelopeFactory|\PHPUnit\Framework\MockObject\MockObject
+     * @return EnvelopeFactory|MockObject
      */
     private function envelopeFactoryCreatesEnvelope($message, Envelope $expectedEnvelope)
     {
-        $envelopeFactory = $this->createMock('SimpleBus\Serialization\Envelope\EnvelopeFactory');
+        $envelopeFactory = $this->createMock(EnvelopeFactory::class);
         $envelopeFactory
             ->expects($this->once())
             ->method('wrapMessageInEnvelope')
@@ -161,21 +164,19 @@ class StandardMessageInEnvelopeSerializerTest extends TestCase
     }
 
     /**
-     * @return ObjectSerializer|\PHPUnit\Framework\MockObject\MockObject
+     * @return MockObject|ObjectSerializer
      */
     private function mockObjectSerializer()
     {
-        return $this->createMock('SimpleBus\Serialization\ObjectSerializer');
+        return $this->createMock(ObjectSerializer::class);
     }
 
     /**
-     * @param $envelopeClass
-     *
-     * @return EnvelopeFactory|\PHPUnit\Framework\MockObject\MockObject
+     * @return EnvelopeFactory|MockObject
      */
-    private function envelopeFactoryForEnvelopeClass($envelopeClass)
+    private function envelopeFactoryForEnvelopeClass(string $envelopeClass)
     {
-        $envelopeFactory = $this->createMock('SimpleBus\Serialization\Envelope\EnvelopeFactory');
+        $envelopeFactory = $this->createMock(EnvelopeFactory::class);
         $envelopeFactory
             ->expects($this->any())
             ->method('envelopeClass')

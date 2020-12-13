@@ -6,17 +6,13 @@ interface EnvelopeFactory
 {
     /**
      * Create an Envelope for a message.
-     *
-     * @param object $message
-     *
-     * @return Envelope
      */
-    public function wrapMessageInEnvelope($message);
+    public function wrapMessageInEnvelope(object $message): Envelope;
 
     /**
      * The FQCN of the Envelope instances created by this factory.
      *
-     * @return string
+     * @return class-string
      */
-    public function envelopeClass();
+    public function envelopeClass(): string;
 }

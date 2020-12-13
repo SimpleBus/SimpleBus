@@ -2,6 +2,7 @@
 
 namespace Message\Envelope;
 
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
@@ -15,13 +16,13 @@ class DefaultEnvelopeTest extends TestCase
     /**
      * @test
      */
-    public function itCreatesAnEnvelopeForAMessage()
+    public function itCreatesAnEnvelopeForAMessage(): void
     {
         $message = new DummyMessage();
         $type = get_class($message);
 
         $envelope = DefaultEnvelope::forMessage($message);
-        $this->assertInstanceOf('SimpleBus\Serialization\Envelope\DefaultEnvelope', $envelope);
+        $this->assertInstanceOf(DefaultEnvelope::class, $envelope);
         $this->assertSame($message, $envelope->message());
         $this->assertSame($type, $envelope->messageType());
     }
@@ -29,7 +30,7 @@ class DefaultEnvelopeTest extends TestCase
     /**
      * @test
      */
-    public function itCreatesANewInstanceForADifferentMessage()
+    public function itCreatesANewInstanceForADifferentMessage(): void
     {
         $message = new DummyMessage();
         $type = get_class($message);
@@ -46,7 +47,7 @@ class DefaultEnvelopeTest extends TestCase
     /**
      * @test
      */
-    public function itCreatesANewInstanceForASerializedVersionOfTheMessage()
+    public function itCreatesANewInstanceForASerializedVersionOfTheMessage(): void
     {
         $message = new DummyMessage();
         $type = get_class($message);
@@ -64,12 +65,12 @@ class DefaultEnvelopeTest extends TestCase
     /**
      * @test
      */
-    public function itFailsWhenTheSerializedMessageIsUnavailable()
+    public function itFailsWhenTheSerializedMessageIsUnavailable(): void
     {
         $message = new DummyMessage();
         $envelope = DefaultEnvelope::forMessage($message);
 
-        $this->expectException('LogicException');
+        $this->expectException(LogicException::class);
 
         $envelope->serializedMessage();
     }
@@ -77,14 +78,14 @@ class DefaultEnvelopeTest extends TestCase
     /**
      * @test
      */
-    public function itFailsWhenTheMessageIsUnavailable()
+    public function itFailsWhenTheMessageIsUnavailable(): void
     {
         $envelope = DefaultEnvelope::forSerializedMessage(
-            'SimpleBus\Serialization\Tests\Fixtures\DummyMessage',
+            DummyMessage::class,
             'serialized message'
         );
 
-        $this->expectException('LogicException');
+        $this->expectException(LogicException::class);
 
         $envelope->message();
     }

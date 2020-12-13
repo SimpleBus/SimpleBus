@@ -2,46 +2,36 @@
 
 namespace SimpleBus\Serialization\Envelope;
 
+use LogicException;
+
 interface Envelope
 {
     /**
      * The type (FQCN) of the message.
      *
-     * @return string
+     * @return class-string
      */
-    public function messageType();
+    public function messageType(): string;
 
     /**
      * The message.
      *
-     * @throws \LogicException When the Message has not been provided
-     *
-     * @return object
+     * @throws LogicException When the Message has not been provided
      */
-    public function message();
+    public function message(): object;
 
     /**
      * A new instance of the same class, with the same type, but another message.
-     *
-     * @param object $message
-     *
-     * @return Envelope
      */
-    public function withMessage($message);
+    public function withMessage(object $message): Envelope;
 
     /**
      * A new instance of the same class, with a serialized message of the same type.
-     *
-     * @param string $serializedMessage
-     *
-     * @return Envelope
      */
-    public function withSerializedMessage($serializedMessage);
+    public function withSerializedMessage(string $serializedMessage): Envelope;
 
     /**
-     * @throws \LogicException When the serialized message has not been provided
-     *
-     * @return string
+     * @throws LogicException When the serialized message has not been provided
      */
-    public function serializedMessage();
+    public function serializedMessage(): string;
 }
