@@ -10,6 +10,7 @@ $config = (new PhpCsFixer\Config())
         '@PHP70Migration' => true,
         '@PHP71Migration' => true,
         '@PHP73Migration' => true,
+        '@PHP74Migration' => true,
         '@Symfony' => true,
         'array_syntax' => [
             'syntax' => 'short'
