@@ -8,25 +8,19 @@ use SimpleBus\Serialization\ObjectSerializer;
 
 class JMSSerializerObjectSerializer implements ObjectSerializer
 {
-    /**
-     * @var SerializerInterface
-     */
-    private $serializer;
+    private SerializerInterface $serializer;
 
-    /**
-     * @var string
-     */
-    private $format;
+    private string $format;
 
     public function __construct(
         SerializerInterface $serializer,
-        $format
+        string $format
     ) {
         $this->serializer = $serializer;
         $this->format = $format;
     }
 
-    public function serialize($object)
+    public function serialize(object $object): string
     {
         $serializationContext = SerializationContext::create()
             ->setSerializeNull(true);
@@ -34,7 +28,10 @@ class JMSSerializerObjectSerializer implements ObjectSerializer
         return $this->serializer->serialize($object, $this->format, $serializationContext);
     }
 
-    public function deserialize($serializedObject, $type)
+    /**
+     * @param class-string $type
+     */
+    public function deserialize(string $serializedObject, string $type): object
     {
         return $this->serializer->deserialize($serializedObject, $type, $this->format);
     }

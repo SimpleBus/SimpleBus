@@ -17,7 +17,7 @@ class JMSSerializerObjectSerializerTest extends TestCase
     /**
      * @test
      */
-    public function itSerializesAndDeserializesMessages()
+    public function itSerializesAndDeserializesMessages(): void
     {
         $format = 'json';
         $jmsSerializer = SerializerBuilder::create()
@@ -25,7 +25,7 @@ class JMSSerializerObjectSerializerTest extends TestCase
             ->build();
 
         $originalEnvelope = DefaultEnvelope::forSerializedMessage(
-            'SimpleBus\JMSSerializerBridge\Tests\Integration\SampleMessage',
+            SampleMessage::class,
             '{}'
         );
 
