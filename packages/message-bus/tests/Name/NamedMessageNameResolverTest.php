@@ -31,21 +31,6 @@ class NamedMessageNameResolverTest extends TestCase
     /**
      * @test
      */
-    public function itFailsWhenTheNameIsNotAString(): void
-    {
-        $notAString = new stdClass();
-        StubNamedMessage::$name = $notAString;
-        $message = new StubNamedMessage();
-
-        $resolver = new NamedMessageNameResolver();
-
-        $this->expectException('SimpleBus\Message\Name\Exception\CouldNotResolveMessageName');
-        $resolver->resolve($message);
-    }
-
-    /**
-     * @test
-     */
     public function itFailsWhenTheNameIsAnEmptyString(): void
     {
         $emptyString = '';
