@@ -19,7 +19,7 @@ class AdditionalPropertiesResolverPass implements CompilerPassInterface
 
         foreach ($container->findTaggedServiceIds('simple_bus.additional_properties_resolver') as $serviceId => $tags) {
             foreach ($tags as $tagAttributes) {
-                $priority = isset($tagAttributes['priority']) ? $tagAttributes['priority'] : 0;
+                $priority = $tagAttributes['priority'] ?? 0;
                 $resolverReferences->insert(new Reference($serviceId), $priority);
             }
         }
