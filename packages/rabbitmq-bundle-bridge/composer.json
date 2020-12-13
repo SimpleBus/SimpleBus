@@ -36,6 +36,7 @@
         "symfony/monolog-bundle": "^3.4"
     },
     "require-dev": {
+        "ergebnis/composer-normalize": "^2.11",
         "matthiasnoback/phpunit-asynchronicity": "^2.0",
         "phpunit/phpunit": "^9.3",
         "simple-bus/jms-serializer-bundle-bridge": "~3.0",
@@ -43,6 +44,9 @@
         "symfony/finder": "^4.4 || ^5.1",
         "symfony/process": "^4.4 || ^5.1",
         "symfony/translation": "^4.4 || ^5.1"
+    },
+    "config": {
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
@@ -55,8 +59,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true
-    }
+    "prefer-stable": true
 }
