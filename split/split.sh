@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
 git subsplit publish "
-    Bridge/DoctrineDBALBridge:git@github.com:SimpleBus/DoctrineDBALBridge.git
-    Bridge/DoctrineORMBridge:git@github.com:SimpleBus/DoctrineORMBridge.git
-    Bridge/JMSSerializerBridge:git@github.com:SimpleBus/JMSSerializerBridge.git
+    packages/doctrine-dbal-bridge:git@github.com:SimpleBus/DoctrineDBALBridge.git
+    packages/doctrine-orm-bridge:git@github.com:SimpleBus/DoctrineORMBridge.git
+    packages/jms-serializer-bridge:git@github.com:SimpleBus/JMSSerializerBridge.git
 
-    Bundle/AsynchronousBundle:git@github.com:SimpleBus/AsynchronousBundle.git
-    Bundle/JMSSerializerBundleBridge:git@github.com:SimpleBus/JMSSerializerBundleBridge.git
-    Bundle/RabbitMQBundleBridge:git@github.com:SimpleBus/RabbitMQBundleBridge.git
-    Bundle/SymfonyBridge:git@github.com:SimpleBus/SymfonyBridge.git
+    packages/asynchronous-bundle:git@github.com:SimpleBus/AsynchronousBundle.git
+    packages/jms-serializer-bundle-bridge:git@github.com:SimpleBus/JMSSerializerBundleBridge.git
+    packages/rabbitmq-bundle-bridge:git@github.com:SimpleBus/RabbitMQBundleBridge.git
+    packages/symfony-bridge:git@github.com:SimpleBus/SymfonyBridge.git
 
-    Component/Asynchronous:git@github.com:SimpleBus/Asynchronous.git
-    Component/MessageBus:git@github.com:SimpleBus/MessageBus.git
-    Component/Serialization:git@github.com:SimpleBus/Serialization.git
+    packages/asynchronous:git@github.com:SimpleBus/Asynchronous.git
+    packages/message-bus:git@github.com:SimpleBus/MessageBus.git
+    packages/serialization:git@github.com:SimpleBus/Serialization.git
 
     docs:git@github.com:SimpleBus/docs.git
 " --update --heads="master gh-pages"
