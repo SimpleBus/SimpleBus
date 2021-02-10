@@ -18,7 +18,6 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             # Remove `ignore-platform-req` when these issues are fixed
             # https://github.com/php-amqplib/php-amqplib/issues/846
-            # https://github.com/schmittjoh/JMSSerializerBundle/pull/819
             -   run: composer install --no-progress --ansi --ignore-platform-req php
             -   run: vendor/bin/monorepo-builder validate
             -   id: set-packages
@@ -86,7 +85,6 @@ jobs:
 
             # Remove `ignore-platform-req` when these issues are fixed
             # https://github.com/php-amqplib/php-amqplib/issues/846
-            # https://github.com/schmittjoh/JMSSerializerBundle/pull/819
             -   run: composer install --no-progress --ansi --ignore-platform-req php
 
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
