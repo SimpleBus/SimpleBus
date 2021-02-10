@@ -36,7 +36,7 @@ class DoctrineOrmSmokeTest extends KernelTestCase
         if (!class_exists('Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator')) {
             $this->markTestSkipped('This test requires "symfony/proxy-manager-bridge" to be installed.');
 
-            /** @phpstan-ignore-next-line */
+            // @phpstan-ignore-next-line
             return;
         }
 
@@ -88,7 +88,7 @@ class DoctrineOrmSmokeTest extends KernelTestCase
         if (class_exists('Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator')) {
             $this->markTestSkipped('This test requires "symfony/proxy-manager-bridge" to NOT be installed.');
 
-            /** @phpstan-ignore-next-line */
+            // @phpstan-ignore-next-line
             return;
         }
 
