@@ -86,8 +86,8 @@ jobs:
             # Remove `ignore-platform-req` when these issues are fixed
             # https://github.com/php-amqplib/php-amqplib/issues/846
             -   run: composer install --no-progress --ansi --ignore-platform-req php
-
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
+            -   run: vendor/bin/monorepo-builder bump-interdependency dev-main
 
             -   run: bin/console rebuild-symfony-requirements ${{ matrix.package }} "${{ matrix.symfony-version }}"
 
