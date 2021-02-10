@@ -11,9 +11,9 @@ class DefaultEnvelope implements Envelope
      */
     private string $messageType;
 
-    private ?object $message;
+    private ?object $message = null;
 
-    private ?string $serializedMessage;
+    private ?string $serializedMessage = null;
 
     /**
      * @param class-string $messageType
