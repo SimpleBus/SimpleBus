@@ -117,10 +117,11 @@ jobs:
 
     phpstan:
         needs: build-matrix
+        runs-on: ubuntu-20.04
         strategy:
+            fail-fast: false
             matrix:
                 php-version: ${{ fromJson(needs.build-matrix.outputs.php-version) }}
-        runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2
