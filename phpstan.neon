@@ -25,3 +25,6 @@ parameters:
         - packages/symfony-bridge/src/
         - packages/symfony-bridge/tests/
         - src/
+    excludes_analyse:
+        # See https://github.com/phpstan/phpstan/issues/4516
+        - packages/message-bus/src/Recorder/PrivateMessageRecorderCapabilities.php
