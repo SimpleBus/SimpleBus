@@ -58,7 +58,7 @@
         "matthiasnoback/doctrine-orm-test-service-provider": "^3.0",
         "matthiasnoback/phpunit-asynchronicity": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "ocramius/proxy-manager": "dev-allow-php-8 as 2.10.99",
+        "ocramius/proxy-manager": "^2.11.1",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "^0.12.61",
         "phpstan/phpstan-phpunit": "^0.12.17",
@@ -104,13 +104,6 @@
             "SimpleBus\\SymfonyBridge\\Tests\\": "packages/symfony-bridge/tests"
         }
     },
-    "repositories": [
-        {
-            "description": "Use fork until PHP 8 is supported https://github.com/Ocramius/ProxyManager/pull/628",
-            "type": "vcs",
-            "url": "https://github.com/greg0ire/ProxyManager.git"
-        }
-    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }

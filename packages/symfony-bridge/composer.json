@@ -40,7 +40,7 @@
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/orm": "^2.8",
         "ergebnis/composer-normalize": "^2.11",
-        "ocramius/proxy-manager": "dev-allow-php-8 as 2.10.99",
+        "ocramius/proxy-manager": "^2.11.1",
         "phpunit/phpunit": "^9.3",
         "simple-bus/doctrine-orm-bridge": "^5.0",
         "symfony/framework-bundle": "^4.4 || ^5.1",
@@ -68,13 +68,6 @@
             "SimpleBus\\SymfonyBridge\\Tests\\": "tests"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/greg0ire/ProxyManager.git",
-            "description": "Use fork until PHP 8 is supported https://github.com/Ocramius/ProxyManager/pull/628"
-        }
-    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
