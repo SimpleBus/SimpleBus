@@ -42,28 +42,28 @@ jobs:
                 dependencies:
                     - 'lowest'
                     - 'highest'
-                composer-remove-arguments: ['']
+                composer-remove-arguments: [ '' ]
                 include:
-                    - php-version: '7.4'
-                      package: 'symfony-bridge'
-                      symfony-version: '5.1.*'
-                      dependencies: 'lowest'
-                      composer-remove-arguments: '--dev symfony/proxy-manager-bridge'
+                    -   php-version: '7.4'
+                        package: 'symfony-bridge'
+                        symfony-version: '5.1.*'
+                        dependencies: 'lowest'
+                        composer-remove-arguments: '--dev symfony/proxy-manager-bridge'
                 exclude:
                     # Only test once it has no Symfony packages
-                    - package: 'asynchronous'
-                      symfony-version: '4.4.*'
-                    - package: 'message-bus'
-                      symfony-version: '4.4.*'
-                    - package: 'serialization'
-                      symfony-version: '4.4.*'
+                    -   package: 'asynchronous'
+                        symfony-version: '4.4.*'
+                    -   package: 'message-bus'
+                        symfony-version: '4.4.*'
+                    -   package: 'serialization'
+                        symfony-version: '4.4.*'
                     # Exclude as it is not support on PHP 8
                     # https://github.com/php-amqplib/php-amqplib/issues/846
-                    - package: 'rabbitmq-bundle-bridge'
-                      php-version: '8.0'
+                    -   package: 'rabbitmq-bundle-bridge'
+                        php-version: '8.0'
                     # https://github.com/schmittjoh/JMSSerializerBundle/pull/819
-                    - package: 'jms-serializer-bundle-bridge'
-                      php-version: '8.0'
+                    -   package: 'jms-serializer-bundle-bridge'
+                        php-version: '8.0'
         steps:
             -   uses: actions/checkout@v2
 
@@ -106,27 +106,27 @@ jobs:
     php-cs-fixer:
         runs-on: ubuntu-20.04
         steps:
-            - uses: actions/checkout@v2
-            - uses: shivammathur/setup-php@v2
-              with:
-                  coverage: none
-                    # PHP CS Fixer is not able run on PHP 8.0.0 due to bug in PHP tokenizer (https://bugs.php.net/bug.php?id=80462).
-                    # Somehow setup-php doesn't install the latest PHP when picking 8.0
-                    php-version: 7.4
-              env:
-                  COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            - run: composer install --no-progress --ansi
-            - run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    coverage: none
+                        # PHP CS Fixer is not able run on PHP 8.0.0 due to bug in PHP tokenizer (https://bugs.php.net/bug.php?id=80462).
+                        # Somehow setup-php doesn't install the latest PHP when picking 8.0
+                        php-version: 7.4
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            -   run: composer install --no-progress --ansi
+            -   run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
 
     phpstan:
         runs-on: ubuntu-20.04
         steps:
-            - uses: actions/checkout@v2
-            - uses: shivammathur/setup-php@v2
-              with:
-                  php-version: 7.4
-                  coverage: none
-              env:
-                  COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            - run: composer install --no-progress --ansi
-            - run: vendor/bin/phpstan analyse --ansi
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            -   run: composer install --no-progress --ansi
+            -   run: vendor/bin/phpstan analyse --ansi
