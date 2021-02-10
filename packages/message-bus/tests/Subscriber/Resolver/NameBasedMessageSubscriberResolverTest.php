@@ -41,12 +41,9 @@ class NameBasedMessageSubscriberResolverTest extends TestCase
     }
 
     /**
-     * @param $message
-     * @param $messageName
-     *
      * @return MessageNameResolver|MockObject
      */
-    private function stubMessageNameResolver($message, $messageName)
+    private function stubMessageNameResolver(object $message, string $messageName)
     {
         $messageNameResolver = $this->createMock(MessageNameResolver::class);
 

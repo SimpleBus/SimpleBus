@@ -21,4 +21,16 @@ class SampleMessage
         $this->foo = $foo;
         $this->bar = $bar;
     }
+
+    public function getFoo() : string
+    {
+        return $this->foo;
+    }
+
+    public function getBar() : int
+    {
+        return $this->bar;
+    }
+
+
 }

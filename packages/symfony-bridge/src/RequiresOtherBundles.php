@@ -17,7 +17,7 @@ trait RequiresOtherBundles
             throw new LogicException('You can only use this trait with Bundle instances');
         }
 
-        $enabledBundles = $container->getParameter('kernel.bundles');
+        $enabledBundles = (array) $container->getParameter('kernel.bundles');
 
         foreach ($requiredBundles as $requiredBundle) {
             if (!isset($enabledBundles[$requiredBundle])) {

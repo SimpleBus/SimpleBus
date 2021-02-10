@@ -11,18 +11,18 @@ class DefaultEnvelope implements Envelope
      */
     private string $messageType;
 
-    private $message;
+    private ?object $message;
 
-    private $serializedMessage;
+    private ?string $serializedMessage;
 
     /**
      * @param class-string $messageType
      */
-    protected function __construct(string $messageType, object $message = null, string $serializedMessage = null)
+    protected function __construct(string $messageType, ?object $message, ?string $serializedMessage)
     {
-        $this->setMessageType($messageType);
-        $this->setMessage($message);
-        $this->setSerializedMessage($serializedMessage);
+        $this->messageType = $messageType;
+        $this->message = $message;
+        $this->serializedMessage = $serializedMessage;
     }
 
     public static function forMessage(object $message): self
@@ -71,23 +71,5 @@ class DefaultEnvelope implements Envelope
     public function withSerializedMessage(string $serializedMessage): self
     {
         return new self($this->messageType, $this->message, $serializedMessage);
-    }
-
-    /**
-     * @param class-string $messageType
-     */
-    private function setMessageType(string $messageType): void
-    {
-        $this->messageType = $messageType;
-    }
-
-    private function setMessage(object $message = null): void
-    {
-        $this->message = $message;
-    }
-
-    private function setSerializedMessage(?string $serializedMessage): void
-    {
-        $this->serializedMessage = $serializedMessage;
     }
 }
