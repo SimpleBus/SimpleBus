@@ -1,4 +1,4 @@
-name: composer normalize
+name: Composer validation
 
 on: [ push ]
 
@@ -36,6 +36,7 @@ jobs:
               env:
                   COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - run: composer install --no-progress --ansi
+            - run: composer validate
             - run: composer normalize --dry-run
 
     packages:
@@ -54,6 +55,8 @@ jobs:
               env:
                   COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - run: composer install --no-progress --ansi
+              working-directory: packages/${{ matrix.package }}
+            - run: composer validate
               working-directory: packages/${{ matrix.package }}
             - run: composer normalize --dry-run
               working-directory: packages/${{ matrix.package }}
