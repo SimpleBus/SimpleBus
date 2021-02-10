@@ -2,7 +2,6 @@
 
 namespace SimpleBus\Message\CallableResolver;
 
-use Assert\Assertion;
 
 class CallableCollection
 {
@@ -20,7 +19,11 @@ class CallableCollection
         array $callablesByName,
         CallableResolver $callableResolver
     ) {
-        Assertion::allIsArray($callablesByName, 'You need to provide arrays of callables, indexed by name');
+        foreach ($callablesByName as $callable) {
+            if (!is_array($callable)) {
+                throw new \InvalidArgumentException('You need to provide arrays of callables, indexed by name');
+            }
+        }
 
         $this->callablesByName = $callablesByName;
         $this->callableResolver = $callableResolver;

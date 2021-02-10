@@ -24,7 +24,6 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "beberlei/assert": "^3.0",
         "doctrine/dbal": "^2.12",
         "doctrine/orm": "^2.8",
         "emag-tech-labs/rabbitmq-bundle": "^2.3",
