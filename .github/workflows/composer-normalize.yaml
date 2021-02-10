@@ -7,7 +7,7 @@ env:
 
 jobs:
     build-matrix:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2
@@ -26,7 +26,7 @@ jobs:
             packages: ${{ steps.set-packages.outputs.packages }}
 
     root:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@v2
             - uses: shivammathur/setup-php@v2
@@ -40,7 +40,7 @@ jobs:
 
     packages:
         needs: build-matrix
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
