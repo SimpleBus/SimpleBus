@@ -77,4 +77,16 @@ class EventRecordingEntity implements ContainsRecordedMessages
     {
         $this->record(new EntityChangedPreUpdate());
     }
+
+    public function getId() : int
+    {
+        return $this->id;
+    }
+
+    public function getSomething() : string
+    {
+        return $this->something;
+    }
+
+
 }

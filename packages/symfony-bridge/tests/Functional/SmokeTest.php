@@ -2,6 +2,7 @@
 
 namespace SimpleBus\SymfonyBridge\Tests\Functional;
 
+use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest\Auto\AutoCommand1;
 use SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest\Auto\AutoCommand2;
 use SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest\Auto\AutoEvent1;
@@ -23,7 +24,6 @@ class SmokeTest extends KernelTestCase
         parent::tearDown();
 
         static::$class = null;
-        static::$kernel = null;
     }
 
     /**
@@ -38,7 +38,11 @@ class SmokeTest extends KernelTestCase
 
         $this->assertFalse($event->isHandledBy(AutoEventSubscriberUsingInvoke::class));
 
-        $container->get('event_bus')->handle($event);
+        $eventBus = $container->get('event_bus');
+
+        $this->assertInstanceOf(MessageBus::class, $eventBus);
+
+        $eventBus->handle($event);
 
         $this->assertTrue($event->isHandledBy(AutoEventSubscriberUsingInvoke::class));
     }
@@ -57,8 +61,12 @@ class SmokeTest extends KernelTestCase
         $this->assertFalse($event2->isHandledBy(AutoEventSubscriberUsingPublicMethod::class));
         $this->assertFalse($event3->isHandledBy(AutoEventSubscriberUsingPublicMethod::class));
 
-        $container->get('event_bus')->handle($event2);
-        $container->get('event_bus')->handle($event3);
+        $eventBus = $container->get('event_bus');
+
+        $this->assertInstanceOf(MessageBus::class, $eventBus);
+
+        $eventBus->handle($event2);
+        $eventBus->handle($event3);
 
         $this->assertTrue($event2->isHandledBy(AutoEventSubscriberUsingPublicMethod::class));
         $this->assertTrue($event3->isHandledBy(AutoEventSubscriberUsingPublicMethod::class));
@@ -76,7 +84,11 @@ class SmokeTest extends KernelTestCase
 
         $this->assertFalse($command->isHandled());
 
-        $container->get('command_bus')->handle($command);
+        $commandBus = $container->get('command_bus');
+
+        $this->assertInstanceOf(MessageBus::class, $commandBus);
+
+        $commandBus->handle($command);
 
         $this->assertTrue($command->isHandled());
     }
@@ -93,7 +105,11 @@ class SmokeTest extends KernelTestCase
 
         $this->assertFalse($command->isHandled());
 
-        $container->get('command_bus')->handle($command);
+        $commandBus = $container->get('command_bus');
+
+        $this->assertInstanceOf(MessageBus::class, $commandBus);
+
+        $commandBus->handle($command);
 
         $this->assertTrue($command->isHandled());
     }

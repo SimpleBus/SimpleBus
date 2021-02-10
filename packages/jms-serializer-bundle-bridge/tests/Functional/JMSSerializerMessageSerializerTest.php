@@ -16,7 +16,6 @@ class JMSSerializerMessageSerializerTest extends KernelTestCase
         parent::tearDown();
 
         static::$class = null;
-        static::$kernel = null;
     }
 
     /**

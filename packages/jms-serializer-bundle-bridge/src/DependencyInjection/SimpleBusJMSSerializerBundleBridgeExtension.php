@@ -50,7 +50,7 @@ class SimpleBusJMSSerializerBundleBridgeExtension extends Extension implements P
 
     private function requireBundle(string $bundleName, ContainerBuilder $container): void
     {
-        $enabledBundles = $container->getParameter('kernel.bundles');
+        $enabledBundles = (array) $container->getParameter('kernel.bundles');
         if (!isset($enabledBundles[$bundleName])) {
             throw new LogicException(sprintf('You need to enable "%s" as well', $bundleName));
         }

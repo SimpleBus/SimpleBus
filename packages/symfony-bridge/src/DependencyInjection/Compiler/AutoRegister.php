@@ -4,6 +4,7 @@ namespace SimpleBus\SymfonyBridge\DependencyInjection\Compiler;
 
 use ReflectionClass;
 use ReflectionMethod;
+use ReflectionNamedType;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -35,6 +36,7 @@ final class AutoRegister implements CompilerPassInterface
                 $definition = $container->getDefinition($serviceId);
 
                 // check if service id is class name
+                /** @phpstan-ignore-next-line */
                 $reflectionClass = new ReflectionClass($definition->getClass() ?: $serviceId);
 
                 $methods = $reflectionClass->getMethods(ReflectionMethod::IS_PUBLIC);
@@ -56,12 +58,17 @@ final class AutoRegister implements CompilerPassInterface
                     $parameters = $method->getParameters();
 
                     // if no param, optional param or non-class param, skip
-                    if (1 !== count($parameters) || $parameters[0]->isOptional() || null === $parameters[0]->getType()) {
+                    if (1 !== count($parameters) || $parameters[0]->isOptional()) {
+                        continue;
+                    }
+
+                    $type = $parameters[0]->getType();
+                    if (null === $type || !$type instanceof ReflectionNamedType) {
                         continue;
                     }
 
                     // get the class name
-                    $handles = $parameters[0]->getType()->getName();
+                    $handles = $type->getName();
 
                     $tagAttributes[] = [
                         $this->tagAttribute => $handles,

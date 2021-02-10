@@ -17,6 +17,9 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 {
     private FileLogger $logger;
 
+    /**
+     * @var null|Process<\Generator>
+     */
     private ?Process $process = null;
 
     /**
@@ -28,7 +31,11 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     {
         static::bootKernel();
 
-        $this->logger = static::$kernel->getContainer()->get('logger');
+        $logger = static::$kernel->getContainer()->get('logger');
+
+        $this->assertInstanceof(FileLogger::class, $logger);
+
+        $this->logger = $logger;
         $this->logger->clearFile();
 
         $process = new Process(
@@ -43,7 +50,6 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
         parent::tearDown();
 
         static::$class = null;
-        static::$kernel = null;
 
         if ($this->process instanceof Process) {
             $this->process->stop(2, SIGKILL);
@@ -126,7 +132,11 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
         $this->commandBus()->handle(new AsynchronousCommand());
 
-        $data = $container->get('simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.producer_mock')->getAdditionalProperties();
+        $producer = $container->get('simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.producer_mock');
+
+        $this->assertInstanceOf(AdditionalPropertiesResolverProducerMock::class, $producer);
+
+        $data = $producer->getAdditionalProperties();
         $this->assertSame(['debug' => 'string'], $data);
     }
 
@@ -148,17 +158,29 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     private function commandBus(): MessageBus
     {
-        return static::$kernel->getContainer()->get('command_bus');
+        $commandBus = static::$kernel->getContainer()->get('command_bus');
+
+        $this->assertInstanceOf(MessageBus::class, $commandBus);
+
+        return $commandBus;
     }
 
     private function eventBus(): MessageBus
     {
-        return static::$kernel->getContainer()->get('event_bus');
+        $eventBus = static::$kernel->getContainer()->get('event_bus');
+
+        $this->assertInstanceOf(MessageBus::class, $eventBus);
+
+        return $eventBus;
     }
 
     private function additionalPropertiesResolver(): DelegatingAdditionalPropertiesResolver
     {
-        return static::$kernel->getContainer()->get('simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.public');
+        $resolver = static::$kernel->getContainer()->get('simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver.public');
+
+        $this->assertInstanceOf(DelegatingAdditionalPropertiesResolver::class, $resolver);
+
+        return $resolver;
     }
 
     private function messageDummy(): stdClass

@@ -17,7 +17,6 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         parent::tearDown();
 
         static::$class = null;
-        static::$kernel = null;
     }
 
     /**
