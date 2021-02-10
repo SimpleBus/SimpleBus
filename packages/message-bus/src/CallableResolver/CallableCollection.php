@@ -2,7 +2,6 @@
 
 namespace SimpleBus\Message\CallableResolver;
 
-
 class CallableCollection
 {
     /**
