@@ -61,9 +61,6 @@ jobs:
                     # https://github.com/php-amqplib/php-amqplib/issues/846
                     -   package: 'rabbitmq-bundle-bridge'
                         php-version: '8.0'
-                    # https://github.com/schmittjoh/JMSSerializerBundle/pull/819
-                    -   package: 'jms-serializer-bundle-bridge'
-                        php-version: '8.0'
         steps:
             -   uses: actions/checkout@v2
 
@@ -95,10 +92,10 @@ jobs:
                 run: composer remove --no-progress --ansi --working-dir packages/${{ matrix.package }} --no-update ${{ matrix.composer-remove-arguments }}
 
             -   if: "matrix.dependencies == 'highest'"
-                run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }} ${{ matrix.composer-update-arguments }}
+                run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }}
 
             -   if: "matrix.dependencies == 'lowest'"
-                run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }} --prefer-lowest ${{ matrix.composer-update-arguments }}
+                run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }} --prefer-lowest
 
             -   run: vendor/bin/phpunit
                 working-directory: packages/${{ matrix.package }}
@@ -113,6 +110,8 @@ jobs:
                     php-version: 8.0
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # Remove `ignore-platform-req` when these issues are fixed
+            # https://github.com/php-amqplib/php-amqplib/issues/846
             -   run: composer install --no-progress --ansi --ignore-platform-req php
             -   run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
 
@@ -130,5 +129,7 @@ jobs:
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # Remove `ignore-platform-req` when these issues are fixed
+            # https://github.com/php-amqplib/php-amqplib/issues/846
             -   run: composer install --no-progress --ansi --ignore-platform-req php
             -   run: vendor/bin/phpstan analyse --ansi
