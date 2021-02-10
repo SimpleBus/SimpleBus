@@ -22,15 +22,13 @@ class SampleMessage
         $this->bar = $bar;
     }
 
-    public function getFoo() : string
+    public function getFoo(): string
     {
         return $this->foo;
     }
 
-    public function getBar() : int
+    public function getBar(): int
     {
         return $this->bar;
     }
-
-
 }
