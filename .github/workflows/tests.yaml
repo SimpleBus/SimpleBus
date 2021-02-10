@@ -119,14 +119,18 @@ jobs:
             -   run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
 
     phpstan:
+        needs: build-matrix
+        strategy:
+            matrix:
+                php-version: ${{ fromJson(needs.build-matrix.outputs.php-version) }}
         runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v2
             -   uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 7.4
+                    php-version: ${{ matrix.php-version }}
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            -   run: composer install --no-progress --ansi
+            -   run: composer install --no-progress --ansi --ignore-platform-req php
             -   run: vendor/bin/phpstan analyse --ansi
