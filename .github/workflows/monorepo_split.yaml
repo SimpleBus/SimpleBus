@@ -1,0 +1,41 @@
+name: 'Monorepo Split'
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build-matrix:
+        runs-on: ubuntu-20.04
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+            -   run: composer install --no-progress --ansi
+            -   id: set-packages
+                run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
+        outputs:
+            packages: ${{ steps.set-packages.outputs.packages }}
+
+    split:
+        needs: build-matrix
+        runs-on: ubuntu-20.04
+        strategy:
+            fail-fast: false
+            matrix:
+                package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: TomasVotruba/github-action-monorepo-split@0.1.3
+                env:
+                    GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+                with:
+                    package-directory: 'packages/${{ matrix.package }}'
+                    split-repository-organization: 'SimpleBus'
+                    split-repository-name: '${{ matrix.package }}'
+                    user-email: simplebus-bot@users.noreply.github.com
+                    user-name: simplebus-bot
+                    branch: main
