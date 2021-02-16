@@ -2,11 +2,7 @@
     "name": "simple-bus/serialization",
     "type": "library",
     "description": "Generic classes and interfaces for serializing messages",
-    "keywords": [
-        "messages",
-        "serialization",
-        "SimpleBus"
-    ],
+    "keywords": ["messages", "serialization", "SimpleBus"],
     "homepage": "http://github.com/SimpleBus/Serialization",
     "license": "MIT",
     "authors": [

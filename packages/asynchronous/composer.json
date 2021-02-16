@@ -2,12 +2,7 @@
     "name": "simple-bus/asynchronous",
     "type": "library",
     "description": "Generic classes and interfaces for asynchronous messaging using SimpleBus",
-    "keywords": [
-        "asynchronous",
-        "messaging",
-        "command bus",
-        "event bus"
-    ],
+    "keywords": ["asynchronous", "messaging", "command bus", "event bus"],
     "homepage": "http://github.com/SimpleBus/Asynchronous",
     "license": "MIT",
     "authors": [
@@ -28,8 +23,8 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "psr/log": "^1.0",
-        "simple-bus/message-bus": "^3.0.3",
-        "simple-bus/serialization": "^3.0"
+        "simple-bus/message-bus": "^6.0",
+        "simple-bus/serialization": "^6.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",

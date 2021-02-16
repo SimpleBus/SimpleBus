@@ -2,11 +2,7 @@
     "name": "simple-bus/doctrine-orm-bridge",
     "type": "library",
     "description": "Doctrine ORM bridge for using command and event buses",
-    "keywords": [
-        "Doctrine",
-        "event bus",
-        "command bus"
-    ],
+    "keywords": ["Doctrine", "event bus", "command bus"],
     "homepage": "http://github.com/SimpleBus/DoctrineORMBridge",
     "license": "MIT",
     "authors": [
@@ -28,7 +24,7 @@
         "php": "^7.4 || ^8.0",
         "doctrine/dbal": "^2.12",
         "doctrine/orm": "^2.8",
-        "simple-bus/message-bus": "^3.0.3"
+        "simple-bus/message-bus": "^6.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
