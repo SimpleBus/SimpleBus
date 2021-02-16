@@ -62,6 +62,7 @@
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "^0.12.61",
         "phpstan/phpstan-phpunit": "^0.12.17",
+        "phpstan/phpstan-symfony": "^0.12.19",
         "phpunit/phpunit": "^9.3",
         "symfony/console": "^4.4 || ^5.2",
         "symfony/finder": "^4.4 || ^5.2",

@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#"
-			count: 1
-			path: packages/asynchronous-bundle/src/DependencyInjection/Configuration.php
-
-		-
 			message: "#^Access to an undefined property Doctrine\\\\ORM\\\\Proxy\\\\Proxy&SimpleBus\\\\Message\\\\Recorder\\\\ContainsRecordedMessages\\:\\:\\$__isInitialized__\\.$#"
 			count: 1
 			path: packages/doctrine-orm-bridge/src/EventListener/CollectsEventsFromEntities.php
@@ -14,24 +9,4 @@ parameters:
 			message: "#^Property SimpleBus\\\\DoctrineORMBridge\\\\Tests\\\\EventListener\\\\Fixtures\\\\Entity\\\\EventRecordingEntity\\:\\:\\$id is never written, only read\\.$#"
 			count: 1
 			path: packages/doctrine-orm-bridge/tests/EventListener/Fixtures/Entity/EventRecordingEntity.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:addDefaultsIfNotSet\\(\\)\\.$#"
-			count: 1
-			path: packages/rabbitmq-bundle-bridge/src/DependencyInjection/Configuration.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:addDefaultsIfNotSet\\(\\)\\.$#"
-			count: 1
-			path: packages/symfony-bridge/src/DependencyInjection/CommandBusConfiguration.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:addDefaultsIfNotSet\\(\\)\\.$#"
-			count: 1
-			path: packages/symfony-bridge/src/DependencyInjection/DoctrineOrmBridgeConfiguration.php
-
-		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:addDefaultsIfNotSet\\(\\)\\.$#"
-			count: 1
-			path: packages/symfony-bridge/src/DependencyInjection/EventBusConfiguration.php
 
