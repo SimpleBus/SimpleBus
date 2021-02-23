@@ -2,7 +2,11 @@
     "name": "simple-bus/doctrine-orm-bridge",
     "type": "library",
     "description": "Doctrine ORM bridge for using command and event buses",
-    "keywords": ["Doctrine", "event bus", "command bus"],
+    "keywords": [
+        "Doctrine",
+        "event bus",
+        "command bus"
+    ],
     "homepage": "http://github.com/SimpleBus/DoctrineORMBridge",
     "license": "MIT",
     "authors": [

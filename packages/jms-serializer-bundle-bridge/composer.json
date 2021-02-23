@@ -2,7 +2,11 @@
     "name": "simple-bus/jms-serializer-bundle-bridge",
     "type": "symfony-bundle",
     "description": "Symfony bundle for using JMSSerializer as message serializer for SimpleBus/Asynchronous",
-    "keywords": ["asynchronous", "message", "serializer"],
+    "keywords": [
+        "asynchronous",
+        "message",
+        "serializer"
+    ],
     "homepage": "http://github.com/SimpleBus/JMSSerializerBundleBridge",
     "license": "MIT",
     "authors": [

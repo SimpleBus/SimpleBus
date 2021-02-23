@@ -2,7 +2,11 @@
     "name": "simple-bus/jms-serializer-bridge",
     "type": "library",
     "description": "Bridge for using JMSSerializer as message serializer for SimpleBus/Asynchronous",
-    "keywords": ["asynchronous", "message", "serialization"],
+    "keywords": [
+        "asynchronous",
+        "message",
+        "serialization"
+    ],
     "homepage": "http://github.com/SimpleBus/JMSSerializerBridge",
     "license": "MIT",
     "authors": [
