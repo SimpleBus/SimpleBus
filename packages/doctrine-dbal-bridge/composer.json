@@ -2,7 +2,12 @@
     "name": "simple-bus/doctrine-dbal-bridge",
     "type": "library",
     "description": "Bridge for using SimpleBus with Doctrine DBAL",
-    "keywords": ["Doctrine", "DBAL", "message bus", "command bus"],
+    "keywords": [
+        "Doctrine",
+        "DBAL",
+        "message bus",
+        "command bus"
+    ],
     "homepage": "http://github.com/SimpleBus/DoctrineDBALBridge",
     "license": "MIT",
     "authors": [
