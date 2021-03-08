@@ -19,7 +19,10 @@ jobs:
             # Remove `ignore-platform-req` when these issues are fixed
             # https://github.com/php-amqplib/php-amqplib/issues/846
             # https://github.com/schmittjoh/JMSSerializerBundle/pull/819
-            -   run: composer install --no-progress --ansi --ignore-platform-req php
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
+                with:
+                    composer-options: "--ignore-platform-req php"
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
         outputs:
@@ -28,16 +31,17 @@ jobs:
     root:
         runs-on: ubuntu-20.04
         steps:
-            - uses: actions/checkout@v2
-            - uses: shivammathur/setup-php@v2
-              with:
-                  php-version: 7.4
-                  coverage: none
-              env:
-                  COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            - run: composer install --no-progress --ansi
-            - run: composer validate
-            - run: composer normalize --dry-run
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
+            -   run: composer validate
+            -   run: composer normalize --dry-run
 
     packages:
         needs: build-matrix
@@ -47,16 +51,18 @@ jobs:
             matrix:
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
         steps:
-            - uses: actions/checkout@v2
-            - uses: shivammathur/setup-php@v2
-              with:
-                  php-version: 7.4
-                  coverage: none
-              env:
-                  COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            - run: composer install --no-progress --ansi
-              working-directory: packages/${{ matrix.package }}
-            - run: composer validate
-              working-directory: packages/${{ matrix.package }}
-            - run: composer normalize --dry-run
-              working-directory: packages/${{ matrix.package }}
+            -   uses: actions/checkout@v2
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
+                with:
+                    working-directory: packages/${{ matrix.package }}
+            -   run: composer validate
+                working-directory: packages/${{ matrix.package }}
+            -   run: composer normalize --dry-run
+                working-directory: packages/${{ matrix.package }}
