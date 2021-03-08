@@ -18,7 +18,10 @@ jobs:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             # Remove `ignore-platform-req` when these issues are fixed
             # https://github.com/php-amqplib/php-amqplib/issues/846
-            -   run: composer install --no-progress --ansi --ignore-platform-req php
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
+                with:
+                    composer-options: "--ignore-platform-req php"
             -   run: vendor/bin/monorepo-builder validate
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
@@ -42,13 +45,13 @@ jobs:
                 dependencies:
                     - 'lowest'
                     - 'highest'
-                composer-remove-arguments: [ '' ]
+                composer-options: [ '' ]
                 include:
                     -   php-version: '7.4'
                         package: 'symfony-bridge'
                         symfony-version: '5.2.*'
                         dependencies: 'lowest'
-                        composer-remove-arguments: '--dev symfony/proxy-manager-bridge'
+                        composer-options: '--dev symfony/proxy-manager-bridge'
                 exclude:
                     # Only test once it has no Symfony packages
                     -   package: 'asynchronous'
@@ -82,20 +85,21 @@ jobs:
 
             # Remove `ignore-platform-req` when these issues are fixed
             # https://github.com/php-amqplib/php-amqplib/issues/846
-            -   run: composer install --no-progress --ansi --ignore-platform-req php
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
+                with:
+                    composer-options: "--ignore-platform-req php"
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
             -   run: vendor/bin/monorepo-builder bump-interdependency dev-main
 
             -   run: bin/console rebuild-symfony-requirements ${{ matrix.package }} "${{ matrix.symfony-version }}"
 
-            -   if: "matrix.composer-remove-arguments != ''"
-                run: composer remove --no-progress --ansi --working-dir packages/${{ matrix.package }} --no-update ${{ matrix.composer-remove-arguments }}
-
-            -   if: "matrix.dependencies == 'highest'"
-                run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }}
-
-            -   if: "matrix.dependencies == 'lowest'"
-                run: composer update --no-progress --ansi --working-dir packages/${{ matrix.package }} --prefer-lowest
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
+                with:
+                    dependency-versions: ${{ matrix.dependencies }}
+                    working-directory: packages/${{ matrix.package }}
+                    composer-options: "${{ matrix.composer-options }}"
 
             -   run: vendor/bin/phpunit
                 working-directory: packages/${{ matrix.package }}
@@ -110,9 +114,8 @@ jobs:
                     php-version: 8.0
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            # Remove `ignore-platform-req` when these issues are fixed
-            # https://github.com/php-amqplib/php-amqplib/issues/846
-            -   run: composer install --no-progress --ansi --ignore-platform-req php
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
             -   run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
 
     phpstan:
@@ -130,7 +133,6 @@ jobs:
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            # Remove `ignore-platform-req` when these issues are fixed
-            # https://github.com/php-amqplib/php-amqplib/issues/846
-            -   run: composer install --no-progress --ansi --ignore-platform-req php
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
             -   run: vendor/bin/phpstan analyse --ansi

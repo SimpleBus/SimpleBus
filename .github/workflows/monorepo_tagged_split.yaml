@@ -15,7 +15,8 @@ jobs:
                 with:
                     php-version: 7.4
                     coverage: none
-            -   run: composer install --no-progress --ansi
+            -   name: Install dependencies
+                uses: ramsey/composer-install@1.2.0
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
         outputs:
@@ -29,16 +30,14 @@ jobs:
             matrix:
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
         steps:
-            -
-                uses: actions/checkout@v2
+            -   uses: actions/checkout@v2
                 # this is required for "WyriHaximus/github-action-get-previous-tag" workflow
                 # see https://github.com/actions/checkout#fetch-all-history-for-all-tags-and-branches
                 with:
                     fetch-depth: 0
 
             # see https://github.com/WyriHaximus/github-action-get-previous-tag
-            -
-                id: previous_tag
+            -   id: previous_tag
                 uses: "WyriHaximus/github-action-get-previous-tag@v1.0.1"
 
             -   uses: TomasVotruba/github-action-monorepo-split@1.1
