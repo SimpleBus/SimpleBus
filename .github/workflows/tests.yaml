@@ -41,13 +41,13 @@ jobs:
                 dependencies:
                     - 'lowest'
                     - 'highest'
-                composer-options: [ '' ]
+                remove-dependencies: [ '' ]
                 include:
                     -   php-version: '7.4'
                         package: 'symfony-bridge'
                         symfony-version: '5.2.*'
                         dependencies: 'lowest'
-                        composer-options: '--dev symfony/proxy-manager-bridge'
+                        remove-dependencies: '--dev symfony/proxy-manager-bridge'
                 exclude:
                     # Only test once it has no Symfony packages
                     -   package: 'asynchronous'
@@ -86,12 +86,15 @@ jobs:
 
             -   run: bin/console rebuild-symfony-requirements ${{ matrix.package }} "${{ matrix.symfony-version }}"
 
+            -   if: "matrix.remove-dependencies != ''"
+                name: Remove dependencies
+                run: composer --working-dir=packages/${{ matrix.package }} remove --no-update ${{ matrix.remove-dependencies }}
+
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.2.0
                 with:
                     dependency-versions: ${{ matrix.dependencies }}
                     working-directory: packages/${{ matrix.package }}
-                    composer-options: "${{ matrix.composer-options }}"
 
             -   run: vendor/bin/phpunit
                 working-directory: packages/${{ matrix.package }}
