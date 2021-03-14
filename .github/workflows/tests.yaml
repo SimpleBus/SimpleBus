@@ -16,12 +16,8 @@ jobs:
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            # Remove `ignore-platform-req` when these issues are fixed
-            # https://github.com/php-amqplib/php-amqplib/issues/846
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.2.0
-                with:
-                    composer-options: "--ignore-platform-req php"
             -   run: vendor/bin/monorepo-builder validate
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
@@ -83,12 +79,8 @@ jobs:
                     rabbitmq password: 'guest'
                     rabbitmq vhost: '/'
 
-            # Remove `ignore-platform-req` when these issues are fixed
-            # https://github.com/php-amqplib/php-amqplib/issues/846
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.2.0
-                with:
-                    composer-options: "--ignore-platform-req php"
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
             -   run: vendor/bin/monorepo-builder bump-interdependency dev-main
 
