@@ -16,13 +16,8 @@ jobs:
                     coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            # Remove `ignore-platform-req` when these issues are fixed
-            # https://github.com/php-amqplib/php-amqplib/issues/846
-            # https://github.com/schmittjoh/JMSSerializerBundle/pull/819
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.2.0
-                with:
-                    composer-options: "--ignore-platform-req php"
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
         outputs:

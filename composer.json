@@ -56,7 +56,7 @@
         "ergebnis/composer-normalize": "^2.11",
         "friendsofphp/php-cs-fixer": "^2.17",
         "matthiasnoback/doctrine-orm-test-service-provider": "^3.0",
-        "matthiasnoback/phpunit-asynchronicity": "^2.0",
+        "matthiasnoback/phpunit-asynchronicity": "^2.4",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
         "ocramius/proxy-manager": "^2.11.1",
         "phpstan/extension-installer": "^1.1",
