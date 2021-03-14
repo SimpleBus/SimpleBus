@@ -26,7 +26,7 @@
         "php": "^7.4 || ^8.0",
         "doctrine/dbal": "^2.12",
         "doctrine/orm": "^2.8",
-        "emag-tech-labs/rabbitmq-bundle": "^2.3",
+        "emag-tech-labs/rabbitmq-bundle": "^2.5",
         "jms/serializer": "^3.2.0",
         "jms/serializer-bundle": "^3.8",
         "psr/log": "^1.0",
