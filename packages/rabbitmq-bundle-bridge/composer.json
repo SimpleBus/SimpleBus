@@ -28,7 +28,7 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "emag-tech-labs/rabbitmq-bundle": "^2.5",
+        "php-amqplib/rabbitmq-bundle": "^2.6",
         "simple-bus/asynchronous": "^6.0",
         "simple-bus/asynchronous-bundle": "^6.0",
         "simple-bus/message-bus": "^6.0",
