@@ -30,6 +30,10 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
         $uow = $em->getUnitOfWork();
         foreach ($uow->getIdentityMap() as $entities) {
             foreach ($entities as $entity) {
+                if (null === $entity) {
+                    continue;
+                }
+
                 $this->collectEventsFromEntity($entity);
             }
         }
@@ -48,6 +52,10 @@ class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMes
         $uow = $em->getUnitOfWork();
         foreach ($uow->getIdentityMap() as $entities) {
             foreach ($entities as $entity) {
+                if (null === $entity) {
+                    continue;
+                }
+
                 $this->collectEventsFromEntity($entity);
             }
         }
