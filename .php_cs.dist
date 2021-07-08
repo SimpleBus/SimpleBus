@@ -3,6 +3,7 @@
 $finder = PhpCsFixer\Finder::create()
     ->in('src')
     ->in('packages')
+    ->exclude('temp')
 ;
 
 $config = (new PhpCsFixer\Config())
