@@ -32,7 +32,7 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.3",
-        "symfony/yaml": "^4.4 || ^5.2"
+        "symfony/yaml": "^4.4 || ^5.3"
     },
     "config": {
         "sort-packages": true

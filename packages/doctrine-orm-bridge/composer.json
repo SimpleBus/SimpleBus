@@ -34,7 +34,7 @@
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.3",
         "pimple/pimple": "^3.4",
-        "symfony/cache": "^4.4 || ^5.2"
+        "symfony/cache": "^4.4 || ^5.3"
     },
     "suggest": {
         "simple-bus/symfony-bridge": "Bridge for using command buses and event buses with Symfony"

@@ -37,7 +37,7 @@ jobs:
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
                 symfony-version:
                     - '4.4.*'
-                    - '5.2.*'
+                    - '5.3.*'
                 dependencies:
                     - 'lowest'
                     - 'highest'
@@ -45,7 +45,7 @@ jobs:
                 include:
                     -   php-version: '7.4'
                         package: 'symfony-bridge'
-                        symfony-version: '5.2.*'
+                        symfony-version: '5.3.*'
                         dependencies: 'lowest'
                         remove-dependencies: '--dev symfony/proxy-manager-bridge'
                 exclude:

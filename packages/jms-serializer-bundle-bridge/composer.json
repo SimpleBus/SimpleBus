@@ -29,9 +29,9 @@
         "jms/serializer-bundle": "^3.8",
         "simple-bus/asynchronous-bundle": "^6.0",
         "simple-bus/jms-serializer-bridge": "^6.0",
-        "symfony/config": "^4.4.17 || ^5.2",
-        "symfony/dependency-injection": "^4.4.17 || ^5.2",
-        "symfony/framework-bundle": "^4.4 || ^5.2"
+        "symfony/config": "^4.4.17 || ^5.3",
+        "symfony/dependency-injection": "^4.4.17 || ^5.3",
+        "symfony/framework-bundle": "^4.4 || ^5.3"
     },
     "conflict": {
         "doctrine/annotations": "<1.10.4",
