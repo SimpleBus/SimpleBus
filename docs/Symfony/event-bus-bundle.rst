@@ -158,6 +158,23 @@ With the following code for the subscriber:
 SimpleBus automatically detects that ``ElasticSearchSubscriber`` wants to subscribe to both
 ``EventAddedEvent`` and ``VenueAddedEvent``.
 
+If you use PHP 8.0 you can also use union types like this:
+
+.. code-block::  php
+
+    namespace App\Subscriber;
+
+    use App\Event\EventAddedEvent;
+    use App\Event\VenueAddedEvent;
+
+    class ElasticSearchSubscriber
+    {
+        public function onEvent(VenueAddedEvent | EventAddedEvent $event)
+        {
+            // Add the Venue or Event to ElasticSearch
+        }
+    }
+
 Setting the event name resolving strategy
 -----------------------------------------
 
