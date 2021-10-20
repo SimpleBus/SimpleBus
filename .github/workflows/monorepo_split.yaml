@@ -34,9 +34,9 @@ jobs:
                 env:
                     GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
                 with:
-                    package-directory: 'packages/${{ matrix.package }}'
-                    split-repository-organization: 'SimpleBus'
-                    split-repository-name: '${{ matrix.package }}'
-                    user-email: simplebus-bot@users.noreply.github.com
-                    user-name: simplebus-bot
+                    package_directory: 'packages/${{ matrix.package }}'
+                    repository_organization: 'SimpleBus'
+                    repository_name: '${{ matrix.package }}'
+                    user_email: simplebus-bot@users.noreply.github.com
+                    user_name: simplebus-bot
                     branch: main
