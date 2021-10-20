@@ -9,7 +9,7 @@ jobs:
     build-matrix:
         runs-on: ubuntu-20.04
         steps:
-            -   uses: actions/checkout@v2.3.4
+            -   uses: actions/checkout@v2.3.5
             -   uses: shivammathur/setup-php@2.15.0
                 with:
                     php-version: 8.0
@@ -26,7 +26,7 @@ jobs:
     root:
         runs-on: ubuntu-20.04
         steps:
-            -   uses: actions/checkout@v2.3.4
+            -   uses: actions/checkout@v2.3.5
             -   uses: shivammathur/setup-php@2.15.0
                 with:
                     php-version: 8.0
@@ -46,7 +46,7 @@ jobs:
             matrix:
                 package: ${{ fromJson(needs.build-matrix.outputs.packages) }}
         steps:
-            -   uses: actions/checkout@v2.3.4
+            -   uses: actions/checkout@v2.3.5
             -   uses: shivammathur/setup-php@2.15.0
                 with:
                     php-version: 8.0
