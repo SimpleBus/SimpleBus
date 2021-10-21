@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "psr/log": "^1.0",
+        "psr/log": "^1.0 || ^2.0 || ^3.0",
         "simple-bus/message-bus": "^6.0",
         "simple-bus/serialization": "^6.0"
     },
