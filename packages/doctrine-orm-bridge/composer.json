@@ -30,6 +30,9 @@
         "doctrine/orm": "^2.8",
         "simple-bus/message-bus": "^6.0"
     },
+    "conflict": {
+        "doctrine/persistence": "<2.2.2"
+    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5.5",
