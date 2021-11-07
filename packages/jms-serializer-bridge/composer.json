@@ -29,6 +29,9 @@
         "jms/serializer": "^3.2.0",
         "simple-bus/serialization": "^6.0"
     },
+    "conflict": {
+        "jms/metadata": "<2.5.2"
+    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5",

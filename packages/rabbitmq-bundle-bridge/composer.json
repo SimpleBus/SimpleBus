@@ -34,6 +34,9 @@
         "simple-bus/message-bus": "^6.0",
         "symfony/monolog-bundle": "^3.4"
     },
+    "conflict": {
+        "jms/metadata": "<2.5.2"
+    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "matthiasnoback/phpunit-asynchronicity": "^2.4",
