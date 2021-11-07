@@ -61,7 +61,7 @@
         "phpstan/phpstan": "^0.12.61",
         "phpstan/phpstan-phpunit": "^0.12.17",
         "phpstan/phpstan-symfony": "^0.12.19",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.5.5",
         "pimple/pimple": "^3.5",
         "symfony/cache": "^4.4 || ^5.3",
         "symfony/console": "^4.4 || ^5.3",
