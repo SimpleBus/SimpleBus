@@ -42,7 +42,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
             ['php', 'console.php', 'rabbitmq:setup-fabric'],
             __DIR__
         );
-        $process->run();
+        $this->assertSame(0, $process->run());
     }
 
     protected function tearDown(): void
