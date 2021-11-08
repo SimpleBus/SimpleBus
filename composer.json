@@ -69,6 +69,7 @@
         "symfony/monolog-bridge": "^4.4.30 || ^5.3.7",
         "symfony/process": "^4.4.30 || ^5.3.7",
         "symfony/proxy-manager-bridge": "^4.4.30 || ^5.3.7",
+        "symfony/stopwatch": "^4.4.30 || ^5.3.7",
         "symfony/translation": "^4.4.30 || ^5.3.7",
         "symplify/easy-ci": "^9.0",
         "symplify/monorepo-builder": "^9.0"
