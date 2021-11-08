@@ -44,6 +44,7 @@
         "doctrine/orm": "^2.8",
         "ergebnis/composer-normalize": "^2.11",
         "friendsofphp/proxy-manager-lts": "^1.0",
+        "laminas/laminas-code": "^4.5",
         "phpunit/phpunit": "^9.5.5",
         "simple-bus/doctrine-orm-bridge": "^6.0",
         "symfony/framework-bundle": "^4.4.30 || ^5.3.7",
