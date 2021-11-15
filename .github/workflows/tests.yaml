@@ -55,6 +55,14 @@ jobs:
                         symfony-version: '4.4.*'
                     -   package: 'serialization'
                         symfony-version: '4.4.*'
+        services:
+            rabbitmq:
+                image: rabbitmq:3.8-alpine
+                env:
+                    RABBITMQ_DEFAULT_USER: guest
+                    RABBITMQ_DEFAULT_PASS: guest
+                ports:
+                    - 5672:5672
         steps:
             -   uses: actions/checkout@v2.4.0
 
@@ -63,15 +71,6 @@ jobs:
                     php-version: ${{ matrix.php-version }}
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-            -   if: "matrix.package == 'rabbitmq-bundle-bridge'"
-                uses: getong/rabbitmq-action@v1.2
-                with:
-                    rabbitmq version: '3.8.9-management-alpine'
-                    host port: 5672
-                    rabbitmq user: 'guest'
-                    rabbitmq password: 'guest'
-                    rabbitmq vhost: '/'
 
             -   run: composer validate
             -   name: Install dependencies
