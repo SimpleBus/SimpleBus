@@ -13,7 +13,6 @@ jobs:
             -   uses: shivammathur/setup-php@2.15.0
                 with:
                     php-version: 8.0
-                    coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             -   name: Install dependencies
@@ -62,7 +61,6 @@ jobs:
             -   uses: shivammathur/setup-php@2.15.0
                 with:
                     php-version: ${{ matrix.php-version }}
-                    coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -101,7 +99,6 @@ jobs:
             -   uses: actions/checkout@v2.4.0
             -   uses: shivammathur/setup-php@2.15.0
                 with:
-                    coverage: none
                     php-version: 8.0
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -121,7 +118,6 @@ jobs:
             -   uses: shivammathur/setup-php@2.15.0
                 with:
                     php-version: ${{ matrix.php-version }}
-                    coverage: none
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             -   name: Install dependencies
