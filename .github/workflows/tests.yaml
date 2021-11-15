@@ -73,6 +73,7 @@ jobs:
                     rabbitmq password: 'guest'
                     rabbitmq vhost: '/'
 
+            -   run: composer validate
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.3.0
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
@@ -84,6 +85,8 @@ jobs:
                 name: Remove dependencies
                 run: composer --working-dir=packages/${{ matrix.package }} remove --no-update ${{ matrix.remove-dependencies }}
 
+            -   run: composer validate
+                working-directory: packages/${{ matrix.package }}
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.3.0
                 with:
