@@ -38,7 +38,7 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
-        "phpunit/phpunit": "^9.3",
+        "phpunit/phpunit": "^9.5",
         "symfony/monolog-bundle": "^3.4"
     },
     "suggest": {
