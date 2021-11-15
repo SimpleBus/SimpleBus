@@ -37,7 +37,7 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "matthiasnoback/phpunit-asynchronicity": "^2.4",
-        "phpunit/phpunit": "^9.3",
+        "phpunit/phpunit": "^9.5",
         "simple-bus/jms-serializer-bundle-bridge": "^6.0",
         "symfony/console": "^4.4 || ^5.3",
         "symfony/finder": "^4.4 || ^5.3",
