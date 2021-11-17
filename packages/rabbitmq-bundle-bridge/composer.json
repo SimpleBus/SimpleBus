@@ -28,6 +28,7 @@
     ],
     "require": {
         "php": "^7.4 || ^8.0",
+        "php-amqplib/php-amqplib": "^3.1",
         "php-amqplib/rabbitmq-bundle": "^2.6",
         "simple-bus/asynchronous": "^6.0",
         "simple-bus/asynchronous-bundle": "^6.0",
