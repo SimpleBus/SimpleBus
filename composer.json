@@ -28,6 +28,7 @@
         "doctrine/orm": "^2.8",
         "jms/serializer": "^3.15",
         "jms/serializer-bundle": "^4.0",
+        "php-amqplib/php-amqplib": "^3.1",
         "php-amqplib/rabbitmq-bundle": "^2.6",
         "psr/log": "^1.0 || ^2.0 || ^3.0",
         "symfony/config": "^4.4.30 || ^5.3.7",
