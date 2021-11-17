@@ -35,6 +35,9 @@
         "symfony/dependency-injection": "^4.4.17 || ^5.3",
         "symfony/framework-bundle": "^4.4 || ^5.3"
     },
+    "conflict": {
+        "monolog/monolog": "<1.26.1 || >=2.0,<2.3.0"
+    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",

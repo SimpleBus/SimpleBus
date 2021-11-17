@@ -35,7 +35,8 @@
         "symfony/monolog-bundle": "^3.4"
     },
     "conflict": {
-        "jms/metadata": "<2.5.2"
+        "jms/metadata": "<2.5.2",
+        "monolog/monolog": "<1.26.1 || >=2.0,<2.3.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
