@@ -1,7 +1,7 @@
 .phpunit.result.cache
-/.php_cs.cache
 /composer.lock
 /phpunit.xml
 /split/.subsplit
 /split/git-subsplit
 /vendor
+/.php-cs-fixer.cache
