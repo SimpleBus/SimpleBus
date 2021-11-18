@@ -42,7 +42,7 @@ jobs:
                     - 'highest'
                 remove-dependencies: [ '' ]
                 include:
-                    -   php-version: '7.4'
+                    -   php-version: '8.0'
                         package: 'symfony-bridge'
                         symfony-version: '5.3.*'
                         dependencies: 'lowest'
