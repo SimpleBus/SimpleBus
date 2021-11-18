@@ -8,11 +8,6 @@ $finder = PhpCsFixer\Finder::create()
 
 $config = (new PhpCsFixer\Config())
     ->setRules([
-        '@PHP56Migration' => true,
-        '@PHP70Migration' => true,
-        '@PHP71Migration' => true,
-        '@PHP73Migration' => true,
-        '@PHP74Migration' => true,
         '@Symfony' => true,
         '@PhpCsFixer' => true,
         'array_syntax' => [
