@@ -35,6 +35,7 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5.5",
+        "symfony/phpunit-bridge": "^4.4.30 || ^5.3.7",
         "symfony/yaml": "^4.4.30 || ^5.3.7"
     },
     "config": {
