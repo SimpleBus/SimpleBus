@@ -25,7 +25,6 @@ parameters:
         - packages/serialization/tests/
         - packages/symfony-bridge/src/
         - packages/symfony-bridge/tests/
-        - src/
     excludes_analyse:
         - packages/asynchronous-bundle/tests/Functional/temp/
         - packages/jms-serializer-bundle-bridge/tests/Functional/temp/

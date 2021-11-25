@@ -1,11 +1,12 @@
+#!/usr/bin/env php
 <?php
 
-namespace SimpleBus\CI\Command;
+require __DIR__ . '/../vendor/autoload.php';
 
+use Symfony\Component\Console\Application;
 use Composer\Semver\Constraint\ConstraintInterface;
 use Composer\Semver\Constraint\MultiConstraint;
 use Composer\Semver\VersionParser;
-use LogicException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,7 +34,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
         $this->versionParser = new VersionParser();
     }
 
-    protected function configure(): void
+    protected function configure() : void
     {
         $this->setName('rebuild-symfony-requirements');
         $this->addArgument(
@@ -51,7 +52,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $package = $input->getArgument(self::PACKAGE);
         $newVersion = $input->getArgument(self::VERSION);
@@ -65,7 +66,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
             throw new LogicException('Version argument should be a string');
         }
 
-        $path = __DIR__.'/../../packages/'.$package.'/composer.json';
+        $path = __DIR__ . '/../packages/' . $package . '/composer.json';
 
         if (false === $content = file_get_contents($path)) {
             throw new LogicException('composer.json content could not be read');
@@ -94,12 +95,12 @@ final class RebuildSymfonyRequirementsCommand extends Command
             return self::SUCCESS;
         }
 
-        file_put_contents($path, $json.PHP_EOL);
+        file_put_contents($path, $json . PHP_EOL);
 
         return self::SUCCESS;
     }
 
-    private function fetchSymfonySplitPackages(OutputInterface $output): bool
+    private function fetchSymfonySplitPackages(OutputInterface $output) : bool
     {
         $json = file_get_contents(self::SYMFONY_VERSIONS);
         if (false === $json) {
@@ -118,7 +119,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
      *
      * @return array<string, string>
      */
-    private function getSymfonyConflicts(OutputInterface $output, array $conflicts, string $newVersion): array
+    private function getSymfonyConflicts(OutputInterface $output, array $conflicts, string $newVersion) : array
     {
         $newVersionConstraint = $this->versionParser->parseConstraints($newVersion);
         $conflict = sprintf(
@@ -149,7 +150,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
         return $conflicts;
     }
 
-    private function normalizeVersion(string $version): string
+    private function normalizeVersion(string $version) : string
     {
         return str_replace('.0-dev', '', $version);
     }
@@ -159,7 +160,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
      *
      * @return array<string, string>
      */
-    private function replace(OutputInterface $output, array $require, string $newVersion): array
+    private function replace(OutputInterface $output, array $require, string $newVersion) : array
     {
         $newVersionConstraint = $this->versionParser->parseConstraints($newVersion);
 
@@ -189,7 +190,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
         ConstraintInterface $provider,
         string $version,
         string $newVersion
-    ): ConstraintInterface {
+    ) : ConstraintInterface {
         if (!$multi instanceof MultiConstraint) {
             throw new LogicException(sprintf('The constraint is not a %s', MultiConstraint::class));
         }
@@ -213,3 +214,8 @@ final class RebuildSymfonyRequirementsCommand extends Command
         return $provider;
     }
 }
+
+$application = new Application('rebuild-symfony-requirements', '1.0.0');
+$application->add(new RebuildSymfonyRequirementsCommand());
+$application->setDefaultCommand('rebuild-symfony-requirements', true);
+$application->run();

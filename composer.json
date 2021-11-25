@@ -100,7 +100,6 @@
         "psr-4": {
             "SimpleBus\\AsynchronousBundle\\Tests\\": "packages/asynchronous-bundle/tests",
             "SimpleBus\\Asynchronous\\Tests\\": "packages/asynchronous/tests",
-            "SimpleBus\\CI\\": "src",
             "SimpleBus\\DoctrineDBALBridge\\Tests\\": "packages/doctrine-dbal-bridge/tests",
             "SimpleBus\\DoctrineORMBridge\\Tests\\": "packages/doctrine-orm-bridge/tests",
             "SimpleBus\\JMSSerializerBridge\\Tests\\": "packages/jms-serializer-bridge/tests",

@@ -1,12 +1,11 @@
 <?php
 
 $finder = PhpCsFixer\Finder::create()
-    ->in('src')
     ->in('packages')
     ->exclude('temp')
 ;
 
-$config = (new PhpCsFixer\Config())
+return (new PhpCsFixer\Config())
     ->setRules([
         '@Symfony' => true,
         '@PhpCsFixer' => true,
@@ -19,7 +18,4 @@ $config = (new PhpCsFixer\Config())
         'method_chaining_indentation' => false,
         'multiline_whitespace_before_semicolons' => false,
     ])
-    ->setFinder($finder)
-;
-
-return $config;
+    ->setFinder($finder);
