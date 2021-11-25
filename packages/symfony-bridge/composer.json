@@ -50,6 +50,7 @@
         "symfony/framework-bundle": "^4.4.30 || ^5.3.7",
         "symfony/monolog-bridge": "^4.4.30 || ^5.3.7",
         "symfony/monolog-bundle": "^3.4",
+        "symfony/phpunit-bridge": "^4.4.30 || ^5.3.7",
         "symfony/proxy-manager-bridge": "^4.4.30 || ^5.3.7"
     },
     "suggest": {

@@ -68,6 +68,7 @@
         "symfony/console": "^4.4.30 || ^5.3.7",
         "symfony/finder": "^4.4.30 || ^5.3.7",
         "symfony/monolog-bridge": "^4.4.30 || ^5.3.7",
+        "symfony/phpunit-bridge": "^4.4.30 || ^5.3.7",
         "symfony/process": "^4.4.30 || ^5.3.7",
         "symfony/proxy-manager-bridge": "^4.4.30 || ^5.3.7",
         "symfony/stopwatch": "^4.4.30 || ^5.3.7",
