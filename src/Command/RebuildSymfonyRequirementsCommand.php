@@ -9,12 +9,14 @@ use LogicException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class RebuildSymfonyRequirementsCommand extends Command
 {
     private const PACKAGE = 'package';
     private const VERSION = 'version';
+    private const DRY_RUN = 'dry-run';
     private const IGNORED_PACKAGES = ['symfony/monolog-bundle'];
 
     private VersionParser $versionParser;
@@ -37,12 +39,18 @@ final class RebuildSymfonyRequirementsCommand extends Command
             self::VERSION,
             InputArgument::REQUIRED
         );
+        $this->addOption(
+            self::DRY_RUN,
+            null,
+            InputOption::VALUE_NONE
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $package = $input->getArgument(self::PACKAGE);
         $newVersion = $input->getArgument(self::VERSION);
+        $dryRun = $input->getOption(self::DRY_RUN);
 
         if (!is_string($package)) {
             throw new LogicException('Package argument should be a string');
@@ -68,10 +76,14 @@ final class RebuildSymfonyRequirementsCommand extends Command
         $content['require'] = $this->replace($content['require'], $newVersion);
         $content['require-dev'] = $this->replace($content['require-dev'], $newVersion);
 
-        file_put_contents(
-            $path,
-            json_encode($content, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL
-        );
+        $json = json_encode($content, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        if ($dryRun) {
+            $output->writeln($json);
+
+            return self::SUCCESS;
+        }
+
+        file_put_contents($path, $json.PHP_EOL);
 
         return self::SUCCESS;
     }
