@@ -76,6 +76,9 @@
         "symplify/easy-ci": "^9.0",
         "symplify/monorepo-builder": "^9.0"
     },
+    "conflict": {
+        "friendsofphp/proxy-manager-lts": "<1.0.5"
+    },
     "config": {
         "sort-packages": true
     },

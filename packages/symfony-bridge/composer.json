@@ -36,6 +36,7 @@
     "conflict": {
         "doctrine/dbal": "<2.13.3",
         "doctrine/persistence": "<2.2.2",
+        "friendsofphp/proxy-manager-lts": "<1.0.5",
         "monolog/monolog": "<1.26.1 || >=2.0,<2.3.0",
         "zendframework/zend-code": "<3.3.1"
     },
