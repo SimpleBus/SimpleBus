@@ -80,7 +80,7 @@ jobs:
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
             -   run: vendor/bin/monorepo-builder bump-interdependency dev-main
 
-            -   run: bin/console rebuild-symfony-requirements ${{ matrix.package }} "${{ matrix.symfony-version }}"
+            -   run: bin/rebuild-symfony-requirements ${{ matrix.package }} "${{ matrix.symfony-version }}"
 
             -   if: "matrix.remove-dependencies != ''"
                 name: Remove dependencies
