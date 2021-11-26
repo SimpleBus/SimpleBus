@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v2.4.0
-            -   uses: shivammathur/setup-php@2.15.0
+            -   uses: shivammathur/setup-php@2.16.0
                 with:
                     php-version: 8.0
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
@@ -67,7 +67,7 @@ jobs:
         steps:
             -   uses: actions/checkout@v2.4.0
 
-            -   uses: shivammathur/setup-php@2.15.0
+            -   uses: shivammathur/setup-php@2.16.0
                 with:
                     php-version: ${{ matrix.php-version }}
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
@@ -101,7 +101,7 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v2.4.0
-            -   uses: shivammathur/setup-php@2.15.0
+            -   uses: shivammathur/setup-php@2.16.0
                 with:
                     php-version: 8.0
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
@@ -120,7 +120,7 @@ jobs:
                 php-version: ${{ fromJson(needs.build-matrix.outputs.php-version) }}
         steps:
             -   uses: actions/checkout@v2.4.0
-            -   uses: shivammathur/setup-php@2.15.0
+            -   uses: shivammathur/setup-php@2.16.0
                 with:
                     php-version: ${{ matrix.php-version }}
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
