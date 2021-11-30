@@ -56,7 +56,7 @@
         "friendsofphp/php-cs-fixer": "^3.0",
         "friendsofphp/proxy-manager-lts": "^1.0",
         "matthiasnoback/phpunit-asynchronicity": "^2.4",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.3",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "^1.2",
         "phpstan/phpstan-phpunit": "^1.0",
