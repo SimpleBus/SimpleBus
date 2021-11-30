@@ -9,10 +9,6 @@ use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Name\MessageNameResolver;
 use stdClass;
 
-/**
- * @internal
- * @coversNothing
- */
 class PublishesPredefinedMessagesTest extends TestCase
 {
     /**

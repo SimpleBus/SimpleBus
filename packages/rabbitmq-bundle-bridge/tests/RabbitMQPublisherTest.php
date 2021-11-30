@@ -11,10 +11,6 @@ use SimpleBus\RabbitMQBundleBridge\RabbitMQPublisher;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 use stdClass;
 
-/**
- * @internal
- * @coversNothing
- */
 class RabbitMQPublisherTest extends TestCase
 {
     /**

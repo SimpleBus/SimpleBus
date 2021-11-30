@@ -13,10 +13,6 @@ use SimpleBus\Serialization\ObjectSerializer;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
 use stdClass;
 
-/**
- * @internal
- * @coversNothing
- */
 class StandardMessageInEnvelopeSerializerTest extends TestCase
 {
     /**

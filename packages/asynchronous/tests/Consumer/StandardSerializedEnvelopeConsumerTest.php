@@ -10,10 +10,6 @@ use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 use stdClass;
 
-/**
- * @internal
- * @coversNothing
- */
 class StandardSerializedEnvelopeConsumerTest extends TestCase
 {
     /**

@@ -7,10 +7,6 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use SimpleBus\AsynchronousBundle\DependencyInjection\SimpleBusAsynchronousExtension;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
-/**
- * @internal
- * @coversNothing
- */
 class SimpleBusAsynchronousExtensionTest extends AbstractExtensionTestCase
 {
     /**

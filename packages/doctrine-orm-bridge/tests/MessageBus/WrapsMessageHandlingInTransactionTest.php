@@ -11,10 +11,6 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
 use Throwable;
 
-/**
- * @internal
- * @coversNothing
- */
 class WrapsMessageHandlingInTransactionTest extends TestCase
 {
     /**

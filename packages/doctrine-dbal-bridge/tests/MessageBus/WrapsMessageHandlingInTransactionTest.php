@@ -10,10 +10,6 @@ use SimpleBus\DoctrineDBALBridge\MessageBus\WrapsMessageHandlingInTransaction;
 use stdClass;
 use Throwable;
 
-/**
- * @internal
- * @coversNothing
- */
 class WrapsMessageHandlingInTransactionTest extends TestCase
 {
     /**

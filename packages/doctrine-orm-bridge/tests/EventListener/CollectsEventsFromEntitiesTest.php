@@ -14,10 +14,6 @@ use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityNotDirt
 use SimpleBus\DoctrineORMBridge\Tests\PHPUnitTestServiceContainer\PHPUnit\TestCaseWithEntityManager;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
-/**
- * @internal
- * @coversNothing
- */
 class CollectsEventsFromEntitiesTest extends TestCase
 {
     use TestCaseWithEntityManager;

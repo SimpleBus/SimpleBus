@@ -8,10 +8,6 @@ use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use stdClass;
 
-/**
- * @internal
- * @coversNothing
- */
 class AlwaysPublishesMessagesTest extends TestCase
 {
     /**
