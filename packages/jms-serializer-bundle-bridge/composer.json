@@ -29,9 +29,9 @@
         "jms/serializer-bundle": "^4.0",
         "simple-bus/asynchronous-bundle": "^6.0",
         "simple-bus/jms-serializer-bridge": "^6.0",
-        "symfony/config": "^5.3.7",
-        "symfony/dependency-injection": "^5.3.7",
-        "symfony/framework-bundle": "^5.3.7"
+        "symfony/config": "^5.3.7 || ^5.4",
+        "symfony/dependency-injection": "^5.3.7 || ^5.4",
+        "symfony/framework-bundle": "^5.3.7 || ^5.4"
     },
     "conflict": {
         "doctrine/annotations": "<1.10.4",
@@ -41,7 +41,7 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5.5",
-        "symfony/phpunit-bridge": "^5.3.7"
+        "symfony/phpunit-bridge": "^6.0"
     },
     "config": {
         "sort-packages": true
