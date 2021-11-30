@@ -5,3 +5,4 @@
 /split/git-subsplit
 /vendor
 /.php-cs-fixer.cache
+/bin/vendor

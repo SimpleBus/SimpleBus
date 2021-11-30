@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
 use Composer\Semver\Constraint\ConstraintInterface;
@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class RebuildSymfonyRequirementsCommand extends Command
 {
     private const SYMFONY_VERSIONS = 'https://raw.githubusercontent.com/symfony/recipes/master/.github/versions.json';
-    private const PACKAGE = 'package';
+    private const PATH = 'package';
     private const VERSION = 'version';
     private const DRY_RUN = 'dry-run';
 
@@ -38,7 +38,7 @@ final class RebuildSymfonyRequirementsCommand extends Command
     {
         $this->setName('rebuild-symfony-requirements');
         $this->addArgument(
-            self::PACKAGE,
+            self::PATH,
             InputArgument::REQUIRED
         );
         $this->addArgument(
@@ -54,19 +54,17 @@ final class RebuildSymfonyRequirementsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
-        $package = $input->getArgument(self::PACKAGE);
+        $path = $input->getArgument(self::PATH);
         $newVersion = $input->getArgument(self::VERSION);
         $dryRun = $input->getOption(self::DRY_RUN);
 
-        if (!is_string($package)) {
-            throw new LogicException('Package argument should be a string');
+        if (!is_string($path) || !file_exists($path)) {
+            throw new LogicException('Path does not exist');
         }
 
         if (!is_string($newVersion)) {
             throw new LogicException('Version argument should be a string');
         }
-
-        $path = __DIR__ . '/../packages/' . $package . '/composer.json';
 
         if (false === $content = file_get_contents($path)) {
             throw new LogicException('composer.json content could not be read');
@@ -82,9 +80,6 @@ final class RebuildSymfonyRequirementsCommand extends Command
         if (!$this->fetchSymfonySplitPackages($output)) {
             return self::FAILURE;
         }
-
-        $content['require'] = $this->replace($output, $content['require'], $newVersion);
-        $content['require-dev'] = $this->replace($output, $content['require-dev'], $newVersion);
 
         $content['conflict'] = $this->getSymfonyConflicts($output, $content['conflict'] ?? [], $newVersion);
 
