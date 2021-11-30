@@ -27,7 +27,7 @@
     "require": {
         "php": "^8.0",
         "doctrine/dbal": "^2.12",
-        "doctrine/orm": "^2.8",
+        "doctrine/orm": "^2.8.5",
         "simple-bus/message-bus": "^6.0"
     },
     "conflict": {
