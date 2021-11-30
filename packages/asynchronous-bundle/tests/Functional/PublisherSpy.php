@@ -4,7 +4,7 @@ namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
 use SimpleBus\Asynchronous\Publisher\Publisher;
 
-class PublisherSpy implements Publisher
+final class PublisherSpy implements Publisher
 {
     /**
      * @var object[]

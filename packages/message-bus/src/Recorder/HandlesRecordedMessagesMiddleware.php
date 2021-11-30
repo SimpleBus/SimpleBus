@@ -6,7 +6,7 @@ use Exception;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
-class HandlesRecordedMessagesMiddleware implements MessageBusMiddleware
+final class HandlesRecordedMessagesMiddleware implements MessageBusMiddleware
 {
     private ContainsRecordedMessages $messageRecorder;
 

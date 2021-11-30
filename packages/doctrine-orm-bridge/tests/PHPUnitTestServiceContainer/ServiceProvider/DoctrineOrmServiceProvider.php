@@ -14,7 +14,7 @@ use Pimple\Container;
 use SimpleBus\DoctrineORMBridge\Tests\PHPUnitTestServiceContainer\ServiceContainer;
 use SimpleBus\DoctrineORMBridge\Tests\PHPUnitTestServiceContainer\ServiceProvider;
 
-class DoctrineOrmServiceProvider implements ServiceProvider
+final class DoctrineOrmServiceProvider implements ServiceProvider
 {
     /**
      * @var string[]

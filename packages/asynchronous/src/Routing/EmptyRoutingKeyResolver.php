@@ -2,7 +2,7 @@
 
 namespace SimpleBus\Asynchronous\Routing;
 
-class EmptyRoutingKeyResolver implements RoutingKeyResolver
+final class EmptyRoutingKeyResolver implements RoutingKeyResolver
 {
     /**
      * Always use an empty routing key.

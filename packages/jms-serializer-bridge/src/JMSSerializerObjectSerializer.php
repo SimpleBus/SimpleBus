@@ -6,7 +6,7 @@ use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use SimpleBus\Serialization\ObjectSerializer;
 
-class JMSSerializerObjectSerializer implements ObjectSerializer
+final class JMSSerializerObjectSerializer implements ObjectSerializer
 {
     private SerializerInterface $serializer;
 

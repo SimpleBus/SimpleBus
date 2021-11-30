@@ -6,7 +6,7 @@ use Doctrine\DBAL\Driver\Connection;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use Throwable;
 
-class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
+final class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
     private Connection $connection;
 

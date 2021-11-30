@@ -5,7 +5,7 @@ namespace SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest;
 use SimpleBus\Message\Name\NamedMessage;
 use SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest\Entity\TestEntity;
 
-class TestEntityCreated implements NamedMessage
+final class TestEntityCreated implements NamedMessage
 {
     private TestEntity $testEntity;
 

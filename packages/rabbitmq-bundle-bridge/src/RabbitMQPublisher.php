@@ -10,7 +10,7 @@ use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Asynchronous\Routing\RoutingKeyResolver;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 
-class RabbitMQPublisher implements Publisher
+final class RabbitMQPublisher implements Publisher
 {
     private MessageInEnvelopeSerializer $serializer;
 

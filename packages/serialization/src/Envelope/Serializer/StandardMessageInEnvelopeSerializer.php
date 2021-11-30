@@ -7,7 +7,7 @@ use SimpleBus\Serialization\Envelope\Envelope;
 use SimpleBus\Serialization\Envelope\EnvelopeFactory;
 use SimpleBus\Serialization\ObjectSerializer;
 
-class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
+final class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
 {
     private EnvelopeFactory $envelopeFactory;
 

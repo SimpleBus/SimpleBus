@@ -2,7 +2,7 @@
 
 namespace SimpleBus\Message\Recorder;
 
-class AggregatesRecordedMessages implements ContainsRecordedMessages
+final class AggregatesRecordedMessages implements ContainsRecordedMessages
 {
     /**
      * @var ContainsRecordedMessages[]

@@ -9,7 +9,7 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\Proxy\Proxy;
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
-class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMessages
+final class CollectsEventsFromEntities implements EventSubscriber, ContainsRecordedMessages
 {
     /**
      * @var object[]

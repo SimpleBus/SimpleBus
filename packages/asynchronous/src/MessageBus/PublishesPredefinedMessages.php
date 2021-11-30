@@ -6,7 +6,7 @@ use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use SimpleBus\Message\Name\MessageNameResolver;
 
-class PublishesPredefinedMessages implements MessageBusMiddleware
+final class PublishesPredefinedMessages implements MessageBusMiddleware
 {
     private Publisher $publisher;
 

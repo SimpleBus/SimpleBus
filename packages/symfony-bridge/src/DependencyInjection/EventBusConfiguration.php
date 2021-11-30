@@ -5,7 +5,7 @@ namespace SimpleBus\SymfonyBridge\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-class EventBusConfiguration implements ConfigurationInterface
+final class EventBusConfiguration implements ConfigurationInterface
 {
     private string $alias;
 

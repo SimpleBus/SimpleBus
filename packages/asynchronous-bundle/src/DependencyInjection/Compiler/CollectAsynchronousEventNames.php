@@ -6,7 +6,7 @@ use SimpleBus\SymfonyBridge\DependencyInjection\Compiler\CollectServices;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class CollectAsynchronousEventNames implements CompilerPassInterface
+final class CollectAsynchronousEventNames implements CompilerPassInterface
 {
     use CollectServices;
 

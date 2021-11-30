@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class AdditionalPropertiesResolverPass implements CompilerPassInterface
+final class AdditionalPropertiesResolverPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {

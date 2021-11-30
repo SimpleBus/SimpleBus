@@ -4,7 +4,7 @@ namespace SimpleBus\Message\Name;
 
 use SimpleBus\Message\Name\Exception\CouldNotResolveMessageName;
 
-class NamedMessageNameResolver implements MessageNameResolver
+final class NamedMessageNameResolver implements MessageNameResolver
 {
     public function resolve(object $message): string
     {

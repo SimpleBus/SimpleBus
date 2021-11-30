@@ -5,7 +5,7 @@ namespace SimpleBus\Asynchronous\MessageBus;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
-class AlwaysPublishesMessages implements MessageBusMiddleware
+final class AlwaysPublishesMessages implements MessageBusMiddleware
 {
     private Publisher $publisher;
 

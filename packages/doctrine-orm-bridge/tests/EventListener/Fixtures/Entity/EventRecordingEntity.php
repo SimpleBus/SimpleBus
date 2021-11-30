@@ -15,7 +15,7 @@ use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
  * @Entity
  * @HasLifecycleCallbacks()
  */
-class EventRecordingEntity implements ContainsRecordedMessages
+final class EventRecordingEntity implements ContainsRecordedMessages
 {
     use PrivateMessageRecorderCapabilities;
 

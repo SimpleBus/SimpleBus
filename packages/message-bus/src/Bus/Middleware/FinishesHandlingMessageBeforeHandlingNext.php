@@ -4,7 +4,7 @@ namespace SimpleBus\Message\Bus\Middleware;
 
 use Throwable;
 
-class FinishesHandlingMessageBeforeHandlingNext implements MessageBusMiddleware
+final class FinishesHandlingMessageBeforeHandlingNext implements MessageBusMiddleware
 {
     /**
      * @var object[]

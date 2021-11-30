@@ -6,7 +6,7 @@ use LogicException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class AddMiddlewareTags implements CompilerPassInterface
+final class AddMiddlewareTags implements CompilerPassInterface
 {
     private const MESSAGE_BUS_TAG = 'message_bus';
 

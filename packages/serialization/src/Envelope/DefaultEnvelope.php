@@ -4,7 +4,7 @@ namespace SimpleBus\Serialization\Envelope;
 
 use LogicException;
 
-class DefaultEnvelope implements Envelope
+final class DefaultEnvelope implements Envelope
 {
     /**
      * @var class-string
@@ -18,7 +18,7 @@ class DefaultEnvelope implements Envelope
     /**
      * @param class-string $messageType
      */
-    protected function __construct(string $messageType, ?object $message, ?string $serializedMessage)
+    private function __construct(string $messageType, ?object $message, ?string $serializedMessage)
     {
         $this->messageType = $messageType;
         $this->message = $message;

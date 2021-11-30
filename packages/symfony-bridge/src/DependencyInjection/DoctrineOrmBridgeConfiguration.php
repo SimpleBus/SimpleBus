@@ -5,7 +5,7 @@ namespace SimpleBus\SymfonyBridge\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-class DoctrineOrmBridgeConfiguration implements ConfigurationInterface
+final class DoctrineOrmBridgeConfiguration implements ConfigurationInterface
 {
     private string $alias;
 

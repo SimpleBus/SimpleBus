@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class RegisterHandlers implements CompilerPassInterface
+final class RegisterHandlers implements CompilerPassInterface
 {
     use CollectServices;
 

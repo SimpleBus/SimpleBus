@@ -8,7 +8,7 @@ use Psr\Log\NullLogger;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use SimpleBus\Message\Subscriber\Resolver\MessageSubscribersResolver;
 
-class NotifiesMessageSubscribersMiddleware implements MessageBusMiddleware
+final class NotifiesMessageSubscribersMiddleware implements MessageBusMiddleware
 {
     private MessageSubscribersResolver $messageSubscribersResolver;
 

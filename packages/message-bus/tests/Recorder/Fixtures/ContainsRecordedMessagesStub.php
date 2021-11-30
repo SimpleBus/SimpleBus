@@ -4,7 +4,7 @@ namespace SimpleBus\Message\Tests\Recorder\Fixtures;
 
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 
-class ContainsRecordedMessagesStub implements ContainsRecordedMessages
+final class ContainsRecordedMessagesStub implements ContainsRecordedMessages
 {
     /**
      * @var object[]

@@ -4,7 +4,7 @@ namespace SimpleBus\Message\Tests\Bus\Fixtures;
 
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
-class StubMessageBusMiddleware implements MessageBusMiddleware
+final class StubMessageBusMiddleware implements MessageBusMiddleware
 {
     /**
      * @var callable

@@ -7,7 +7,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use Throwable;
 
-class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
+final class WrapsMessageHandlingInTransaction implements MessageBusMiddleware
 {
     private ManagerRegistry $managerRegistry;
 

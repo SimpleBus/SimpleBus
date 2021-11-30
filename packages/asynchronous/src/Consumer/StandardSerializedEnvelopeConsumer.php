@@ -8,7 +8,7 @@ use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 /**
  * Use this consumer to easily implement an asynchronous message consumer.
  */
-class StandardSerializedEnvelopeConsumer implements SerializedEnvelopeConsumer
+final class StandardSerializedEnvelopeConsumer implements SerializedEnvelopeConsumer
 {
     private MessageInEnvelopeSerializer $messageInEnvelopeSerializer;
 

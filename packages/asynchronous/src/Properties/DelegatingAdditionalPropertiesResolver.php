@@ -2,7 +2,7 @@
 
 namespace SimpleBus\Asynchronous\Properties;
 
-class DelegatingAdditionalPropertiesResolver implements AdditionalPropertiesResolver
+final class DelegatingAdditionalPropertiesResolver implements AdditionalPropertiesResolver
 {
     /**
      * @var AdditionalPropertiesResolver[]

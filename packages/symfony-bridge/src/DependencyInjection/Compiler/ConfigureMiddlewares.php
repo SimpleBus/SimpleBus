@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class ConfigureMiddlewares implements CompilerPassInterface
+final class ConfigureMiddlewares implements CompilerPassInterface
 {
     private string $mainBusId;
     private string $busTag;

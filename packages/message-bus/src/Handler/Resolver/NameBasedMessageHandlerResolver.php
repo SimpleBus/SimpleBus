@@ -5,7 +5,7 @@ namespace SimpleBus\Message\Handler\Resolver;
 use SimpleBus\Message\CallableResolver\CallableMap;
 use SimpleBus\Message\Name\MessageNameResolver;
 
-class NameBasedMessageHandlerResolver implements MessageHandlerResolver
+final class NameBasedMessageHandlerResolver implements MessageHandlerResolver
 {
     private MessageNameResolver $messageNameResolver;
 

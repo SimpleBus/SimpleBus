@@ -2,7 +2,7 @@
 
 namespace SimpleBus\Serialization\Envelope;
 
-class DefaultEnvelopeFactory implements EnvelopeFactory
+final class DefaultEnvelopeFactory implements EnvelopeFactory
 {
     public function wrapMessageInEnvelope(object $message): Envelope
     {

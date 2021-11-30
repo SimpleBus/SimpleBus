@@ -2,7 +2,7 @@
 
 namespace SimpleBus\Message\Name;
 
-class ClassBasedNameResolver implements MessageNameResolver
+final class ClassBasedNameResolver implements MessageNameResolver
 {
     /**
      * The unique name of a message is assumed to be its fully qualified class name.

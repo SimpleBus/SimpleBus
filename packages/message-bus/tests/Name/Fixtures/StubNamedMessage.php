@@ -4,7 +4,7 @@ namespace SimpleBus\Message\Tests\Name\Fixtures;
 
 use SimpleBus\Message\Name\NamedMessage;
 
-class StubNamedMessage implements NamedMessage
+final class StubNamedMessage implements NamedMessage
 {
     public static string $name;
 

@@ -7,7 +7,7 @@ use SimpleBus\RabbitMQBundleBridge\Event\Events;
 use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class LogErrorWhenMessageConsumptionFailed implements EventSubscriberInterface
+final class LogErrorWhenMessageConsumptionFailed implements EventSubscriberInterface
 {
     private LoggerInterface $logger;
 

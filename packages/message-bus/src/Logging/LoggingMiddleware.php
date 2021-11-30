@@ -5,7 +5,7 @@ namespace SimpleBus\Message\Logging;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
-class LoggingMiddleware implements MessageBusMiddleware
+final class LoggingMiddleware implements MessageBusMiddleware
 {
     private LoggerInterface $logger;
 

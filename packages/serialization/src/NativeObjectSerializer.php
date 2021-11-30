@@ -4,7 +4,7 @@ namespace SimpleBus\Serialization;
 
 use LogicException;
 
-class NativeObjectSerializer implements ObjectSerializer
+final class NativeObjectSerializer implements ObjectSerializer
 {
     /**
      * Serialize the given object using the native `serialize()` function.

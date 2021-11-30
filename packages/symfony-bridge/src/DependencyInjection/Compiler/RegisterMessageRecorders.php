@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class RegisterMessageRecorders implements CompilerPassInterface
+final class RegisterMessageRecorders implements CompilerPassInterface
 {
     private string $aggregatorId;
     private string $recorderTag;

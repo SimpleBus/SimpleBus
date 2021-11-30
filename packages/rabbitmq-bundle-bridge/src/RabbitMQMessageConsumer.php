@@ -11,7 +11,7 @@ use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumed;
 use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class RabbitMQMessageConsumer implements ConsumerInterface
+final class RabbitMQMessageConsumer implements ConsumerInterface
 {
     private SerializedEnvelopeConsumer $consumer;
 

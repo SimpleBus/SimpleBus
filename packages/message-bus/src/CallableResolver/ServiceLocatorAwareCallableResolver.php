@@ -4,7 +4,7 @@ namespace SimpleBus\Message\CallableResolver;
 
 use SimpleBus\Message\CallableResolver\Exception\CouldNotResolveCallable;
 
-class ServiceLocatorAwareCallableResolver implements CallableResolver
+final class ServiceLocatorAwareCallableResolver implements CallableResolver
 {
     /**
      * @var callable
