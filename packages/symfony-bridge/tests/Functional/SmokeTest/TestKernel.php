@@ -38,7 +38,7 @@ class TestKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $loader->load(sprintf('%s/%s.yml', __DIR__, $this->environment));
+        $loader->load(sprintf('%s/%s.php', __DIR__, $this->environment));
     }
 
     public function getCacheDir(): string

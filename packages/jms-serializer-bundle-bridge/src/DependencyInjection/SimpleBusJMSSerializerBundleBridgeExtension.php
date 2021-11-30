@@ -7,7 +7,7 @@ use SimpleBus\JMSSerializerBridge\SerializerMetadata;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class SimpleBusJMSSerializerBundleBridgeExtension extends Extension implements PrependExtensionInterface
@@ -17,8 +17,8 @@ class SimpleBusJMSSerializerBundleBridgeExtension extends Extension implements P
      */
     public function load(array $config, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.php');
     }
 
     public function prepend(ContainerBuilder $container): void

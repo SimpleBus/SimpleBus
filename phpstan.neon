@@ -31,3 +31,5 @@ parameters:
         - packages/symfony-bridge/tests/Functional/temp/
         # See https://github.com/phpstan/phpstan/issues/4516
         - packages/message-bus/src/Recorder/PrivateMessageRecorderCapabilities.php
+    scanFiles:
+        - vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php

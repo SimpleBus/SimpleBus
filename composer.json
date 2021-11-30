@@ -35,8 +35,7 @@
         "symfony/dependency-injection": "^5.3.7 || ^5.4",
         "symfony/framework-bundle": "^5.3.7 || ^5.4",
         "symfony/http-kernel": "^5.3.7 || ^5.4",
-        "symfony/monolog-bundle": "^3.4",
-        "symfony/yaml": "^5.3.7 || ^5.4"
+        "symfony/monolog-bundle": "^3.4"
     },
     "replace": {
         "simple-bus/asynchronous": "self.version",
@@ -72,6 +71,7 @@
         "symfony/proxy-manager-bridge": "^5.3.7 || ^5.4",
         "symfony/stopwatch": "^5.3.7 || ^5.4",
         "symfony/translation": "^5.3.7 || ^5.4",
+        "symfony/yaml": "^5.3.7 || ^5.4",
         "symplify/easy-ci": "^9.0",
         "symplify/monorepo-builder": "^9.0"
     },

@@ -6,7 +6,7 @@ use LogicException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension implements PrependExtensionInterface
@@ -63,21 +63,21 @@ class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension imple
      */
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         foreach (['command' => 'commands', 'event' => 'events'] as $messageType => $configurationKey) {
             if (!$mergedConfig[$configurationKey]['enabled']) {
                 continue;
             }
 
-            $loader->load($configurationKey.'.yml');
+            $loader->load($configurationKey.'.php');
             $container->setAlias(
                 'simple_bus.rabbit_mq_bundle_bridge.'.$messageType.'_producer',
                 $mergedConfig[$configurationKey]['producer_service_id']
             );
         }
 
-        $loader->load('error_handling.yml');
+        $loader->load('error_handling.php');
         $loggerChannel = $mergedConfig['logging']['channel'];
         $container
             ->findDefinition('simple_bus.rabbit_mq_bundle_bridge.error_logging_event_subscriber')
@@ -86,7 +86,7 @@ class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension imple
                 ['channel' => $loggerChannel]
             );
 
-        $loader->load('routing.yml');
+        $loader->load('routing.php');
         if (in_array($mergedConfig['routing_key_resolver'], ['empty', 'class_based'])) {
             $routingKeyResolverId = sprintf(
                 'simple_bus.rabbit_mq_bundle_bridge.routing.%s_routing_key_resolver',
@@ -107,7 +107,7 @@ class SimpleBusRabbitMQBundleBridgeExtension extends ConfigurableExtension imple
             $eventsRoutingKey
         );
 
-        $loader->load('properties.yml');
+        $loader->load('properties.php');
     }
 
     private function requireBundle(string $bundleName, ContainerBuilder $container): void

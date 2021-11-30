@@ -6,7 +6,7 @@ use LogicException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class SimpleBusAsynchronousExtension extends ConfigurableExtension
@@ -36,9 +36,9 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
      */
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loader->load('asynchronous_serialization.yml');
+        $loader->load('asynchronous_serialization.php');
         $container->setAlias(
             'simple_bus.asynchronous.object_serializer',
             $mergedConfig['object_serializer_service_id']
@@ -67,7 +67,7 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
     private function loadAsynchronousCommandBus(array $config, ContainerBuilder $container, LoaderInterface $loader): void
     {
         $this->requireBundle('SimpleBusCommandBusBundle', $container);
-        $loader->load('asynchronous_commands.yml');
+        $loader->load('asynchronous_commands.php');
 
         $container->setAlias(
             'simple_bus.asynchronous.command_bus.command_name_resolver',
@@ -80,7 +80,7 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
         );
 
         if ($config['logging']['enabled']) {
-            $loader->load('asynchronous_commands_logging.yml');
+            $loader->load('asynchronous_commands_logging.php');
         }
     }
 
@@ -90,7 +90,7 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
     private function loadAsynchronousEventBus(array $config, ContainerBuilder $container, LoaderInterface $loader): void
     {
         $this->requireBundle('SimpleBusEventBusBundle', $container);
-        $loader->load('asynchronous_events.yml');
+        $loader->load('asynchronous_events.php');
 
         $container->setAlias(
             'simple_bus.asynchronous.event_bus.event_name_resolver',
@@ -103,7 +103,7 @@ class SimpleBusAsynchronousExtension extends ConfigurableExtension
         );
 
         if ($config['logging']['enabled']) {
-            $loader->load('asynchronous_events_logging.yml');
+            $loader->load('asynchronous_events_logging.php');
         }
 
         $eventMiddleware = $config['strategy']['strategy_service_id'];

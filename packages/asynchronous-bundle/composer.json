@@ -35,15 +35,15 @@
         "symfony/dependency-injection": "^5.3.7 || ^5.4",
         "symfony/framework-bundle": "^5.3.7 || ^5.4"
     },
-    "conflict": {
-        "monolog/monolog": "<1.26.1 || >=2.0,<2.3.0"
-    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
         "phpunit/phpunit": "^9.5.5",
         "symfony/monolog-bundle": "^3.4",
         "symfony/phpunit-bridge": "^6.0"
+    },
+    "conflict": {
+        "monolog/monolog": "<1.26.1 || >=2.0,<2.3.0"
     },
     "suggest": {
         "symfony/monolog-bundle": "For logging messages"

@@ -29,14 +29,14 @@
         "jms/serializer": "^3.15",
         "simple-bus/serialization": "^6.0"
     },
-    "conflict": {
-        "jms/metadata": "<2.5.2"
-    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5.5",
         "symfony/phpunit-bridge": "^6.0",
         "symfony/yaml": "^5.3.7 || ^5.4"
+    },
+    "conflict": {
+        "jms/metadata": "<2.5.2"
     },
     "config": {
         "sort-packages": true

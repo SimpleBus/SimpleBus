@@ -4,7 +4,7 @@ namespace SimpleBus\SymfonyBridge\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
@@ -35,9 +35,9 @@ class EventBusExtension extends ConfigurableExtension
      */
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loader->load('event_bus.yml');
+        $loader->load('event_bus.php');
 
         $container->setAlias(
             'simple_bus.event_bus.event_name_resolver',
@@ -45,7 +45,7 @@ class EventBusExtension extends ConfigurableExtension
         );
 
         if ($mergedConfig['logging']['enabled']) {
-            $loader->load('event_bus_logging.yml');
+            $loader->load('event_bus_logging.php');
 
             $container->getDefinition('simple_bus.event_bus.notifies_message_subscribers_middleware')
                 ->replaceArgument(1, new Reference('logger'))

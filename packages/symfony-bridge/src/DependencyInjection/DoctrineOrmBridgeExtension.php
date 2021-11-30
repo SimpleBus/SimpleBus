@@ -4,7 +4,7 @@ namespace SimpleBus\SymfonyBridge\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class DoctrineOrmBridgeExtension extends ConfigurableExtension
@@ -34,9 +34,9 @@ class DoctrineOrmBridgeExtension extends ConfigurableExtension
      */
     public function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loader->load('doctrine_orm_bridge.yml');
+        $loader->load('doctrine_orm_bridge.php');
 
         $container->setParameter(
             'simple_bus.doctrine_orm_bridge.entity_manager',

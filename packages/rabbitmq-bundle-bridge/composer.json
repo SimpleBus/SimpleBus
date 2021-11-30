@@ -35,10 +35,6 @@
         "simple-bus/message-bus": "^6.0",
         "symfony/monolog-bundle": "^3.4"
     },
-    "conflict": {
-        "jms/metadata": "<2.5.2",
-        "monolog/monolog": "<1.26.1 || >=2.0,<2.3.0"
-    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "matthiasnoback/phpunit-asynchronicity": "^2.4",
@@ -50,6 +46,10 @@
         "symfony/process": "^5.3.7 || ^5.4",
         "symfony/stopwatch": "^5.3.7 || ^5.4",
         "symfony/translation": "^5.3.7 || ^5.4"
+    },
+    "conflict": {
+        "jms/metadata": "<2.5.2",
+        "monolog/monolog": "<1.26.1 || >=2.0,<2.3.0"
     },
     "config": {
         "sort-packages": true

@@ -30,16 +30,16 @@
         "doctrine/orm": "^2.8.5",
         "simple-bus/message-bus": "^6.0"
     },
-    "conflict": {
-        "doctrine/dbal": "<2.13.3",
-        "doctrine/persistence": "<2.2.2"
-    },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5.5",
         "pimple/pimple": "^3.5",
         "symfony/cache": "^5.3.7 || ^5.4",
         "symfony/phpunit-bridge": "^6.0"
+    },
+    "conflict": {
+        "doctrine/dbal": "<2.13.3",
+        "doctrine/persistence": "<2.2.2"
     },
     "suggest": {
         "simple-bus/symfony-bridge": "Bridge for using command buses and event buses with Symfony"

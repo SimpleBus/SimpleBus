@@ -33,15 +33,16 @@
         "symfony/dependency-injection": "^5.3.7 || ^5.4",
         "symfony/framework-bundle": "^5.3.7 || ^5.4"
     },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.11",
+        "phpunit/phpunit": "^9.5.5",
+        "symfony/phpunit-bridge": "^6.0",
+        "symfony/yaml": "^5.3.7 || ^5.4"
+    },
     "conflict": {
         "doctrine/annotations": "<1.10.4",
         "jms/metadata": "<2.5.2",
         "jms/serializer": "<3.2.0"
-    },
-    "require-dev": {
-        "ergebnis/composer-normalize": "^2.11",
-        "phpunit/phpunit": "^9.5.5",
-        "symfony/phpunit-bridge": "^6.0"
     },
     "config": {
         "sort-packages": true

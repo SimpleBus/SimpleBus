@@ -1,7 +1,0 @@
-services:
-    simple_bus.jms_serializer.object_serializer:
-        class: SimpleBus\JMSSerializerBridge\JMSSerializerObjectSerializer
-        public: false
-        arguments:
-            - '@jms_serializer'
-            - 'json'
