@@ -6,10 +6,6 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Routing\EmptyRoutingKeyResolver;
 use stdClass;
 
-/**
- * @internal
- * @coversNothing
- */
 class EmptyRoutingKeyResolverTest extends TestCase
 {
     /**

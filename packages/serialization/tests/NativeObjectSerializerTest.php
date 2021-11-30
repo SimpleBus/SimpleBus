@@ -9,10 +9,6 @@ use SimpleBus\Serialization\NativeObjectSerializer;
 use SimpleBus\Serialization\Tests\Fixtures\AnotherDummyMessage;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
 
-/**
- * @internal
- * @coversNothing
- */
 class NativeObjectSerializerTest extends TestCase
 {
     /**

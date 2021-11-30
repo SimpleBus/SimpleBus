@@ -6,10 +6,6 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\Asynchronous\Routing\ClassBasedRoutingKeyResolver;
 use SimpleBus\Asynchronous\Tests\Routing\Fixtures\MessageDummy;
 
-/**
- * @internal
- * @coversNothing
- */
 class ClassBasedRoutingKeyResolverTest extends TestCase
 {
     /**

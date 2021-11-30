@@ -5,10 +5,6 @@ namespace SimpleBus\JMSSerializerBundleBridge\Tests\Functional;
 use SimpleBus\Serialization\Envelope\Serializer\MessageInEnvelopeSerializer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-/**
- * @internal
- * @coversNothing
- */
 class JMSSerializerMessageSerializerTest extends KernelTestCase
 {
     protected function tearDown(): void

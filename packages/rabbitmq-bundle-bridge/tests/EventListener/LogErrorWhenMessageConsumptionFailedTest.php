@@ -11,10 +11,6 @@ use Psr\Log\LogLevel;
 use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use SimpleBus\RabbitMQBundleBridge\EventListener\LogErrorWhenMessageConsumptionFailed;
 
-/**
- * @internal
- * @coversNothing
- */
 class LogErrorWhenMessageConsumptionFailedTest extends TestCase
 {
     /**
