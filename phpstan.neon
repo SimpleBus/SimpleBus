@@ -1,9 +1,8 @@
 includes:
-    - phpstan.conditional.php
     - phpstan-baseline.neon
-    - phar://phpstan.phar/conf/bleedingEdge.neon
 parameters:
-    level: max
+    level: 8
+    reportUnmatchedIgnoredErrors: false
     paths:
         - packages/asynchronous-bundle/src/
         - packages/asynchronous-bundle/tests/
@@ -25,7 +24,7 @@ parameters:
         - packages/serialization/tests/
         - packages/symfony-bridge/src/
         - packages/symfony-bridge/tests/
-    excludes_analyse:
+    excludePaths:
         - packages/asynchronous-bundle/tests/Functional/temp/
         - packages/jms-serializer-bundle-bridge/tests/Functional/temp/
         - packages/rabbitmq-bundle-bridge/tests/Functional/temp/
