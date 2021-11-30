@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
-class CommandBusExtension extends ConfigurableExtension
+final class CommandBusExtension extends ConfigurableExtension
 {
     private string $alias;
 

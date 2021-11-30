@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SimpleBusCommandBusBundle extends Bundle
+final class SimpleBusCommandBusBundle extends Bundle
 {
     private string $configurationAlias;
 

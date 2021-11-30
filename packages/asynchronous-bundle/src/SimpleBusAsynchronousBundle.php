@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SimpleBusAsynchronousBundle extends Bundle
+final class SimpleBusAsynchronousBundle extends Bundle
 {
     public function getContainerExtension(): SimpleBusAsynchronousExtension
     {

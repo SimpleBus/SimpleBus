@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class SimpleBusJMSSerializerBundleBridgeExtension extends Extension implements PrependExtensionInterface
+final class SimpleBusJMSSerializerBundleBridgeExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * @param mixed[] $config

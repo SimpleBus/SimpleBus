@@ -7,7 +7,7 @@ use SimpleBus\RabbitMQBundleBridge\DependencyInjection\SimpleBusRabbitMQBundleBr
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SimpleBusRabbitMQBundleBridgeBundle extends Bundle
+final class SimpleBusRabbitMQBundleBridgeBundle extends Bundle
 {
     public function getContainerExtension(): SimpleBusRabbitMQBundleBridgeExtension
     {

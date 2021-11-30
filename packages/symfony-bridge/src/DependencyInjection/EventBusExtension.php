@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
-class EventBusExtension extends ConfigurableExtension
+final class EventBusExtension extends ConfigurableExtension
 {
     private string $alias;
 
