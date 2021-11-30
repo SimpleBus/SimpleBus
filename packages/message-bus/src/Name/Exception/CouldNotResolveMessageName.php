@@ -4,7 +4,7 @@ namespace SimpleBus\Message\Name\Exception;
 
 use LogicException;
 
-class CouldNotResolveMessageName extends LogicException
+final class CouldNotResolveMessageName extends LogicException
 {
     public static function forMessage(object $message, string $exceptionMessage): self
     {

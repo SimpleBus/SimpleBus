@@ -4,7 +4,7 @@ namespace SimpleBus\Message\CallableResolver\Exception;
 
 use LogicException;
 
-class CouldNotResolveCallable extends LogicException
+final class CouldNotResolveCallable extends LogicException
 {
     /**
      * @param mixed $value
