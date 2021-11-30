@@ -2,6 +2,6 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\Event;
 
-class MessageConsumed extends AbstractMessageEvent
+final class MessageConsumed extends AbstractMessageEvent
 {
 }

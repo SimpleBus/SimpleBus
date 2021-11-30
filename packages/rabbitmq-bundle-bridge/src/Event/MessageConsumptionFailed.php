@@ -5,7 +5,7 @@ namespace SimpleBus\RabbitMQBundleBridge\Event;
 use Exception;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class MessageConsumptionFailed extends AbstractMessageEvent
+final class MessageConsumptionFailed extends AbstractMessageEvent
 {
     private Exception $exception;
 

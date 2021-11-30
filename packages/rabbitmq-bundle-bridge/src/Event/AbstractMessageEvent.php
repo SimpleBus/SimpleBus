@@ -6,7 +6,7 @@ use BadMethodCallException;
 use PhpAmqpLib\Message\AMQPMessage;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class AbstractMessageEvent extends Event
+abstract class AbstractMessageEvent extends Event
 {
     private AMQPMessage $message;
 
