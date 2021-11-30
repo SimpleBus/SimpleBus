@@ -1,6 +1,0 @@
-{
-    "require": {
-        "composer/semver": "^3.2",
-        "symfony/console": "^6.0"
-    }
-}
