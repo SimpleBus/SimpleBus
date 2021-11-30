@@ -10,3 +10,8 @@ parameters:
 			count: 1
 			path: packages/doctrine-orm-bridge/tests/EventListener/Fixtures/Entity/EventRecordingEntity.php
 
+
+		-
+			message: "#^Method Symfony\\\\Contracts\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:dispatch\\(\\) invoked with 2 parameters, 1 required\\.$#"
+			count: 2
+			path: packages/rabbitmq-bundle-bridge/src/RabbitMQMessageConsumer.php
