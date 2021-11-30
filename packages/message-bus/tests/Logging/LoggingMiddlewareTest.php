@@ -8,7 +8,7 @@ use Psr\Log\LogLevel;
 use SimpleBus\Message\Logging\LoggingMiddleware;
 use stdClass;
 
-class LoggingMiddlewareTest extends TestCase
+final class LoggingMiddlewareTest extends TestCase
 {
     /**
      * @test

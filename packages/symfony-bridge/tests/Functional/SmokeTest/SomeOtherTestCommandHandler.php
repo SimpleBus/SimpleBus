@@ -4,7 +4,7 @@ namespace SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest;
 
 use SimpleBus\Message\Recorder\RecordsMessages;
 
-class SomeOtherTestCommandHandler
+final class SomeOtherTestCommandHandler
 {
     public bool $commandHandled = false;
     private RecordsMessages $messageRecorder;

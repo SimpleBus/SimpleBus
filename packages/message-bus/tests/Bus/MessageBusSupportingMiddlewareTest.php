@@ -9,7 +9,7 @@ use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
 use stdClass;
 
-class MessageBusSupportingMiddlewareTest extends TestCase
+final class MessageBusSupportingMiddlewareTest extends TestCase
 {
     /**
      * @test

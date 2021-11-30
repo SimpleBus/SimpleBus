@@ -4,7 +4,7 @@ namespace SimpleBus\JMSSerializerBundleBridge\Tests\Functional;
 
 use JMS\Serializer\Annotation as Serializer;
 
-class SampleMessage
+final class SampleMessage
 {
     /**
      * @Serializer\Type("string")

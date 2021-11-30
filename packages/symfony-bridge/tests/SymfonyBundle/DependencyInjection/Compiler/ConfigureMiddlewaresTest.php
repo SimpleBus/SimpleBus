@@ -10,7 +10,7 @@ use SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest\Auto\AutoEvent3;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class ConfigureMiddlewaresTest extends TestCase
+final class ConfigureMiddlewaresTest extends TestCase
 {
     private ContainerBuilder $container;
 

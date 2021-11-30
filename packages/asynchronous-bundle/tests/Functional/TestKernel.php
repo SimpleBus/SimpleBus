@@ -10,7 +10,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Kernel;
 
-class TestKernel extends Kernel
+final class TestKernel extends Kernel
 {
     private string $tempDir;
 

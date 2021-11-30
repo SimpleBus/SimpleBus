@@ -8,7 +8,7 @@ use SimpleBus\JMSSerializerBridge\JMSSerializerObjectSerializer;
 use SimpleBus\JMSSerializerBridge\SerializerMetadata;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 
-class JMSSerializerObjectSerializerTest extends TestCase
+final class JMSSerializerObjectSerializerTest extends TestCase
 {
     /**
      * @test

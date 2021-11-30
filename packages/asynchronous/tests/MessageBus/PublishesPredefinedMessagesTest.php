@@ -9,7 +9,7 @@ use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\Name\MessageNameResolver;
 use stdClass;
 
-class PublishesPredefinedMessagesTest extends TestCase
+final class PublishesPredefinedMessagesTest extends TestCase
 {
     /**
      * @test

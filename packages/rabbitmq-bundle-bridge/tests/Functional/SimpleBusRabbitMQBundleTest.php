@@ -9,7 +9,7 @@ use stdClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Process\Process;
 
-class SimpleBusRabbitMQBundleTest extends KernelTestCase
+final class SimpleBusRabbitMQBundleTest extends KernelTestCase
 {
     private FileLogger $logger;
 

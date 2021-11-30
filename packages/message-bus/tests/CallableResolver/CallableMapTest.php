@@ -8,7 +8,7 @@ use SimpleBus\Message\CallableResolver\CallableMap;
 use SimpleBus\Message\CallableResolver\CallableResolver;
 use SimpleBus\Message\CallableResolver\Exception\UndefinedCallable;
 
-class CallableMapTest extends TestCase
+final class CallableMapTest extends TestCase
 {
     /**
      * @var CallableResolver|MockObject

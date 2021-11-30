@@ -10,7 +10,7 @@ use stdClass;
 use Throwable;
 use TypeError;
 
-class FinishesMessageBeforeHandlingNextTest extends TestCase
+final class FinishesMessageBeforeHandlingNextTest extends TestCase
 {
     /**
      * @test

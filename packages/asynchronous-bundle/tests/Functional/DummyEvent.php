@@ -2,6 +2,6 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
-class DummyEvent
+final class DummyEvent
 {
 }

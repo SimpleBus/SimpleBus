@@ -2,6 +2,6 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
-class AlwaysFailingCommand
+final class AlwaysFailingCommand
 {
 }

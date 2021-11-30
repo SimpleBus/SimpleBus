@@ -6,7 +6,7 @@ use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class SimpleBusAsynchronousBundleTest extends KernelTestCase
+final class SimpleBusAsynchronousBundleTest extends KernelTestCase
 {
     protected function tearDown(): void
     {

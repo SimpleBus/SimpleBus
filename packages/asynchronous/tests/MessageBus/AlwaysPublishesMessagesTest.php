@@ -8,7 +8,7 @@ use SimpleBus\Asynchronous\MessageBus\AlwaysPublishesMessages;
 use SimpleBus\Asynchronous\Publisher\Publisher;
 use stdClass;
 
-class AlwaysPublishesMessagesTest extends TestCase
+final class AlwaysPublishesMessagesTest extends TestCase
 {
     /**
      * @test

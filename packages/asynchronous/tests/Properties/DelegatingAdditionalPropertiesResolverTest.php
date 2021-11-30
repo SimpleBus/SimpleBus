@@ -8,7 +8,7 @@ use SimpleBus\Asynchronous\Properties\AdditionalPropertiesResolver;
 use SimpleBus\Asynchronous\Properties\DelegatingAdditionalPropertiesResolver;
 use stdClass;
 
-class DelegatingAdditionalPropertiesResolverTest extends TestCase
+final class DelegatingAdditionalPropertiesResolverTest extends TestCase
 {
     /**
      * @test

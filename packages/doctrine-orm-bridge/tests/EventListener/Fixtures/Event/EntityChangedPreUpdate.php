@@ -2,6 +2,6 @@
 
 namespace SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event;
 
-class EntityChangedPreUpdate
+final class EntityChangedPreUpdate
 {
 }

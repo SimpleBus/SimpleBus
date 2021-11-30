@@ -5,7 +5,7 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 use Psr\Log\AbstractLogger;
 use RuntimeException;
 
-class FileLogger extends AbstractLogger
+final class FileLogger extends AbstractLogger
 {
     private string $path;
 

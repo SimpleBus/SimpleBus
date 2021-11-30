@@ -2,7 +2,7 @@
 
 namespace SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest;
 
-class SomeOtherTestCommand
+final class SomeOtherTestCommand
 {
     public function name(): string
     {

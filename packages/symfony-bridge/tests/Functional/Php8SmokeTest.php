@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  * @coversNothing
  * @requires PHP 8.0
  */
-class Php8SmokeTest extends KernelTestCase
+final class Php8SmokeTest extends KernelTestCase
 {
     protected function tearDown(): void
     {

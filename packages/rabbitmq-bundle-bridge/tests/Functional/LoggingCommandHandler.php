@@ -4,7 +4,7 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use Psr\Log\LoggerInterface;
 
-class LoggingCommandHandler
+final class LoggingCommandHandler
 {
     private LoggerInterface $logger;
 

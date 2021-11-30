@@ -5,7 +5,7 @@ namespace SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest;
 use Doctrine\ORM\EntityManager;
 use SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest\Entity\TestEntity;
 
-class TestCommandHandler
+final class TestCommandHandler
 {
     public bool $commandHandled = false;
 

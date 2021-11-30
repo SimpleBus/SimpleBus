@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\Message\CallableResolver\CallableCollection;
 use SimpleBus\Message\CallableResolver\CallableResolver;
 
-class CallableCollectionTest extends TestCase
+final class CallableCollectionTest extends TestCase
 {
     /**
      * @var CallableResolver|MockObject

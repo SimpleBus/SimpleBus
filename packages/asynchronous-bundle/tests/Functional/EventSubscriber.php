@@ -2,7 +2,7 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
-class EventSubscriber
+final class EventSubscriber
 {
     private Spy $spy;
 

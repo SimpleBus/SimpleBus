@@ -11,7 +11,7 @@ use SimpleBus\Message\Tests\CallableResolver\Fixtures\LegacySubscriber;
 use SimpleBus\Message\Tests\CallableResolver\Fixtures\SubscriberWithCustomNotify;
 use stdClass;
 
-class ServiceLocatorAwareCallableResolverTest extends TestCase
+final class ServiceLocatorAwareCallableResolverTest extends TestCase
 {
     private ServiceLocatorAwareCallableResolver $resolver;
 

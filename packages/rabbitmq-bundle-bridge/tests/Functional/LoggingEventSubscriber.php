@@ -4,7 +4,7 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use Psr\Log\LoggerInterface;
 
-class LoggingEventSubscriber
+final class LoggingEventSubscriber
 {
     private LoggerInterface $logger;
 

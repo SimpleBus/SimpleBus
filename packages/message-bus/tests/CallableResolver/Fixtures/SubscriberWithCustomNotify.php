@@ -2,7 +2,7 @@
 
 namespace SimpleBus\Message\Tests\CallableResolver\Fixtures;
 
-class SubscriberWithCustomNotify
+final class SubscriberWithCustomNotify
 {
     public function customNotifyMethod(object $message): void
     {

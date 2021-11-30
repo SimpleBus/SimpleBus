@@ -4,7 +4,7 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use OldSound\RabbitMqBundle\RabbitMq\Producer;
 
-class AdditionalPropertiesResolverProducerMock extends Producer
+final class AdditionalPropertiesResolverProducerMock extends Producer
 {
     /**
      * @var mixed[]

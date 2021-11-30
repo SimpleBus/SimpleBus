@@ -9,7 +9,7 @@ use SimpleBus\Message\Handler\Resolver\MessageHandlerResolver;
 use SimpleBus\Message\Tests\Fixtures\CallableSpy;
 use stdClass;
 
-class DelegatesToMessageHandlerMiddlewareTest extends TestCase
+final class DelegatesToMessageHandlerMiddlewareTest extends TestCase
 {
     /**
      * @test

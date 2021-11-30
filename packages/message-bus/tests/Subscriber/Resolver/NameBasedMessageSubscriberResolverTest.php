@@ -9,7 +9,7 @@ use SimpleBus\Message\Name\MessageNameResolver;
 use SimpleBus\Message\Subscriber\Resolver\NameBasedMessageSubscriberResolver;
 use stdClass;
 
-class NameBasedMessageSubscriberResolverTest extends TestCase
+final class NameBasedMessageSubscriberResolverTest extends TestCase
 {
     /**
      * @test

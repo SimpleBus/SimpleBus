@@ -2,7 +2,7 @@
 
 namespace SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest;
 
-class SomeOtherEventSubscriber
+final class SomeOtherEventSubscriber
 {
     public bool $eventHandled = false;
 

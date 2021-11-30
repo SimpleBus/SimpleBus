@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
 
-class DefaultEnvelopeTest extends TestCase
+final class DefaultEnvelopeTest extends TestCase
 {
     /**
      * @test

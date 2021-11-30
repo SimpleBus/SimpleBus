@@ -14,7 +14,7 @@ use SimpleBus\RabbitMQBundleBridge\Event\MessageConsumptionFailed;
 use SimpleBus\RabbitMQBundleBridge\RabbitMQMessageConsumer;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class RabbitMQMessageConsumerTest extends TestCase
+final class RabbitMQMessageConsumerTest extends TestCase
 {
     /**
      * @test

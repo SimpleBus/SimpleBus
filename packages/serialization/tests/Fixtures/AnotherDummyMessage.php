@@ -2,6 +2,6 @@
 
 namespace SimpleBus\Serialization\Tests\Fixtures;
 
-class AnotherDummyMessage
+final class AnotherDummyMessage
 {
 }

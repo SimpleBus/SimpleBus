@@ -7,7 +7,7 @@ use SimpleBus\Serialization\Envelope\DefaultEnvelope;
 use SimpleBus\Serialization\Envelope\DefaultEnvelopeFactory;
 use SimpleBus\Serialization\Tests\Fixtures\DummyMessage;
 
-class DefaultEnvelopeFactoryTest extends TestCase
+final class DefaultEnvelopeFactoryTest extends TestCase
 {
     /**
      * @test

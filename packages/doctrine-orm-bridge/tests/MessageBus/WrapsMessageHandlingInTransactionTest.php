@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
 use Throwable;
 
-class WrapsMessageHandlingInTransactionTest extends TestCase
+final class WrapsMessageHandlingInTransactionTest extends TestCase
 {
     /**
      * @test
@@ -127,6 +127,6 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
     }
 }
 
-class DummyMessage
+final class DummyMessage
 {
 }

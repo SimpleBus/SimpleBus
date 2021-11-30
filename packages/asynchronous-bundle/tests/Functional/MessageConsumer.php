@@ -4,7 +4,7 @@ namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
 use SimpleBus\Asynchronous\Consumer\StandardSerializedEnvelopeConsumer;
 
-class MessageConsumer
+final class MessageConsumer
 {
     private StandardSerializedEnvelopeConsumer $consumer;
 

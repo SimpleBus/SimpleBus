@@ -11,7 +11,7 @@ use SimpleBus\Message\Recorder\HandlesRecordedMessagesMiddleware;
 use SimpleBus\Message\Tests\Fixtures\CallableSpy;
 use stdClass;
 
-class HandlesRecordedMessagesMiddlewareTest extends TestCase
+final class HandlesRecordedMessagesMiddlewareTest extends TestCase
 {
     /**
      * @test

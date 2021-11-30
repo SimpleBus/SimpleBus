@@ -11,7 +11,7 @@ use SimpleBus\Asynchronous\Publisher\Publisher;
 use SimpleBus\Message\CallableResolver\Exception\UndefinedCallable;
 use stdClass;
 
-class PublishesUnhandledMessagesTest extends TestCase
+final class PublishesUnhandledMessagesTest extends TestCase
 {
     /**
      * @test

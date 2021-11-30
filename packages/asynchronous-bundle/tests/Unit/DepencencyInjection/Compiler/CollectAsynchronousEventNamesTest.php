@@ -7,7 +7,7 @@ use SimpleBus\AsynchronousBundle\DependencyInjection\Compiler\CollectAsynchronou
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class CollectAsynchronousEventNamesTest extends AbstractCompilerPassTestCase
+final class CollectAsynchronousEventNamesTest extends AbstractCompilerPassTestCase
 {
     /**
      * @test

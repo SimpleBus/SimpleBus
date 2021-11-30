@@ -4,7 +4,7 @@ namespace SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest;
 
 use SimpleBus\Message\Bus\MessageBus;
 
-class TestEntityCreatedEventSubscriber
+final class TestEntityCreatedEventSubscriber
 {
     public bool $eventHandled = false;
     private MessageBus $commandBus;

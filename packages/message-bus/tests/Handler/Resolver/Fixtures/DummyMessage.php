@@ -2,6 +2,6 @@
 
 namespace SimpleBus\Message\Tests\Handler\Resolver\Fixtures;
 
-class DummyMessage
+final class DummyMessage
 {
 }

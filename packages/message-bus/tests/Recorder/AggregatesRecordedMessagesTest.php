@@ -7,7 +7,7 @@ use SimpleBus\Message\Recorder\AggregatesRecordedMessages;
 use SimpleBus\Message\Tests\Recorder\Fixtures\ContainsRecordedMessagesStub;
 use stdClass;
 
-class AggregatesRecordedMessagesTest extends TestCase
+final class AggregatesRecordedMessagesTest extends TestCase
 {
     /**
      * @test

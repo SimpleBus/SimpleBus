@@ -4,7 +4,7 @@ namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use Exception;
 
-class AlwaysFailingCommandHandler
+final class AlwaysFailingCommandHandler
 {
     public function handle(): void
     {

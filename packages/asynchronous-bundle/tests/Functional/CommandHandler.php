@@ -2,7 +2,7 @@
 
 namespace SimpleBus\AsynchronousBundle\Tests\Functional;
 
-class CommandHandler
+final class CommandHandler
 {
     private Spy $spy;
 

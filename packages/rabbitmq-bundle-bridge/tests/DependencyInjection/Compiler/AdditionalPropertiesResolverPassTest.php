@@ -7,7 +7,7 @@ use SimpleBus\RabbitMQBundleBridge\DependencyInjection\Compiler\AdditionalProper
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class AdditionalPropertiesResolverPassTest extends TestCase
+final class AdditionalPropertiesResolverPassTest extends TestCase
 {
     private ContainerBuilder $container;
 
@@ -72,14 +72,14 @@ class AdditionalPropertiesResolverPassTest extends TestCase
     }
 }
 
-class Resolver1
+final class Resolver1
 {
 }
 
-class Resolver2
+final class Resolver2
 {
 }
 
-class Resolver3
+final class Resolver3
 {
 }

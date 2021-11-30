@@ -2,7 +2,7 @@
 
 namespace SimpleBus\Serialization\Tests\Fixtures;
 
-class DummyMessage
+final class DummyMessage
 {
     public string $foo;
 }

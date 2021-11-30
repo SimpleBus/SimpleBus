@@ -12,7 +12,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Kernel;
 
-class DoctrineTestKernel extends Kernel
+final class DoctrineTestKernel extends Kernel
 {
     private string $tempDir;
 

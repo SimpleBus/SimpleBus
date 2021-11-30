@@ -2,6 +2,6 @@
 
 namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
-class AsynchronousCommand
+final class AsynchronousCommand
 {
 }
