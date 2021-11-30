@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 use Error;
 use Exception;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineORMBridge\MessageBus\WrapsMessageHandlingInTransaction;
 use Throwable;
@@ -118,12 +117,9 @@ final class WrapsMessageHandlingInTransactionTest extends TestCase
         }
     }
 
-    /**
-     * @return DummyMessage|MockObject
-     */
-    private function dummyMessage()
+    private function dummyMessage(): DummyMessage
     {
-        return $this->createMock(DummyMessage::class);
+        return new DummyMessage();
     }
 }
 
