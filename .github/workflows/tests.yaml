@@ -12,6 +12,7 @@ jobs:
             -   uses: actions/checkout@v2.4.0
             -   uses: shivammathur/setup-php@2.16.0
                 with:
+                    tools: flex
                     php-version: 8.0
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
                 env:
@@ -70,6 +71,7 @@ jobs:
 
             -   uses: shivammathur/setup-php@2.16.0
                 with:
+                    tools: flex
                     php-version: ${{ matrix.php-version }}
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
                 env:
@@ -78,10 +80,10 @@ jobs:
             -   run: composer validate
             -   name: Install core dependencies
                 uses: ramsey/composer-install@1.3.0
+                env:
+                    SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
             -   run: vendor/bin/monorepo-builder bump-interdependency dev-main
-
-            -   run: cd bin && composer install && cd .. && bin/rebuild-symfony-requirements packages/${{ matrix.package }}/composer.json "${{ matrix.symfony-version }}"
 
             -   if: "matrix.remove-dependencies != ''"
                 name: Remove dependencies
@@ -91,6 +93,8 @@ jobs:
                 working-directory: packages/${{ matrix.package }}
             -   name: Install package dependencies
                 uses: ramsey/composer-install@1.3.0
+                env:
+                    SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
                 with:
                     dependency-versions: ${{ matrix.dependencies }}
                     composer-options: '--working-dir=packages/${{ matrix.package }}'
@@ -104,12 +108,15 @@ jobs:
             -   uses: actions/checkout@v2.4.0
             -   uses: shivammathur/setup-php@2.16.0
                 with:
+                    tools: flex
                     php-version: 8.0
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             -   name: Install dependencies
                 uses: ramsey/composer-install@1.3.0
+                env:
+                    SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
             -   run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
 
     phpstan:
@@ -127,13 +134,15 @@ jobs:
             -   uses: actions/checkout@v2.4.0
             -   uses: shivammathur/setup-php@2.16.0
                 with:
+                    tools: flex
                     php-version: ${{ matrix.php-version }}
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            -   run: cd bin && composer install && cd .. && bin/rebuild-symfony-requirements composer.json "${{ matrix.symfony-version }}"
             -   name: Install core dependencies
                 uses: ramsey/composer-install@1.3.0
+                env:
+                    SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
                 with:
                     dependency-versions: ${{ matrix.dependencies }}
             -   run: vendor/bin/phpstan analyse --ansi
