@@ -29,14 +29,14 @@
         "jms/serializer": "^3.15",
         "jms/serializer-bundle": "^4.0",
         "php-amqplib/php-amqplib": "^3.1",
-        "php-amqplib/rabbitmq-bundle": "^2.6",
+        "php-amqplib/rabbitmq-bundle": "^2.11.0",
         "psr/log": "^1.1.4 || ^2.0 || ^3.0",
-        "symfony/config": "^5.3.7 || ^5.4",
-        "symfony/dependency-injection": "^5.3.7 || ^5.4",
-        "symfony/framework-bundle": "^5.3.7 || ^5.4",
-        "symfony/http-kernel": "^5.3.7 || ^5.4",
+        "symfony/config": "^5.4 || ^6.0",
+        "symfony/dependency-injection": "^5.4 || ^6.0",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/http-kernel": "^5.4 || ^6.0",
         "symfony/monolog-bundle": "^3.4",
-        "symfony/yaml": "^5.3.7 || ^5.4"
+        "symfony/yaml": "^5.4 || ^6.0"
     },
     "replace": {
         "simple-bus/asynchronous": "self.version",
@@ -52,7 +52,7 @@
     },
     "require-dev": {
         "ext-json": "*",
-        "doctrine/doctrine-bundle": "^2.2",
+        "doctrine/doctrine-bundle": "^2.5",
         "friendsofphp/php-cs-fixer": "^3.0",
         "friendsofphp/proxy-manager-lts": "^1.0",
         "matthiasnoback/phpunit-asynchronicity": "^2.4",
@@ -63,23 +63,27 @@
         "phpstan/phpstan-symfony": "^1.0",
         "phpunit/phpunit": "^9.5.5",
         "pimple/pimple": "^3.5",
-        "symfony/cache": "^5.3.7 || ^5.4",
-        "symfony/console": "^5.3.7 || ^5.4",
-        "symfony/finder": "^5.3.7 || ^5.4",
-        "symfony/monolog-bridge": "^5.3.7 || ^5.4",
+        "symfony/cache": "^5.4 || ^6.0",
+        "symfony/console": "^5.4 || ^6.0",
+        "symfony/finder": "^5.4 || ^6.0",
+        "symfony/monolog-bridge": "^5.4 || ^6.0",
         "symfony/phpunit-bridge": "^6.0",
-        "symfony/process": "^5.3.7 || ^5.4",
-        "symfony/proxy-manager-bridge": "^5.3.7 || ^5.4",
-        "symfony/stopwatch": "^5.3.7 || ^5.4",
-        "symfony/translation": "^5.3.7 || ^5.4",
-        "symplify/easy-ci": "^9.0",
-        "symplify/monorepo-builder": "^9.0"
+        "symfony/process": "^5.4 || ^6.0",
+        "symfony/proxy-manager-bridge": "^5.4 || ^6.0",
+        "symfony/stopwatch": "^5.4 || ^6.0",
+        "symfony/translation": "^5.4 || ^6.0",
+        "symplify/easy-ci": "^10.0",
+        "symplify/monorepo-builder": "^10.0"
     },
     "conflict": {
         "friendsofphp/proxy-manager-lts": "<1.0.5"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "phpstan/extension-installer": true
+        }
     },
     "autoload": {
         "psr-4": {

@@ -25,7 +25,7 @@ jobs:
             -   id: set-php-version
                 run: echo "::set-output name=php-version::$(vendor/bin/easy-ci php-versions-json | sed 's/]$/,"8.1"]/')"
             -   id: set-symfony-version
-                run: echo '::set-output name=symfony-version::["5.3.*", "5.4.*"]'
+                run: echo '::set-output name=symfony-version::["5.4.*", "6.0.*"]'
         outputs:
             packages: ${{ steps.set-packages.outputs.packages }}
             php-version: ${{ steps.set-php-version.outputs.php-version }}
@@ -47,17 +47,17 @@ jobs:
                 include:
                     -   php-version: '8.0'
                         package: 'symfony-bridge'
-                        symfony-version: '5.3.*'
+                        symfony-version: '5.4.*'
                         dependencies: 'lowest'
                         remove-dependencies: '--dev symfony/proxy-manager-bridge'
                 exclude:
                     # Only test once it has no Symfony packages
                     -   package: 'asynchronous'
-                        symfony-version: '4.4.*'
+                        symfony-version: '5.4.*'
                     -   package: 'message-bus'
-                        symfony-version: '4.4.*'
+                        symfony-version: '5.4.*'
                     -   package: 'serialization'
-                        symfony-version: '4.4.*'
+                        symfony-version: '5.4.*'
         services:
             rabbitmq:
                 image: rabbitmq:3.8-alpine

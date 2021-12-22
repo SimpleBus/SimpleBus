@@ -13,8 +13,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::DATA_TO_APPEND, [
         ComposerJsonSection::REQUIRE_DEV => [
             'phpunit/phpunit' => '^9.5.5',
-            'symplify/monorepo-builder' => '^9.0',
+            'symplify/monorepo-builder' => '^10.0',
         ],
     ]);
-    $parameters->set(Option::PACKAGE_DIRECTORIES, [__DIR__ . '/packages']);
+    $parameters->set(Option::PACKAGE_DIRECTORIES, [__DIR__.'/packages']);
 };
