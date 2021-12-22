@@ -36,7 +36,7 @@
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5.5",
         "symfony/phpunit-bridge": "^6.0",
-        "symfony/yaml": "^5.3.7 || ^5.4"
+        "symfony/yaml": "^5.4 || ^6.0"
     },
     "config": {
         "sort-packages": true

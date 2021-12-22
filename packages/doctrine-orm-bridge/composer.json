@@ -38,7 +38,7 @@
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5.5",
         "pimple/pimple": "^3.5",
-        "symfony/cache": "^5.3.7 || ^5.4",
+        "symfony/cache": "^5.4 || ^6.0",
         "symfony/phpunit-bridge": "^6.0"
     },
     "suggest": {
