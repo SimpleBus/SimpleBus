@@ -24,7 +24,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "doctrine/dbal": "^2.12",
+        "doctrine/dbal": "^2.12 || ^3.0",
         "doctrine/orm": "^2.8.5",
         "jms/serializer": "^3.15",
         "jms/serializer-bundle": "^4.0",
