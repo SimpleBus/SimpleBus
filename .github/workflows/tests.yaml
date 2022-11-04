@@ -18,7 +18,7 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             -   name: Install dependencies
-                uses: ramsey/composer-install@2.1.0
+                uses: ramsey/composer-install@2.1.1
             -   run: vendor/bin/monorepo-builder validate
             -   id: set-packages
                 run: echo "::set-output name=packages::$(vendor/bin/monorepo-builder packages-json)"
@@ -79,7 +79,7 @@ jobs:
 
             -   run: composer validate
             -   name: Install core dependencies
-                uses: ramsey/composer-install@2.1.0
+                uses: ramsey/composer-install@2.1.1
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
             -   run: vendor/bin/monorepo-builder localize-composer-paths packages/${{ matrix.package }}/composer.json --ansi
@@ -92,7 +92,7 @@ jobs:
             -   run: composer validate
                 working-directory: packages/${{ matrix.package }}
             -   name: Install package dependencies
-                uses: ramsey/composer-install@2.1.0
+                uses: ramsey/composer-install@2.1.1
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
                 with:
@@ -114,7 +114,7 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             -   name: Install dependencies
-                uses: ramsey/composer-install@2.1.0
+                uses: ramsey/composer-install@2.1.1
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
             -   run: vendor/bin/php-cs-fixer fix --ansi --diff --dry-run
@@ -140,7 +140,7 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             -   name: Install core dependencies
-                uses: ramsey/composer-install@2.1.0
+                uses: ramsey/composer-install@2.1.1
                 env:
                     SYMFONY_REQUIRE: "${{ matrix.symfony-version }}"
                 with:
