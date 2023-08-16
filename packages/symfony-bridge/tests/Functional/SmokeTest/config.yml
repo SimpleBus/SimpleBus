@@ -4,6 +4,7 @@ services:
 
 framework:
     secret: 'secret'
+    http_method_override: false
 
 doctrine:
     dbal:
