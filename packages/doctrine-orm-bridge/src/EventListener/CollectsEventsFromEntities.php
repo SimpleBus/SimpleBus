@@ -17,7 +17,7 @@ class CollectsEventsFromEntities implements ContainsRecordedMessages
 
     public function preFlush(PreFlushEventArgs $eventArgs): void
     {
-        $em = $eventArgs->getEntityManager();
+        $em = $eventArgs->getObjectManager();
         $uow = $em->getUnitOfWork();
         foreach ($uow->getIdentityMap() as $entities) {
             foreach ($entities as $entity) {
@@ -39,7 +39,7 @@ class CollectsEventsFromEntities implements ContainsRecordedMessages
      */
     public function postFlush(PostFlushEventArgs $eventArgs): void
     {
-        $em = $eventArgs->getEntityManager();
+        $em = $eventArgs->getObjectManager();
         $uow = $em->getUnitOfWork();
         foreach ($uow->getIdentityMap() as $entities) {
             foreach ($entities as $entity) {
