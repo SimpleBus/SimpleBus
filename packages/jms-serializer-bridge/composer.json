@@ -35,8 +35,8 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5.5",
-        "symfony/phpunit-bridge": "^6.0",
-        "symfony/yaml": "^5.4 || ^6.0"
+        "symfony/phpunit-bridge": "^6.3",
+        "symfony/yaml": "^5.4 || ^6.3"
     },
     "config": {
         "sort-packages": true,
