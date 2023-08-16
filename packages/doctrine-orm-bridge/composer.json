@@ -45,7 +45,10 @@
         "simple-bus/symfony-bridge": "Bridge for using command buses and event buses with Symfony"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        }
     },
     "autoload": {
         "psr-4": {
