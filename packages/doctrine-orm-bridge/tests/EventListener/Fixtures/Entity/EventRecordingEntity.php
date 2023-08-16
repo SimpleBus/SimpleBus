@@ -2,6 +2,13 @@
 
 namespace SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Entity;
 
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping\PreUpdate;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityAboutToBeRemoved;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityChanged;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityChangedPreUpdate;
@@ -11,27 +18,18 @@ use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Event\EntityNotDirt
 use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
 
-/**
- * @Entity
- *
- * @HasLifecycleCallbacks()
- */
+#[Entity]
+#[HasLifecycleCallbacks]
 class EventRecordingEntity implements ContainsRecordedMessages
 {
     use PrivateMessageRecorderCapabilities;
 
-    /**
-     * @Id
-     *
-     * @GeneratedValue(strategy="AUTO")
-     *
-     * @Column(type="integer")
-     */
+    #[Id]
+    #[GeneratedValue(strategy: 'AUTO')]
+    #[Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @Column(type="string")
-     */
+    #[Column(type: 'string')]
     private string $something;
 
     public function __construct()
@@ -65,17 +63,13 @@ class EventRecordingEntity implements ContainsRecordedMessages
         $this->record(new EntityNotDirty());
     }
 
-    /**
-     * @PrePersist
-     */
+    #[PrePersist]
     public function recordMessageDuringPrePersistLifecycleCallback(): void
     {
         $this->record(new EntityCreatedPrePersist());
     }
 
-    /**
-     * @PreUpdate
-     */
+    #[PreUpdate]
     public function recordMessageDuringPreUpdateLifecycleCallback(): void
     {
         $this->record(new EntityChangedPreUpdate());

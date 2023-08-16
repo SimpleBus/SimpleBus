@@ -1,7 +1,5 @@
 <?php
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
-
 foreach ([__DIR__.'/../vendor/autoload.php', __DIR__.'/../../../vendor/autoload.php'] as $file) {
     if (file_exists($file)) {
         require $file;
@@ -9,5 +7,3 @@ foreach ([__DIR__.'/../vendor/autoload.php', __DIR__.'/../../../vendor/autoload.
         break;
     }
 }
-
-AnnotationRegistry::registerLoader('class_exists');

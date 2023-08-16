@@ -7,20 +7,14 @@ use SimpleBus\Message\Recorder\ContainsRecordedMessages;
 use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
 use SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest\TestEntityCreated;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class TestEntity implements ContainsRecordedMessages
 {
     use PrivateMessageRecorderCapabilities;
 
-    /**
-     * @ORM\Id
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     public int $id;
 
     public function __construct()
