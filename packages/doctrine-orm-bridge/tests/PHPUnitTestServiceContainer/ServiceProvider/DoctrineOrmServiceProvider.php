@@ -8,8 +8,8 @@ namespace SimpleBus\DoctrineORMBridge\Tests\PHPUnitTestServiceContainer\ServiceP
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\ORM\Tools\Setup;
 use Pimple\Container;
 use SimpleBus\DoctrineORMBridge\Tests\PHPUnitTestServiceContainer\ServiceContainer;
 use SimpleBus\DoctrineORMBridge\Tests\PHPUnitTestServiceContainer\ServiceProvider;
@@ -60,7 +60,7 @@ class DoctrineOrmServiceProvider implements ServiceProvider
         };
 
         $serviceContainer['doctrine_orm.configuration'] = function (ServiceContainer $serviceContainer) {
-            return Setup::createAnnotationMetadataConfiguration(
+            return ORMSetup::createAttributeMetadataConfiguration(
                 $serviceContainer['doctrine_orm.entity_directories'],
                 $serviceContainer['doctrine_orm.development_mode'],
                 $serviceContainer['doctrine_orm.proxy_dir']

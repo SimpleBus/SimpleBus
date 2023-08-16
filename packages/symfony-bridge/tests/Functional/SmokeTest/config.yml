@@ -16,7 +16,7 @@ doctrine:
                 connection: default
                 mappings:
                     test:
-                        type: annotation
+                        type: attribute
                         dir: "%kernel.project_dir%/Entity/"
                         prefix: SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest\Entity
                         alias: Test
