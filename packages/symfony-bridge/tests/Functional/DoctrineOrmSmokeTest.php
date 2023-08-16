@@ -5,7 +5,6 @@ namespace SimpleBus\SymfonyBridge\Tests\Functional;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Tools\SchemaTool;
-use LogicException;
 use SimpleBus\Message\Bus\MessageBus;
 use SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest\DoctrineTestKernel;
 use SimpleBus\SymfonyBridge\Tests\Functional\SmokeTest\SomeOtherEventSubscriber;
@@ -30,13 +29,6 @@ class DoctrineOrmSmokeTest extends KernelTestCase
      */
     public function itHandlesACommandThenDispatchesEventsForAllModifiedEntities(): void
     {
-        if (!class_exists('Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator')) {
-            $this->markTestSkipped('This test requires "symfony/proxy-manager-bridge" to be installed.');
-
-            // @phpstan-ignore-next-line
-            return;
-        }
-
         self::bootKernel(['environment' => 'config1']);
         $container = self::$kernel->getContainer();
 
@@ -75,24 +67,6 @@ class DoctrineOrmSmokeTest extends KernelTestCase
         $this->assertStringContainsString('event_bus.DEBUG: Finished handling a message', $loggedMessages);
         $this->assertStringContainsString('event_bus.DEBUG: Started notifying a subscriber', $loggedMessages);
         $this->assertStringContainsString('event_bus.DEBUG: Finished notifying a subscriber', $loggedMessages);
-    }
-
-    /**
-     * @test
-     */
-    public function failsBecauseOfMisingDependency(): void
-    {
-        if (class_exists('Symfony\Bridge\ProxyManager\LazyProxy\Instantiator\RuntimeInstantiator')) {
-            $this->markTestSkipped('This test requires "symfony/proxy-manager-bridge" to NOT be installed.');
-
-            // @phpstan-ignore-next-line
-            return;
-        }
-
-        $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('In order to use bundle "DoctrineOrmBridgeBundle" you need to require "symfony/proxy-manager-bridge" package.');
-
-        self::bootKernel(['environment' => 'config2']);
     }
 
     protected static function getKernelClass(): string
