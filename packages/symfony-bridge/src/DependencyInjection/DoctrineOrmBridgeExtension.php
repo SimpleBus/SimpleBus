@@ -2,6 +2,7 @@
 
 namespace SimpleBus\SymfonyBridge\DependencyInjection;
 
+use Doctrine\ORM\Events;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -46,6 +47,7 @@ class DoctrineOrmBridgeExtension extends ConfigurableExtension
         $connection = $container->getParameterBag()->resolveValue($mergedConfig['connection']);
         $container
             ->findDefinition('simple_bus.doctrine_orm_bridge.collects_events_from_entities')
-            ->addTag('doctrine.event_subscriber', ['connection' => $connection]);
+            ->addTag('doctrine.event_listener', ['connection' => $connection, 'event' => Events::preFlush])
+            ->addTag('doctrine.event_listener', ['connection' => $connection, 'event' => Events::postFlush]);
     }
 }

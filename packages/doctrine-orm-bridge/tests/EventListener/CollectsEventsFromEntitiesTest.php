@@ -2,6 +2,7 @@
 
 namespace SimpleBus\DoctrineORMBridge\Tests\EventListener;
 
+use Doctrine\ORM\Events;
 use PHPUnit\Framework\TestCase;
 use SimpleBus\DoctrineORMBridge\EventListener\CollectsEventsFromEntities;
 use SimpleBus\DoctrineORMBridge\Tests\EventListener\Fixtures\Entity\EventRecordingEntity;
@@ -25,7 +26,7 @@ class CollectsEventsFromEntitiesTest extends TestCase
         parent::setUp();
 
         $this->eventSubscriber = new CollectsEventsFromEntities();
-        $this->getEventManager()->addEventSubscriber($this->eventSubscriber);
+        $this->getEventManager()->addEventListener([Events::preFlush, Events::postFlush], $this->eventSubscriber);
     }
 
     /**
