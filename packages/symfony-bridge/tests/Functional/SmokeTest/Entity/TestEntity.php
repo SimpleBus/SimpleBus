@@ -16,7 +16,9 @@ class TestEntity implements ContainsRecordedMessages
 
     /**
      * @ORM\Id
+     *
      * @ORM\Column(type="integer")
+     *
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     public int $id;

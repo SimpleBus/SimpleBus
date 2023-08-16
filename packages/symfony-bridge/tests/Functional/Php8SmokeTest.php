@@ -11,7 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @internal
+ *
  * @coversNothing
+ *
  * @requires PHP 8.0
  */
 class Php8SmokeTest extends KernelTestCase

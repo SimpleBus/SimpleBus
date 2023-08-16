@@ -2,6 +2,8 @@
 
 namespace SimpleBus\Message\CallableResolver;
 
+use InvalidArgumentException;
+
 class CallableCollection
 {
     /**
@@ -20,7 +22,7 @@ class CallableCollection
     ) {
         foreach ($callablesByName as $callable) {
             if (!is_array($callable)) {
-                throw new \InvalidArgumentException('You need to provide arrays of callables, indexed by name');
+                throw new InvalidArgumentException('You need to provide arrays of callables, indexed by name');
             }
         }
 

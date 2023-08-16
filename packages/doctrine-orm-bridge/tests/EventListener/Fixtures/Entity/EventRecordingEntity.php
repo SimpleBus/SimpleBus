@@ -13,6 +13,7 @@ use SimpleBus\Message\Recorder\PrivateMessageRecorderCapabilities;
 
 /**
  * @Entity
+ *
  * @HasLifecycleCallbacks()
  */
 class EventRecordingEntity implements ContainsRecordedMessages
@@ -21,7 +22,9 @@ class EventRecordingEntity implements ContainsRecordedMessages
 
     /**
      * @Id
+     *
      * @GeneratedValue(strategy="AUTO")
+     *
      * @Column(type="integer")
      */
     private int $id;

@@ -71,6 +71,7 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider errorProvider
      */
     public function itResetsTheEntityManagerIfTheTransactionFails(Throwable $error): void

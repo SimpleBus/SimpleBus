@@ -57,6 +57,7 @@ class WrapsMessageHandlingInTransactionTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider errorProvider
      */
     public function itRollsTheTransactionBackWhenAnThrowableIsThrown(Throwable $error): void

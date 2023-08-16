@@ -23,7 +23,7 @@ class NativeObjectSerializer implements ObjectSerializer
     {
         $deserializedObject = unserialize($serializedObject);
 
-        if (!($deserializedObject instanceof $type)) {
+        if (!$deserializedObject instanceof $type) {
             throw new LogicException(sprintf('Unserialized object was expected to be of type "%s"', $type));
         }
 

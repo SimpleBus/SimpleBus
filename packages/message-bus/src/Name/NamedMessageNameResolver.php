@@ -8,7 +8,7 @@ class NamedMessageNameResolver implements MessageNameResolver
 {
     public function resolve(object $message): string
     {
-        if (!($message instanceof NamedMessage)) {
+        if (!$message instanceof NamedMessage) {
             throw CouldNotResolveMessageName::forMessage($message, 'Message should be an instance of NamedMessage');
         }
 

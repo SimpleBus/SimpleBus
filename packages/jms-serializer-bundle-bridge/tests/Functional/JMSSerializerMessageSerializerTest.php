@@ -23,6 +23,7 @@ class JMSSerializerMessageSerializerTest extends KernelTestCase
             'debug' => false,
         ]);
         $kernel->boot();
+
         /** @var MessageInEnvelopeSerializer $messageSerializer */
         $messageSerializer = $kernel->getContainer()->get('public_message_serializer');
         $originalMessage = new SampleMessage('test', 123);
