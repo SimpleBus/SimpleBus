@@ -44,12 +44,6 @@ jobs:
                     - 'lowest'
                     - 'highest'
                 remove-dependencies: [ '' ]
-                include:
-                    -   php-version: '8.0'
-                        package: 'symfony-bridge'
-                        symfony-version: '5.4.*'
-                        dependencies: 'lowest'
-                        remove-dependencies: '--dev symfony/proxy-manager-bridge'
                 exclude:
                     # Only test once it has no Symfony packages
                     -   package: 'asynchronous'
