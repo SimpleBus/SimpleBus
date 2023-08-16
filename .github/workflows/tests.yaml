@@ -13,7 +13,7 @@ jobs:
             -   uses: shivammathur/setup-php@2.18.0
                 with:
                     tools: flex
-                    php-version: 8.0
+                    php-version: 8.2
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -109,7 +109,7 @@ jobs:
             -   uses: shivammathur/setup-php@2.18.0
                 with:
                     tools: flex
-                    php-version: 8.0
+                    php-version: 8.2
                     ini-values: "memory_limit=-1, error_reporting=-1, display_errors=On"
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
