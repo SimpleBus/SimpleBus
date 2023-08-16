@@ -24,6 +24,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $kernel->boot();
 
         $event = new DummyEvent();
+
         /** @var MessageBus $eventBus */
         $eventBus = $kernel->getContainer()->get('event_bus');
         $eventBus->handle($event);
@@ -46,6 +47,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $kernel->boot();
 
         $event = new DummyEvent();
+
         /** @var MessageBus $asynchronousEventBus */
         $asynchronousEventBus = $kernel->getContainer()->get('asynchronous_event_bus');
         $asynchronousEventBus->handle($event);
@@ -68,6 +70,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $kernel->boot();
 
         $command = new DummyCommand();
+
         /** @var MessageBus $commandBus */
         $commandBus = $kernel->getContainer()->get('command_bus');
         $commandBus->handle($command);
@@ -86,6 +89,7 @@ class SimpleBusAsynchronousBundleTest extends KernelTestCase
         $kernel->boot();
 
         $command = new DummyCommand();
+
         /** @var MessageBus $asynchronousCommandBus */
         $asynchronousCommandBus = $kernel->getContainer()->get('asynchronous_command_bus');
         $asynchronousCommandBus->handle($command);

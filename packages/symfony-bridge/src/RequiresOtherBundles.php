@@ -13,7 +13,7 @@ trait RequiresOtherBundles
      */
     protected function checkRequirements(array $requiredBundles, ContainerBuilder $container): void
     {
-        if (!($this instanceof Bundle)) {
+        if (!$this instanceof Bundle) {
             throw new LogicException('You can only use this trait with Bundle instances');
         }
 

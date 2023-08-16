@@ -56,7 +56,7 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
             $envelopeClass
         );
 
-        if (!($envelope instanceof $envelopeClass)) {
+        if (!$envelope instanceof $envelopeClass) {
             throw new LogicException(sprintf('Expected deserialized object to be an instance of "%s"', $envelopeClass));
         }
 
@@ -76,7 +76,7 @@ class StandardMessageInEnvelopeSerializer implements MessageInEnvelopeSerializer
     {
         $message = $this->objectSerializer->deserialize($serializedMessage, $messageClass);
 
-        if (!($message instanceof $messageClass)) {
+        if (!$message instanceof $messageClass) {
             throw new LogicException(sprintf('Expected deserialized message to be an instance of "%s"', $messageClass));
         }
 

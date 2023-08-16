@@ -16,7 +16,7 @@ final class NestedCommandExecutionOrderConfigurationTest extends KernelTestCase
     {
         parent::tearDown();
 
-        static::$class = null;
+        self::$class = null;
     }
 
     /**

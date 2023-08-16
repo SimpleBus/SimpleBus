@@ -31,7 +31,7 @@ class AddMiddlewareTags implements CompilerPassInterface
 
     public function process(ContainerBuilder $container): void
     {
-        if (!($container->has($this->middlewareServiceId))) {
+        if (!$container->has($this->middlewareServiceId)) {
             return;
         }
 

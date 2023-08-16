@@ -12,7 +12,7 @@ class AdditionalPropertiesResolverPass implements CompilerPassInterface
     public function process(ContainerBuilder $container): void
     {
         $delegatingResolverId = 'simple_bus.rabbit_mq_bundle_bridge.delegating_additional_properties_resolver';
-        if (!($container->has($delegatingResolverId))) {
+        if (!$container->has($delegatingResolverId)) {
             return;
         }
 

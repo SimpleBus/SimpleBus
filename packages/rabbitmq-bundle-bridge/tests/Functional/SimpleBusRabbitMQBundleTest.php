@@ -3,6 +3,7 @@
 namespace SimpleBus\RabbitMQBundleBridge\Tests\Functional;
 
 use Asynchronicity\PHPUnit\Eventually;
+use Generator;
 use SimpleBus\Asynchronous\Properties\DelegatingAdditionalPropertiesResolver;
 use SimpleBus\Message\Bus\MessageBus;
 use stdClass;
@@ -14,7 +15,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
     private FileLogger $logger;
 
     /**
-     * @var null|Process<\Generator>
+     * @var null|Process<Generator>
      */
     private ?Process $process = null;
 
@@ -69,6 +70,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     /**
      * @test
+     *
      * @group functional
      */
     public function itHandlesCommandsAsynchronously(): void
@@ -84,6 +86,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     /**
      * @test
+     *
      * @group functional
      */
     public function itHandlesEventsAsynchronously(): void
@@ -97,6 +100,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     /**
      * @test
+     *
      * @group functional
      */
     public function itLogsErrors(): void
@@ -110,6 +114,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     /**
      * @test
+     *
      * @group functional
      */
     public function itResolveProperties(): void
@@ -121,6 +126,7 @@ class SimpleBusRabbitMQBundleTest extends KernelTestCase
 
     /**
      * @test
+     *
      * @group functional
      */
     public function itSendsPropertiesToProducer(): void
