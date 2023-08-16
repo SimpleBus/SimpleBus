@@ -62,7 +62,10 @@
         "symfony/proxy-manager-bridge": "For integration with Symfony and Doctrine ORM"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        }
     },
     "autoload": {
         "psr-4": {

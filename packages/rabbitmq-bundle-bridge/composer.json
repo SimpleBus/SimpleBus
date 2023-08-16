@@ -52,7 +52,10 @@
         "symfony/translation": "^5.4 || ^6.0"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        }
     },
     "autoload": {
         "psr-4": {
