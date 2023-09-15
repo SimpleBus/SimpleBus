@@ -10,7 +10,7 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v4
-            -   uses: shivammathur/setup-php@2.25.5
+            -   uses: shivammathur/setup-php@2.26.0
                 with:
                     tools: flex
                     php-version: 8.2
@@ -63,7 +63,7 @@ jobs:
         steps:
             -   uses: actions/checkout@v4
 
-            -   uses: shivammathur/setup-php@2.25.5
+            -   uses: shivammathur/setup-php@2.26.0
                 with:
                     tools: flex
                     php-version: ${{ matrix.php-version }}
@@ -100,7 +100,7 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             -   uses: actions/checkout@v4
-            -   uses: shivammathur/setup-php@2.25.5
+            -   uses: shivammathur/setup-php@2.26.0
                 with:
                     tools: flex
                     php-version: 8.2
@@ -126,7 +126,7 @@ jobs:
                     - 'highest'
         steps:
             -   uses: actions/checkout@v4
-            -   uses: shivammathur/setup-php@2.25.5
+            -   uses: shivammathur/setup-php@2.26.0
                 with:
                     tools: flex
                     php-version: ${{ matrix.php-version }}
