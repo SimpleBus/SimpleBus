@@ -31,9 +31,9 @@
         "simple-bus/asynchronous": "^6.0",
         "simple-bus/message-bus": "^6.0",
         "simple-bus/symfony-bridge": "^6.0",
-        "symfony/config": "^5.4 || ^6.3",
-        "symfony/dependency-injection": "^5.4 || ^6.3",
-        "symfony/framework-bundle": "^5.4 || ^6.3"
+        "symfony/config": "^5.4 || ^6.3 || ^7.0",
+        "symfony/dependency-injection": "^5.4 || ^6.3 || ^7.0",
+        "symfony/framework-bundle": "^5.4 || ^6.3 || ^7.0"
     },
     "conflict": {
         "monolog/monolog": "<1.26.1 || >=2.0,<2.3.0"
@@ -43,7 +43,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^4.3",
         "phpunit/phpunit": "^9.5.5",
         "symfony/monolog-bundle": "^3.8",
-        "symfony/phpunit-bridge": "^6.3"
+        "symfony/phpunit-bridge": "^6.3 || ^7.0"
     },
     "suggest": {
         "symfony/monolog-bundle": "For logging messages"

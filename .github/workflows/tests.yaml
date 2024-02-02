@@ -25,7 +25,7 @@ jobs:
             -   id: set-php-version
                 run: echo "php-version=$(vendor/bin/easy-ci php-versions-json)" >> $GITHUB_OUTPUT
             -   id: set-symfony-version
-                run: echo 'symfony-version=["5.4.*", "6.3.*"]' >> $GITHUB_OUTPUT
+                run: echo 'symfony-version=["5.4.*", "6.3.*", "7.0.*"]' >> $GITHUB_OUTPUT
         outputs:
             packages: ${{ steps.set-packages.outputs.packages }}
             php-version: ${{ steps.set-php-version.outputs.php-version }}

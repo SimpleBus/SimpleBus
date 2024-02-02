@@ -38,8 +38,8 @@
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5.5",
         "pimple/pimple": "^3.5",
-        "symfony/cache": "^5.4 || ^6.3",
-        "symfony/phpunit-bridge": "^6.3"
+        "symfony/cache": "^5.4 || ^6.3 || ^7.0",
+        "symfony/phpunit-bridge": "^6.3 || ^7.0"
     },
     "suggest": {
         "simple-bus/symfony-bridge": "Bridge for using command buses and event buses with Symfony"
