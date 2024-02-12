@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "doctrine/dbal": "^3.0",
         "simple-bus/message-bus": "^6.0"
     },
