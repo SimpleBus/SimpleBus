@@ -26,13 +26,13 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "psr/log": "^1.1.4 || ^2.0 || ^3.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5.5",
-        "symfony/phpunit-bridge": "^6.3"
+        "symfony/phpunit-bridge": "^6.3 || ^7.0"
     },
     "config": {
         "sort-packages": true,

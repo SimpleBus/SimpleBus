@@ -25,13 +25,13 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "jms/serializer-bundle": "^4.0",
         "simple-bus/asynchronous-bundle": "^6.0",
         "simple-bus/jms-serializer-bridge": "^6.0",
-        "symfony/config": "^5.4 || ^6.3",
-        "symfony/dependency-injection": "^5.4 || ^6.3",
-        "symfony/framework-bundle": "^5.4 || ^6.3"
+        "symfony/config": "^5.4 || ^6.3 || ^7.0",
+        "symfony/dependency-injection": "^5.4 || ^6.3 || ^7.0",
+        "symfony/framework-bundle": "^5.4 || ^6.3 || ^7.0"
     },
     "conflict": {
         "doctrine/annotations": "<1.10.4",
@@ -41,7 +41,7 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.11",
         "phpunit/phpunit": "^9.5.5",
-        "symfony/phpunit-bridge": "^6.3"
+        "symfony/phpunit-bridge": "^6.3 || ^7.0"
     },
     "config": {
         "sort-packages": true,
